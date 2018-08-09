@@ -1,0 +1,23 @@
+import ceylon.collection {
+	LinkedList
+}
+import herd.convertx.core.api.component {
+	Creator,
+	Component
+}
+import ceylon.language.meta.model {
+	Class
+}
+service(`interface Component`)
+shared class LinkedListCreator() satisfies Creator<List<Anything>,{Anything*}> {
+	shared actual List<Anything> create(Class<List<Anything>,Nothing> kind, {Anything*} arguments) {
+		return kind.apply(arguments);
+	}
+	matcher => object satisfies LinkedListCreator.Matcher {
+		shared actual Boolean match(Class<List<Anything>,Nothing> kind, {Anything*} arguments) {
+			return kind.declaration==`class LinkedList`;
+		}
+		
+		shared actual Integer priority => 1;
+	};
+}
