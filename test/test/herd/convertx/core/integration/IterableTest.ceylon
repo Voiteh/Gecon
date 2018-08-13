@@ -1,6 +1,7 @@
 import ceylon.test {
 	test,
-	ignore
+	ignore,
+	parameters
 }
 import herd.convertx.core {
 	Convertx
@@ -11,48 +12,52 @@ import ceylon.collection {
 import herd.convertx.core.api.component {
 	ConvertionException
 }
-shared class IterableIntegerationTest() {
-	
-	Convertx convertx=Convertx();
-	
+shared class IterableTest() {
 	
 	
 	shared test 
-	void shouldConvertIterableToIterable(){
+	parameters(`value defaultIntegrationParameters`)
+	void shouldConvertIterableToIterable(Convertx convertx){
 		assert(is {String*} result=convertx.convert({1,2,3},`{String*}`)); 
 		assert(result.containsEvery({"1","2","3"}));
 	}
 	
 	shared test 
-	void shouldConvertIterableToSet(){
+	parameters(`value defaultIntegrationParameters`)
+	void shouldConvertIterableToSet(Convertx convertx){
 		assert(is Set<String> result=convertx.convert({1,2,3},`Set<String>`)); 
 		assert(result.containsEvery({"1","2","3"}));
 	}
 	shared test 
-	void shouldConvertIterableToList(){
+	parameters(`value defaultIntegrationParameters`)
+	void shouldConvertIterableToList(Convertx convertx){
 		assert(is List<String> result=convertx.convert({1,2,3},`List<String>`)); 
 		assert(result.containsEvery({"1","2","3"}));
 	}
 	
 	shared test 
-	void shouldConvertIterableToArrayList(){
+	parameters(`value defaultIntegrationParameters`)
+	void shouldConvertIterableToArrayList(Convertx convertx){
 		assert(is ArrayList<String> result=convertx.convert({1,2,3},`List<String>`)); 
 		assert(result.containsEvery({"1","2","3"}));
 	}
-	shared ignore("Failing because of https://github.com/eclipse/ceylon/issues/7390") test 
-	void shouldConvertIterableToArray(){
+	shared ignore("Failing because of https://github.com/eclipse/ceylon/issues/7390") test
+	parameters(`value defaultIntegrationParameters`) 
+	void shouldConvertIterableToArray(Convertx convertx){
 		assert(is Array<String> result=convertx.convert({1,2,3}, `Array<String>`));
 		assert(result.containsEvery({"1","2","3"}));
 	}
 	shared test
-	void shouldConvertIterableToTouple(){
+	parameters(`value defaultIntegrationParameters`) 
+	void shouldConvertIterableToTouple(Convertx convertx){
 		assert(is [String,String,String] result=convertx.convert({1,2,3}, `[String,String,String]`));
 		assert(result.first=="1");
 		assert(result.rest.first=="2");
 		assert(result.rest.rest.first=="3");
 	}
 	shared test
-	void shouldConvertIterableToTupleWithDifferentTypes(){
+	parameters(`value defaultIntegrationParameters`) 
+	void shouldConvertIterableToTupleWithDifferentTypes(Convertx convertx){
 		if(is Exception ex=convertx.convert({1,1,1}, `[String,Boolean,Float]`)){
 			throw ex;
 		}
@@ -63,11 +68,13 @@ shared class IterableIntegerationTest() {
 	}
 	
 	shared test
-	void shouldNotConvertIterableToToupleToFewArguments(){
+	parameters(`value defaultIntegrationParameters`) 
+	void shouldNotConvertIterableToToupleToFewArguments(Convertx convertx){
 		assert(is ConvertionException error=convertx.convert({1,2,3}, `[String,String,String,String]`));
 	}
 	shared test
-	void shouldNotConvertIterableToToupleToManyArguments(){
+	parameters(`value defaultIntegrationParameters`) 
+	void shouldNotConvertIterableToToupleToManyArguments(Convertx convertx){
 		assert(is ConvertionException error=convertx.convert({1,2,3,4}, `[String,String,String]`));
 	}
 }

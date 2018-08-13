@@ -1,6 +1,12 @@
 import herd.convertx.core.api.component.support {
 	AttributeDescriptor
 }
+import herd.convertx.core {
+	Convertx
+}
+
+shared [Convertx] defaultIntegrationParameters=[Convertx()];
+
 
 shared abstract class EnumOne() of first|second|third|fourth{}
 shared object first extends EnumOne() {}
