@@ -17,7 +17,7 @@ shared class EntryConverter() satisfies  TypedConverter<Object->Anything,ClassOr
 	shared actual Object->Anything convert(Context context, Object->Anything source, ClassOrInterface<Object->Anything> resultType) {
 		value key = source.key;
 		value item = source.item;
-		value resolvedType=context.resolve(resultType);
+		value resolvedType=context.resolve(source,resultType);
 		assert(is Class<Entry<Object,Anything>> entryType=typeHierarchy(resultType).findByDeclaration(`class Entry`));
 		assert (exists destKeyType = entryType.typeArgumentList.first);
 		assert (exists destItemType = entryType.typeArgumentList.rest.first);

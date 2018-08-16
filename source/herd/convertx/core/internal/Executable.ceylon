@@ -73,9 +73,9 @@ Executable.Adapter defaultExecutableAdapter=> object satisfies Executable.Adapte
 		string = "Descriptor - ``descriptor``";	
 	};
 	
-	shared actual Executable adaptResolver<Base, Output, Input>(TypedResolver<Base,Output,Input> resolver) => object satisfies Executable{
+	shared actual Executable adaptResolver<Output, OutputType, Input>(TypedResolver<Output,OutputType,Input> resolver) => object satisfies Executable{
 		shared actual Anything execute(Anything[] args) {
-			assert(is [Input] args);
+			assert(is [Input,OutputType] args);
 			return resolver.resolve(*args);
 		}
 		string = "Resolver - ``resolver``";	

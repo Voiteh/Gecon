@@ -15,7 +15,7 @@ import herd.convertx.core.util {
 service(`interface Component`)
 shared class IterableToIterableConverter() satisfies  TypedConverter<{Anything*},ClassOrInterface<{Anything*}>,{Anything*}> {
 	shared actual {Anything*} convert(Context context, {Anything*} source, ClassOrInterface<{Anything*}> resultType){
-			value resolvedType=context.resolve(resultType);
+			value resolvedType=context.resolve(source,resultType);
 			assert(exists explictIterableType = typeHierarchy(resolvedType).findByDeclaration(`interface Iterable`));
 			assert(exists elementType=explictIterableType.typeArgumentList.first);
 			value args = source.map((Anything element) => context.convert(element, elementType)).sequence();

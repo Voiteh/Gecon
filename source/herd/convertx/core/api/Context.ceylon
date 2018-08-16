@@ -22,7 +22,7 @@ shared interface Context {
 	
 	throws(`class ResolvanceException`,"Resolver was not able, resolve specific type")
 	throws(`class ComponentFindingException`,"Resolver has not been found")
-	shared formal Class<Result> resolve<Result>(Type<Result> input);
+	shared formal Class<Result> resolve<Result>(Anything source,Type<Result> resultType);
 	
 	
 	throws(`class CreationException`,"Creator was not able to create provided class")

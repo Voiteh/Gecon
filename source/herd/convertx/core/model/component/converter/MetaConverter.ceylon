@@ -12,7 +12,7 @@ import ceylon.language.meta.model {
 service(`interface Component`)
 shared class MetaConverter() satisfies TypedConverter<Object,ClassOrInterface<Object>,Object> {
 	shared actual Object convert(Context context, Object source, ClassOrInterface<Object> resultType) {
-			value resolvedType = context.resolve(resultType);
+			value resolvedType = context.resolve(source,resultType);
 			value description = context.describe(source, resolvedType);
 			value accumulator =context.create(description.accumulatorClass, null);
 			for(value part in description.parts){

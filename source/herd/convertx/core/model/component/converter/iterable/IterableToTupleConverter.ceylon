@@ -30,7 +30,7 @@ shared class IterableToTupleConverter() satisfies TypedConverter<{Anything*},Cla
 	
 	shared actual Tuple<Anything,Anything,Anything> convert(Context context, {Anything*} source, ClassOrInterface<Tuple<Anything,Anything,Anything>> resultType) {
 
-		value resolvedType=context.resolve(resultType);
+		value resolvedType=context.resolve(source,resultType);
 		value argsType = extractArgsType(resultType);
 		if(source.size!=argsType.size){
 			throw ConvertionException(source, resultType,Exception("Different sizes of provided source ``source`` to touple argument types ``argsType`` "));

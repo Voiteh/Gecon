@@ -15,7 +15,7 @@ import herd.convertx.core.api.component {
 shared interface Findable of Hashable|Matchable{
 	shared static interface Adapter{
 		shared formal Findable adaptConverter<Source, ResultType,Result>(TypedConverter<Source,ResultType,Result> converter);
-		shared formal Findable adaptResolver<Base,Output,Input>(TypedResolver<Base,Output,Input> resolver);
+		shared formal Findable adaptResolver<Output,OutputType,Input>(TypedResolver<Output,OutputType,Input> resolver);
 		shared formal Findable adaptCreator<Result,Kind,Args>(TypedCreator<Result,Kind,Args> creator);
 		shared formal Findable adaptDescriptor<Source,Destination>(TypedDescriptor<Source,Destination> descriptor); 
 	}
@@ -48,11 +48,11 @@ Findable.Adapter defaultFindableAdapter=> object satisfies Findable.Adapter{
 		
 		
 	}
-	shared actual Findable adaptResolver<Base,Output,Input>(TypedResolver<Base,Output,Input> resolver){
+	shared actual Findable adaptResolver<Output,OutputType,Input>(TypedResolver<Output,OutputType,Input> resolver){
 		if (exists matcher = resolver.matcher) {
 			return object satisfies Matchable {
 				shared actual Boolean match(Anything[] args) {
-					if (is [Input] args) {
+					if (is [Input,OutputType] args) {
 						return matcher.match(*args);
 					}
 					return false;
@@ -62,8 +62,10 @@ Findable.Adapter defaultFindableAdapter=> object satisfies Findable.Adapter{
 				string = "Matchable for resolver - ``resolver``";
 			};
 		}
-		value base = typeLiteral<Base>();
-		return Hashable(base);
+		value input = typeLiteral<Input>();
+		value output = typeLiteral<Output>();
+		
+		return Hashable(input,output);
 	}
 	shared actual Findable adaptCreator<Result,Kind,Args>(TypedCreator<Result,Kind,Args> creator){
 		if(exists matcher=creator.matcher){

@@ -28,14 +28,14 @@ shared class DefaultContext(Registry registry, Executable.FindStrategy strategy 
 		}
 		throw ComponentFindingException("Can't find Converter for provided arguments: source - `` source else "null" ``, resultType - ``resultType``");
 	}
-	shared actual Class<Result> resolve<Result>(Type<Result> input) {
-		value args = [input];
+	shared actual Class<Result> resolve<Result>(Anything source,Type<Result> resultType) {
+		value args = [source,resultType];
 		if(exists executable =strategy.find(registry.resolvers, args)){
 			assert(is Class<Result> result=executable.execute(args));
 			return result;
 		}
 		
-		throw ComponentFindingException("Can't find resolver for provided arguments: input - ``input``");
+		throw ComponentFindingException("Can't find resolver for provided arguments: input - ``source else "null"``, resultType - ``resultType``");
 	}
 	
 	shared actual Result create<Result>(Class<Result,Nothing> kind, Anything args) {

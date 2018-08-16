@@ -15,7 +15,7 @@ import herd.convertx.core.api.component {
 service(`interface Component`)
 shared class MapToMapConverter() satisfies TypedConverter<Map<>,ClassOrInterface<Map<>>,Map<>> {
 	shared actual Map<Object,Anything> convert(Context context, Map<Object,Anything> source, ClassOrInterface<Map<Object,Anything>> resultType){
-		value resolvedType=context.resolve(resultType);
+		value resolvedType=context.resolve(source,resultType);
 		assert(exists explictMapType = typeHierarchy(resolvedType).findByDeclaration(`interface Map`));
 		assert(exists keyDestination=explictMapType.typeArgumentList.first);
 		assert(exists itemDestination=explictMapType.typeArgumentList.rest.first);
