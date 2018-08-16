@@ -21,7 +21,7 @@ shared class MapToMapResolver() satisfies Resolver<Map<>> {
 		assert (exists iterableType = hierarchy.findByDeclaration(`interface Map`));
 		assert (exists keyType = iterableType.typeArgumentList.first);
 		assert (exists itemType = iterableType.typeArgumentList.rest.first);
-		return `class HashMap`.classApply<HashMap<Anything,Nothing>>(keyType, itemType);
+		return `class HashMap`.classApply<Map<>>(keyType, itemType);
 	}
 	matcher => object satisfies MapToMapResolver.Matcher {
 		
