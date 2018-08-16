@@ -1,5 +1,5 @@
 import herd.convertx.core.model.component.resolver.iterable {
-	MapResolver
+	MapToMapResolver
 }
 import ceylon.test {
 	test
@@ -10,15 +10,15 @@ import ceylon.collection {
 import ceylon.language.meta.model {
 	Class
 }
-shared class MapResolverTest() {
+shared class MapToMapResolverTest() {
 	
 	
-	value mapResolver=MapResolver();
+	value mapResolver=MapToMapResolver();
 	
 	
 	
 	shared test void shouldResolveToHashMap(){
-		assert(is Class<HashMap<String,Integer>> resolved=mapResolver.resolve(`Map<String,Integer>`));
+		assert(is Class<HashMap<String,Integer>> resolved=mapResolver.resolve(HashMap<Integer,String>(),`Map<String,Integer>`));
 	}
 	
 	
