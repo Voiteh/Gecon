@@ -22,7 +22,7 @@ shared class MapResolver() satisfies Resolver<Map<>> {
 		assert (exists iterableType = hierarchy.findByDeclaration(`interface Map`));
 		assert (exists keyType = iterableType.typeArgumentList.first);
 		assert (exists itemType = iterableType.typeArgumentList.rest.first);
-		return `class HashMap`.classApply<HashMap<Anything,Nothing>>(keyType, itemType);
+		return `class HashMap`.classApply<Map<>>(keyType, itemType);
 	}
 	matcher => object satisfies MapResolver.Matcher {
 		shared actual Boolean match(ClassOrInterface<Map<>> inputType) => inputType is Interface<{Anything*}>;
