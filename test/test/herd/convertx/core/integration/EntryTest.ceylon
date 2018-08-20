@@ -1,16 +1,11 @@
 import ceylon.test {
-	test,
-	parameters
+	test
 }
-import herd.convertx.core {
-	Convertx
-}
-shared class EntryTest() {
+shared class EntryTest() extends BaseTest(){
 	
 	
 	shared test
-	parameters(`value defaultIntegrationParameters`)
-	void shouldConvertEntryToEntry(Convertx convertx){
+	void shouldConvertEntryToEntry(){
 		assert(is String->Integer result=convertx.convert(3->"4", `String->Integer`));
 		assert(result.key=="3");
 		assert(result.item==4);

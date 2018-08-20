@@ -1,43 +1,33 @@
 import ceylon.test {
-	parameters,
 	test,
 	assertEquals
-}
-import herd.convertx.core {
-	Convertx
 }
 import ceylon.language.meta {
 	type
 }
-shared class SelfTest() {
-	
-
+shared class SelfTest() extends BaseTest() {
 	
 	shared test  
-	parameters(`value defaultIntegrationParameters`)
-	void shouldConvertIntegerToInteger(Convertx convertx){
+	void shouldConvertIntegerToInteger(){
 		 	value result = convertx.convert(4, `Integer`);
 		 	assertEquals(result,4);
 	}
 	
 	shared test  
-	parameters(`value defaultIntegrationParameters`)
-	void shouldConvertEnumToEnum(Convertx convertx){
+	void shouldConvertEnumToEnum(){
 		value result = convertx.convert(one, `EnumTwo`);
 		assertEquals(result,one);
 	}
 	
 	shared test
-	parameters(`value defaultIntegrationParameters`)
-	void shouldConvertSimpleModelToSimpleModel(Convertx convertx){
+	void shouldConvertSimpleModelToSimpleModel(){
 		value model=TestSimpleModel(1,"bla");
 		value result=convertx.convert(model, `TestSimpleModel`);
 		assertEquals(result,model);
 	}
 	
 	shared test
-	parameters(`value defaultIntegrationParameters`)
-	void shouldConvertIterableToIterable(Convertx convertx){
+	void shouldConvertIterableToIterable(){
 		value stream={1,2,3};
 		value result=convertx.convert(stream, type(stream));
 		assertEquals(result,stream);

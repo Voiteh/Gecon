@@ -1,16 +1,11 @@
 import ceylon.test {
-	test,
-	parameters
+	test
 }
-import herd.convertx.core {
-	Convertx
-}
-shared class MetaTest() {
+shared class MetaTest() extends BaseTest(){
 	
 	
 	shared test
-	parameters(`value defaultIntegrationParameters`)
-	void shouldConvertTestModelOneToTwo(Convertx convertx){
+	void shouldConvertTestModelOneToTwo(){
 		value model=TestSimpleModel(1, "3");
 		assert(is TestOtherSimpleModel adapt = convertx.convert(model, `TestOtherSimpleModel`));
 		

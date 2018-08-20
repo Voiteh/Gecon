@@ -1,16 +1,11 @@
 import ceylon.test {
-	test,
-	parameters
+	test
 }
-import herd.convertx.core {
-	Convertx
-}
-shared class UnionTest() {
+shared class UnionTest() extends BaseTest(){
 	
 	
 	shared test 
-	parameters(`value defaultIntegrationParameters`) 
-	void shouldConvertToUnion(Convertx convertx){
+	void shouldConvertToUnion(){
 		if(is Exception result=convertx.convert("5", `Integer?`)){
 			throw result;
 		}
@@ -19,14 +14,12 @@ shared class UnionTest() {
 	}
 	
 	shared test 
-	parameters(`value defaultIntegrationParameters`) 
-	void shouldConvertToUnionWithMovedTypes(Convertx convertx){
+	void shouldConvertToUnionWithMovedTypes(){
 		assert(is Integer result=convertx.convert("5", `Null|Integer`));
 		assert(result==5);
 	}
 	shared test
-	parameters(`value defaultIntegrationParameters`) 
-	void shouldConvertToFloatBecauseOfUnionTypeIndexes(Convertx convertx){
+	void shouldConvertToFloatBecauseOfUnionTypeIndexes(){
 		assert(is Float result=convertx.convert("5", `Float|Integer`));
 		assert(result==5.0);
 	}

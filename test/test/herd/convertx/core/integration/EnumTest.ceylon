@@ -1,33 +1,26 @@
-import herd.convertx.core {
-	Convertx
-}
 import ceylon.test {
-	test,
-	parameters
+	test
 }
 import herd.convertx.core.api.component {
 	ConvertionException
 }
-shared class EnumTest() {
+shared class EnumTest() extends BaseTest() {
 	
 	
 	shared test
-	parameters(`value defaultIntegrationParameters`)
-	void shouldConvertEnumOneToEnumTwo(Convertx convertx){
+	void shouldConvertEnumOneToEnumTwo(){
 		assert(is EnumTwo adapt = convertx.convert(first, `EnumTwo`));
 		assert(adapt==one);
 	}
 	
 	shared test
-	parameters(`value defaultIntegrationParameters`)
-	void shouldConvertEnumTwoToEnumOne(Convertx convertx){
+	void shouldConvertEnumTwoToEnumOne(){
 		assert(is EnumOne adapt=convertx.convert(one, `EnumOne`));
 		assert(adapt==first);
 	}
 	
 	shared test
-	parameters(`value defaultIntegrationParameters`) 
-	void shouldFailConvertEnumOneToEnumTwoWithIndexToHigh(Convertx convertx){
+	void shouldFailConvertEnumOneToEnumTwoWithIndexToHigh(){
 		assert(is ConvertionException adapt = convertx.convert(fourth, `EnumTwo`));
 		
 	}
