@@ -7,10 +7,13 @@ import herd.convertx.core.internal {
 	Executable,
 	Findable
 }
+import herd.convertx.core.api {
+	Context
+}
 
 shared interface TypedResolver<out Output=Anything,in OutputType=Nothing, in Input=Nothing> satisfies Component
 		given OutputType satisfies Type<Output> {
-	shared formal Class<Output> resolve(Input input,OutputType outputType);
+	shared formal Class<Output> resolve(Context context,Input input,OutputType outputType);
 	
 	
 	shared interface Matcher {
@@ -28,7 +31,7 @@ shared interface TypedResolver<out Output=Anything,in OutputType=Nothing, in Inp
 shared interface Resolver<Output,Input=Output> satisfies TypedResolver<Output,ClassOrInterface<Output>,Input> {
 	
 	throws (`class ResolvanceException`)
-	shared formal actual Class<Output> resolve(Input type,ClassOrInterface<Output> outputType);
+	shared formal actual Class<Output> resolve(Context context,Input type,ClassOrInterface<Output> outputType);
 	
 	
 	shared default actual Resolver<Output,Input>.Matcher? matcher=> null;

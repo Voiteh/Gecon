@@ -3,18 +3,19 @@ import ceylon.collection {
 }
 import ceylon.language.meta.model {
 	Class,
-	ClassOrInterface,
 	Interface
 }
 import herd.convertx.core.api.component {
 	Component,
-	Resolver,
 	TypedResolver
+}
+import herd.convertx.core.api {
+	Context
 }
 
 service (`interface Component`)
 shared class IterableToListResolver() satisfies TypedResolver<List<>,Interface<List<>>,{Anything*}> {
-	shared actual Class<List<>,Nothing> resolve({Anything*} input, Interface<List<>> outputType) {
+	shared actual Class<List<>,Nothing> resolve(Context context,{Anything*} input, Interface<List<>> outputType) {
 		value typeForIterable = iterableTypeArgument(outputType);
 		
 		return `class ArrayList`.classApply<List<>>(typeForIterable);

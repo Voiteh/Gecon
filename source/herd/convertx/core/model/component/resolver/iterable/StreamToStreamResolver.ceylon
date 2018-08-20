@@ -9,9 +9,12 @@ import herd.convertx.core.api.component {
 	Component,
 	TypedResolver
 }
+import herd.convertx.core.api {
+	Context
+}
 service(`interface Component`)
 shared class StreamToStreamResolver() satisfies  TypedResolver<{Anything*},Interface<{Anything*}>,{Anything*}>{
-	shared actual Class<{Anything*},Nothing> resolve({Anything*} input, Interface<{Anything*}> outputType){
+	shared actual Class<{Anything*},Nothing> resolve(Context context,{Anything*} input, Interface<{Anything*}> outputType){
 		value typeForIterable = iterableTypeArgument(outputType);
 		return `class ArrayList`.classApply<Iterable<>>(typeForIterable);
 	}

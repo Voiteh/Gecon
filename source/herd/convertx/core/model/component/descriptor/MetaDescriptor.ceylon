@@ -24,10 +24,13 @@ import herd.convertx.core.util {
 import herd.convertx.core.model {
 	AttributeDescription
 }
+import herd.convertx.core.api {
+	Context
+}
 
 service(`interface Component`)
 shared class MetaDescriptor() satisfies Descriptor<Object,Object>{
-	shared actual Description describe(Object source, Class<Object,Nothing> destinationType) {
+	shared actual Description describe(Context context,Object source, Class<Object,Nothing> destinationType) {
 		value sourceType=type(source);
 		value parts=ArrayList<MetaPart>();
 		for(value destAttribute in destinationType.getAttributes<>().filter(filterObjectAndIdentifiableAttributes)){

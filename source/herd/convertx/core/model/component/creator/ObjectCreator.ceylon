@@ -14,22 +14,25 @@ import ceylon.language.serialization {
 	DeserializationException,
 	deserialization
 }
+import herd.convertx.core.api {
+	Context
+}
 service (`interface Component`)
 shared class ObjectCreator() satisfies Creator<Object,MetaAccumulator> {
-	shared actual Object create(Class<Object,Nothing> kind, MetaAccumulator arguments) {
+	shared actual Object create(Context context,Class<Object,Nothing> kind, MetaAccumulator arguments) {
 		value instanceId = kind.string;
-		value context = deserialization<String>();
-		context.instance(instanceId, kind);
+		value deserializationContext = deserialization<String>();
+		deserializationContext.instance(instanceId, kind);
 		
 		for (value targetable -> data in arguments.accumulated) {
 			if (is AdaptationException error = data) {
 				throw CreationException(kind, error);
 			}
-			context.attribute(instanceId, targetable.declaration, targetable.declaration.string);
-			context.instanceValue(targetable.declaration.string, data);
+			deserializationContext.attribute(instanceId, targetable.declaration, targetable.declaration.string);
+			deserializationContext.instanceValue(targetable.declaration.string, data);
 		}
 		try {
-			return context.reconstruct<Object>(instanceId);
+			return deserializationContext.reconstruct<Object>(instanceId);
 		} catch (DeserializationException x) {
 			throw CreationException(kind, x);
 		}

@@ -29,8 +29,9 @@ shared class DefaultContext(Registry registry, Executable.FindStrategy strategy 
 		throw ComponentFindingException("Can't find Converter for provided arguments: source - `` source else "null" ``, resultType - ``resultType``");
 	}
 	shared actual Class<Result> resolve<Result>(Anything source,Type<Result> resultType) {
-		value args = [source,resultType];
-		if(exists executable =strategy.find(registry.resolvers, args)){
+		value hashable = [source, resultType];
+		value args = [this,source,resultType];
+		if(exists executable =strategy.find(registry.resolvers, hashable)){
 			assert(is Class<Result> result=executable.execute(args));
 			return result;
 		}
@@ -39,16 +40,18 @@ shared class DefaultContext(Registry registry, Executable.FindStrategy strategy 
 	}
 	
 	shared actual Result create<Result>(Class<Result,Nothing> kind, Anything args) {
-		value params = [kind, args];
-		if(exists executable=strategy.find(registry.creators,params)){
+		value hashable = [kind, args];
+		value params=[this,kind,args];
+		if(exists executable=strategy.find(registry.creators,hashable)){
 			assert(is Result result=executable.execute(params));
 			return result;
 		}
 		throw ComponentFindingException("Can't find creator for provided arguments: kind - ``kind``, args - `` args else "null" ``");
 	}
 	shared actual Description describe(Anything source, Class<Anything> destinationType) {
-		value args = [source, destinationType];
-		if(exists executable=strategy.find(registry.descriptors,args)){
+		value hashable = [source, destinationType];
+		value args=[this,source,destinationType];
+		if(exists executable=strategy.find(registry.descriptors,hashable)){
 			assert(is Description result=executable.execute(args));
 			return result;
 		}

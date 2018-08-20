@@ -10,9 +10,12 @@ import herd.convertx.core.api.component {
 import ceylon.language.meta.model {
 	Class
 }
+import herd.convertx.core.api {
+	Context
+}
 service(`interface Component`)
 shared class HashMapCreator() satisfies  Creator<Map<>,{Anything*}> {
-	shared actual Map<> create(Class<Map<>,Nothing> kind, {Anything*} arguments) {
+	shared actual Map<> create(Context context,Class<Map<>,Nothing> kind, {Anything*} arguments) {
 		return kind.apply(linked, Hashtable(), arguments);
 	}
 	matcher => object satisfies Creator<Map<>,{Anything*}>.Matcher {

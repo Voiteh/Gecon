@@ -59,7 +59,7 @@ Executable.Adapter defaultExecutableAdapter=> object satisfies Executable.Adapte
 	
 	shared actual Executable adaptCreator<Result,Kind, Args>(TypedCreator<Result,Kind,Args> creator) => object satisfies Executable{
 		shared actual Anything execute(Anything[] args) {
-			assert(is [Class<Kind>,Args] args);
+			assert(is [Context,Class<Kind>,Args] args);
 			return creator.create(*args);
 		}
 		string = "Creator - ``creator``";	
@@ -67,7 +67,7 @@ Executable.Adapter defaultExecutableAdapter=> object satisfies Executable.Adapte
 	
 	shared actual Executable adaptDescriptor<Source,Destination>(TypedDescriptor<Source,Destination> descriptor) => object satisfies Executable{
 		shared actual Anything execute(Anything[] args) {
-			assert(is [Source,Class<Destination>] args);
+			assert(is [Context,Source,Class<Destination>] args);
 			return descriptor.describe(*args);
 		}
 		string = "Descriptor - ``descriptor``";	
@@ -75,7 +75,7 @@ Executable.Adapter defaultExecutableAdapter=> object satisfies Executable.Adapte
 	
 	shared actual Executable adaptResolver<Output, OutputType, Input>(TypedResolver<Output,OutputType,Input> resolver) => object satisfies Executable{
 		shared actual Anything execute(Anything[] args) {
-			assert(is [Input,OutputType] args);
+			assert(is [Context,Input,OutputType] args);
 			return resolver.resolve(*args);
 		}
 		string = "Resolver - ``resolver``";	

@@ -6,13 +6,13 @@ import herd.convertx.core.api.component {
 	Resolver,
 	Component
 }
-import ceylon.language.meta {
-	type
+import herd.convertx.core.api {
+	Context
 }
 
 service (`interface Component`)
 shared class SelfResolver() satisfies Resolver<Anything,Anything> {
-	shared actual Class<Anything,Nothing> resolve(Anything input,ClassOrInterface<Anything> outputType) {
+	shared actual Class<Anything,Nothing> resolve(Context context,Anything input,ClassOrInterface<Anything> outputType) {
 		assert (is Class<> type = outputType);
 		return type;
 	}

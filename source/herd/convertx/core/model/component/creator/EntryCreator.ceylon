@@ -5,9 +5,12 @@ import herd.convertx.core.api.component {
 import ceylon.language.meta.model {
 	Class
 }
+import herd.convertx.core.api {
+	Context
+}
 service(`interface Component`)
 shared class EntryCreator() satisfies Creator<Entry<Object,Anything>,{Anything*}> {
-	shared actual Object->Anything create(Class<Object->Anything,Nothing> kind, {Anything*} arguments) {
+	shared actual Object->Anything create(Context context,Class<Object->Anything,Nothing> kind, {Anything*} arguments) {
 		value key = arguments.first;
 		assert (exists key);
 		value item = arguments.rest.first;

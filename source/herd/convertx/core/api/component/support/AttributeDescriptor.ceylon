@@ -21,9 +21,12 @@ import herd.convertx.core.api.meta.support {
 import herd.convertx.core.util {
 	filterObjectAndIdentifiableAttributes
 }
+import herd.convertx.core.api {
+	Context
+}
 
 shared class AttributeDescriptor<Source,Destination>({<Attribute<Source>-> Attribute<Destination>>*} attributes) satisfies Descriptor<Source, Destination>{
-	shared actual Description describe(Source source, Class<Destination,Nothing> destinationType){
+	shared actual Description describe(Context context,Source source, Class<Destination,Nothing> destinationType){
 		value parts=ArrayList<MetaPart>();
 		for(value destinationAttribute in destinationType.getAttributes<>().filter(filterObjectAndIdentifiableAttributes)){
 			value sourceAttribute = attributes.find((Attribute<Source,Anything,Nothing> elementKey -> Attribute<Destination,Anything,Nothing> elementItem) => destinationAttribute==elementItem)?.key;

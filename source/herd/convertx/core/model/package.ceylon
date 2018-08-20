@@ -1,1 +1,2 @@
-package herd.convertx.core.model;
+shared package herd.convertx.core.model;
+ 
