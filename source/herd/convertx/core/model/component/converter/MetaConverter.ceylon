@@ -6,16 +6,21 @@ import herd.convertx.core.api {
 	Context
 }
 import ceylon.language.meta.model {
-	ClassOrInterface
+	ClassOrInterface,
+	Type
 }
 import herd.convertx.core.api.meta {
 	Partialization
+}
+import ceylon.language.meta {
+	type
 }
 service(`interface Component`)
 shared class MetaConverter() satisfies TypedConverter<Object,ClassOrInterface<Object>,Object> {
 	shared actual Object convert(Context context, Object source, ClassOrInterface<Object> resultType) {
 			value resolvedType = context.resolve(source,resultType);
-			value relations=source->resolvedType;
+			value relationsType=`class Entry`.apply<Entry<Object,Type<Anything>>>(type(source),type(resultType));
+			value relations=context.convert(source->resultType,relationsType);
 			value partializationType=context.resolve(relations, `Partialization`);
 			value partialization=context.create(partializationType,relations);
 			return context.create(resolvedType, partialization);
