@@ -10,14 +10,13 @@ import ceylon.language.meta {
 import herd.convertx.core.api.component {
 	TypedResolver,
 	TypedCreator,
-	TypedConverter,
-	TypedDescriptor}
+	TypedConverter
+}
 shared interface Findable of Hashable|Matchable{
 	shared static interface Adapter{
 		shared formal Findable adaptConverter<Source, ResultType,Result>(TypedConverter<Source,ResultType,Result> converter);
 		shared formal Findable adaptResolver<Output,OutputType,Input>(TypedResolver<Output,OutputType,Input> resolver);
 		shared formal Findable adaptCreator<Result,Kind,Args>(TypedCreator<Result,Kind,Args> creator);
-		shared formal Findable adaptDescriptor<Source,Destination>(TypedDescriptor<Source,Destination> descriptor); 
 	}
 	
 	 
@@ -53,14 +52,14 @@ Findable.Adapter defaultFindableAdapter=> object satisfies Findable.Adapter{
 			return object satisfies Matchable {
 				shared actual Boolean match(Anything[] args) {
 					if (is [Input,OutputType] args) {
-						return matcher.match(*args);
+						value match= matcher.match(*args);
+						return match;
 					}
 					return false;
 				}
-				
 				shared actual Integer priority = matcher.priority;
-				string = "Matchable for resolver - ``resolver``";
 			};
+			
 		}
 		value input = typeLiteral<Input>();
 		value output = typeLiteral<Output>();
@@ -85,25 +84,6 @@ Findable.Adapter defaultFindableAdapter=> object satisfies Findable.Adapter{
 		value kind=typeLiteral<Kind>();
 		value args =typeLiteral<Args>();
 		return Hashable(kind,args);
-	}
-	shared actual Findable adaptDescriptor<Source,Destination>(TypedDescriptor<Source,Destination> descriptor)  {
-		if(exists matcher=descriptor.matcher){
-			return object satisfies Matchable{
-				shared actual Boolean match(Anything[] args) {
-					if(is [Source,Class<Destination>] args){
-						return matcher.match(*args);
-					}
-					return false;
-				}
-				
-				shared actual Integer priority = matcher.priority;
-				string = "Matchable for descriptor - ``descriptor``";
-				
-			};
-		}
-		value sourceType=typeLiteral<Source>();
-		value destinationType =typeLiteral<Destination>();
-		return Hashable(sourceType,destinationType);
 	}
 	
 };

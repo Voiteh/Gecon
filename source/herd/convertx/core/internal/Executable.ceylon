@@ -1,8 +1,7 @@
 import herd.convertx.core.api.component {
 	TypedResolver,
 	TypedCreator,
-	TypedConverter,
-	TypedDescriptor
+	TypedConverter
 }
 import herd.convertx.core.api {
 	Context
@@ -19,10 +18,7 @@ shared sealed interface Executable {
 		shared formal Executable adaptConverter<Source,ResultType, Result>(TypedConverter<Source,ResultType,Result> converter);
 		shared formal Executable adaptResolver<Base,Output,Input>(TypedResolver<Base,Output,Input> resolver);
 		shared formal Executable adaptCreator<Result,Kind, Args>(TypedCreator<Result,Kind,Args> creator);
-		shared formal Executable adaptDescriptor<Source,Destination>(TypedDescriptor<Source,Destination> descriptor);	
 	}
-	
-
 	
 	shared formal Anything execute(Anything[] args);
 	
@@ -65,13 +61,6 @@ Executable.Adapter defaultExecutableAdapter=> object satisfies Executable.Adapte
 		string = "Creator - ``creator``";	
 	};
 	
-	shared actual Executable adaptDescriptor<Source,Destination>(TypedDescriptor<Source,Destination> descriptor) => object satisfies Executable{
-		shared actual Anything execute(Anything[] args) {
-			assert(is [Context,Source,Class<Destination>] args);
-			return descriptor.describe(*args);
-		}
-		string = "Descriptor - ``descriptor``";	
-	};
 	
 	shared actual Executable adaptResolver<Output, OutputType, Input>(TypedResolver<Output,OutputType,Input> resolver) => object satisfies Executable{
 		shared actual Anything execute(Anything[] args) {
@@ -80,6 +69,7 @@ Executable.Adapter defaultExecutableAdapter=> object satisfies Executable.Adapte
 		}
 		string = "Resolver - ``resolver``";	
 	};
+	
 	
 };
 

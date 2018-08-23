@@ -8,9 +8,6 @@ import herd.convertx.core.api {
 import herd.convertx.core.api.component {
 	ComponentFindingException
 }
-import herd.convertx.core.api.meta {
-	Description
-}
 import herd.convertx.core.internal {
 	Executable,
 	Registry,
@@ -47,14 +44,5 @@ shared class DefaultContext(Registry registry, Executable.FindStrategy strategy 
 			return result;
 		}
 		throw ComponentFindingException("Can't find creator for provided arguments: kind - ``kind``, args - `` args else "null" ``");
-	}
-	shared actual Description describe(Anything source, Class<Anything> destinationType) {
-		value hashable = [source, destinationType];
-		value args=[this,source,destinationType];
-		if(exists executable=strategy.find(registry.descriptors,hashable)){
-			assert(is Description result=executable.execute(args));
-			return result;
-		}
-		throw ComponentFindingException("Can't find descriptor for provided arguments: source - ``source else "null"``, destinationType - ``destinationType``");
 	}
 }

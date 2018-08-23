@@ -1,45 +1,41 @@
 import herd.convertx.core.api.component {
 	Creator,
 	CreationException,
-	AdaptationException,
 	Component
 }
 import ceylon.language.meta.model {
-	Class
+	Class,
+	Attribute
 }
 import herd.convertx.core.api.meta.support {
-	MetaAccumulator
+	AttributePartialization
 }
 import ceylon.language.serialization {
-	DeserializationException,
 	deserialization
 }
 import herd.convertx.core.api {
 	Context
 }
+
 service (`interface Component`)
-shared class ObjectCreator() satisfies Creator<Object,MetaAccumulator> {
-	shared actual Object create(Context context,Class<Object,Nothing> kind, MetaAccumulator arguments) {
+shared class ObjectCreator() satisfies Creator<Object,AttributePartialization> {
+	shared actual Object create(Context context,Class<Object,Nothing> kind, AttributePartialization partialization) {
 		value instanceId = kind.string;
 		value deserializationContext = deserialization<String>();
 		deserializationContext.instance(instanceId, kind);
-		
-		for (value targetable -> data in arguments.accumulated) {
-			if (is AdaptationException error = data) {
-				throw CreationException(kind, error);
-			}
-			deserializationContext.attribute(instanceId, targetable.declaration, targetable.declaration.string);
-			deserializationContext.instanceValue(targetable.declaration.string, data);
-		}
 		try {
+			partialization.parts.each((Attribute<> resultAttribute-> Anything resultPartValue) {
+				deserializationContext.attribute(instanceId, resultAttribute.declaration, resultAttribute.declaration.name);
+				deserializationContext.instanceValue(resultAttribute.declaration.name, resultPartValue);
+			});
 			return deserializationContext.reconstruct<Object>(instanceId);
-		} catch (DeserializationException x) {
+		} catch (Exception x) {
 			throw CreationException(kind, x);
 		}
 	}
 	
 	matcher => object satisfies ObjectCreator.Matcher {
-		shared actual Boolean match(Class<Object,Nothing> kind, MetaAccumulator arguments) => kind.declaration.serializable;
+		shared actual Boolean match(Class<Object,Nothing> kind, AttributePartialization arguments) =>true;
 		
 		shared actual Integer priority => 0;
 	};

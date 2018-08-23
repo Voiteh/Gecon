@@ -10,8 +10,11 @@ shared class MetaTest() extends BaseTest() {
 	
 	shared test
 	void shouldConvertTestModelOneToTwo() {
-		value model = TestSimpleModel(1, "3");
-		assert (is TestOtherSimpleModel adapt = convertx.convert(model, `TestOtherSimpleModel`));
+		value adapt = convertx.convert(testSimpleModel, `TestOtherSimpleModel`);
+		if (is Exception adapt) {
+			throw adapt;
+		}
+		assertEquals(adapt, testOtherSimpleModel);
 	}
 	
 	shared test
@@ -30,7 +33,7 @@ shared class MetaTest() extends BaseTest() {
 				`TestSimpleModel.name`.declaration.name->testSimpleModel.name
 			};
 		};
-		value result=convertx.convert(map, `TestSimpleModel`);
-		assertEquals(result,testSimpleModel);
+		value result = convertx.convert(map, `TestSimpleModel`);
+		assertEquals(result, testSimpleModel);
 	}
 }
