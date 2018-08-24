@@ -10,6 +10,7 @@ import ceylon.language.meta.model {
 	Class
 }
 shared sealed interface Executable {
+	
 	shared static interface FindStrategy{
 		shared formal Executable? find(Container container,Anything[] args);
 	}

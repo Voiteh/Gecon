@@ -5,6 +5,12 @@ import ceylon.test {
 import ceylon.collection {
 	HashMap
 }
+import herd.convertx.core {
+	logger
+}
+import ceylon.logging {
+	debug
+}
 
 shared class MetaTest() extends BaseTest() {
 	

@@ -16,6 +16,9 @@ import herd.convertx.core.api.component {
 	AdaptationException
 }
 
+
+
+
 shared class Convertx {
 	
 	Context context;
@@ -36,8 +39,12 @@ shared class Convertx {
 	
 	shared Result|AdaptationException convert<Result>(Anything source, Type<Result> resultType) {
 		try {
-			return context.convert(source, resultType);
+			logger.debug("Converting: ``source else "null"``, to ``resultType``");
+			value result =context.convert(source, resultType);
+			logger.info("Converted: ``source else "null"``, to ``resultType``, result: ``result else "null"``");
+			return result;
 		} catch (AdaptationException x) {
+			logger.error("Convertion FAILED: ``source else "null"`` to ``resultType``, ",x);
 			return x;
 		}
 	}

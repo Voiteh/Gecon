@@ -12,6 +12,10 @@ import herd.convertx.core.api.component {
 	TypedCreator,
 	TypedConverter
 }
+
+import herd.convertx.core {
+	logger
+}
 shared interface Findable of Hashable|Matchable{
 	shared static interface Adapter{
 		shared formal Findable adaptConverter<Source, ResultType,Result>(TypedConverter<Source,ResultType,Result> converter);
@@ -23,16 +27,22 @@ shared interface Findable of Hashable|Matchable{
 	
 }
 
+String matchingResultLog(Boolean result) =>"Matching ``if (result) then "SUCCESS" else "FAILURE"``";
 
 Findable.Adapter defaultFindableAdapter=> object satisfies Findable.Adapter{
 	shared actual Findable adaptConverter<Source, ResultType,Result>(TypedConverter<Source,ResultType,Result> converter){
 		if (exists matcher = converter.matcher) {
 			return object satisfies Matchable {
 				shared actual Boolean match(Anything[] args) {
+					Boolean result;
 					if (is [Source, ResultType] args) {
-						return matcher.match(*args);
+						result= matcher.match(*args);
 					}
-					return false;
+					else{
+						result=false;
+					}
+					logger.trace("``matchingResultLog(result)``,for Converter: ``converter`` to: ``args``");
+					return result;
 				}
 				
 				shared actual Integer priority = matcher.priority;
@@ -51,11 +61,15 @@ Findable.Adapter defaultFindableAdapter=> object satisfies Findable.Adapter{
 		if (exists matcher = resolver.matcher) {
 			return object satisfies Matchable {
 				shared actual Boolean match(Anything[] args) {
+					Boolean result;
 					if (is [Input,OutputType] args) {
-						value match= matcher.match(*args);
-						return match;
+						result= matcher.match(*args);
 					}
-					return false;
+					else{
+						result =false;
+					}
+					logger.trace("``matchingResultLog(result)``, for Resolver: ``resolver`` to: ``args``");
+					return result;
 				}
 				shared actual Integer priority = matcher.priority;
 			};
@@ -70,10 +84,15 @@ Findable.Adapter defaultFindableAdapter=> object satisfies Findable.Adapter{
 		if(exists matcher=creator.matcher){
 			return object satisfies Matchable{
 				shared actual Boolean match(Anything[] args) {
+					Boolean result;
 					if(is [Class<Kind> , Args ] args){
-						return matcher.match(*args);
+						result=matcher.match(*args);
 					}
-					return false;
+					else {
+						result=false;
+					}
+					logger.trace("``matchingResultLog(result)``, for Creator: ``creator`` to: ``args``");
+					return result;
 				}
 				
 				shared actual Integer priority = matcher.priority;
