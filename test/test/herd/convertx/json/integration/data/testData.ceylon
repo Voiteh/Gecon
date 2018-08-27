@@ -3,7 +3,8 @@ import herd.convertx.core {
 }
 import herd.convertx.json {
 	JSONObject,
-	JSONArray
+	JSONArray,
+	JSONProvider
 }
 import ceylon.collection {
 	ArrayList,
@@ -12,7 +13,7 @@ import ceylon.collection {
 
 object testData {
 	
-	shared Convertx jsonConvertx = Convertx();
+	shared Convertx jsonConvertx = Convertx(JSONProvider());
 	shared String name = "Test";
 	shared Integer id = 123;
 	shared Null nullVal = null;
