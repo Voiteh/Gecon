@@ -1,13 +1,8 @@
 import ceylon.test {
 	test
 }
-import herd.convertx.core {
-	Convertx
-}
-shared class UnionIntegrationTest() {
+shared class UnionTest() extends BaseTest(){
 	
-	
-	value convertx =Convertx();
 	
 	shared test 
 	void shouldConvertToUnion(){

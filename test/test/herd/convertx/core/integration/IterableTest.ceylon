@@ -2,19 +2,13 @@ import ceylon.test {
 	test,
 	ignore
 }
-import herd.convertx.core {
-	Convertx
-}
 import ceylon.collection {
 	ArrayList
 }
 import herd.convertx.core.api.component {
 	ConvertionException
 }
-shared class IterableIntegerationTest() {
-	
-	Convertx convertx=Convertx();
-	
+shared class IterableTest() extends BaseTest(){
 	
 	
 	shared test 
@@ -39,7 +33,7 @@ shared class IterableIntegerationTest() {
 		assert(is ArrayList<String> result=convertx.convert({1,2,3},`List<String>`)); 
 		assert(result.containsEvery({"1","2","3"}));
 	}
-	shared ignore("Failing because of https://github.com/eclipse/ceylon/issues/7390") test 
+	shared ignore("Failing because of https://github.com/eclipse/ceylon/issues/7390") test
 	void shouldConvertIterableToArray(){
 		assert(is Array<String> result=convertx.convert({1,2,3}, `Array<String>`));
 		assert(result.containsEvery({"1","2","3"}));

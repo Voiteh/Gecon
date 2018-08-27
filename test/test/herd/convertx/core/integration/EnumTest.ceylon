@@ -1,14 +1,10 @@
-import herd.convertx.core {
-	Convertx
-}
 import ceylon.test {
 	test
 }
 import herd.convertx.core.api.component {
 	ConvertionException
 }
-shared class EnumIntegrationTest() {
-	Convertx convertx=Convertx();
+shared class EnumTest() extends BaseTest() {
 	
 	
 	shared test
@@ -23,7 +19,7 @@ shared class EnumIntegrationTest() {
 		assert(adapt==first);
 	}
 	
-	shared test 
+	shared test
 	void shouldFailConvertEnumOneToEnumTwoWithIndexToHigh(){
 		assert(is ConvertionException adapt = convertx.convert(fourth, `EnumTwo`));
 		

@@ -21,6 +21,6 @@ shared class SelfConverter() satisfies Converter<Anything,Anything> {
 	matcher => object satisfies SelfConverter.Matcher {
 		shared actual Boolean match(Anything source, Type<Anything> resultType) => resultType.exactly(type(source));
 		
-		shared actual Integer priority => 1;
+		shared actual Integer priority => runtime.maxIntegerValue;
 	};
 }

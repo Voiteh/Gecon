@@ -5,9 +5,12 @@ import herd.convertx.core.api.component {
 import ceylon.language.meta.model {
 	Class
 }
+import herd.convertx.core.api {
+	Context
+}
 service(`interface Component`)
 shared class ArrayCreator() satisfies  Creator<List<>,{Anything*}> {
-	shared actual List<> create(Class<List<>,Nothing> kind, {Anything*} arguments) {
+	shared actual List<> create(Context context,Class<List<>,Nothing> kind, {Anything*} arguments) {
 		return kind.apply(arguments);
 	}
 	matcher => object satisfies Creator<List<>,{Anything*}>.Matcher {

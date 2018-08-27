@@ -11,7 +11,7 @@ import herd.convertx.core.api {
 service(`interface Component`)
 shared class IntersectionConverter() satisfies TypedConverter<Anything, IntersectionType<Anything>, Anything>{
 	shared actual Anything convert(Context context, Anything source, IntersectionType<Anything> resultType) {
-		value resolvedType=context.resolve(resultType);
+		value resolvedType=context.resolve(source,resultType);
 		return context.convert(source, resolvedType);
 	}
 	

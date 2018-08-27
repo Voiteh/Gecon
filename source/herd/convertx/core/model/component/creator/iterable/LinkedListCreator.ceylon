@@ -8,9 +8,12 @@ import herd.convertx.core.api.component {
 import ceylon.language.meta.model {
 	Class
 }
+import herd.convertx.core.api {
+	Context
+}
 service(`interface Component`)
 shared class LinkedListCreator() satisfies Creator<List<Anything>,{Anything*}> {
-	shared actual List<Anything> create(Class<List<Anything>,Nothing> kind, {Anything*} arguments) {
+	shared actual List<Anything> create(Context context,Class<List<Anything>,Nothing> kind, {Anything*} arguments) {
 		return kind.apply(arguments);
 	}
 	matcher => object satisfies LinkedListCreator.Matcher {

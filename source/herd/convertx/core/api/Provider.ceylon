@@ -1,8 +1,11 @@
 import herd.convertx.core.api.component {
 	Component
 }
+import ceylon.collection {
+	MutableList
+}
 shared interface Provider {
 	
-	shared formal {Component*} components;
+	shared formal MutableList<Component> components;
 	
 }

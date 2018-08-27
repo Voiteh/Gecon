@@ -5,17 +5,12 @@ import ceylon.language.meta.model {
 
 "Exception returned whenever one aspect of adaptation process fail"
 shared abstract class AdaptationException(String message, Throwable? cause = null) 
-		of DescriptionException
-		|AttributeMappingException
+		of AttributeMappingException
 		|ConvertionException 
 		|ResolvanceException 
 		|CreationException 
 		|ComponentFindingException
 		extends Exception(message, cause) {}
-
-shared class DescriptionException(Anything source,Type<> destination,Throwable? cause = null) 
-		extends AdaptationException("Can't describe ``destination`` with source  ``source else "null"`` ", cause) {
-}
 shared class CreationException extends AdaptationException {
 	shared new (Type<Anything> type,Anything args=null, Throwable? cause = null)
 			extends AdaptationException("Can't create ``type`` with arguments ``args else "null"``", cause) {}

@@ -10,30 +10,39 @@ import ceylon.language.meta {
 import herd.convertx.core.api.component {
 	TypedResolver,
 	TypedCreator,
-	TypedConverter,
-	TypedDescriptor}
+	TypedConverter
+}
+
+import herd.convertx.core {
+	logger
+}
 shared interface Findable of Hashable|Matchable{
 	shared static interface Adapter{
 		shared formal Findable adaptConverter<Source, ResultType,Result>(TypedConverter<Source,ResultType,Result> converter);
-		shared formal Findable adaptResolver<Base,Output,Input>(TypedResolver<Base,Output,Input> resolver);
+		shared formal Findable adaptResolver<Output,OutputType,Input>(TypedResolver<Output,OutputType,Input> resolver);
 		shared formal Findable adaptCreator<Result,Kind,Args>(TypedCreator<Result,Kind,Args> creator);
-		shared formal Findable adaptDescriptor<Source,Destination>(TypedDescriptor<Source,Destination> descriptor); 
 	}
 	
 	 
 	
 }
 
+String matchingResultLog(Boolean result) =>"Matching ``if (result) then "SUCCESS" else "FAILURE"``";
 
 Findable.Adapter defaultFindableAdapter=> object satisfies Findable.Adapter{
 	shared actual Findable adaptConverter<Source, ResultType,Result>(TypedConverter<Source,ResultType,Result> converter){
 		if (exists matcher = converter.matcher) {
 			return object satisfies Matchable {
 				shared actual Boolean match(Anything[] args) {
+					Boolean result;
 					if (is [Source, ResultType] args) {
-						return matcher.match(*args);
+						result= matcher.match(*args);
 					}
-					return false;
+					else{
+						result=false;
+					}
+					logger.trace("``matchingResultLog(result)``,for Converter: ``converter`` to: ``args``");
+					return result;
 				}
 				
 				shared actual Integer priority = matcher.priority;
@@ -48,31 +57,42 @@ Findable.Adapter defaultFindableAdapter=> object satisfies Findable.Adapter{
 		
 		
 	}
-	shared actual Findable adaptResolver<Base,Output,Input>(TypedResolver<Base,Output,Input> resolver){
+	shared actual Findable adaptResolver<Output,OutputType,Input>(TypedResolver<Output,OutputType,Input> resolver){
 		if (exists matcher = resolver.matcher) {
 			return object satisfies Matchable {
 				shared actual Boolean match(Anything[] args) {
-					if (is [Input] args) {
-						return matcher.match(*args);
+					Boolean result;
+					if (is [Input,OutputType] args) {
+						result= matcher.match(*args);
 					}
-					return false;
+					else{
+						result =false;
+					}
+					logger.trace("``matchingResultLog(result)``, for Resolver: ``resolver`` to: ``args``");
+					return result;
 				}
-				
 				shared actual Integer priority = matcher.priority;
-				string = "Matchable for resolver - ``resolver``";
 			};
+			
 		}
-		value base = typeLiteral<Base>();
-		return Hashable(base);
+		value input = typeLiteral<Input>();
+		value output = typeLiteral<Output>();
+		
+		return Hashable(input,output);
 	}
 	shared actual Findable adaptCreator<Result,Kind,Args>(TypedCreator<Result,Kind,Args> creator){
 		if(exists matcher=creator.matcher){
 			return object satisfies Matchable{
 				shared actual Boolean match(Anything[] args) {
+					Boolean result;
 					if(is [Class<Kind> , Args ] args){
-						return matcher.match(*args);
+						result=matcher.match(*args);
 					}
-					return false;
+					else {
+						result=false;
+					}
+					logger.trace("``matchingResultLog(result)``, for Creator: ``creator`` to: ``args``");
+					return result;
 				}
 				
 				shared actual Integer priority = matcher.priority;
@@ -83,25 +103,6 @@ Findable.Adapter defaultFindableAdapter=> object satisfies Findable.Adapter{
 		value kind=typeLiteral<Kind>();
 		value args =typeLiteral<Args>();
 		return Hashable(kind,args);
-	}
-	shared actual Findable adaptDescriptor<Source,Destination>(TypedDescriptor<Source,Destination> descriptor)  {
-		if(exists matcher=descriptor.matcher){
-			return object satisfies Matchable{
-				shared actual Boolean match(Anything[] args) {
-					if(is [Source,Class<Destination>] args){
-						return matcher.match(*args);
-					}
-					return false;
-				}
-				
-				shared actual Integer priority = matcher.priority;
-				string = "Matchable for descriptor - ``descriptor``";
-				
-			};
-		}
-		value sourceType=typeLiteral<Source>();
-		value destinationType =typeLiteral<Destination>();
-		return Hashable(sourceType,destinationType);
 	}
 	
 };

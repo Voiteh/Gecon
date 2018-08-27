@@ -7,14 +7,17 @@ import ceylon.language.meta.declaration {
 import herd.convertx.core.api.component {
 	Component
 }
-shared class ServiceProvider(Module* modules) satisfies Provider{
-	shared actual {Component*} components => modules.flatMap((Module element) {
-		 try{
-		 	return element.findServiceProviders(`Component`);
-		 }catch(Exception x){
-		 	print(x);
-		 	return empty;
-		 }
-	});
-	
+import ceylon.collection {
+	ArrayList,
+	MutableList
+}
+
+shared class ServiceProvider(Module* modules) satisfies Provider {
+	shared actual MutableList<Component> components {
+		value list = ArrayList<Component>();
+		for (\imodule in modules) {
+			list.addAll(\imodule.findServiceProviders(`Component`));
+		}
+		return list;
+	}
 }

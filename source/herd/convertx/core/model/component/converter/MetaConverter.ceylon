@@ -1,5 +1,4 @@
 import herd.convertx.core.api.component {
-	ConvertionException,
 	Component,
 	TypedConverter
 }
@@ -7,22 +6,24 @@ import herd.convertx.core.api {
 	Context
 }
 import ceylon.language.meta.model {
-	ClassOrInterface
+	ClassOrInterface,
+	Type
+}
+import herd.convertx.core.api.meta {
+	Partialization
+}
+import ceylon.language.meta {
+	type
 }
 service(`interface Component`)
 shared class MetaConverter() satisfies TypedConverter<Object,ClassOrInterface<Object>,Object> {
 	shared actual Object convert(Context context, Object source, ClassOrInterface<Object> resultType) {
-			value resolvedType = context.resolve(resultType);
-			value description = context.describe(source, resolvedType);
-			value accumulator =context.create(description.accumulatorClass, null);
-			for(value part in description.parts){
-				value sourcePart = part.obtainable.obtain;
-				value destPart=context.convert(sourcePart, part.targetable.type);
-				if(exists error=accumulator.accumulate(part.targetable, destPart)){
-					throw ConvertionException(source, resultType,error);
-				}
-			}
-			return context.create(resolvedType, accumulator);
+			value resolvedType = context.resolve(source,resultType);
+			value relationsType=`class Entry`.apply<Entry<Object,Type<Anything>>>(type(source),type(resultType));
+			value relations=context.convert(source->resultType,relationsType);
+			value partializationType=context.resolve(relations, `Partialization`);
+			value partialization=context.create(partializationType,relations);
+			return context.create(resolvedType, partialization);
 	}
 	
 	matcher => object satisfies MetaConverter.Matcher{

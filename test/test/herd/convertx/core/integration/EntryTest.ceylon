@@ -1,12 +1,7 @@
 import ceylon.test {
 	test
 }
-import herd.convertx.core {
-	Convertx
-}
-shared class EntryIntegrationTest() {
-	
-	value convertx=Convertx();
+shared class EntryTest() extends BaseTest(){
 	
 	
 	shared test

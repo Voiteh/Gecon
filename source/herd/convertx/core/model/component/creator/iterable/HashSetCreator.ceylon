@@ -10,9 +10,12 @@ import herd.convertx.core.api.component {
 import ceylon.language.meta.model {
 	Class
 }
+import herd.convertx.core.api {
+	Context
+}
 service(`interface Component`)
 shared class HashSetCreator() satisfies  Creator<Set<>,{Anything*}> {
-	shared actual Set<> create(Class<Set<>,Nothing> kind, {Anything*} arguments) {
+	shared actual Set<> create(Context context,Class<Set<>,Nothing> kind, {Anything*} arguments) {
 		return kind.apply(linked, Hashtable(), arguments);
 	}
 	matcher => object satisfies Creator<Set<>,{Anything*}>.Matcher {
