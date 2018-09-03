@@ -3,7 +3,7 @@ import ceylon.collection {
 }
 import herd.convertx.core.api.component {
 	Creator,
-	Component
+	wired
 }
 import ceylon.language.meta.model {
 	Class
@@ -11,7 +11,7 @@ import ceylon.language.meta.model {
 import herd.convertx.core.api {
 	Context
 }
-service(`interface Component`)
+wired
 shared class LinkedListCreator() satisfies Creator<List<Anything>,{Anything*}> {
 	shared actual List<Anything> create(Context context,Class<List<Anything>,Nothing> kind, {Anything*} arguments) {
 		return kind.apply(arguments);

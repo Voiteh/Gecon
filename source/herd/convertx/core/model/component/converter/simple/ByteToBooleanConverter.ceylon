@@ -1,6 +1,6 @@
 import herd.convertx.core.api.component {
 	Converter,
-	Component
+	wired
 }
 import herd.convertx.core.api {
 	Context
@@ -9,7 +9,7 @@ import ceylon.language.meta.model {
 	Type
 }
 
-service(`interface Component`)
+wired
 shared class ByteToBooleanConverter() satisfies Converter<Byte,Boolean> {
 	shared actual Boolean convert(Context context, Byte source, Type<Boolean> resultType) {
 		value convert = context.convert(source, `Integer`);

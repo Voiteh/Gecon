@@ -9,10 +9,10 @@ import herd.convertx.core.api {
 	Context
 }
 import herd.convertx.core.api.component {
-	Component,
-	TypedConverter
+	TypedConverter,
+	wired
 }
-service(`interface Component`)
+wired
 shared class MapToMapConverter() satisfies TypedConverter<Map<>,ClassOrInterface<Map<>>,Map<>> {
 	shared actual Map<Object,Anything> convert(Context context, Map<Object,Anything> source, ClassOrInterface<Map<Object,Anything>> resultType){
 		value resolvedType=context.resolve(source,resultType);

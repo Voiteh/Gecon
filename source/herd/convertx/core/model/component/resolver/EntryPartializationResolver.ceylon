@@ -1,6 +1,6 @@
 import herd.convertx.core.api.component {
 	Resolver,
-	Component
+	wired
 }
 import herd.convertx.core.api.meta {
 	Partialization
@@ -16,7 +16,7 @@ import herd.convertx.core.api {
 import herd.convertx.core.api.meta.support {
 	EntryPartialization
 }
-service(`interface Component`)
+wired
 shared class EntryPartializationResolver() satisfies Resolver<Partialization,Object->Type<Map<String,Anything>>>{
 	shared actual Class<Partialization,Nothing> resolve(Context context, Object->Type<Map<String,Anything>> type, ClassOrInterface<Partialization> outputType) =>`EntryPartialization`;
 	

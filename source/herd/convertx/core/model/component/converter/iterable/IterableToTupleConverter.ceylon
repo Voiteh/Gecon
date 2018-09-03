@@ -6,13 +6,13 @@ import ceylon.language.meta.model {
 }
 import herd.convertx.core.api.component {
 	ConvertionException,
-	Component,
-	TypedConverter
+	TypedConverter,
+	wired
 }
 import herd.convertx.core.api {
 	Context
 }
-service(`interface Component`)
+wired
 shared class IterableToTupleConverter() satisfies TypedConverter<{Anything*},ClassOrInterface<Tuple<Anything,Anything,Anything>>,Tuple<Anything,Anything,Anything>>{
 	
 	{Type<Anything>*} extractArgsType(Type<Anything> toupleType){

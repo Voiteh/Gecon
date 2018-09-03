@@ -1,7 +1,7 @@
 import herd.convertx.core.api.component {
-	Component,
 	Converter,
-	ConvertionException
+	ConvertionException,
+	wired
 }
 import ceylon.language.meta.model {
 	Type
@@ -9,7 +9,7 @@ import ceylon.language.meta.model {
 import herd.convertx.core.api {
 	Context
 }
-service(`interface Component`)
+wired
 shared class StringToBooleanConverter() satisfies Converter<String,Boolean>  {
 	shared actual Boolean convert(Context context, String source, Type<Boolean> resultType) {
 		value result = Boolean.parse(source);

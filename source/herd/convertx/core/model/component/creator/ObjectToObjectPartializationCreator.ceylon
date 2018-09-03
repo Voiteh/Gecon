@@ -1,6 +1,6 @@
 import herd.convertx.core.api.component {
 	Creator,
-	Component
+	wired
 }
 import ceylon.language.meta.model {
 	Type,
@@ -23,7 +23,7 @@ import herd.convertx.core.api.meta.support {
 import ceylon.collection {
 	HashMap
 }
-service(`interface Component`)
+wired
 shared class ObjectToObjectPartializationCreator() satisfies Creator<AttributePartialization, Object->Type<Object>>{
 	shared actual AttributePartialization create(Context context, Class<AttributePartialization,Nothing> kind, Object->Type<Object> arguments){
 		assert(is Class<Object> clazz=arguments.item);

@@ -6,9 +6,9 @@ import herd.convertx.core.api {
 }
 import herd.convertx.core.api.component {
 	Converter,
-	Component
+	wired
 }
-service(`interface Component`)
+wired
 shared class CharacterToStringConverter() satisfies Converter<Character,String>  {
 	shared actual String convert(Context context, Character source, Type<String> resultType) =>  source.string;
 	

@@ -1,6 +1,6 @@
 import herd.convertx.core.api.component {
 	Resolver,
-	Component
+	wired
 }
 
 import ceylon.language.meta.model {
@@ -18,7 +18,7 @@ import herd.convertx.core.api.meta {
 	Partialization
 }
 
-service(`interface Component`)
+wired
 shared class AttributePartializationResolver() satisfies Resolver<Partialization,Object->Type<Object>> {
 	shared actual Class<AttributePartialization,Nothing> resolve(Context context, Object->Type<Object> source, ClassOrInterface<Partialization> outputType) => `AttributePartialization`;
 	

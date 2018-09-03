@@ -3,13 +3,13 @@ import ceylon.language.meta.model {
 }
 import herd.convertx.core.api.component {
 	Converter,
-	Component
+	wired
 }
 import herd.convertx.core.api {
 	Context
 }
 
-service(`interface Component`)
+wired
 shared class IntegerToCharacterConverter() satisfies Converter<Integer,Character>{
 	shared actual Character convert(Context context, Integer source, Type<Character> resultType) => source.character;
 	

@@ -34,7 +34,6 @@ shared interface Converter<Source,Result>
 		satisfies TypedConverter<Source, Type<Result>,Result> {
 	
 	
-	
 	throws(`class ConvertionException`)
 	shared actual formal Result convert(Context context,Source source,Type<Result> resultType);
 	

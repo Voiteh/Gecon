@@ -2,8 +2,8 @@ import herd.convertx.core.api {
 	Context
 }
 import herd.convertx.core.api.component {
-	Component,
-	TypedConverter
+	TypedConverter,
+	wired
 }
 import ceylon.language.meta.model {
 	ClassOrInterface
@@ -12,7 +12,7 @@ import herd.convertx.core.util {
 	typeHierarchy,
 	runtimeCall
 }
-service(`interface Component`)
+wired
 shared class IterableToIterableConverter() satisfies  TypedConverter<{Anything*},ClassOrInterface<{Anything*}>,{Anything*}> {
 	shared actual {Anything*} convert(Context context, {Anything*} source, ClassOrInterface<{Anything*}> resultType){
 			value resolvedType=context.resolve(source,resultType);
