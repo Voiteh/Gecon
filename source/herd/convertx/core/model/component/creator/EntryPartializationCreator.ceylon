@@ -5,7 +5,7 @@ import ceylon.language.meta.model {
 }
 import herd.convertx.core.api.component {
 	Creator,
-	Component
+	wired
 }
 import herd.convertx.core.api {
 	Context
@@ -22,7 +22,7 @@ import herd.convertx.core.util {
 import ceylon.collection {
 	HashMap
 }
-service(`interface Component`)
+wired
 shared class EntryPartializationCreator() satisfies Creator<EntryPartialization,Object->Type<Map<String,Anything>>> {
 	shared actual EntryPartialization create(Context context, Class<EntryPartialization,Nothing> kind, Object->Type<Map<String,Anything>> arguments) {
 		value sourceType = type(arguments.key);

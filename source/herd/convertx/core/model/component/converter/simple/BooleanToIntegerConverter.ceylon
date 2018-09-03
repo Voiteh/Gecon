@@ -6,9 +6,9 @@ import herd.convertx.core.api {
 }
 import herd.convertx.core.api.component {
 	Converter,
-	Component
+	wired
 }
-service(`interface Component`)
+wired
 shared class BooleanToIntegerConverter() satisfies Converter<Boolean,Integer>  {
 	shared actual Integer convert(Context context, Boolean source, Type<Integer> resultType){
 		switch (source)

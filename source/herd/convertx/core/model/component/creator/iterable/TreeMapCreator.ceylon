@@ -7,7 +7,7 @@ import herd.convertx.core.util {
 }
 import herd.convertx.core.api.component {
 	Creator,
-	Component
+	wired
 }
 import ceylon.language.meta.model {
 	Class
@@ -15,7 +15,7 @@ import ceylon.language.meta.model {
 import herd.convertx.core.api {
 	Context
 }
-service(`interface Component`)
+wired
 shared class TreeMapCreator() satisfies Creator<Map<>,{Anything*}> {
 	shared actual Map<> create(Context context,Class<Map<>,Nothing> kind, {Anything*} arguments) {
 		value factoryMethod = `function naturalOrderTreeMap`.apply<Map<>>(*kind.typeArgumentList);

@@ -3,13 +3,13 @@ import ceylon.language.meta.model {
 }
 import herd.convertx.core.api.component {
 	Creator,
-	Component
+	wired
 }
 import herd.convertx.core.api {
 	Context
 }
 
-service(`interface Component`)
+wired
 shared class TupleCreator() satisfies  Creator<Tuple<Anything,Anything,Anything>,{Anything*}> {
 	shared actual Tuple<Anything,Anything,Anything> create(Context context,Class<Tuple<Anything,Anything,Anything>,Nothing> kind, {Anything*} arguments) {
 		value first = arguments.first;

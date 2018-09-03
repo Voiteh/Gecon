@@ -6,9 +6,9 @@ import herd.convertx.core.api {
 }
 import herd.convertx.core.api.component {
 	Converter,
-	Component
+	wired
 }
-service(`interface Component`)
+wired
 shared class BooleanToFloatConverter() satisfies Converter<Boolean,Float>  {
 	shared actual Float convert(Context context, Boolean source, Type<Float> resultType) {
 		switch(source)

@@ -1,6 +1,6 @@
 import herd.convertx.core.api.component {
 	Creator,
-	Component
+	wired
 }
 import ceylon.language.meta.model {
 	Class
@@ -8,7 +8,7 @@ import ceylon.language.meta.model {
 import herd.convertx.core.api {
 	Context
 }
-service(`interface Component`)
+wired
 shared class ArrayCreator() satisfies  Creator<List<>,{Anything*}> {
 	shared actual List<> create(Context context,Class<List<>,Nothing> kind, {Anything*} arguments) {
 		return kind.apply(arguments);

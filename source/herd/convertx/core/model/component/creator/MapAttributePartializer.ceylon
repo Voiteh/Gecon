@@ -1,11 +1,11 @@
 import herd.convertx.core.api.component {
-	Component
+	wired
 }
 
 import herd.convertx.core.api.component.support.meta {
 	AttributePartializer
 }
-service(`interface Component`)
+wired
 shared class MapAttributePartializer() extends AttributePartializer<Map<String,Anything>,Object>(){
 	shared actual String[] extractKeys(Map<String,Anything> source) => source.keys.sequence();
 	

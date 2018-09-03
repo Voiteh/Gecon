@@ -1,6 +1,6 @@
 import herd.convertx.core.api.component {
 	TypedConverter,
-	Component
+	wired
 }
 import ceylon.language.meta.model {
 	IntersectionType
@@ -8,7 +8,7 @@ import ceylon.language.meta.model {
 import herd.convertx.core.api {
 	Context
 }
-service(`interface Component`)
+wired
 shared class IntersectionConverter() satisfies TypedConverter<Anything, IntersectionType<Anything>, Anything>{
 	shared actual Anything convert(Context context, Anything source, IntersectionType<Anything> resultType) {
 		value resolvedType=context.resolve(source,resultType);

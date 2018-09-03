@@ -6,9 +6,9 @@ import herd.convertx.core.api {
 }
 import herd.convertx.core.api.component {
 	Converter,
-	Component
+	wired
 }
-service(`interface Component`)
+wired
 shared class ByteToStringConverter() satisfies Converter<Byte,String>  {
 	shared actual String convert(Context context, Byte source, Type<String> resultType) =>  source.string;
 	

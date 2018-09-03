@@ -4,12 +4,12 @@ import ceylon.language.meta.model {
 import herd.convertx.core.api.component {
 	ConvertionException,
 	Converter,
-	Component
+	wired
 }
 import herd.convertx.core.api {
 	Context
 }
-service(`interface Component`)
+wired
 shared class StringToIntegerConverter() satisfies Converter<String,Integer>  {
 	shared actual Integer convert(Context context, String source, Type<Integer> resultType) {
 		value parse = Integer.parse(source);

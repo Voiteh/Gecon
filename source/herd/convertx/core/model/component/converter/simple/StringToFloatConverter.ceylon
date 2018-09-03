@@ -1,7 +1,7 @@
 import herd.convertx.core.api.component {
 	Converter,
 	ConvertionException,
-	Component
+	wired
 }
 import herd.convertx.core.api {
 	Context
@@ -9,7 +9,7 @@ import herd.convertx.core.api {
 import ceylon.language.meta.model {
 	Type
 }
-service(`interface Component`)
+wired
 shared class StringToFloatConverter() satisfies Converter<String,Float> {
 	shared actual Float convert(Context context, String source, Type<Float> resultType) {
 		value parse = Float.parse(source);

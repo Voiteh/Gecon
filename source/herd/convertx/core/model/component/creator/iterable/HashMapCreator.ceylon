@@ -5,7 +5,7 @@ import ceylon.collection {
 }
 import herd.convertx.core.api.component {
 	Creator,
-	Component
+	wired
 }
 import ceylon.language.meta.model {
 	Class
@@ -13,7 +13,7 @@ import ceylon.language.meta.model {
 import herd.convertx.core.api {
 	Context
 }
-service(`interface Component`)
+wired
 shared class HashMapCreator() satisfies  Creator<Map<>,{Entry<Object,Anything>*}> {
 	shared actual Map<> create(Context context,Class<Map<>,Nothing> kind, {Entry<Object,Anything>*} arguments) {
 		return kind.apply(linked, Hashtable(), arguments);
