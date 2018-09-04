@@ -1,48 +1,40 @@
 import ceylon.test {
 	test,
-	parameters,
 	assertEquals
 }
 import test.herd.convertx.json.integration.data {
 	TypeResolveInterface,
-	typeResolveOneParams,
-	typeResolveTwoParams
+	testData
 }
-import herd.convertx.core {
-	Convertx
-}
+
 import herd.convertx.json {
 	JSONObject
 }
-shared class AbstractionResolveTest() {
+shared class AbstractionResolveTest() extends BaseJSONIntegrationTest(){
 	
 	
 	shared test
-	parameters(`value typeResolveOneParams`)
-	void shouldConvertTypeResolveOneIntoJSONObject(Convertx convertx,JSONObject jsonObject,TypeResolveInterface resolve){
-		value result=convertx.convert(resolve,`JSONObject`);
-		assertEquals(result,jsonObject);
+	void shouldConvertTypeResolveOneIntoJSONObject(){
+		value result=convertx.convert(testData.resolveOne,`JSONObject`);
+		assertEquals(result,testData.resolveOneJSONObject);
 	}
 	
 	shared test
-	parameters(`value typeResolveTwoParams`)
-	void shouldConvertTypeResolveTwoIntoJSONObject(Convertx convertx,JSONObject jsonObject,TypeResolveInterface resolve){
-		value result=convertx.convert(resolve,`JSONObject`);
-		assertEquals(result,resolve);
+	void shouldConvertTypeResolveTwoIntoJSONObject(){
+		value result=convertx.convert(testData.resolveTwo,`JSONObject`);
+		assertEquals(result,testData.resolveTwoJSONObject);
 	}
 	
 	shared test
-	parameters(`value typeResolveOneParams`)
-	void shouldConvertJSONObjectIntoTypeResolveOne(Convertx convertx,JSONObject jsonObject,TypeResolveInterface resolve){
-		value result=convertx.convert(jsonObject,`TypeResolveInterface`);
-		assertEquals(result,jsonObject);
+	void shouldConvertJSONObjectIntoTypeResolveOne(){
+		value result=convertx.convert(testData.resolveOneJSONObject,`TypeResolveInterface`);
+		assertEquals(result,testData.resolveOne);
 	}
 	
 	shared test
-	parameters(`value typeResolveTwoParams`)
-	void shouldConvertJSONObjectIntoTypeResolveTwo(Convertx convertx,JSONObject jsonObject,TypeResolveInterface resolve){
-		value result=convertx.convert(resolve,`JSONObject`);
-		assertEquals(result,resolve);
+	void shouldConvertJSONObjectIntoTypeResolveTwo(){
+		value result=convertx.convert(testData.resolveTwoJSONObject,`TypeResolveInterface`);
+		assertEquals(result,testData.resolveTwo);
 	}
 	
 	
