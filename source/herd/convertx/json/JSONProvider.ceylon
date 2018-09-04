@@ -1,4 +1,4 @@
 import herd.convertx.core.api.support {
-	ServiceProvider
+ WiredProvider
 }
-shared class JSONProvider() extends ServiceProvider(`module`){}
+shared class JSONProvider() extends WiredProvider(`module`){}

@@ -1,19 +1,14 @@
-import herd.convertx.core {
-	Convertx
-}
+
 import herd.convertx.json {
 	JSONObject,
-	JSONArray,
-	JSONProvider
+	JSONArray
 }
 import ceylon.collection {
 	ArrayList,
 	HashSet
 }
 
-object testData {
-	
-	shared Convertx jsonConvertx = Convertx(JSONProvider());
+shared object testData {
 	shared String name = "Test";
 	shared Integer id = 123;
 	shared Null nullVal = null;
