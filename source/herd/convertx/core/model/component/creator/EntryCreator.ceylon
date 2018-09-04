@@ -1,6 +1,6 @@
 import herd.convertx.core.api.component {
 	Creator,
-	Component
+	wired
 }
 import ceylon.language.meta.model {
 	Class
@@ -8,7 +8,7 @@ import ceylon.language.meta.model {
 import herd.convertx.core.api {
 	Context
 }
-service(`interface Component`)
+wired
 shared class EntryCreator() satisfies Creator<Entry<Object,Anything>,{Anything*}> {
 	shared actual Object->Anything create(Context context,Class<Object->Anything,Nothing> kind, {Anything*} arguments) {
 		value key = arguments.first;

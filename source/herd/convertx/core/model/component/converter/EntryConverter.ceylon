@@ -5,14 +5,14 @@ import herd.convertx.core.api {
 	Context
 }
 import herd.convertx.core.api.component {
-	Component,
-	TypedConverter
+	TypedConverter,
+	wired
 }
 import ceylon.language.meta.model {
 	Class,
 	ClassOrInterface
 }
-service(`interface Component`)
+wired
 shared class EntryConverter() satisfies  TypedConverter<Object->Anything,ClassOrInterface<Object->Anything>,Object->Anything> {
 	shared actual Object->Anything convert(Context context, Object->Anything source, ClassOrInterface<Object->Anything> resultType) {
 		value key = source.key;

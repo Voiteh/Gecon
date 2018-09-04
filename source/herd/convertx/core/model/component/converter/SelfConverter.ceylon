@@ -1,6 +1,7 @@
 import herd.convertx.core.api.component {
 	Component,
-	Converter
+	Converter,
+	wired
 }
 import herd.convertx.core.api {
 	Context
@@ -12,7 +13,7 @@ import ceylon.language.meta {
 	type
 }
 
-service (`interface Component`)
+wired
 shared class SelfConverter() satisfies Converter<Anything,Anything> {
 	shared actual Anything convert(Context context, Anything source, Type<Anything> resultType) {
 		return source;

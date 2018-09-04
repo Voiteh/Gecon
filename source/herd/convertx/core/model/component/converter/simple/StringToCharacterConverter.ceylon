@@ -4,12 +4,12 @@ import ceylon.language.meta.model {
 import herd.convertx.core.api.component {
 	ConvertionException,
 	Converter,
-	Component
+	wired
 }
 import herd.convertx.core.api {
 	Context
 }
-service(`interface Component`)
+wired
 shared class StringToCharacterConverter() satisfies Converter<String,Character> {
 	shared actual Character convert(Context context, String source, Type<Character> resultType) {
 		if (exists char = source.first) {

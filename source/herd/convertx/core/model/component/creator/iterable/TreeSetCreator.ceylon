@@ -1,6 +1,6 @@
 import herd.convertx.core.api.component {
 	Creator,
-	Component
+	wired
 }
 import ceylon.collection {
 	TreeSet,
@@ -12,7 +12,7 @@ import ceylon.language.meta.model {
 import herd.convertx.core.api {
 	Context
 }
-service(`interface Component`)
+wired
 shared class TreeSetCreator() satisfies  Creator<Set<>,{Anything*}> {
 	shared actual Set<> create(Context context,Class<Set<>,Nothing> kind, {Anything*} arguments) {
 		value factoryMethod = `function naturalOrderTreeSet`.apply<Set<>>(*kind.typeArgumentList);

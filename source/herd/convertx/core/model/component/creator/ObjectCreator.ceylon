@@ -1,7 +1,8 @@
 import herd.convertx.core.api.component {
 	Creator,
 	CreationException,
-	Component
+	Component,
+	wired
 }
 import ceylon.language.meta.model {
 	Class,
@@ -17,7 +18,7 @@ import herd.convertx.core.api {
 	Context
 }
 
-service (`interface Component`)
+wired
 shared class ObjectCreator() satisfies Creator<Object,AttributePartialization> {
 	shared actual Object create(Context context,Class<Object,Nothing> kind, AttributePartialization partialization) {
 		value instanceId = kind.string;

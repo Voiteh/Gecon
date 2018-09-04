@@ -38,7 +38,8 @@ shared class IntersectionTest() extends BaseTest() {
 	
 	shared test
 	void shouldConvertToIntersectionContainingType() {
-		assert (is InteresectionModel result = convertx.convert(testData.matchingIntersection, `InteresectionModel`));
+		value result = convertx.convert(testData.matchingIntersection, `InteresectionModel`);
+		assert (is InteresectionModel result);
 		assert (result.data.containsEvery({ "1", "2", "3" }));
 	}
 }

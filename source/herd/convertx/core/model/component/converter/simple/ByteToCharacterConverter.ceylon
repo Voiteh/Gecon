@@ -1,6 +1,6 @@
 import herd.convertx.core.api.component {
 	Converter,
-	Component
+	wired
 }
 import herd.convertx.core.api {
 	Context
@@ -11,7 +11,7 @@ import ceylon.language.meta.model {
 
 
 
-service(`interface Component`)
+wired
 shared class ByteToCharacterConverter() satisfies Converter<Byte,Character>  {
 	shared actual Character convert(Context context, Byte source, Type<Character> resultType) {
 		value convert = context.convert(source, `Integer`);

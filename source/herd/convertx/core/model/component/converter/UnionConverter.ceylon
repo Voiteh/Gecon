@@ -3,14 +3,14 @@ import ceylon.language.meta.model {
 }
 import herd.convertx.core.api.component {
 	ConvertionException,
-	Component,
 	TypedConverter,
-	AdaptationException
+	AdaptationException,
+	wired
 }
 import herd.convertx.core.api {
 	Context
 }
-service(`interface Component`)
+wired
 shared class UnionConverter() satisfies TypedConverter<Anything,UnionType<Anything>,Anything>{
 	shared actual Anything convert(Context context, Anything source, UnionType<Anything> resultType) {
 		for(value type in resultType.caseTypes){

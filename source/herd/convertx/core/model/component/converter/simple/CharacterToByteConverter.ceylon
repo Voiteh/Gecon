@@ -6,9 +6,9 @@ import herd.convertx.core.api {
 }
 import herd.convertx.core.api.component {
 	Converter,
-	Component
+	wired
 }
-service(`interface Component`)
+wired
 shared class CharacterToByteConverter() satisfies Converter<Character,Byte>{
 	shared actual Byte convert(Context context, Character source, Type<Byte> resultType) => source.integer.byte;
 	

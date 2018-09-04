@@ -1,6 +1,6 @@
 import herd.convertx.core.api.component {
-	Component,
-	TypedConverter
+	TypedConverter,
+	wired
 }
 import herd.convertx.core.api {
 	Context
@@ -15,7 +15,7 @@ import herd.convertx.core.api.meta {
 import ceylon.language.meta {
 	type
 }
-service(`interface Component`)
+wired
 shared class MetaConverter() satisfies TypedConverter<Object,ClassOrInterface<Object>,Object> {
 	shared actual Object convert(Context context, Object source, ClassOrInterface<Object> resultType) {
 			value resolvedType = context.resolve(source,resultType);

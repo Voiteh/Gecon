@@ -6,13 +6,13 @@ import ceylon.language.meta.model {
 	Interface
 }
 import herd.convertx.core.api.component {
-	Component,
-	TypedResolver
+	TypedResolver,
+	wired
 }
 import herd.convertx.core.api {
 	Context
 }
-service(`interface Component`)
+wired
 shared class StreamToStreamResolver() satisfies  TypedResolver<{Anything*},Interface<{Anything*}>,{Anything*}>{
 	shared actual Class<{Anything*},Nothing> resolve(Context context,{Anything*} input, Interface<{Anything*}> outputType){
 		value typeForIterable = iterableTypeArgument(outputType);

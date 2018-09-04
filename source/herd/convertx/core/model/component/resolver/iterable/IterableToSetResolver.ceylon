@@ -6,13 +6,13 @@ import ceylon.collection {
 	HashSet
 }
 import herd.convertx.core.api.component {
-	Component,
-	TypedResolver
+	TypedResolver,
+	wired
 }
 import herd.convertx.core.api {
 	Context
 }
-service(`interface Component`)
+wired
 shared class IterableToSetResolver() satisfies TypedResolver<Set<>,Interface<Set<>>,{Anything*}>{
 	
 	shared actual Class<Set<>> resolve(Context context,{Anything*} input,Interface<Set<>> outputType) { 

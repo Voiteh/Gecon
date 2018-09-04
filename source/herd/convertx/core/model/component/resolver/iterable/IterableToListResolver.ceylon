@@ -7,13 +7,14 @@ import ceylon.language.meta.model {
 }
 import herd.convertx.core.api.component {
 	Component,
-	TypedResolver
+	TypedResolver,
+	wired
 }
 import herd.convertx.core.api {
 	Context
 }
 
-service (`interface Component`)
+wired
 shared class IterableToListResolver() satisfies TypedResolver<List<>,Interface<List<>>,{Anything*}> {
 	shared actual Class<List<>,Nothing> resolve(Context context,{Anything*} input, Interface<List<>> outputType) {
 		value typeForIterable = iterableTypeArgument(outputType);

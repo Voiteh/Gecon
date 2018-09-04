@@ -1,6 +1,6 @@
 import herd.convertx.core.api.component {
 	Resolver,
-	Component
+	wired
 }
 import ceylon.language.meta.model {
 	Class,
@@ -12,7 +12,7 @@ import herd.convertx.core.api {
 import ceylon.collection {
 	HashMap
 }
-service(`interface Component`)
+wired
 shared class ObjectToMapResolver() satisfies Resolver<Map<String,Anything>,Object>{
 	shared actual Class<Map<String,Anything>,Nothing> resolve(Context context, Object type, ClassOrInterface<Map<String,Anything>> outputType) => `HashMap<String,Anything>`;
 	

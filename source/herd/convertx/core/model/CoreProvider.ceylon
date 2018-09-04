@@ -1,6 +1,6 @@
 import herd.convertx.core.api.support {
-	ServiceProvider
+	WiredProvider
 }
 
-shared class CoreProvider() extends ServiceProvider(`module`) {
+shared class CoreProvider() extends WiredProvider(`module`) {
 }

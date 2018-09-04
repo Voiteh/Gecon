@@ -6,8 +6,8 @@ import ceylon.language.meta {
 }
 import herd.convertx.core.api.component {
 	ConvertionException,
-	Component,
-	TypedConverter
+	TypedConverter,
+	wired
 }
 import herd.convertx.core.api {
 	Context
@@ -15,7 +15,7 @@ import herd.convertx.core.api {
 import herd.convertx.core.util {
 	typeHierarchy
 }
-service(`interface Component`)
+wired
 shared class EnumToEnumConverter() satisfies  TypedConverter<Object,ClassOrInterface<Object>,Object>{
 	shared actual Object convert(Context context, Object source, ClassOrInterface<Object> resultType) {
 		value hierarchy=typeHierarchy(type(source));

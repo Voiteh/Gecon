@@ -6,9 +6,9 @@ import herd.convertx.core.api {
 }
 import herd.convertx.core.api.component {
 	Converter,
-	Component
+	wired
 }
-service(`interface Component`)
+wired
 shared class ByteToFloatConverter() satisfies Converter<Byte,Float>  {
 	shared actual Float convert(Context context, Byte source, Type<Float> resultType){
 		value convert = context.convert(source, `Integer`);
