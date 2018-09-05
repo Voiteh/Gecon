@@ -38,7 +38,5 @@ shared interface Converter<Source,Result>
 	shared actual formal Result convert(Context context,Source source,Type<Result> resultType);
 	
 	
-	shared default actual Converter<Source,Result>.Matcher? matcher=>null;
-	
 	
 }
