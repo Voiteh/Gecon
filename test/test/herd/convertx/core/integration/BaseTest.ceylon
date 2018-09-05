@@ -2,11 +2,13 @@ import herd.convertx.core.api {
 	Provider
 }
 import herd.convertx.core {
-	Convertx
+	Convertx,
+	logger
 }
 import ceylon.logging {
 	addLogWriter,
-	writeSimpleLog
+	writeSimpleLog,
+	trace
 }
 import ceylon.test {
 	beforeTestRun
@@ -14,6 +16,7 @@ import ceylon.test {
 
 beforeTestRun
 shared void setupLogger(){
+	logger.priority=trace;
 	addLogWriter(writeSimpleLog);
 }
 

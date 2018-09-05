@@ -1,6 +1,7 @@
 import ceylon.test {
 	test,
-	ignore
+	ignore,
+	assertEquals
 }
 import ceylon.collection {
 	ArrayList
@@ -64,4 +65,24 @@ shared class IterableTest() extends BaseTest(){
 	void shouldNotConvertIterableToToupleToManyArguments(){
 		assert(is ConvertionException error=convertx.convert({1,2,3,4}, `[String,String,String]`));
 	}
+	
+	shared test 
+	void shouldConvertConcreteMapToGenericMap(){
+		assert(is Map<String,Anything> result= convertx.convert(testData.concreteStringIntegerMap, `Map<String,Anything>`));
+		testData.concreteStringIntegerMap.each((String elementKey -> Integer elementItem) {
+			value resultItem=result.get(elementKey);
+			assert(is Integer resultItem );
+			assertEquals(elementItem,resultItem);
+		});
+	}
+	shared test
+	void shouldConvertConcreteUnionMapToGenericMap(){
+		assert(is Map<String,Anything> result= convertx.convert(testData.concreteStringUnionMap, `Map<String,Anything>`));
+		testData.concreteStringUnionMap.each((String elementKey -> Integer? elementItem) {
+			value resultItem=result.get(elementKey);
+			assert(is Integer? resultItem );
+			assertEquals(elementItem,resultItem);
+		});
+	}
+	
 }
