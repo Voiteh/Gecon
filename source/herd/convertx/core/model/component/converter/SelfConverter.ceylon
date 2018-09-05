@@ -9,8 +9,8 @@ import herd.convertx.core.api {
 import ceylon.language.meta.model {
 	Type
 }
-import ceylon.language.meta {
-	type
+import herd.convertx.core.util {
+	extractObjectType
 }
 
 wired
@@ -20,7 +20,7 @@ shared class SelfConverter() satisfies Converter<Anything,Anything> {
 	}
 	
 	matcher => object satisfies SelfConverter.Matcher {
-		shared actual Boolean match(Anything source, Type<Anything> resultType) => resultType.exactly(type(source));
+		shared actual Boolean match(Anything source, Type<Anything> resultType) => resultType.exactly(extractObjectType(source));
 		
 		shared actual Integer priority => runtime.maxIntegerValue;
 	};
