@@ -11,6 +11,9 @@ import test.herd.convertx.json.integration.data {
 	testData
 	
 }
+import ceylon.language.meta.model {
+	UnionType
+}
 shared class SimpleModelTest() extends BaseJSONIntegrationTest() {
 	
 	shared test 
@@ -27,16 +30,11 @@ shared class SimpleModelTest() extends BaseJSONIntegrationTest() {
 	
 	shared test
 	void shouldConvertJSONObjectToMap(){
-		assert(is Map<String,Anything > result=convertx.convert(testData.simpleModelJSONObject, `Map<String,Anything>`));
+		value result=convertx.convert(testData.simpleModelJSONObject, `Map<String,Anything>`);
+		assert(is Map<String,Anything > result);
 		testData.simpleModelJSONObject.each((String elementKey -> JSONValue elementItem) {
 			value item=result.get(elementKey);
-			if(exists elementItem){
-				assert(exists item);
-				assertEquals(item,elementItem);
-			}
-			else{
-				assert(!exists item);
-			}
+			assertEquals(item,elementItem);
 		});
 	}
 }
