@@ -5,19 +5,20 @@ import ceylon.language.meta.model {
 import ceylon.language.meta {
 	type
 }
-shared Attribute<Nothing,Anything,Nothing>[] objectAndIdentifiableAttributes = `Object`.getAttributes<Object,Anything,Nothing>()
-		.append(`Identifiable`.getAttributes<Identifiable,Anything,Nothing>());
 
+String[] filteredAttributeNames = `Object`.getAttributes<Object,Anything,Nothing>()
+	.append(`Identifiable`.getAttributes<Identifiable,Anything,Nothing>())
+		.map((Attribute<Identifiable,Anything,Nothing> element) => element.declaration.name)
+		.sequence();
 
-shared Boolean filterObjectAndIdentifiableAttributes(Attribute<> attribute){
-	return !objectAndIdentifiableAttributes.contains(attribute);
+shared Boolean filterObjectAndIdentifiableAttributes(Attribute<> attribute) {
+	return !filteredAttributeNames.contains(attribute.declaration.name);
 }
 
-
-shared ClassModel<Data> extractObjectType<Data>(Data data){
-	value clazz=type(data);
-	if(clazz.declaration.anonymous){
-		assert(is ClassModel<Data> extendedType= clazz.extendedType);
+shared ClassModel<Data> extractObjectType<Data>(Data data) {
+	value clazz = type(data);
+	if (clazz.declaration.anonymous) {
+		assert (is ClassModel<Data> extendedType = clazz.extendedType);
 		return extendedType;
 	}
 	return clazz;

@@ -1,30 +1,44 @@
 import herd.convertx.core.api.component {
-	Creator,
 	wired
 }
 import herd.convertx.json.model.meta {
 	JSONPartialization
 }
 import herd.convertx.json {
-	JSONObject
+	JSONObject,
+	JSONValue
 }
 import ceylon.language.meta.model {
-	Type,
+	Attribute,
 	Class,
-	Attribute
+	Type
 }
 import herd.convertx.core.api {
 	Context
 }
 import herd.convertx.core.api.component.support.meta {
-	GenericObjectPartializer
+	ObjectPartializer
 }
 wired
-shared class ObjectJSONPartializer() extends GenericObjectPartializer<JSONPartialization, {<String->Anything>*}, JSONObject>(){
-	shared actual JSONPartialization createPartialization({<String->Anything>*} holder) => JSONPartialization(holder);
+shared class ObjectJSONPartializer() extends ObjectPartializer<JSONPartialization, {<String->JSONValue>*}, JSONObject>(){
+	shared actual JSONPartialization createPartialization({<String->JSONValue>*} holder) => JSONPartialization(holder);
 	
-	shared actual {<String->Anything>*} mapAttributes(Object source, {Attribute<Nothing,Anything,Nothing>*} attributes) => attributes.map((Attribute<Nothing,Anything,Nothing> element) => element.declaration.name->element.bind(source).get());
+	shared actual {<String->JSONValue>*} mapAttributes(Context context,Object source, {Attribute<Nothing,Anything,Nothing>*} attributes) => attributes.map((Attribute<> element) {
+		value val=element.bind(source).get();
+		if(is JSONValue val ){
+			return element.declaration.name->val;
+		}
+		else{
+			return element.declaration.name->context.convert(val, `JSONValue`);
+		}
+	});
 	
-	
+	matcher => object satisfies ObjectJSONPartializer.Matcher{
+		shared actual Boolean match(Class<JSONPartialization,Nothing> kind, Object->Type<JSONObject> arguments) => true;
+		
+		shared actual Integer priority => 2;
+		
+		
+	};
 	
 }

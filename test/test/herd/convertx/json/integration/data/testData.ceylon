@@ -9,7 +9,7 @@ import ceylon.collection {
 }
 
 shared object testData {
-	shared String name = "Test";
+	shared String name = "Test Name";
 	shared Integer id = 123;
 	shared Null nullVal = null;
 	shared SimpleModel simpleModel = SimpleModel(name, id, nullVal);

@@ -10,7 +10,8 @@ import herd.convertx.core.api.component {
 }
 import ceylon.language.meta.model {
 	Class,
-	ClassOrInterface
+	ClassOrInterface,
+	Type
 }
 import herd.convertx.core.api {
 	Context
@@ -19,12 +20,12 @@ import herd.convertx.json.model.meta {
 	JSONPartialization
 }
 wired
-shared class JSONPartializationResolver() satisfies Resolver<Partialization,Object->JSONObject>{
-	shared actual Class<Partialization,Nothing> resolve(Context context, Object->JSONObject type, ClassOrInterface<Partialization> outputType) => `JSONPartialization`;
+shared class JSONPartializationResolver() satisfies Resolver<Partialization,Object->Type<JSONObject>>{
+	shared actual Class<Partialization,Nothing> resolve(Context context, Object->Type<JSONObject> type, ClassOrInterface<Partialization> outputType) => `JSONPartialization`;
 	
 	
 	matcher => object satisfies JSONPartializationResolver.Matcher{
-		shared actual Boolean match(Object->JSONObject input, ClassOrInterface<Partialization> outputType) => true;
+		shared actual Boolean match(Object->Type<JSONObject> input, ClassOrInterface<Partialization> outputType) => true;
 		
 		shared actual Integer priority => 2;
 		
