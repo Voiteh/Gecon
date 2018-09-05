@@ -1,5 +1,6 @@
 import ceylon.language.meta.model {
-	ClassOrInterface
+	ClassOrInterface,
+	Type
 }
 import herd.convertx.core.util {
 	typeHierarchy,
@@ -17,13 +18,15 @@ shared class MapToMapConverter() satisfies TypedConverter<Map<>,ClassOrInterface
 	shared actual Map<Object,Anything> convert(Context context, Map<Object,Anything> source, ClassOrInterface<Map<Object,Anything>> resultType){
 		value resolvedType=context.resolve(source,resultType);
 		assert(exists explictMapType = typeHierarchy(resolvedType).findByDeclaration(`interface Map`));
-		assert(exists keyDestination=explictMapType.typeArgumentList.first);
+		assert(is Type<Object>keyDestination=explictMapType.typeArgumentList.first);
 		assert(exists itemDestination=explictMapType.typeArgumentList.rest.first);
 		value entryType=`class Entry`.classApply<Entry<Object,Anything>>(keyDestination,itemDestination);
 		value args = source.map((Object elementKey -> Anything elementItem) {
-			value convertedKey = context.convert(elementKey, keyDestination);
-			value convertedItem = context.convert(elementItem, itemDestination);
-			assert(is Object convertedKey);
+			value resolvedKeyType=context.resolve(elementKey, keyDestination);
+			value convertedKey = context.convert(elementKey, resolvedKeyType);
+			value resolvedItemType=context.resolve(elementItem, itemDestination);
+			value convertedItem = context.convert(elementItem, resolvedItemType);
+			value entryType=`class Entry`.classApply<Entry<Object,Anything>>(keyDestination,itemDestination);
 			return context.create(entryType, {convertedKey,convertedItem});
 		});
 		

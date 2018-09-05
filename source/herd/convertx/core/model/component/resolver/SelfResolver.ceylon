@@ -22,7 +22,7 @@ shared class SelfResolver() satisfies Resolver<Anything,Anything> {
 		
 		shared actual Integer priority => 0;
 		shared actual Boolean match(Anything inputType, ClassOrInterface<Anything> outputType) {
-			if (is Class<> outputType) {
+			if (is Class<> outputType,!outputType.declaration.abstract) {
 				return true;
 			}
 			return false;
