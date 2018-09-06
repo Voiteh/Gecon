@@ -19,8 +19,8 @@ wired
 shared class MetaConverter() satisfies TypedConverter<Object,ClassOrInterface<Object>,Object> {
 	shared actual Object convert(Context context, Object source, ClassOrInterface<Object> resultType) {
 			value resolvedType = context.resolve(source,resultType);
-			value relationsType=`class Entry`.apply<Entry<Object,Type<Anything>>>(type(source),type(resultType));
-			value relations=context.convert(source->resultType,relationsType);
+			value relationsType=`class Entry`.apply<Entry<Object,Type<Anything>>>(type(source),type(resolvedType));
+			value relations=context.convert(source->resolvedType,relationsType);
 			value partializationType=context.resolve(relations, `Partialization`);
 			value partialization=context.create(partializationType,relations);
 			return context.create(resolvedType, partialization);
