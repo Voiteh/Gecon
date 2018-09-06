@@ -8,8 +8,7 @@ import herd.convertx.core {
 import ceylon.logging {
 	addLogWriter,
 	writeSimpleLog,
-	trace,
-	debug
+	info
 }
 import ceylon.test {
 	beforeTestRun,
@@ -29,7 +28,7 @@ shared void setupLogger(){
 class LoggingTestExtension() satisfies TestListener{
 	shared actual void testStarted(TestStartedEvent event) {
 		if (exists instance=event.instance) {
-			logger.info("----- TEST--STARTED-----``event.description``-----");
+			logger.info("----- TEST--STARTED----- ``event.description`` -----");
 		}
 	}
 }
@@ -39,7 +38,7 @@ shared class BaseTest() {
 	
 		shared beforeTest 
 		default void setupLogger(){
-			logger.priority=debug;
+			logger.priority=info;
 		}
 	
 	

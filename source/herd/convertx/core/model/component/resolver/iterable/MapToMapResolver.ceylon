@@ -7,7 +7,6 @@ import ceylon.language.meta.model {
 }
 import herd.convertx.core.api.component {
 	Resolver,
-	Component,
 	wired
 }
 import herd.convertx.core.util {
