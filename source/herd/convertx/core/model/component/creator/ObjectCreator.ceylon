@@ -1,7 +1,6 @@
 import herd.convertx.core.api.component {
 	Creator,
 	CreationException,
-	Component,
 	wired
 }
 import ceylon.language.meta.model {
@@ -25,8 +24,8 @@ shared class ObjectCreator() satisfies Creator<Object,AttributePartialization> {
 	shared actual Object create(Context context,Class<Object,Nothing> kind, AttributePartialization partialization) {
 		value instanceId = kind.string;
 		value deserializationContext = deserialization<String>();
-		deserializationContext.instance(instanceId, kind);
 		try {
+			deserializationContext.instance(instanceId, kind);
 			partialization.parts.each((Attribute<> resultAttribute-> Anything resultPartValue) {
 				deserializationContext.attribute(instanceId, resultAttribute.declaration, resultAttribute.declaration.name);
 				deserializationContext.instanceValue(resultAttribute.declaration.name, resultPartValue);
