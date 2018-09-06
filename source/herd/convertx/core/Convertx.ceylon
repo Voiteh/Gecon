@@ -39,7 +39,7 @@ shared class Convertx {
 	
 	shared Result|AdaptationException convert<Result>(Anything source, Type<Result> resultType) {
 		try {
-			logger.debug("Converting: ``source else "null"``, to ``resultType``");
+			logger.info("Converting: ``source else "null"``, to ``resultType``");
 			value result =context.convert(source, resultType);
 			logger.info("Converted: ``source else "null"``, to ``resultType``, result: ``result else "null"``");
 			return result;
