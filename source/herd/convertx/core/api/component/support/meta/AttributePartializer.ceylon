@@ -47,14 +47,7 @@ shared abstract class AttributePartializer<Source, Result>()
 		return AttributePartialization(HashMap<Attribute<>,Anything>{entries=entries;});
 	}
 	
-	 matcher => object satisfies AttributePartializer<Source, Result>.Matcher{
-		
-		shared actual Integer priority => 1;
-		shared actual Boolean match(Class<AttributePartialization,Nothing> kind, Source->ClassOrInterface<Result> arguments) => true;
-		
-		
-		
-	};
+	 
 	
 	
 	
