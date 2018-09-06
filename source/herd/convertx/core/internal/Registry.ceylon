@@ -7,6 +7,9 @@ import herd.convertx.core.api.component {
 	TypedCreator,
 	TypedConverter
 }
+import herd.convertx.core {
+	logger
+}
 
 shared alias Container => HashMap<Findable,Executable>;
 Container container=> HashMap<Findable,Executable>();
@@ -35,9 +38,9 @@ shared class Registry {
 			case (is TypedCreator<>) {
 				replaced=creators.put(findable, executable);
 			}
+			logger.trace("Registered: ``element``");
 			if(exists replaced){
-				//TODO make a real Log
-				print("Warning! Replaced: ``replaced``, with: ``executable``");
+				logger.warn("Replaced: ``replaced``, with: ``executable``");
 			}
 		});
 		
