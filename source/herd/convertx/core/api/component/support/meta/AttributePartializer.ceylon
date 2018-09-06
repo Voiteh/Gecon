@@ -13,9 +13,6 @@ import herd.convertx.core.api {
 import herd.convertx.core.util {
 	filterObjectAndIdentifiableAttributes
 }
-import ceylon.collection {
-	HashMap
-}
 import herd.convertx.core.api.meta {
 	Relation,
 	AttributePartialization
@@ -46,7 +43,7 @@ shared abstract class AttributePartializer<Source, Result>()
 				throw CreationException(kind,Exception("Can't find attribute by name: ``key`` in ``arguments.resultClass`` type"));
 			}
 		});
-		return AttributePartialization(HashMap<Attribute<>,Anything>{entries=entries;});
+		return AttributePartialization(entries);
 	}
 	
 	 

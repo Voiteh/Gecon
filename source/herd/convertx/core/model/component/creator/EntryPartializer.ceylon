@@ -8,9 +8,6 @@ import herd.convertx.core.api.component {
 
 
 
-import ceylon.collection {
-	HashMap
-}
 import herd.convertx.core.api.component.support.meta {
 	ObjectPartializer
 }
@@ -26,7 +23,7 @@ import herd.convertx.core.model.meta {
 
 wired
 shared class EntryPartializer() extends ObjectPartializer<EntryPartialization,{<String->Anything>*},Map<String,Anything>>() {
-	shared actual EntryPartialization createPartialization({<String->Anything>*} holder) => EntryPartialization(HashMap<String,Anything> { entries = holder; });
+	shared actual EntryPartialization createPartialization({<String->Anything>*} holder) => EntryPartialization(holder);
 	
 	shared actual {<String->Anything>*} mapAttributes(Context context, Object source, {Attribute<Nothing,Anything,Nothing>*} attributes) => attributes.map((Attribute<Nothing,Anything,Nothing> element) => element.declaration.name -> element.bind(source).get());
 	

@@ -4,7 +4,7 @@ import herd.convertx.core.api.meta {
 import ceylon.collection {
 	HashMap
 }
-shared class EntryPartialization(parts) satisfies Partialization {
-	shared actual HashMap<String,Anything> parts;
+shared class EntryPartialization({<String->Anything>*} entries) satisfies Partialization {
+	shared actual HashMap<String,Anything> parts=HashMap<String,Anything>{entries=entries;};
 	
 }
