@@ -21,7 +21,7 @@ shared class MapAttributePartializer() extends AttributePartializer<Map<String,A
 	matcher => object satisfies MapAttributePartializer.Matcher{
 		
 		shared actual Integer priority => 1;
-		shared actual Boolean match(Class<AttributePartialization,Nothing> kind, Map<String,Anything>->ClassOrInterface<Object> arguments) => nothing;
+		shared actual Boolean match(Class<AttributePartialization,Nothing> kind, Map<String,Anything>->ClassOrInterface<Object> arguments) => true;
 		
 		
 		
