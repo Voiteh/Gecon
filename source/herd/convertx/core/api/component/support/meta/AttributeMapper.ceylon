@@ -1,28 +1,30 @@
 import ceylon.language.meta.model {
-	ClassOrInterface,
 	Class,
 	Attribute
 }
 import herd.convertx.core.api {
 	Context
 }
-import herd.convertx.core.api.meta.support {
-	AttributePartialization
-}
+
 import ceylon.collection {
 	HashMap
 }
 import herd.convertx.core.api.component {
 	Creator
 }
+import herd.convertx.core.api.meta {
+	Relation,
+	AttributePartialization
+}
+
 shared abstract class AttributeMapper<Source,Result>()
-		 satisfies Creator<AttributePartialization,Source->ClassOrInterface<Result>>
+		 satisfies Creator<AttributePartialization,Relation<Source, Result>>
 		given Source satisfies Object
 		{
 	shared formal {<Attribute<Source>->Attribute<Result>>*} relations;
-	shared actual AttributePartialization create(Context context, Class<AttributePartialization,Nothing> kind, Source->ClassOrInterface<Result> arguments) {
+	shared actual AttributePartialization create(Context context, Class<AttributePartialization,Nothing> kind, Relation<Source,Result> arguments) {
 		value entries=relations.map((Attribute<Source,Anything,Nothing> sourceAttribute -> Attribute<Result,Anything,Nothing> destAttribute) {
-			value sourcePartValue=sourceAttribute.bind(arguments.key).get();
+			value sourcePartValue=sourceAttribute.bind(arguments.source).get();
 			value resultPartValue=context.convert(sourcePartValue,destAttribute.type);
 			return destAttribute->resultPartValue;
 		});

@@ -3,26 +3,27 @@ import herd.convertx.core.api.component {
 	wired
 }
 import herd.convertx.core.api.meta {
-	Partialization
+	Partialization,
+	Relation
 }
 import ceylon.language.meta.model {
-	Type,
 	Class,
 	ClassOrInterface
 }
 import herd.convertx.core.api {
 	Context
 }
-import herd.convertx.core.api.meta.support {
+
+import herd.convertx.core.model.meta {
 	EntryPartialization
 }
 wired
-shared class EntryPartializationResolver() satisfies Resolver<Partialization,Object->Type<Map<String,Anything>>>{
-	shared actual Class<Partialization,Nothing> resolve(Context context, Object->Type<Map<String,Anything>> type, ClassOrInterface<Partialization> outputType) =>`EntryPartialization`;
+shared class EntryPartializationResolver() satisfies Resolver<Partialization,Relation<Object,Map<String,Anything>>>{
+	shared actual Class<Partialization,Nothing> resolve(Context context, Relation<Object,Map<String,Anything>> type, ClassOrInterface<Partialization> outputType) =>`EntryPartialization`;
 	
 
 	matcher=> object satisfies EntryPartializationResolver.Matcher{
-		shared actual Boolean match(Object->Type<Map<String,Anything>> input, ClassOrInterface<Partialization> outputType) => true;
+		shared actual Boolean match(Relation<Object,Map<String,Anything>> input, ClassOrInterface<Partialization> outputType) => true;
 		
 		shared actual Integer priority => 1;
 		

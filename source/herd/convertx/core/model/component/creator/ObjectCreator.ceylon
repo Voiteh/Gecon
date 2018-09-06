@@ -8,14 +8,16 @@ import ceylon.language.meta.model {
 	Class,
 	Attribute
 }
-import herd.convertx.core.api.meta.support {
-	AttributePartialization
-}
+
 import ceylon.language.serialization {
 	deserialization
 }
 import herd.convertx.core.api {
 	Context
+}
+
+import herd.convertx.core.api.meta {
+	AttributePartialization
 }
 
 wired

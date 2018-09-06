@@ -3,7 +3,6 @@ import herd.convertx.core.api.component {
 	wired
 }
 import ceylon.language.meta.model {
-	Type,
 	Class,
 	Attribute
 }
@@ -17,20 +16,22 @@ import ceylon.language.meta {
 import herd.convertx.core.util {
 	filterObjectAndIdentifiableAttributes
 }
-import herd.convertx.core.api.meta.support {
-	AttributePartialization
-}
+
 import ceylon.collection {
 	HashMap
 }
+import herd.convertx.core.api.meta {
+	Relation,
+	AttributePartialization
+}
+
 wired
-shared class AttributePartializationCreator() satisfies Creator<AttributePartialization, Object->Type<Object>>{
-	shared actual AttributePartialization create(Context context, Class<AttributePartialization,Nothing> kind, Object->Type<Object> arguments){
-		assert(is Class<Object> clazz=arguments.item);
-		value sourceType=type(arguments.key);
-		value entries=clazz.getAttributes<>().filter(filterObjectAndIdentifiableAttributes).map((Attribute<Nothing,Anything,Nothing> destAttribute) {
+shared class AttributePartializationCreator() satisfies Creator<AttributePartialization, Relation<Object,Object>>{
+	shared actual AttributePartialization create(Context context, Class<AttributePartialization,Nothing> kind, Relation<Object,Object> arguments){
+		value sourceType=type(arguments.source);
+		value entries=arguments.resultClass.getAttributes<>().filter(filterObjectAndIdentifiableAttributes).map((Attribute<Nothing,Anything,Nothing> destAttribute) {
 			value sourceAttribute = sourceType.getAttribute<>(destAttribute.declaration.name);
-			value sourcePartValue=sourceAttribute?.bind(arguments.key)?.get();
+			value sourcePartValue=sourceAttribute?.bind(arguments.source)?.get();
 			value destPartValue=context.convert(sourcePartValue,destAttribute.type);
 			return destAttribute->destPartValue;
 		});
@@ -38,7 +39,7 @@ shared class AttributePartializationCreator() satisfies Creator<AttributePartial
 	}
 	
 	matcher => object satisfies AttributePartializationCreator.Matcher{
-		shared actual Boolean match(Class<AttributePartialization,Nothing> kind, Object->Type<Object> arguments) => true;
+		shared actual Boolean match(Class<AttributePartialization,Nothing> kind, Relation<Object,Object> arguments) => true;
 		
 		shared actual Integer priority => 0;
 		

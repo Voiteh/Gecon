@@ -2,11 +2,8 @@ import herd.convertx.core.api.component {
 	Creator,
 	CreationException
 }
-import herd.convertx.core.api.meta.support {
-	AttributePartialization
-}
+
 import ceylon.language.meta.model {
-	ClassOrInterface,
 	Attribute,
 	Class
 }
@@ -19,9 +16,14 @@ import herd.convertx.core.util {
 import ceylon.collection {
 	HashMap
 }
+import herd.convertx.core.api.meta {
+	Relation,
+	AttributePartialization
+}
+
 
 shared abstract class AttributePartializer<Source, Result>()
-		satisfies Creator<AttributePartialization,Source->ClassOrInterface<Result>>
+		satisfies Creator<AttributePartialization,Relation<Source,Result>>
 		given Source satisfies Object {
 	
 	
@@ -30,18 +32,18 @@ shared abstract class AttributePartializer<Source, Result>()
 	shared default Attribute<>? findAttribute(String key,Attribute<>[] resultAttributes)
 			=>resultAttributes.find((Attribute<> attribute) => attribute.declaration.name==key);
 	
-	shared actual AttributePartialization create(Context context, Class<AttributePartialization,Nothing> kind, Source->ClassOrInterface<Result> arguments) {
-		value attributes=arguments.item.getAttributes<>().filter(filterObjectAndIdentifiableAttributes).sequence();
-		value entries=extractKeys(arguments.key)
+	shared actual AttributePartialization create(Context context, Class<AttributePartialization,Nothing> kind, Relation<Source,Result> arguments) {
+		value attributes=arguments.resultClass.getAttributes<>().filter(filterObjectAndIdentifiableAttributes).sequence();
+		value entries=extractKeys(arguments.source)
 				.map((String key) {
 			value attribute=findAttribute(key, attributes);
 			if(exists attribute){
-				value toConvert=extractValue(arguments.key, key);
+				value toConvert=extractValue(arguments.source, key);
 				value part=context.convert(toConvert, attribute.type);
 				return attribute->part;
 			}
 			else{
-				throw CreationException(kind,Exception("Can't find attribute by name: ``key`` in ``arguments.item`` type"));
+				throw CreationException(kind,Exception("Can't find attribute by name: ``key`` in ``arguments.resultClass`` type"));
 			}
 		});
 		return AttributePartialization(HashMap<Attribute<>,Anything>{entries=entries;});

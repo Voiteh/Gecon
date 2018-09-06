@@ -9,7 +9,11 @@ import ceylon.collection {
 	HashMap
 }
 import herd.convertx.core.api.meta {
-	Partialization
+	Partialization,
+	Relation
+}
+import ceylon.language.meta.model {
+	Class
 }
 
 class TestModel(id,name){
@@ -25,8 +29,14 @@ shared class EntryPartializationResolverTest() {
 	void shouldMatchToEntryPartializationResolver(){
 		assert(exists matcher=resolver.matcher);
 		value model=TestModel(1,"ble");
-		value input=model->`HashMap<String,Anything>`;
-		value result=matcher.match(input, `Partialization`);
+		object relation satisfies Relation<TestModel,HashMap<String,Anything>>{
+			shared actual Class<HashMap<String,Anything>,Nothing> resultClass => `HashMap<String,Anything>`;
+			
+			shared actual TestModel source => model;
+			
+			
+		}
+		value result=matcher.match(relation, `Partialization`);
 		assertEquals(result,true);
 	}
 	

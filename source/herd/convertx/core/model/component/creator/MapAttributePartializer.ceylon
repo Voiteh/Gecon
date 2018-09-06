@@ -5,13 +5,15 @@ import herd.convertx.core.api.component {
 import herd.convertx.core.api.component.support.meta {
 	AttributePartializer
 }
-import herd.convertx.core.api.meta.support {
-	AttributePartialization
-}
+
 import ceylon.language.meta.model {
-	ClassOrInterface,
 	Class
 }
+import herd.convertx.core.api.meta {
+	Relation,
+	AttributePartialization
+}
+
 wired
 shared class MapAttributePartializer() extends AttributePartializer<Map<String,Anything>,Object>(){
 	shared actual String[] extractKeys(Map<String,Anything> source) => source.keys.sequence();
@@ -21,7 +23,8 @@ shared class MapAttributePartializer() extends AttributePartializer<Map<String,A
 	matcher => object satisfies MapAttributePartializer.Matcher{
 		
 		shared actual Integer priority => 1;
-		shared actual Boolean match(Class<AttributePartialization,Nothing> kind, Map<String,Anything>->ClassOrInterface<Object> arguments) => true;
+		shared actual Boolean match(Class<AttributePartialization,Nothing> kind, Relation<Map<String,Anything>,Object> arguments) => true;
+		
 		
 		
 		

@@ -1,6 +1,4 @@
-import herd.convertx.core.api.meta {
-	Partialization
-}
+
 import ceylon.language.meta.model {
 	Attribute
 }
