@@ -10,14 +10,16 @@ import herd.convertx.json {
 }
 import ceylon.language.meta.model {
 	Attribute,
-	Class,
-	Type
+	Class
 }
 import herd.convertx.core.api {
 	Context
 }
 import herd.convertx.core.api.component.support.meta {
 	ObjectPartializer
+}
+import herd.convertx.core.api.meta {
+	Relation
 }
 wired
 shared class ObjectJSONPartializer() extends ObjectPartializer<JSONPartialization, {<String->JSONValue>*}, JSONObject>(){
@@ -34,7 +36,7 @@ shared class ObjectJSONPartializer() extends ObjectPartializer<JSONPartializatio
 	});
 	
 	matcher => object satisfies ObjectJSONPartializer.Matcher{
-		shared actual Boolean match(Class<JSONPartialization,Nothing> kind, Object->Type<JSONObject> arguments) => true;
+		shared actual Boolean match(Class<JSONPartialization,Nothing> kind, Relation<Object,JSONObject> arguments) => true;
 		
 		shared actual Integer priority => 2;
 		
