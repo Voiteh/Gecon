@@ -2,9 +2,7 @@ import herd.convertx.core.api.component {
 	Creator,
 	wired
 }
-import herd.convertx.core.api.meta.support {
-	EntryPartialization
-}
+
 import ceylon.collection {
 	HashMap
 }
@@ -13,6 +11,9 @@ import herd.convertx.core.api {
 }
 import ceylon.language.meta.model {
 	Class
+}
+import herd.convertx.core.model.meta {
+	EntryPartialization
 }
 wired
 shared class EntryPartializationHashMapCreator() satisfies Creator<HashMap<String,Anything>,EntryPartialization>{

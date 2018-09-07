@@ -22,6 +22,7 @@ import herd.convertx.core {
 shared class DefaultContext(Registry registry, Executable.FindStrategy strategy = defaultFindStrategy) satisfies Context {
 	
 	shared actual Result convert<Result>(Anything source, Type<Result> resultType) {
+		logger.debug("Finding Converter for source: ``source else "null"``, to ``resultType``");
 		value hashable = [source, resultType];
 		value args = [this, source, resultType];
 		if (exists executable = strategy.find(registry.converters, hashable)) {
@@ -33,6 +34,7 @@ shared class DefaultContext(Registry registry, Executable.FindStrategy strategy 
 		throw ComponentFindingException("Can't find Converter for provided arguments: source - `` source else "null" ``, resultType - ``resultType``");
 	}
 	shared actual Class<Result> resolve<Result>(Anything source,Type<Result> resultType) {
+		logger.debug("Finding Resolver for source: ``source else "null"``, to ``resultType``");
 		value hashable = [source, resultType];
 		value args = [this,source,resultType];
 		if(exists executable =strategy.find(registry.resolvers, hashable)){
@@ -42,10 +44,11 @@ shared class DefaultContext(Registry registry, Executable.FindStrategy strategy 
 			return result;
 		}
 		
-		throw ComponentFindingException("Can't find resolver for provided arguments: input - ``source else "null"``, resultType - ``resultType``");
+		throw ComponentFindingException("Can't find resolver for provided arguments: source - ``source else "null"``, resultType - ``resultType``");
 	}
 	
 	shared actual Result create<Result>(Class<Result,Nothing> kind, Anything args) {
+		logger.debug("Finding Creator for: ``kind``, with arguments ``args else "null"``");
 		value hashable = [kind, args];
 		value params=[this,kind,args];
 		if(exists executable=strategy.find(registry.creators,hashable)){

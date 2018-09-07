@@ -11,9 +11,6 @@ import ceylon.language.meta.model {
 import ceylon.language.meta {
 	type
 }
-import herd.convertx.core.util {
-	extractObjectType
-}
 wired
 shared class EnumeratedObjectToStringConverter() satisfies Converter<Object,String> {
 	shared actual String convert(Context context, Object source, Type<String> resultType) => type(source).declaration.name;

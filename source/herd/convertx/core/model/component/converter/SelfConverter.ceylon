@@ -1,5 +1,4 @@
 import herd.convertx.core.api.component {
-	Component,
 	Converter,
 	wired
 }

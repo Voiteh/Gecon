@@ -17,11 +17,13 @@ import ceylon.language.meta {
 import herd.convertx.core.util {
 	filterObjectAndIdentifiableAttributes
 }
-import herd.convertx.core.api.meta.support {
-	AttributePartialization
-}
+
 import ceylon.collection {
 	HashMap
+}
+
+import herd.convertx.core.api.meta {
+	AttributePartialization
 }
 wired
 shared class ObjectToObjectPartializationCreator() satisfies Creator<AttributePartialization, Object->Type<Object>>{

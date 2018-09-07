@@ -4,26 +4,26 @@ import herd.convertx.core.api.component {
 }
 
 import ceylon.language.meta.model {
-	Type,
 	Class,
 	ClassOrInterface
 }
 import herd.convertx.core.api {
 	Context
 }
-import herd.convertx.core.api.meta.support {
+
+import herd.convertx.core.api.meta {
+	Partialization,
+	Relation,
 	AttributePartialization
 }
-import herd.convertx.core.api.meta {
-	Partialization
-}
+
 
 wired
-shared class AttributePartializationResolver() satisfies Resolver<Partialization,Object->Type<Object>> {
-	shared actual Class<AttributePartialization,Nothing> resolve(Context context, Object->Type<Object> source, ClassOrInterface<Partialization> outputType) => `AttributePartialization`;
+shared class AttributePartializationResolver() satisfies Resolver<Partialization,Relation<Object,Object>> {
+	shared actual Class<AttributePartialization,Nothing> resolve(Context context, Relation<Object,Object> source, ClassOrInterface<Partialization> outputType) => `AttributePartialization`;
 	
 	matcher => object satisfies AttributePartializationResolver.Matcher{
-		shared actual Boolean match(Object->Type<Object> input, ClassOrInterface<Partialization> outputType) => true;
+		shared actual Boolean match(Relation<Object,Object> input, ClassOrInterface<Partialization> outputType) => true;
 		
 		shared actual Integer priority => 0;
 		
