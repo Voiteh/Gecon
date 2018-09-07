@@ -34,5 +34,4 @@ shared interface Resolver<Output,Input=Output> satisfies TypedResolver<Output,Cl
 	shared formal actual Class<Output> resolve(Context context,Input type,ClassOrInterface<Output> outputType);
 	
 	
-	shared default actual Resolver<Output,Input>.Matcher? matcher=> null;
 }

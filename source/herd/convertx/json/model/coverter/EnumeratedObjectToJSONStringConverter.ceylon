@@ -12,11 +12,11 @@ import ceylon.language.meta {
 	type
 }
 wired
-shared class EnumeratedObjectToStringConverter() satisfies Converter<Object,String> {
+shared class EnumeratedObjectToJSONStringConverter() satisfies Converter<Object,String> {
 	shared actual String convert(Context context, Object source, Type<String> resultType) => type(source).declaration.name;
 	
 	
-	matcher => object satisfies EnumeratedObjectToStringConverter.Matcher{
+	matcher => object satisfies EnumeratedObjectToJSONStringConverter.Matcher{
 		shared actual Boolean match(Object source, Type<String> resultType) => type(source).declaration.anonymous;
 		
 		shared actual Integer priority => 1;

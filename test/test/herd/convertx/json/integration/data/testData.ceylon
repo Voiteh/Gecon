@@ -7,6 +7,9 @@ import ceylon.collection {
 	ArrayList,
 	HashSet
 }
+import ceylon.language.meta {
+	type
+}
 
 shared object testData {
 	shared String name = "Test Name";
@@ -44,14 +47,14 @@ shared object testData {
 	
 	shared JSONObject resolveOneJSONObject = JSONObject {
 		values = {
-			`TypeResolveOne.type`.declaration.name->resolveOne.type.string,
+			`TypeResolveOne.type`.declaration.name->type(resolveOne.type).declaration.name,
 			`TypeResolveOne.text`.declaration.name->resolveOne.text
 		};
 	};
 	
 	shared JSONObject resolveTwoJSONObject = JSONObject {
 		values = {
-			`TypeResolveTwo.type`.declaration.name->resolveTwo.type.string,
+			`TypeResolveTwo.type`.declaration.name->type(resolveTwo.type).declaration.name,
 			`TypeResolveTwo.id`.declaration.name->resolveTwo.id
 		};
 	};

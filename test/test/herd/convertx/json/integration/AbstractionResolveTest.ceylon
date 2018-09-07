@@ -4,14 +4,36 @@ import ceylon.test {
 }
 import test.herd.convertx.json.integration.data {
 	TypeResolveInterface,
-	testData
+	testData,
+	JSONObjectToTestResolveInterfaceResolver
 }
 
 import herd.convertx.json {
 	JSONObject
 }
+import herd.convertx.core.api {
+	Provider
+}
+import ceylon.collection {
+	MutableList,
+	ArrayList
+}
+import herd.convertx.core.api.component {
+	Component
+}
 shared class AbstractionResolveTest() extends BaseJSONIntegrationTest(){
 	
+	object resolvingProvider satisfies Provider{
+		shared actual MutableList<Component> components = ArrayList<Component>{
+			elements = {
+				JSONObjectToTestResolveInterfaceResolver()
+			};
+	};
+		
+		
+	}
+	
+	shared actual {Provider*} additionalProviders => super.additionalProviders.follow(resolvingProvider);
 	
 	shared test
 	void shouldConvertTypeResolveOneIntoJSONObject(){
