@@ -26,18 +26,18 @@ shared object testData {
 	
 	shared JSONArray simpleJSONArrayWithNull = JSONArray({ name, id, nullVal });
 	shared JSONArray simpleJSONArray = JSONArray({ name, id });
-	shared List<Anything> simpleListWithNull = ArrayList<Anything> {
+	shared List<String|Integer|Null> simpleListWithNull = ArrayList<String|Integer|Null> {
 		elements = { name, id, nullVal };
 	};
-	shared Array<Anything> simpleArrayWithNull = Array<Anything> {
+	shared Array<String|Integer|Null> simpleArrayWithNull = Array<String|Integer|Null> {
 		elements = { name, id, nullVal };
 	};
 	
-	shared Set<Object> simpleSet = HashSet<Object> {
+	shared Set<String|Integer> simpleSet = HashSet<String|Integer> {
 		elements = { name, id };
 	};
-	shared {Object*} simpleStream = { name, id };
-	shared [Object*] simpleSequence = [name, id];
+	shared {String|Integer*} simpleStream = { name, id };
+	shared [String|Integer*] simpleSequence = [name, id];
 	shared [String, Integer] simpleTuple = [name, id];
 	
 	shared TypeResolveOne resolveOne = TypeResolveOne(name);
