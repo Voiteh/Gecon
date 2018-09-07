@@ -3,29 +3,71 @@ import ceylon.test {
 	assertEquals
 }
 import herd.convertx.json {
-	JSONArray
+	JSONArray,
+	JSONValue
 }
-import test.herd.convertx.json.integration.data { 
+import test.herd.convertx.json.integration.data {
 	testData
 }
-shared class IterableTest() extends BaseJSONIntegrationTest(){
+
+shared class IterableTest() extends BaseJSONIntegrationTest() {
+	
+	Boolean assertJSONArrayEquality(Anything result, Anything target) {
+		if (is JSONArray result, is JSONArray target) {
+			for (Integer->JSONValue indexed in target.indexed) {
+				JSONValue indexedItem = indexed.item;
+				JSONValue get = result.get(indexed.key);
+				Boolean andResult = indexedItem exists && get exists;
+				if (andResult) {
+					value indexes = result.indexesWhere((JSONValue element) {
+							if (exists element, exists get) {
+								return element == get;
+							} else if (!exists element, !exists get) {
+								return true;
+							}
+							return false;
+						});
+					if (!indexes.contains(indexed.key)) {
+						return false;
+					}
+				} else {
+					return false;
+				}
+			}
+			return true;
+		}
+		return false;
+	}
 	
 	shared test
 	void shouldConvertStreamToJSONArray() {
 		value result = convertx.convert(testData.simpleStream, `JSONArray`);
-		assertEquals(result, testData.simpleJSONArray);
+		assertEquals {
+			actual = result;
+			expected = testData.simpleJSONArray;
+			compare = assertJSONArrayEquality;
+		};
 	}
 	
 	shared test
 	void shouldConvertJSONArrayToStream() {
 		value result = convertx.convert(testData.simpleStream, `{Object*}`);
-		assertEquals(result, testData.simpleJSONArray);
+		assertEquals {
+			actual = result;
+			expected = testData.simpleJSONArray;
+			compare = assertJSONArrayEquality;
+		};
+
 	}
 	
 	shared test
 	void shouldConvertSequenceToJSONArray() {
 		value result = convertx.convert(testData.simpleSequence, `JSONArray`);
-		assertEquals(result, testData.simpleJSONArray);
+		assertEquals {
+			actual = result;
+			expected = testData.simpleJSONArray;
+			compare = assertJSONArrayEquality;
+		};
 	}
 	
 	shared test
@@ -37,7 +79,11 @@ shared class IterableTest() extends BaseJSONIntegrationTest(){
 	shared test
 	void shouldConvertListToJSONArray() {
 		value result = convertx.convert(testData.simpleListWithNull, `JSONArray`);
-		assertEquals(result, testData.simpleJSONArrayWithNull);
+		assertEquals {
+			actual = result;
+			expected = testData.simpleJSONArrayWithNull;
+			compare = assertJSONArrayEquality;
+		};
 	}
 	shared test
 	void shouldConvertJSONArrayToList() {
@@ -48,7 +94,12 @@ shared class IterableTest() extends BaseJSONIntegrationTest(){
 	shared test
 	void shouldConvertSetToJSONArray() {
 		value result = convertx.convert(testData.simpleSet, `JSONArray`);
-		assertEquals(result, testData.simpleJSONArray);
+		assertEquals {
+			actual = result;
+			expected = testData.simpleJSONArray;
+			compare = assertJSONArrayEquality;
+		};
+
 	}
 	shared test
 	void shouldConvertJSONArrayToSet() {
@@ -58,7 +109,11 @@ shared class IterableTest() extends BaseJSONIntegrationTest(){
 	shared test
 	void shouldConvertArrayToJSONArray() {
 		value result = convertx.convert(testData.simpleArrayWithNull, `JSONArray`);
-		assertEquals(result, testData.simpleJSONArrayWithNull);
+		assertEquals {
+			actual = result;
+			expected = testData.simpleJSONArrayWithNull;
+			compare = assertJSONArrayEquality;
+		};
 	}
 	shared test
 	void shouldConvertJSONArrayToArray() {
@@ -69,7 +124,12 @@ shared class IterableTest() extends BaseJSONIntegrationTest(){
 	shared test
 	void shouldConvertTupleToJSONArray() {
 		value result = convertx.convert(testData.simpleTuple, `JSONArray`);
-		assertEquals(result, testData.simpleJSONArray);
+		assertEquals {
+			actual = result;
+			expected = testData.simpleJSONArray;
+			compare = assertJSONArrayEquality;
+		};
+
 	}
 	shared test
 	void shouldConvertJSONArrayToTuple() {
