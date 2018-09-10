@@ -4,7 +4,7 @@ import ceylon.language.meta.model {
 import herd.convertx.core.api.component {
 	ConvertionException,
 	TypedConverter,
-	AdaptationException,
+	ConvertxException,
 	wired
 }
 import herd.convertx.core.api {
@@ -16,7 +16,7 @@ shared class UnionConverter() satisfies TypedConverter<Anything,UnionType<Anythi
 		for(value type in resultType.caseTypes){
 			try {
 				return context.convert(source, type);
-			} catch (AdaptationException x) {}
+			} catch (ConvertxException x) {}
 		}
 		throw ConvertionException(source, resultType,Exception("All converters for types: ``resultType.caseTypes`` failed"));
 	}
