@@ -6,12 +6,10 @@ import herd.convertx.core.api {
 }
 import ceylon.logging {
 	addLogWriter,
-	writeSimpleLog,
-	trace
+	writeSimpleLog
 }
 import herd.convertx.core {
-	Convertx,
-	logger
+	Convertx
 }
 import herd.convertx.json {
 	JSONProvider

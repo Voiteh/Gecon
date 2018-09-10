@@ -1,5 +1,4 @@
 import herd.convertx.core.api.component {
-	wired,
 	Resolver
 }
 import ceylon.language.meta.model {

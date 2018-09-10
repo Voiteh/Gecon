@@ -11,9 +11,6 @@ import test.herd.convertx.json.integration.data {
 	testData
 	
 }
-import ceylon.language.meta.model {
-	UnionType
-}
 shared class SimpleModelTest() extends BaseJSONIntegrationTest() {
 	
 	shared test 

@@ -1,6 +1,5 @@
 import ceylon.collection {
 	ArrayList,
-	MutableList,
 	ListMutator
 }
 import ceylon.language.meta.model {

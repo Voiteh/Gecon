@@ -6,7 +6,6 @@ import ceylon.test {
 	assertTrue
 }
 import ceylon.collection {
-	MutableList,
 	ListMutator
 }
 shared class MutableListResolverTest() {

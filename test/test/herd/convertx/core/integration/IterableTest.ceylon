@@ -4,7 +4,6 @@ import ceylon.test {
 	assertEquals
 }
 import ceylon.collection {
-	ArrayList,
 	MutableList
 }
 import herd.convertx.core.api.component {
