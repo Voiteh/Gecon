@@ -4,18 +4,59 @@ import ceylon.test {
 	assertEquals
 }
 import ceylon.collection {
-	ArrayList
+	ArrayList,
+	MutableList
 }
 import herd.convertx.core.api.component {
 	ConvertionException
 }
+import ceylon.logging {
+	debug,
+	trace
+}
+import herd.convertx.core {
+	logger
+}
 shared class IterableTest() extends BaseTest(){
 	
 	
+	Boolean checkIterableEquality<Type,Item>(Anything result, Anything target) 
+			given Type satisfies {Item*} {
+		if (is Type result, is Type target) {
+			for (Integer->Item indexed in target.indexed) {
+				Item indexedItem = indexed.item;
+				Item? get = result.getFromFirst(indexed.key);
+				Boolean bothNotExists = !indexedItem exists && !get exists;
+				Boolean bothExists = indexedItem exists && get exists;
+				Boolean andResult = bothExists || bothNotExists;
+				if (!andResult) {
+					return false;
+				}
+			}
+			return true;
+		}
+		return false;
+	}
+	
 	shared test 
 	void shouldConvertIterableToIterable(){
-		assert(is {String*} result=convertx.convert({1,2,3},`{String*}`)); 
-		assert(result.containsEvery({"1","2","3"}));
+		value result=convertx.convert(testData.iterable.integer.stream,`{String*}`);
+		 assertEquals{
+		 	actual=result;
+		 	expected=testData.iterable.strings.stream;
+		 	compare=checkIterableEquality<{String*},String>;
+		 };
+	}
+	
+	shared test 
+	void shouldConvertIterableToNonEmptyIterable(){
+		
+		value result=convertx.convert(testData.iterable.integer.stream,`{String+}`);
+		assertEquals{
+			actual=result;
+			expected=testData.iterable.strings.nonEmptyStream;
+			compare=checkIterableEquality<{String+},String>;
+		};
 	}
 	
 	shared test 
@@ -31,7 +72,8 @@ shared class IterableTest() extends BaseTest(){
 	
 	shared test 
 	void shouldConvertIterableToArrayList(){
-		assert(is ArrayList<String> result=convertx.convert({1,2,3},`List<String>`)); 
+		logger.priority=trace;
+		assert(is MutableList<String> result=convertx.convert({1,2,3},`MutableList<String>`)); 
 		assert(result.containsEvery({"1","2","3"}));
 	}
 	shared ignore("Failing because of https://github.com/eclipse/ceylon/issues/7390") test
@@ -83,6 +125,27 @@ shared class IterableTest() extends BaseTest(){
 			assert(is Integer? resultItem );
 			assertEquals(elementItem,resultItem);
 		});
+	}
+	
+	shared test
+	void shouldConvertIterableToSequence(){
+		logger.priority=debug;
+		value result=convertx.convert(testData.iterable.integer.stream,`[String*]`);
+		assertEquals{
+			actual=result;
+			expected=testData.iterable.strings.sequence;
+			compare=checkIterableEquality<[String*],String>;
+		};
+	}
+	
+	shared test
+	void shouldConvertIterableToNonEmptySequence(){
+		value result=convertx.convert(testData.iterable.integer.stream,`[String+]`);
+		assertEquals{
+			actual=result;
+			expected=testData.iterable.strings.sequence;
+			compare=checkIterableEquality<[String*],String>;
+		};
 	}
 	
 }

@@ -13,11 +13,11 @@ import herd.convertx.core.api {
 }
 wired
 shared class ArrayListCreator() satisfies Creator<List<>,{Anything*}> {
-	shared actual List<> create(Context context,Class<List<>,Nothing> kind, {Anything*} arguments) {
+	shared actual List<> create(Context context,Class<List<>> kind, {Anything*} arguments) {
 		return kind.apply(0, 1.5, arguments);
 	}
 	matcher => object satisfies ArrayListCreator.Matcher {
-		shared actual Boolean match(Class<List<>,Nothing> kind, {Anything*} arguments) {
+		shared actual Boolean match(Class<List<>> kind, {Anything*} arguments) {
 			return kind.declaration==`class ArrayList`;
 		}
 		

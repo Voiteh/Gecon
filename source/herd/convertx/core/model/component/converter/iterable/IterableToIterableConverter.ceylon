@@ -12,15 +12,15 @@ import herd.convertx.core.util {
 	typeHierarchy,
 	runtimeCall
 }
-wired
-shared class IterableToIterableConverter() satisfies  TypedConverter<{Anything*},ClassOrInterface<{Anything*}>,{Anything*}> {
+
+shared wired class IterableToIterableConverter() satisfies  TypedConverter<{Anything*},ClassOrInterface<{Anything*}>,{Anything*}> {
 	shared actual {Anything*} convert(Context context, {Anything*} source, ClassOrInterface<{Anything*}> resultType){
-			value resolvedType=context.resolve(source,resultType);
-			assert(exists explictIterableType = typeHierarchy(resolvedType).findByDeclaration(`interface Iterable`));
+			assert(exists explictIterableType = typeHierarchy(resultType).findByDeclaration(`interface Iterable`));
 			assert(exists elementType=explictIterableType.typeArgumentList.first);
 			value args = source.map((Anything element) => context.convert(element, elementType)).sequence();
-			value creatorArgs = runtimeCall.iterable.narrow(args, elementType);
-			return context.create(resolvedType, creatorArgs);
+			value narrowedArgs=runtimeCall.iterable.narrow(args, elementType);
+			value resolvedType=context.resolve(args,resultType);
+			return context.create(resolvedType, narrowedArgs);
 	}
 	
 	

@@ -11,3 +11,4 @@ shared Type<> iterableTypeArgument(ClassOrInterface<{Anything*}> iterableType){
 	assert(exists elementType=explictIterable.typeArgumentList.first);
 	return elementType;
 }
+
