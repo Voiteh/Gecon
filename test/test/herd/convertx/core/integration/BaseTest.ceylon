@@ -1,8 +1,9 @@
 import herd.convertx.core.api {
-	Provider
+	Provider,
+	Convertx
 }
 import herd.convertx.core {
-	Convertx,
+	CoreConvertx,
 	logger
 }
 import ceylon.logging {
@@ -44,7 +45,7 @@ shared class BaseTest() {
 	
 		shared default {Provider*} additionalProviders =>{};
 	
-		shared default Convertx convertx=>Convertx(*additionalProviders);
+		shared default Convertx convertx=>CoreConvertx(*additionalProviders);
 	
 	
 	

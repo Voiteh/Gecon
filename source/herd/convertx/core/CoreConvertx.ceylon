@@ -1,6 +1,7 @@
 import herd.convertx.core.api {
 	Provider,
-	Context
+	Context,
+	Convertx
 }
 import herd.convertx.core.internal {
 	Registry
@@ -19,7 +20,7 @@ import herd.convertx.core.api.component {
 
 
 
-shared class Convertx {
+shared class CoreConvertx satisfies Convertx{
 	
 	Context context;
 	
@@ -37,7 +38,7 @@ shared class Convertx {
 		this.context = context;
 	}
 	
-	shared Result|ConvertxException convert<Result>(Anything source, Type<Result> resultType) {
+	shared actual Result|ConvertxException convert<Result>(Anything source, Type<Result> resultType) {
 		try {
 			logger.info("Converting: ``source else "null"``, to ``resultType``");
 			value result =context.convert(source, resultType);
