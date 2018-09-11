@@ -4,8 +4,8 @@ import ceylon.language.meta.model {
 	Type
 }
 import herd.convertx.core.api.component {
-	TypedResolver,
-	wired
+	wired,
+	Resolver
 }
 import herd.convertx.core.api {
 	Context,
@@ -14,7 +14,7 @@ import herd.convertx.core.api {
 import ceylon.language.meta {
 	type
 }
-shared wired class StreamToStreamResolver() satisfies  TypedResolver<{Anything*},Interface<{Anything*}>,{Anything*}>{
+shared wired class StreamToStreamResolver() satisfies  Resolver<{Anything*},{Anything*}>{
 	
 	Class<AnyTuple|Empty> createSequentialType(Type<>[] args){
 		
@@ -26,7 +26,7 @@ shared wired class StreamToStreamResolver() satisfies  TypedResolver<{Anything*}
 		return emptyType;
 	}
 	
-	shared actual Class<{Anything*},Nothing> resolve(Context context,{Anything*} input, Interface<{Anything*}> outputType){
+	shared actual Class<{Anything*},Nothing> resolve(Context context,{Anything*} input, Type<{Anything*}> outputType){
 		value tupleArgs=input.map((Anything element) => type(element)).sequence();
 		assert(is Class<AnyTuple> tupleType=createSequentialType(tupleArgs));
 		return tupleType;
@@ -35,7 +35,7 @@ shared wired class StreamToStreamResolver() satisfies  TypedResolver<{Anything*}
 	matcher => object satisfies StreamToStreamResolver.Matcher{
 		
 		shared actual Integer priority => 0;
-		shared actual Boolean match({Anything*} input, Interface<{Anything*}> outputType) => true;
+		shared actual Boolean match({Anything*} input, Type<{Anything*}> outputType) => outputType is Interface<{Anything*}>;
 		
 		
 		

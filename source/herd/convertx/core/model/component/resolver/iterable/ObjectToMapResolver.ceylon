@@ -4,7 +4,7 @@ import herd.convertx.core.api.component {
 }
 import ceylon.language.meta.model {
 	Class,
-	ClassOrInterface
+	Type
 }
 import herd.convertx.core.api {
 	Context
@@ -12,12 +12,12 @@ import herd.convertx.core.api {
 import ceylon.collection {
 	HashMap
 }
-wired
-shared class ObjectToMapResolver() satisfies Resolver<Map<String,Anything>,Object>{
-	shared actual Class<Map<String,Anything>,Nothing> resolve(Context context, Object type, ClassOrInterface<Map<String,Anything>> outputType) => `HashMap<String,Anything>`;
+
+shared wired class ObjectToMapResolver() satisfies Resolver<Map<String,Anything>,Object>{
+	shared actual Class<Map<String,Anything>,Nothing> resolve(Context context, Object type, Type<Map<String,Anything>> outputType) => `HashMap<String,Anything>`;
 	
 	matcher => object satisfies ObjectToMapResolver.Matcher{
-		shared actual Boolean match(Object input, ClassOrInterface<Map<String,Anything>> outputType) => true;
+		shared actual Boolean match(Object input, Type<Map<String,Anything>> outputType) => true;
 		
 		shared actual Integer priority => 0;
 		

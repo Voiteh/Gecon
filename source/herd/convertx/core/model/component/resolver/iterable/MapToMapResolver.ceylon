@@ -3,7 +3,8 @@ import ceylon.collection {
 }
 import ceylon.language.meta.model {
 	Class,
-	ClassOrInterface
+	ClassOrInterface,
+	Type
 }
 import herd.convertx.core.api.component {
 	Resolver,
@@ -16,10 +17,10 @@ import herd.convertx.core.api {
 	Context
 }
 
-wired
-shared class MapToMapResolver() satisfies Resolver<Map<>> {
+shared wired class MapToMapResolver() satisfies Resolver<Map<>> {
 	
-	shared actual Class<Map<>,Nothing> resolve(Context context,Map<> input,ClassOrInterface<Map<>> outputType) {
+	shared actual Class<Map<>,Nothing> resolve(Context context,Map<> input,Type<Map<>> outputType) {
+		assert(is ClassOrInterface<Map<>> outputType);
 		value hierarchy = typeHierarchy(outputType);
 		assert (exists iterableType = hierarchy.findByDeclaration(`interface Map`));
 		assert (exists keyType = iterableType.typeArgumentList.first);
@@ -29,7 +30,7 @@ shared class MapToMapResolver() satisfies Resolver<Map<>> {
 	matcher => object satisfies MapToMapResolver.Matcher {
 		
 		shared actual Integer priority => 1;
-		shared actual Boolean match(Map<Object,Anything> input, ClassOrInterface<Map<Object,Anything>> outputType) => true;
+		shared actual Boolean match(Map<> input, Type<Map<>> outputType) => outputType is ClassOrInterface<Map<>>;
 		
 	};
 }

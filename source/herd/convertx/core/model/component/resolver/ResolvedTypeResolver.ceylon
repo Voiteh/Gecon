@@ -1,6 +1,6 @@
 import ceylon.language.meta.model {
 	Class,
-	ClassOrInterface
+	Type
 }
 import herd.convertx.core.api.component {
 	Resolver,
@@ -12,7 +12,7 @@ import herd.convertx.core.api {
 
 
 shared wired class ResolvedTypeResolver() satisfies Resolver<Anything,Anything> {
-	shared actual Class<Anything,Nothing> resolve(Context context, Anything input, ClassOrInterface<Anything> outputType) {
+	shared actual Class<Anything,Nothing> resolve(Context context, Anything input, Type<Anything> outputType) {
 		assert (is Class<> outputType);
 		return outputType;
 	}
@@ -20,7 +20,7 @@ shared wired class ResolvedTypeResolver() satisfies Resolver<Anything,Anything> 
 	matcher => object satisfies ResolvedTypeResolver.Matcher {
 		
 		shared actual Integer priority => runtime.maxIntegerValue;
-		shared actual Boolean match(Anything input, ClassOrInterface<Anything> outputType) {
+		shared actual Boolean match(Anything input, Type<Anything> outputType) {
 			if(is Class<> outputType,!outputType.declaration.abstract){
 				return true;
 			}

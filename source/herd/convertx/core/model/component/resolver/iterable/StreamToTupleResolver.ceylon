@@ -3,7 +3,6 @@ import herd.convertx.core.api.component {
 }
 import ceylon.language.meta.model {
 	Class,
-	ClassOrInterface,
 	Type,
 	ClassModel
 }
@@ -27,7 +26,7 @@ shared class StreamToTupleResolver() satisfies Resolver<AnyTuple,{Anything*}>{
 		return type(empty);	
 	}
 	
-	shared actual Class<AnyTuple> resolve(Context context, {Anything*} input, ClassOrInterface<AnyTuple> outputType) {
+	shared actual Class<AnyTuple> resolve(Context context, {Anything*} input, Type<AnyTuple> outputType) {
 		value tupleArgs=input.map((Anything element) => type(element)).sequence();
 		assert(is Class<AnyTuple> tupleType=createTupleType(tupleArgs));
 		return tupleType;
@@ -37,7 +36,7 @@ shared class StreamToTupleResolver() satisfies Resolver<AnyTuple,{Anything*}>{
 	matcher => object satisfies StreamToTupleResolver.Matcher{
 		
 		shared actual Integer priority => 1;
-		shared actual Boolean match({Anything*} input, ClassOrInterface<AnyTuple> outputType) => !input.empty;
+		shared actual Boolean match({Anything*} input, Type<AnyTuple> outputType) => !input.empty;
 		
 	};
 	

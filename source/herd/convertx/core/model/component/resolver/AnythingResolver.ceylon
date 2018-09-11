@@ -4,7 +4,7 @@ import herd.convertx.core.api.component {
 }
 import ceylon.language.meta.model {
 	Class,
-	ClassOrInterface
+	Type
 }
 import herd.convertx.core.api {
 	Context
@@ -15,7 +15,7 @@ import ceylon.language.meta {
 
 wired
 shared class AnythingResolver() satisfies Resolver<Anything,Anything> {
-	shared actual Class<Anything,Nothing> resolve(Context context, Anything input, ClassOrInterface<Anything> outputType) {
+	shared actual Class<Anything,Nothing> resolve(Context context, Anything input, Type<Anything> outputType) {
 		
 		switch (input)
 		case (is Object) {
@@ -30,7 +30,7 @@ shared class AnythingResolver() satisfies Resolver<Anything,Anything> {
 		}
 	}
 	matcher => object satisfies AnythingResolver.Matcher {
-		shared actual Boolean match(Anything input, ClassOrInterface<Anything> outputType) => outputType == `Anything`;
+		shared actual Boolean match(Anything input, Type<Anything> outputType) => outputType == `Anything`;
 		
 		shared actual Integer priority => 0;
 	};

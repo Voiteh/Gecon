@@ -1,7 +1,6 @@
 import ceylon.language.meta.model {
 	Class,
-	Type,
-	ClassOrInterface
+	Type
 }
 import herd.convertx.core.internal {
 	Executable,
@@ -28,10 +27,10 @@ shared interface TypedResolver<out Output=Anything,in OutputType=Nothing, in Inp
 	shared actual Executable toExecutable(Executable.Adapter visitor) => visitor.adaptResolver(this);
 }
 
-shared interface Resolver<Output,Input=Output> satisfies TypedResolver<Output,ClassOrInterface<Output>,Input> {
+shared interface Resolver<Output,Input=Output> satisfies TypedResolver<Output,Type<Output>,Input> {
 	
 	throws (`class ResolvanceException`)
-	shared formal actual Class<Output> resolve(Context context,Input type,ClassOrInterface<Output> outputType);
+	shared formal actual Class<Output> resolve(Context context,Input type,Type<Output> outputType);
 	
 	
 }

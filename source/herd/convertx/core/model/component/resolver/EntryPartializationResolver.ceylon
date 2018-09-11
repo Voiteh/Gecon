@@ -8,7 +8,7 @@ import herd.convertx.core.api.meta {
 }
 import ceylon.language.meta.model {
 	Class,
-	ClassOrInterface
+	Type
 }
 import herd.convertx.core.api {
 	Context
@@ -19,11 +19,11 @@ import herd.convertx.core.model.meta {
 }
 wired
 shared class EntryPartializationResolver() satisfies Resolver<Partialization,Relation<Object,Map<String,Anything>>>{
-	shared actual Class<Partialization,Nothing> resolve(Context context, Relation<Object,Map<String,Anything>> type, ClassOrInterface<Partialization> outputType) =>`EntryPartialization`;
+	shared actual Class<Partialization,Nothing> resolve(Context context, Relation<Object,Map<String,Anything>> type, Type<Partialization> outputType) =>`EntryPartialization`;
 	
 
 	matcher=> object satisfies EntryPartializationResolver.Matcher{
-		shared actual Boolean match(Relation<Object,Map<String,Anything>> input, ClassOrInterface<Partialization> outputType) => true;
+		shared actual Boolean match(Relation<Object,Map<String,Anything>> input, Type<Partialization> outputType) => true;
 		
 		shared actual Integer priority => 1;
 		

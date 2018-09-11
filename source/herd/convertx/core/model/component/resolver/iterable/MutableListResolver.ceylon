@@ -4,7 +4,8 @@ import ceylon.collection {
 }
 import ceylon.language.meta.model {
 	Class,
-	ClassOrInterface
+	ClassOrInterface,
+	Type
 }
 import herd.convertx.core.api.component {
 	wired,
@@ -16,7 +17,8 @@ import herd.convertx.core.api {
 
 
 shared wired class MutableListResolver() satisfies Resolver<List<>,{Anything*}> {
-	shared actual Class<List<>,Nothing> resolve(Context context,{Anything*} input, ClassOrInterface<List<>> outputType) {
+	shared actual Class<List<>,Nothing> resolve(Context context,{Anything*} input, Type<List<>> outputType) {
+		assert(is ClassOrInterface<List<>> outputType);
 		value typeForIterable = iterableTypeArgument(outputType);
 		return `class ArrayList`.classApply<List<>>(typeForIterable);
 	}
@@ -24,8 +26,8 @@ shared wired class MutableListResolver() satisfies Resolver<List<>,{Anything*}> 
 	matcher => object satisfies MutableListResolver.Matcher {
 		
 		shared actual Integer priority => 1;
-		shared actual Boolean match({Anything*} input, ClassOrInterface<List<>> outputType) {
-			return outputType.subtypeOf(`ListMutator<Nothing>`);
+		shared actual Boolean match({Anything*} input, Type<List<>> outputType) {
+			return outputType is ClassOrInterface<List<>> && outputType.subtypeOf(`ListMutator<Nothing>`);
 		}
 	};
 }

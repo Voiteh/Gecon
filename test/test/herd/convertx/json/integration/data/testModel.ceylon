@@ -9,7 +9,7 @@ import herd.convertx.json {
 }
 import ceylon.language.meta.model {
 	Class,
-	ClassOrInterface
+	Type
 }
 import herd.convertx.core.api {
 	Context
@@ -96,7 +96,7 @@ class ResolvableClass(resolved) {
 }
 
 shared class JSONObjectToTestResolveInterfaceResolver() satisfies Resolver<TypeResolveInterface,JSONObject> {
-	shared actual Class<TypeResolveInterface,Nothing> resolve(Context context, JSONObject input, ClassOrInterface<TypeResolveInterface> outputType) {
+	shared actual Class<TypeResolveInterface,Nothing> resolve(Context context, JSONObject input, Type<TypeResolveInterface> outputType) {
 		value typeInfo = input.get(`TypeResolveInterface.type`.declaration.name);
 		value dataType = context.convert(typeInfo, `DataType`);
 		switch (dataType)
@@ -108,7 +108,7 @@ shared class JSONObjectToTestResolveInterfaceResolver() satisfies Resolver<TypeR
 		}
 	}
 	matcher => object satisfies JSONObjectToTestResolveInterfaceResolver.Matcher {
-		shared actual Boolean match(JSONObject input, ClassOrInterface<TypeResolveInterface> outputType) => true;
+		shared actual Boolean match(JSONObject input, Type<TypeResolveInterface> outputType) => true;
 		
 		shared actual Integer priority => 1;
 	};
