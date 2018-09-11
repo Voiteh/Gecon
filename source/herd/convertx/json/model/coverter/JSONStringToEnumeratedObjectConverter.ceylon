@@ -1,25 +1,27 @@
 import herd.convertx.core.api.component {
 	wired,
-	TypedConverter
+	Converter
 }
 import herd.convertx.core.api {
 	Context
 }
 import ceylon.language.meta.model {
-	ClassOrInterface
+	ClassOrInterface,
+	Type
 }
 import ceylon.language.meta {
 	type
 }
-wired
-shared class JSONStringToEnumeratedObjectConverter() satisfies TypedConverter<String,ClassOrInterface<Object>,Object>{
-	shared actual Object convert(Context context, String source, ClassOrInterface<Object> resultType) {
+
+shared wired class JSONStringToEnumeratedObjectConverter() satisfies Converter<String,Object>{
+	shared actual Object convert(Context context, String source, Type<Object> resultType) {
+		assert(is ClassOrInterface<Object> resultType);
 		assert(exists objectValue=resultType.caseValues.find((Object elem) => type(elem).declaration.name==source));
 		return objectValue;
 	}
 	matcher => object satisfies JSONStringToEnumeratedObjectConverter.Matcher{
-		shared actual Boolean match(String source, ClassOrInterface<Object> resultType) {
-			if( !resultType.caseValues.empty,exists objectValue=resultType.caseValues.find((Object elem) => type(elem).declaration.name==source)){
+		shared actual Boolean match(String source, Type<Object> resultType) {
+			if(is ClassOrInterface<Object> resultType, !resultType.caseValues.empty,exists objectValue=resultType.caseValues.find((Object elem) => type(elem).declaration.name==source)){
 				return true;
 			}
 			return false;

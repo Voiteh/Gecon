@@ -1,12 +1,13 @@
 import herd.convertx.core.api.component {
-	TypedConverter,
-	wired
+	wired,
+	Converter
 }
 import herd.convertx.core.api {
 	Context
 }
 import ceylon.language.meta.model {
-	ClassOrInterface
+	ClassOrInterface,
+	Type
 }
 import herd.convertx.core.api.meta {
 	Partialization,
@@ -15,9 +16,9 @@ import herd.convertx.core.api.meta {
 import ceylon.language.meta {
 	type
 }
-wired
-shared class MetaConverter() satisfies TypedConverter<Object,ClassOrInterface<Object>,Object> {
-	shared actual Object convert(Context context, Object source, ClassOrInterface<Object> resultType) {
+
+shared wired class MetaConverter() satisfies Converter<Object,Object> {
+	shared actual Object convert(Context context, Object source, Type<Object> resultType) {
 			value resolvedType = context.resolve(source,resultType);
 			value relation=context.convert(source->type(resolvedType), `Relation<>`);
 			value partializationType=context.resolve(relation, `Partialization`);
@@ -26,7 +27,7 @@ shared class MetaConverter() satisfies TypedConverter<Object,ClassOrInterface<Ob
 	}
 	
 	matcher => object satisfies MetaConverter.Matcher{
-		shared actual Boolean match(Object source, ClassOrInterface<Object> resultType) =>true;
+		shared actual Boolean match(Object source, Type<Object> resultType) => resultType is ClassOrInterface<Object>;
 		
 		shared actual Integer priority = 0;
 		

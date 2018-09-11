@@ -1,18 +1,20 @@
 import ceylon.language.meta.model {
-	UnionType
+	UnionType,
+	Type
 }
 import herd.convertx.core.api.component {
 	ConvertionException,
-	TypedConverter,
 	ConvertxException,
-	wired
+	wired,
+	Converter
 }
 import herd.convertx.core.api {
 	Context
 }
-wired
-shared class UnionConverter() satisfies TypedConverter<Anything,UnionType<Anything>,Anything>{
-	shared actual Anything convert(Context context, Anything source, UnionType<Anything> resultType) {
+
+shared wired class UnionConverter() satisfies Converter<Anything,Anything>{
+	shared actual Anything convert(Context context, Anything source, Type<Anything> resultType) {
+		assert(is UnionType<Anything> resultType);
 		for(value type in resultType.caseTypes){
 			try {
 				return context.convert(source, type);
@@ -22,7 +24,7 @@ shared class UnionConverter() satisfies TypedConverter<Anything,UnionType<Anythi
 	}
 	
 	matcher => object satisfies UnionConverter.Matcher{
-		shared actual Boolean match(Anything source, UnionType<Anything> resultType) => true;
+		shared actual Boolean match(Anything source, Type<Anything> resultType) => resultType is UnionType<>;
 		
 		shared actual Integer priority = 1;
 		

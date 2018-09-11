@@ -1,22 +1,24 @@
 import herd.convertx.core.api.component {
-	TypedConverter,
-	wired
+	wired,
+	Converter
 }
 import ceylon.language.meta.model {
-	IntersectionType
+	IntersectionType,
+	Type
 }
 import herd.convertx.core.api {
 	Context
 }
-wired
-shared class IntersectionConverter() satisfies TypedConverter<Anything, IntersectionType<Anything>, Anything>{
-	shared actual Anything convert(Context context, Anything source, IntersectionType<Anything> resultType) {
+
+shared wired class IntersectionConverter() satisfies Converter<Anything, Anything>{
+	shared actual Anything convert(Context context, Anything source, Type<Anything> resultType) {
+		assert(is IntersectionType<> resultType);
 		value resolvedType=context.resolve(source,resultType);
 		return context.convert(source, resolvedType);
 	}
 	
 	matcher => object satisfies IntersectionConverter.Matcher{
-		shared actual Boolean match(Anything source, IntersectionType<Anything> resultType) => true;
+		shared actual Boolean match(Anything source, Type<Anything> resultType) => resultType is IntersectionType<>;
 		
 		shared actual Integer priority = 1;
 		

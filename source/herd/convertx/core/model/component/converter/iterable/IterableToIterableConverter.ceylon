@@ -2,19 +2,21 @@ import herd.convertx.core.api {
 	Context
 }
 import herd.convertx.core.api.component {
-	TypedConverter,
-	wired
+	wired,
+	Converter
 }
 import ceylon.language.meta.model {
-	ClassOrInterface
+	ClassOrInterface,
+	Type
 }
 import herd.convertx.core.util {
 	typeHierarchy,
 	runtimeCall
 }
 
-shared wired class IterableToIterableConverter() satisfies  TypedConverter<{Anything*},ClassOrInterface<{Anything*}>,{Anything*}> {
-	shared actual {Anything*} convert(Context context, {Anything*} source, ClassOrInterface<{Anything*}> resultType){
+shared wired class IterableToIterableConverter() satisfies Converter<{Anything*},{Anything*}> {
+	shared actual {Anything*} convert(Context context, {Anything*} source, Type<{Anything*}> resultType){
+			assert(is ClassOrInterface<{Anything*}> resultType);
 			assert(exists explictIterableType = typeHierarchy(resultType).findByDeclaration(`interface Iterable`));
 			assert(exists elementType=explictIterableType.typeArgumentList.first);
 			value args = source.map((Anything element) => context.convert(element, elementType)).sequence();
@@ -25,7 +27,7 @@ shared wired class IterableToIterableConverter() satisfies  TypedConverter<{Anyt
 	
 	
 	matcher =>  object satisfies IterableToIterableConverter.Matcher{
-		shared actual Boolean match({Anything*} source, ClassOrInterface<{Anything*}> resultType) => true;
+		shared actual Boolean match({Anything*} source, Type<{Anything*}> resultType) => resultType is ClassOrInterface<{Anything*}>;
 		
 		shared actual Integer priority => 1;
 		

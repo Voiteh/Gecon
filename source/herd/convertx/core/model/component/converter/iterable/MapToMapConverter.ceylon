@@ -10,12 +10,12 @@ import herd.convertx.core.api {
 	Context
 }
 import herd.convertx.core.api.component {
-	TypedConverter,
-	wired
+	wired,
+	Converter
 }
-wired
-shared class MapToMapConverter() satisfies TypedConverter<Map<>,ClassOrInterface<Map<>>,Map<>> {
-	shared actual Map<Object,Anything> convert(Context context, Map<Object,Anything> source, ClassOrInterface<Map<Object,Anything>> resultType){
+
+shared wired class MapToMapConverter() satisfies Converter<Map<>,Map<>> {
+	shared actual Map<Object,Anything> convert(Context context, Map<Object,Anything> source, Type<Map<Object,Anything>> resultType){
 		value resolvedType=context.resolve(source,resultType);
 		assert(exists explictMapType = typeHierarchy(resolvedType).findByDeclaration(`interface Map`));
 		assert(is Type<Object>keyDestination=explictMapType.typeArgumentList.first);
@@ -35,7 +35,7 @@ shared class MapToMapConverter() satisfies TypedConverter<Map<>,ClassOrInterface
 	}
 	
 	matcher => object satisfies MapToMapConverter.Matcher{
-		shared actual Boolean match(Map<Object,Anything> source, ClassOrInterface<Map<Object,Anything>> resultType) => true;
+		shared actual Boolean match(Map<Object,Anything> source, Type<Map<Object,Anything>> resultType) => resultType is ClassOrInterface<Map<Object,Anything>>;
 		
 		shared actual Integer priority => 2;
 		

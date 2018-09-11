@@ -1,20 +1,19 @@
 import ceylon.language.meta.model {
 	Type,
 	Interface,
-	Class,
-	ClassOrInterface
+	Class
 }
 import herd.convertx.core.api.component {
 	ConvertionException,
-	TypedConverter,
-	wired
+	wired,
+	Converter
 }
 import herd.convertx.core.api {
 	Context,
 	AnyTuple
 }
-wired
-shared class IterableToTupleConverter() satisfies TypedConverter<{Anything*},ClassOrInterface<AnyTuple>,AnyTuple>{
+
+shared wired class IterableToTupleConverter() satisfies Converter<{Anything*},AnyTuple>{
 	
 	{Type<Anything>*} extractArgsType(Type<Anything> toupleType){
 		assert(is Class<Tuple<Anything,Anything,Anything>>|Interface<Empty> toupleType);
@@ -29,7 +28,7 @@ shared class IterableToTupleConverter() satisfies TypedConverter<{Anything*},Cla
 		}
 	}
 	
-	shared actual Tuple<Anything,Anything,Anything> convert(Context context, {Anything*} source, ClassOrInterface<AnyTuple> resultType) {
+	shared actual Tuple<Anything,Anything,Anything> convert(Context context, {Anything*} source, Type<AnyTuple> resultType) {
 		value argsType = extractArgsType(resultType);
 		if(source.size!=argsType.size){
 			throw ConvertionException(source, resultType,Exception("Different sizes of provided source ``source`` to touple argument types ``argsType`` "));
@@ -41,7 +40,7 @@ shared class IterableToTupleConverter() satisfies TypedConverter<{Anything*},Cla
 		return context.create(resolvedType, converted);
 	}
 	matcher =>  object satisfies IterableToTupleConverter.Matcher{
-		shared actual Boolean match({Anything*} source, ClassOrInterface<AnyTuple> resultType) => resultType is Class<AnyTuple>;
+		shared actual Boolean match({Anything*} source, Type<AnyTuple> resultType) => resultType is Class<AnyTuple>;
 		
 		shared actual Integer priority => 2;
 		

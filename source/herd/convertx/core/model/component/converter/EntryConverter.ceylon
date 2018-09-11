@@ -5,20 +5,20 @@ import herd.convertx.core.api {
 	Context
 }
 import herd.convertx.core.api.component {
-	TypedConverter,
-	wired
+	wired,
+	Converter
 }
 import ceylon.language.meta.model {
 	Class,
-	ClassOrInterface
+	Type
 }
-wired
-shared class EntryConverter() satisfies  TypedConverter<Object->Anything,ClassOrInterface<Object->Anything>,Object->Anything> {
-	shared actual Object->Anything convert(Context context, Object->Anything source, ClassOrInterface<Object->Anything> resultType) {
+
+shared wired class EntryConverter() satisfies Converter<Object->Anything,Object->Anything> {
+	shared actual Object->Anything convert(Context context, Object->Anything source, Type<Object->Anything> resultType) {
 		value key = source.key;
 		value item = source.item;
 		value resolvedType=context.resolve(source,resultType);
-		assert(is Class<Entry<Object,Anything>> entryType=typeHierarchy(resultType).findByDeclaration(`class Entry`));
+		assert(is Class<Entry<Object,Anything>> entryType=typeHierarchy(resolvedType).findByDeclaration(`class Entry`));
 		assert (exists destKeyType = entryType.typeArgumentList.first);
 		assert (exists destItemType = entryType.typeArgumentList.rest.first);
 		
@@ -29,7 +29,7 @@ shared class EntryConverter() satisfies  TypedConverter<Object->Anything,ClassOr
 		return instance;
 	}
 	matcher => object satisfies EntryConverter.Matcher{
-		shared actual Boolean match(Object->Anything source, ClassOrInterface<Object->Anything> resultType) => resultType is Class<Object->Anything>;
+		shared actual Boolean match(Object->Anything source, Type<Object->Anything> resultType) => resultType is Class<Object->Anything>;
 		
 		shared actual Integer priority => 1;
 		
