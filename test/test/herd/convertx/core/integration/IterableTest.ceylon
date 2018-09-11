@@ -10,8 +10,7 @@ import herd.convertx.core.api.component {
 	ConvertionException
 }
 import ceylon.logging {
-	debug,
-	trace
+	debug
 }
 import herd.convertx.core {
 	logger
@@ -71,7 +70,6 @@ shared class IterableTest() extends BaseTest(){
 	
 	shared test 
 	void shouldConvertIterableToArrayList(){
-		logger.priority=trace;
 		assert(is MutableList<String> result=convertx.convert({1,2,3},`MutableList<String>`)); 
 		assert(result.containsEvery({"1","2","3"}));
 	}
