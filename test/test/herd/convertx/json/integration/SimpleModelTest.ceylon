@@ -2,34 +2,34 @@ import ceylon.test {
 	test,
 	assertEquals
 }
-import herd.convertx.json {
-	JSONValue,
-	JSONObject
-}
 import test.herd.convertx.json.integration.data {
 	SimpleModel,
 	testData
 	
 }
+import ceylon.json {
+	JsonObject,
+	Value
+}
 shared class SimpleModelTest() extends BaseJsonIntegrationTest() {
 	
 	shared test 
-	void shouldConvertJSONObjectToModel(){
-		value result=convertx.convert(testData.simpleModelJSONObject, `SimpleModel`);
+	void shouldConvertJsonObjectToModel(){
+		value result=convertx.convert(testData.simpleModelJsonObject, `SimpleModel`);
 		assertEquals(result,testData.simpleModel);
 	}
 	
 	shared test 
-	void shouldConvertModelToJSONObject(){
-		value result=convertx.convert(testData.simpleModel,`JSONObject`);
-		assertEquals(result,testData.simpleModelJSONObject);
+	void shouldConvertModelToJsonObject(){
+		value result=convertx.convert(testData.simpleModel,`JsonObject`);
+		assertEquals(result,testData.simpleModelJsonObject);
 	}
 	
 	shared test
-	void shouldConvertJSONObjectToMap(){
-		value result=convertx.convert(testData.simpleModelJSONObject, `Map<String,Anything>`);
+	void shouldConvertJsonObjectToMap(){
+		value result=convertx.convert(testData.simpleModelJsonObject, `Map<String,Anything>`);
 		assert(is Map<String,Anything > result);
-		testData.simpleModelJSONObject.each((String elementKey -> JSONValue elementItem) {
+		testData.simpleModelJsonObject.each((String elementKey -> Value elementItem) {
 			value item=result.get(elementKey);
 			assertEquals(item,elementItem);
 		});

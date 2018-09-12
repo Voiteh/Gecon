@@ -2,11 +2,7 @@ import herd.convertx.core.api.component {
 	wired
 }
 import herd.convertx.json.model.meta {
-	JSONPartialization
-}
-import herd.convertx.json {
-	JSONObject,
-	JSONValue
+	JsonPartialization
 }
 import ceylon.language.meta.model {
 	Attribute,
@@ -21,22 +17,26 @@ import herd.convertx.core.api.component.support.meta {
 import herd.convertx.core.api.meta {
 	Relation
 }
-wired
-shared class ObjectJSONPartializer() extends ObjectPartializer<JSONPartialization, {<String->JSONValue>*}, JSONObject>(){
-	shared actual JSONPartialization createPartialization({<String->JSONValue>*} holder) => JSONPartialization(holder);
+import ceylon.json {
+	Value,
+	JsonObject
+}
+
+shared wired class ObjectJSONPartializer() extends ObjectPartializer<JsonPartialization, {<String->Value>*}, JsonObject>(){
+	shared actual JsonPartialization createPartialization({<String->Value>*} holder) => JsonPartialization(holder);
 	
-	shared actual {<String->JSONValue>*} mapAttributes(Context context,Object source, {Attribute<Nothing,Anything,Nothing>*} attributes) => attributes.map((Attribute<> element) {
+	shared actual {<String->Value>*} mapAttributes(Context context,Object source, {Attribute<Nothing,Anything,Nothing>*} attributes) => attributes.map((Attribute<> element) {
 		value val=element.bind(source).get();
-		if(is JSONValue val ){
+		if(is Value val ){
 			return element.declaration.name->val;
 		}
 		else{
-			return element.declaration.name->context.convert(val, `JSONValue`);
+			return element.declaration.name->context.convert(val, `Value`);
 		}
 	});
 	
 	matcher => object satisfies ObjectJSONPartializer.Matcher{
-		shared actual Boolean match(Class<JSONPartialization,Nothing> kind, Relation<Object,JSONObject> arguments) => true;
+		shared actual Boolean match(Class<JsonPartialization,Nothing> kind, Relation<Object,JsonObject> arguments) => true;
 		
 		shared actual Integer priority => 2;
 		

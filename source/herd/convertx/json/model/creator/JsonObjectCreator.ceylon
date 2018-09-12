@@ -1,8 +1,5 @@
-import herd.convertx.json {
-	JSONObject
-}
 import herd.convertx.json.model.meta {
-	JSONPartialization
+	JsonPartialization
 }
 import herd.convertx.core.api.component {
 	Creator,
@@ -14,8 +11,11 @@ import herd.convertx.core.api {
 import ceylon.language.meta.model {
 	Class
 }
-wired
-shared class JsonObjectCreator() satisfies Creator<JSONObject,JSONPartialization>{
-	shared actual JSONObject create(Context context, Class<JSONObject,Nothing> kind, JSONPartialization arguments) => JSONObject(arguments.parts);
+import ceylon.json {
+	JsonObject
+}
+
+shared wired class JsonObjectCreator() satisfies Creator<JsonObject,JsonPartialization>{
+	shared actual JsonObject create(Context context, Class<JsonObject,Nothing> kind, JsonPartialization arguments) => JsonObject(arguments.parts);
 	
 }

@@ -4,15 +4,15 @@ import ceylon.language.meta {
 import herd.convertx.core.api.component {
 	Resolver
 }
-import herd.convertx.json {
-	JSONObject
-}
 import ceylon.language.meta.model {
 	Class,
 	Type
 }
 import herd.convertx.core.api {
 	Context
+}
+import ceylon.json {
+	JsonObject
 }
 
 shared serializable
@@ -95,8 +95,8 @@ class ResolvableClass(resolved) {
 	shared TypeResolveInterface resolved;
 }
 
-shared class JSONObjectToTestResolveInterfaceResolver() satisfies Resolver<TypeResolveInterface,JSONObject> {
-	shared actual Class<TypeResolveInterface,Nothing> resolve(Context context, JSONObject input, Type<TypeResolveInterface> outputType) {
+shared class JsonObjectToTestResolveInterfaceResolver() satisfies Resolver<TypeResolveInterface,JsonObject> {
+	shared actual Class<TypeResolveInterface,Nothing> resolve(Context context, JsonObject input, Type<TypeResolveInterface> outputType) {
 		value typeInfo = input.get(`TypeResolveInterface.type`.declaration.name);
 		value dataType = context.convert(typeInfo, `DataType`);
 		switch (dataType)
@@ -107,8 +107,8 @@ shared class JSONObjectToTestResolveInterfaceResolver() satisfies Resolver<TypeR
 			return `TypeResolveTwo`;
 		}
 	}
-	matcher => object satisfies JSONObjectToTestResolveInterfaceResolver.Matcher {
-		shared actual Boolean match(JSONObject input, Type<TypeResolveInterface> outputType) => true;
+	matcher => object satisfies JsonObjectToTestResolveInterfaceResolver.Matcher {
+		shared actual Boolean match(JsonObject input, Type<TypeResolveInterface> outputType) => true;
 		
 		shared actual Integer priority => 1;
 	};

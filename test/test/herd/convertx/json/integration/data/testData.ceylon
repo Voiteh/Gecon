@@ -1,8 +1,4 @@
 
-import herd.convertx.json {
-	JSONObject,
-	JSONArray
-}
 import ceylon.collection {
 	ArrayList,
 	HashSet
@@ -10,13 +6,17 @@ import ceylon.collection {
 import ceylon.language.meta {
 	type
 }
+import ceylon.json {
+	JsonObject,
+	JsonArray
+}
 
 shared object testData {
 	shared String name = "Test Name";
 	shared Integer id = 123;
 	shared Null nullVal = null;
 	shared SimpleModel simpleModel = SimpleModel(name, id, nullVal);
-	shared JSONObject simpleModelJSONObject = JSONObject {
+	shared JsonObject simpleModelJsonObject = JsonObject {
 		values = {
 			`nullVal`.declaration.name->null,
 			`name`.declaration.name->name,
@@ -24,8 +24,8 @@ shared object testData {
 		};
 	};
 	
-	shared JSONArray simpleJSONArrayWithNull = JSONArray({ name, id, nullVal });
-	shared JSONArray simpleJSONArray = JSONArray({ name, id });
+	shared JsonArray simpleJsonArrayWithNull = JsonArray({ name, id, nullVal });
+	shared JsonArray simpleJsonArray = JsonArray({ name, id });
 	shared List<String|Integer|Null> simpleListWithNull = ArrayList<String|Integer|Null> {
 		elements = { name, id, nullVal };
 	};
@@ -45,23 +45,23 @@ shared object testData {
 	
 	shared ResolvableClass resolvable = ResolvableClass(resolveTwo);
 	
-	shared JSONObject resolveOneJSONObject = JSONObject {
+	shared JsonObject resolveOneJsonObject = JsonObject {
 		values = {
 			`TypeResolveOne.type`.declaration.name->type(resolveOne.type).declaration.name,
 			`TypeResolveOne.text`.declaration.name->resolveOne.text
 		};
 	};
 	
-	shared JSONObject resolveTwoJSONObject = JSONObject {
+	shared JsonObject resolveTwoJsonObject = JsonObject {
 		values = {
 			`TypeResolveTwo.type`.declaration.name->type(resolveTwo.type).declaration.name,
 			`TypeResolveTwo.id`.declaration.name->resolveTwo.id
 		};
 	};
 	
-	shared JSONObject resolvableJSONObject = JSONObject{
+	shared JsonObject resolvableJsonObject = JsonObject{
 		values={
-			`ResolvableClass.resolved`.declaration.name -> resolveTwoJSONObject
+			`ResolvableClass.resolved`.declaration.name -> resolveTwoJsonObject
 		};
 	};
 }

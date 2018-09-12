@@ -3,12 +3,12 @@ import ceylon.test {
 	assertEquals,
 	ignore
 }
-import herd.convertx.json {
-	JSONArray,
-	JSONValue
-}
 import test.herd.convertx.json.integration.data {
 	testData
+}
+import ceylon.json {
+	JsonArray,
+	Value
 }
 
 shared class IterableTest() extends BaseJsonIntegrationTest() {
@@ -32,18 +32,18 @@ shared class IterableTest() extends BaseJsonIntegrationTest() {
 	}
 	
 	shared test
-	void shouldConvertStreamToJSONArray() {
-		value result = convertx.convert(testData.simpleStream, `JSONArray`);
+	void shouldConvertStreamToJsonArray() {
+		value result = convertx.convert(testData.simpleStream, `JsonArray`);
 		assertEquals {
 			actual = result;
-			expected = testData.simpleJSONArray;
-			compare = checkIterableEquality<JSONArray,JSONValue>;
+			expected = testData.simpleJsonArray;
+			compare = checkIterableEquality<JsonArray,Value>;
 		};
 	}
 	
 	shared test
-	void shouldConvertJSONArrayToStream() {
-		value result = convertx.convert(testData.simpleJSONArray, `{String|Integer|Null*}`);
+	void shouldConvertJsonArrayToStream() {
+		value result = convertx.convert(testData.simpleJsonArray, `{String|Integer|Null*}`);
 		assertEquals {
 			actual = result;
 			expected = testData.simpleStream;
@@ -52,18 +52,18 @@ shared class IterableTest() extends BaseJsonIntegrationTest() {
 	}
 	
 	shared test
-	void shouldConvertSequenceToJSONArray() {
-		value result = convertx.convert(testData.simpleSequence, `JSONArray`);
+	void shouldConvertSequenceToJsonArray() {
+		value result = convertx.convert(testData.simpleSequence, `JsonArray`);
 		assertEquals {
 			actual = result;
-			expected = testData.simpleJSONArray;
-			compare = checkIterableEquality<JSONArray,JSONValue>;
+			expected = testData.simpleJsonArray;
+			compare = checkIterableEquality<JsonArray,Value>;
 		};
 	}
 	
 	shared test
-	void shouldConvertJSONArrayToSequence() {
-		value result = convertx.convert(testData.simpleJSONArray, `[String|Integer|Null*]`);
+	void shouldConvertJsonArrayToSequence() {
+		value result = convertx.convert(testData.simpleJsonArray, `[String|Integer|Null*]`);
 		assertEquals {
 			actual = result;
 			expected = testData.simpleSequence;
@@ -72,17 +72,17 @@ shared class IterableTest() extends BaseJsonIntegrationTest() {
 	}
 	
 	shared test
-	void shouldConvertListToJSONArray() {
-		value result = convertx.convert(testData.simpleListWithNull, `JSONArray`);
+	void shouldConvertListToJsonArray() {
+		value result = convertx.convert(testData.simpleListWithNull, `JsonArray`);
 		assertEquals {
 			actual = result;
-			expected = testData.simpleJSONArrayWithNull;
-			compare = checkIterableEquality<JSONArray,JSONValue>;
+			expected = testData.simpleJsonArrayWithNull;
+			compare = checkIterableEquality<JsonArray,Value>;
 		};
 	}
 	shared test
-	void shouldConvertJSONArrayToList() {
-		value result = convertx.convert(testData.simpleJSONArrayWithNull, `List<String|Integer|Null>`);
+	void shouldConvertJsonArrayToList() {
+		value result = convertx.convert(testData.simpleJsonArrayWithNull, `List<String|Integer|Null>`);
 		assertEquals {
 			actual = result;
 			expected = testData.simpleListWithNull;
@@ -91,17 +91,17 @@ shared class IterableTest() extends BaseJsonIntegrationTest() {
 	}
 	
 	shared test
-	void shouldConvertSetToJSONArray() {
-		value result = convertx.convert(testData.simpleSet, `JSONArray`);
+	void shouldConvertSetToJsonArray() {
+		value result = convertx.convert(testData.simpleSet, `JsonArray`);
 		assertEquals {
 			actual = result;
-			expected = testData.simpleJSONArray;
-			compare = checkIterableEquality<JSONArray,JSONValue>;
+			expected = testData.simpleJsonArray;
+			compare = checkIterableEquality<JsonArray,Value>;
 		};
 	}
 	shared test
-	void shouldConvertJSONArrayToSet() {
-		value result = convertx.convert(testData.simpleJSONArray, `Set<String|Integer>`);
+	void shouldConvertJsonArrayToSet() {
+		value result = convertx.convert(testData.simpleJsonArray, `Set<String|Integer>`);
 		assertEquals {
 			actual = result;
 			expected = testData.simpleSet;
@@ -109,18 +109,18 @@ shared class IterableTest() extends BaseJsonIntegrationTest() {
 		};
 	}
 	shared test
-	void shouldConvertArrayToJSONArray() {
-		value result = convertx.convert(testData.simpleArrayWithNull, `JSONArray`);
+	void shouldConvertArrayToJsonArray() {
+		value result = convertx.convert(testData.simpleArrayWithNull, `JsonArray`);
 		assertEquals {
 			actual = result;
-			expected = testData.simpleJSONArrayWithNull;
-			compare = checkIterableEquality<JSONArray,JSONValue>;
+			expected = testData.simpleJsonArrayWithNull;
+			compare = checkIterableEquality<JsonArray,Value>;
 		};
 	}
 	shared ignore ("Failing because of https://github.com/eclipse/ceylon/issues/7390")
 	test
-	void shouldConvertJSONArrayToArray() {
-		value result = convertx.convert(testData.simpleJSONArrayWithNull, `Array<String|Integer|Null>`);
+	void shouldConvertJsonArrayToArray() {
+		value result = convertx.convert(testData.simpleJsonArrayWithNull, `Array<String|Integer|Null>`);
 		assertEquals {
 			actual = result;
 			expected = testData.simpleArrayWithNull;
@@ -129,17 +129,17 @@ shared class IterableTest() extends BaseJsonIntegrationTest() {
 	}
 	
 	shared test
-	void shouldConvertTupleToJSONArray() {
-		value result = convertx.convert(testData.simpleTuple, `JSONArray`);
+	void shouldConvertTupleToJsonArray() {
+		value result = convertx.convert(testData.simpleTuple, `JsonArray`);
 		assertEquals {
 			actual = result;
-			expected = testData.simpleJSONArray;
-			compare = checkIterableEquality<JSONArray,JSONValue>;
+			expected = testData.simpleJsonArray;
+			compare = checkIterableEquality<JsonArray,Value>;
 		};
 	}
 	shared test
-	void shouldConvertJSONArrayToTuple() {
-		value result = convertx.convert(testData.simpleJSONArray, `[String, Integer]`);
+	void shouldConvertJsonArrayToTuple() {
+		value result = convertx.convert(testData.simpleJsonArray, `[String, Integer]`);
 		assertEquals(result, testData.simpleTuple);
 	}
 }
