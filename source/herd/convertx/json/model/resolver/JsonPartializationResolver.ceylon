@@ -20,11 +20,11 @@ import herd.convertx.json.model.meta {
 	JSONPartialization
 }
 wired
-shared class JSONPartializationResolver() satisfies Resolver<Partialization,Relation<Object, JSONObject>>{
+shared class JsonPartializationResolver() satisfies Resolver<Partialization,Relation<Object, JSONObject>>{
 	shared actual Class<Partialization,Nothing> resolve(Context context, Relation<Object, JSONObject> input, Type<Partialization> outputType) => `JSONPartialization`;
 	
 	
-	matcher => object satisfies JSONPartializationResolver.Matcher{
+	matcher => object satisfies JsonPartializationResolver.Matcher{
 		shared actual Boolean match(Relation<Object, JSONObject> input, Type<Partialization> outputType) => true;
 		
 		shared actual Integer priority => 2;

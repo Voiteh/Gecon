@@ -21,7 +21,7 @@ import ceylon.collection {
 import herd.convertx.core.api.component {
 	Component
 }
-shared class AbstractionResolveTest() extends BaseJSONIntegrationTest(){
+shared class AbstractionResolveTest() extends BaseJsonIntegrationTest(){
 	
 	object resolvingProvider satisfies Provider{
 		shared actual MutableList<Component> components = ArrayList<Component>{

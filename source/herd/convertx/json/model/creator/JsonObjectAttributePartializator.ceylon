@@ -7,7 +7,7 @@ import herd.convertx.core.api.component {
 import herd.convertx.json {
 	JSONObject
 }
-shared wired class JSONObjectToAttributePartializator() extends AttributePartializer<JSONObject, Object>() {
+shared wired class JsonObjectToAttributePartializator() extends AttributePartializer<JSONObject, Object>() {
 	shared actual String[] extractKeys(JSONObject source) => source.keys.sequence();
 	
 	shared actual Anything extractValue(JSONObject source, String key) => source.get(key);

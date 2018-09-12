@@ -14,10 +14,10 @@ import ceylon.language.meta.model {
 }
 
 wired
-shared class JSONArrayCreator() satisfies Creator<JSONArray,{JSONValue*}> {
+shared class JsonArrayCreator() satisfies Creator<JSONArray,{JSONValue*}> {
 	shared actual JSONArray create(Context context, Class<JSONArray,Nothing> kind, {JSONValue*} arguments) => JSONArray(arguments);
 	
-	matcher => object satisfies JSONArrayCreator.Matcher {
+	matcher => object satisfies JsonArrayCreator.Matcher {
 		shared actual Boolean match(Class<JSONArray,Nothing> kind, {JSONValue*} arguments) => true;
 		
 		shared actual Integer priority => 1;

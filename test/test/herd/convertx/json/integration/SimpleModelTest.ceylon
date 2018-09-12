@@ -11,7 +11,7 @@ import test.herd.convertx.json.integration.data {
 	testData
 	
 }
-shared class SimpleModelTest() extends BaseJSONIntegrationTest() {
+shared class SimpleModelTest() extends BaseJsonIntegrationTest() {
 	
 	shared test 
 	void shouldConvertJSONObjectToModel(){

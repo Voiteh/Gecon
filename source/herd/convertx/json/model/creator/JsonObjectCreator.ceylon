@@ -15,7 +15,7 @@ import ceylon.language.meta.model {
 	Class
 }
 wired
-shared class JSONObjectCreator() satisfies Creator<JSONObject,JSONPartialization>{
+shared class JsonObjectCreator() satisfies Creator<JSONObject,JSONPartialization>{
 	shared actual JSONObject create(Context context, Class<JSONObject,Nothing> kind, JSONPartialization arguments) => JSONObject(arguments.parts);
 	
 }

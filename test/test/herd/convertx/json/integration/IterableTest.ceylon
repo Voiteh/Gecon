@@ -11,7 +11,7 @@ import test.herd.convertx.json.integration.data {
 	testData
 }
 
-shared class IterableTest() extends BaseJSONIntegrationTest() {
+shared class IterableTest() extends BaseJsonIntegrationTest() {
 	
 	Boolean checkIterableEquality<Type,Item>(Anything result, Anything target) 
 			given Type satisfies {Item*} {

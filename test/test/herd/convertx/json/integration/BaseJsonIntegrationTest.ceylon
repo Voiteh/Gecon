@@ -13,15 +13,15 @@ import herd.convertx.core {
 	CoreConvertx
 }
 import herd.convertx.json {
-	JSONProvider
+	JsonProvider
 }
 beforeTestRun
 shared void setupLogger(){
 	addLogWriter(writeSimpleLog);
 }
 
-shared class BaseJSONIntegrationTest() {
-	shared default {Provider*} additionalProviders =>{ JSONProvider()};
+shared class BaseJsonIntegrationTest() {
+	shared default {Provider*} additionalProviders =>{ JsonProvider()};
 	
 	shared default Convertx convertx=>CoreConvertx(*additionalProviders);
 	
