@@ -10,7 +10,7 @@ import herd.convertx.core.internal {
 	Findable
 }
 
-shared interface TypedConverter<in Source=Nothing ,in ResultType=Nothing,out Result=Anything> satisfies Component
+shared sealed interface TypedConverter<in Source=Nothing ,in ResultType=Nothing,out Result=Anything> satisfies Component
 		given ResultType satisfies Type<Result> {
 	
 	throws(`class ConvertionException`)

@@ -10,7 +10,7 @@ import herd.convertx.core.api {
 	Context
 }
 
-shared interface TypedResolver<out Output=Anything,in OutputType=Nothing, in Input=Nothing> satisfies Component
+shared sealed interface TypedResolver<out Output=Anything,in OutputType=Nothing, in Input=Nothing> satisfies Component
 		given OutputType satisfies Type<Output> {
 	shared formal Class<Output> resolve(Context context,Input input,OutputType outputType);
 	
@@ -20,7 +20,7 @@ shared interface TypedResolver<out Output=Anything,in OutputType=Nothing, in Inp
 		shared formal Integer priority;
 	}
 	
-	shared formal Matcher? matcher;
+	shared default Matcher? matcher=>null;
 	
 	
 	shared actual Findable toFindable(Findable.Adapter visitor) => visitor.adaptResolver(this);
