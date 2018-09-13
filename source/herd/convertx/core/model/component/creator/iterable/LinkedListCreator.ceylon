@@ -12,7 +12,7 @@ import herd.convertx.core.api {
 	Context
 }
 wired
-shared class LinkedListCreator() satisfies Creator<List<Anything>,{Anything*}> {
+shared class LinkedListCreator() satisfies Creator<{Anything*},List<Anything>> {
 	shared actual List<Anything> create(Context context,Class<List<Anything>,Nothing> kind, {Anything*} arguments) {
 		return kind.apply(arguments);
 	}

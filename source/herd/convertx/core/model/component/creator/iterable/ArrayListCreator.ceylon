@@ -12,7 +12,7 @@ import herd.convertx.core.api {
 	Context
 }
 wired
-shared class ArrayListCreator() satisfies Creator<List<>,{Anything*}> {
+shared class ArrayListCreator() satisfies Creator<{Anything*},List<>> {
 	shared actual List<> create(Context context,Class<List<>> kind, {Anything*} arguments) {
 		return kind.apply(0, 1.5, arguments);
 	}

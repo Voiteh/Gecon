@@ -18,7 +18,7 @@ import ceylon.language.meta {
 import herd.convertx.core.util {
 	filterObjectAndIdentifiableAttributes
 }
-shared abstract class ObjectPartializer<ThePartialization,Holder,Result>() satisfies Creator<ThePartialization,Relation<Object,Result>> given ThePartialization satisfies Partialization {
+shared abstract class ObjectPartializer<ThePartialization,Holder,Result>() satisfies Creator<Relation<Object,Result>,ThePartialization> given ThePartialization satisfies Partialization {
 	shared actual ThePartialization create(Context context, Class<ThePartialization,Nothing> kind, Relation<Object,Result> arguments) {
 		value sourceType=type(arguments.source);
 		value attributes=sourceType.getAttributes<>().filter(filterObjectAndIdentifiableAttributes);

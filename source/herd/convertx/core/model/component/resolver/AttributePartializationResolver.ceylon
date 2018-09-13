@@ -19,7 +19,7 @@ import herd.convertx.core.api.meta {
 
 
 wired
-shared class AttributePartializationResolver() satisfies Resolver<Partialization,Relation<Object,Object>> {
+shared class AttributePartializationResolver() satisfies Resolver<Relation<Object,Object>,Partialization> {
 	shared actual Class<AttributePartialization,Nothing> resolve(Context context, Relation<Object,Object> source, Type<Partialization> outputType) => `AttributePartialization`;
 	
 	matcher => object satisfies AttributePartializationResolver.Matcher{

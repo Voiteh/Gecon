@@ -17,14 +17,8 @@ import herd.convertx.core.api {
 import ceylon.test {
 	test
 }
-import ceylon.logging {
-	trace
-}
-import herd.convertx.core {
-	logger
-}
 
-class StringIntersectionResolver() satisfies Resolver<MutableList<String>&SearchableList<String>,Anything> {
+class StringIntersectionResolver() satisfies Resolver<Anything,MutableList<String>&SearchableList<String>> {
 	shared actual Class<MutableList<String>&SearchableList<String>,Nothing> resolve(Context context, Anything input, Type<MutableList<String>&SearchableList<String>> outputType) => `ArrayList<String>`;
 	
 	matcher => object satisfies StringIntersectionResolver.Matcher {
@@ -44,7 +38,6 @@ shared class IntersectionTest() extends BaseTest() {
 	
 	shared test
 	void shouldConvertToIntersectionContainingType() {
-		logger.priority=trace;
 		value result = convertx.convert(testData.matchingIntersection, `InteresectionModel`);
 		assert (is InteresectionModel result);
 		assert (result.data.containsEvery({ "1", "2", "3" }));

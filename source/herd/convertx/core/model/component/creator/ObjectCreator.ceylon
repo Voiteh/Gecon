@@ -20,7 +20,7 @@ import herd.convertx.core.api.meta {
 }
 
 wired
-shared class ObjectCreator() satisfies Creator<Object,AttributePartialization> {
+shared class ObjectCreator() satisfies Creator<AttributePartialization,Object> {
 	shared actual Object create(Context context,Class<Object,Nothing> kind, AttributePartialization partialization) {
 		value instanceId = kind.string;
 		value deserializationContext = deserialization<String>();

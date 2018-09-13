@@ -20,7 +20,7 @@ import ceylon.json {
 	JsonObject
 }
 wired
-shared class JsonPartializationResolver() satisfies Resolver<Partialization,Relation<Object, JsonObject>>{
+shared class JsonPartializationResolver() satisfies Resolver<Relation<Object, JsonObject>,Partialization>{
 	shared actual Class<Partialization,Nothing> resolve(Context context, Relation<Object, JsonObject> input, Type<Partialization> outputType) => `JsonPartialization`;
 	
 	

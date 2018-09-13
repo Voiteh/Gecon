@@ -2,14 +2,22 @@ import herd.convertx.core.internal {
 	Executable,
 	Findable
 }
-import ceylon.language.meta {
-	type
-}
 
 shared interface Component of
-	TypedConverter<> | TypedResolver<> | TypedCreator<Anything,Nothing,Nothing> {
+	TypedConverter<> | TypedResolver<> | TypedCreator<> {
 	shared formal Executable toExecutable(Executable.Adapter visitor);
 	shared formal Findable toFindable(Findable.Adapter visitor);
 	
-	string=> type(this).declaration.name;
+	
+	//shared interface Visitor{
+	//	shared formal Visitated converter<Source, ResultType, Result>(TypedConverter<Source, ResultType, Result> converter);
+	//	shared formal Visitated resolver<Output, OutputType, Input>(TypedResolver<Output, OutputType, Input> resolver);
+	//	shared formal Visitated creator<Result, Kind, Args>(TypedCreator<Result, Kind, Args> creator);
+	//}
+	//shared interface Visitated{
+	//	shared formal Findable findable;
+	//	shared formal Executable executable; 
+	//}
+	
+	//shared formal Visitated visit(Visitor visitor);
 }

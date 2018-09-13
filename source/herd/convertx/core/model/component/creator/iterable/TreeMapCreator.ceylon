@@ -16,12 +16,12 @@ import herd.convertx.core.api {
 	Context
 }
 wired
-shared class TreeMapCreator() satisfies Creator<Map<>,{Anything*}> {
+shared class TreeMapCreator() satisfies Creator<{Anything*},Map<>> {
 	shared actual Map<> create(Context context,Class<Map<>,Nothing> kind, {Anything*} arguments) {
 		value factoryMethod = `function naturalOrderTreeMap`.apply<Map<>>(*kind.typeArgumentList);
 		return factoryMethod.apply(*arguments);
 	}
-	matcher => object satisfies Creator<Map<>,{Anything*}>.Matcher {
+	matcher => object satisfies TreeMapCreator.Matcher {
 		shared actual Boolean match(Class<Map<>,Nothing> kind, {Anything*} arguments) {
 			return typeHierarchy(kind).findByDeclaration(`class TreeMap`) exists;
 		}

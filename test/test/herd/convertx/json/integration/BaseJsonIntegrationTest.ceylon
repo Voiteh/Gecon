@@ -1,5 +1,6 @@
 import ceylon.test {
-	beforeTestRun
+	beforeTestRun,
+	beforeTest
 }
 import herd.convertx.core.api {
 	Provider,
@@ -7,10 +8,12 @@ import herd.convertx.core.api {
 }
 import ceylon.logging {
 	addLogWriter,
-	writeSimpleLog
+	writeSimpleLog,
+	info
 }
 import herd.convertx.core {
-	CoreConvertx
+	CoreConvertx,
+	logger
 }
 import herd.convertx.json {
 	JsonProvider
@@ -21,6 +24,12 @@ shared void setupLogger(){
 }
 
 shared class BaseJsonIntegrationTest() {
+	
+	shared beforeTest 
+	default void setupLogger(){
+		logger.priority=info;
+	}
+	
 	shared default {Provider*} additionalProviders =>{ JsonProvider()};
 	
 	shared default Convertx convertx=>CoreConvertx(*additionalProviders);

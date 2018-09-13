@@ -18,7 +18,7 @@ import herd.convertx.core.api.meta {
 }
 
 shared abstract class AttributeMapper<Source,Result>()
-		 satisfies Creator<AttributePartialization,Relation<Source, Result>>
+		 satisfies Creator<Relation<Source, Result>,AttributePartialization>
 		given Source satisfies Object
 		{
 	shared formal {<Attribute<Source>->Attribute<Result>>*} relations;

@@ -14,11 +14,11 @@ import herd.convertx.core.api {
 	Context
 }
 wired
-shared class HashMapCreator() satisfies  Creator<Map<>,{Entry<Object,Anything>*}> {
+shared class HashMapCreator() satisfies  Creator<{Entry<Object,Anything>*},Map<>> {
 	shared actual Map<> create(Context context,Class<Map<>,Nothing> kind, {Entry<Object,Anything>*} arguments) {
 		return kind.apply(linked, Hashtable(), arguments);
 	}
-	matcher => object satisfies Creator<Map<>,{Entry<Object,Anything>*}>.Matcher {
+	matcher => object satisfies HashMapCreator.Matcher {
 		shared actual Boolean match(Class<Map<>,Nothing> kind, {Entry<Object,Anything>*} arguments) {
 			return kind.declaration==`class HashMap`;
 		}

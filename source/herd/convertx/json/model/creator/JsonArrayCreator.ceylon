@@ -14,7 +14,7 @@ import ceylon.json {
 }
 
 wired
-shared class JsonArrayCreator() satisfies Creator<JsonArray,{Value*}> {
+shared class JsonArrayCreator() satisfies Creator<{Value*},JsonArray> {
 	shared actual JsonArray create(Context context, Class<JsonArray,Nothing> kind, {Value*} arguments) => JsonArray(arguments);
 	
 	matcher => object satisfies JsonArrayCreator.Matcher {

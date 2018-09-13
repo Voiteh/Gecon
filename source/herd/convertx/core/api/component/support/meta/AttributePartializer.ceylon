@@ -20,7 +20,7 @@ import herd.convertx.core.api.meta {
 
 
 shared abstract class AttributePartializer<Source, Result>()
-		satisfies Creator<AttributePartialization,Relation<Source,Result>>
+		satisfies Creator<Relation<Source,Result>,AttributePartialization>
 		given Source satisfies Object {
 	
 	

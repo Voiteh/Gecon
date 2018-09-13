@@ -14,7 +14,7 @@ import herd.convertx.core.api {
 	Context
 }
 
-shared wired class IterableToSetResolver() satisfies Resolver<Set<>,{Anything*}>{
+shared wired class IterableToSetResolver() satisfies Resolver<{Anything*},Set<>>{
 	
 	shared actual Class<Set<>> resolve(Context context,{Anything*} input,Type<Set<>> outputType) { 
 		assert(is Interface<Set<>> outputType);

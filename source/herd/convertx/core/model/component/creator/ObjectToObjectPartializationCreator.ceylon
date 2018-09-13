@@ -26,7 +26,7 @@ import herd.convertx.core.api.meta {
 	AttributePartialization
 }
 wired
-shared class ObjectToObjectPartializationCreator() satisfies Creator<AttributePartialization, Object->Type<Object>>{
+shared class ObjectToObjectPartializationCreator() satisfies Creator<Object->Type<Object>,AttributePartialization>{
 	shared actual AttributePartialization create(Context context, Class<AttributePartialization,Nothing> kind, Object->Type<Object> arguments){
 		assert(is Class<Object> clazz=arguments.item);
 		value sourceType=type(arguments.key);

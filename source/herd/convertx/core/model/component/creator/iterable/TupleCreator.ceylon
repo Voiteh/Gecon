@@ -11,7 +11,7 @@ import herd.convertx.core.api {
 }
 
 wired
-shared class TupleCreator() satisfies  Creator<AnyTuple,{Anything*}> {
+shared class TupleCreator() satisfies  Creator<{Anything*},AnyTuple> {
 	shared actual AnyTuple create(Context context,Class<AnyTuple> kind, {Anything*} arguments) {
 		value first = arguments.first;
 		assert (exists elementType = kind.typeArgumentList.first);
@@ -23,7 +23,7 @@ shared class TupleCreator() satisfies  Creator<AnyTuple,{Anything*}> {
 			return kind.apply(first, subTuple);
 		}
 	}
-	matcher => object satisfies Creator<AnyTuple,{Anything*}>.Matcher {
+	matcher => object satisfies TupleCreator.Matcher {
 		shared actual Boolean match(Class<AnyTuple> kind, {Anything*} arguments) => true;
 		
 		shared actual Integer priority => 1;

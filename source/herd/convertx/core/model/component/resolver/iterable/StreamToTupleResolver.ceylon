@@ -14,7 +14,7 @@ import ceylon.language.meta {
 	type
 }
 
-shared class StreamToTupleResolver() satisfies Resolver<AnyTuple,{Anything*}>{
+shared class StreamToTupleResolver() satisfies Resolver<{Anything*},AnyTuple>{
 	
 	
 	Class<AnyTuple>|ClassModel<Empty> createTupleType(Type<>[] args){

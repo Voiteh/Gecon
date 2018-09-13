@@ -18,7 +18,7 @@ import herd.convertx.core.model.meta {
 	EntryPartialization
 }
 wired
-shared class EntryPartializationResolver() satisfies Resolver<Partialization,Relation<Object,Map<String,Anything>>>{
+shared class EntryPartializationResolver() satisfies Resolver<Relation<Object,Map<String,Anything>>,Partialization>{
 	shared actual Class<Partialization,Nothing> resolve(Context context, Relation<Object,Map<String,Anything>> type, Type<Partialization> outputType) =>`EntryPartialization`;
 	
 

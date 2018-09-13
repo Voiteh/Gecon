@@ -95,7 +95,7 @@ class ResolvableClass(resolved) {
 	shared TypeResolveInterface resolved;
 }
 
-shared class JsonObjectToTestResolveInterfaceResolver() satisfies Resolver<TypeResolveInterface,JsonObject> {
+shared class JsonObjectToTestResolveInterfaceResolver() satisfies Resolver<JsonObject,TypeResolveInterface> {
 	shared actual Class<TypeResolveInterface,Nothing> resolve(Context context, JsonObject input, Type<TypeResolveInterface> outputType) {
 		value typeInfo = input.get(`TypeResolveInterface.type`.declaration.name);
 		value dataType = context.convert(typeInfo, `DataType`);

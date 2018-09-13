@@ -26,7 +26,7 @@ import herd.convertx.core.api.meta {
 }
 
 wired
-shared class AttributePartializationCreator() satisfies Creator<AttributePartialization, Relation<Object,Object>>{
+shared class AttributePartializationCreator() satisfies Creator<Relation<Object,Object>,AttributePartialization>{
 	shared actual AttributePartialization create(Context context, Class<AttributePartialization,Nothing> kind, Relation<Object,Object> arguments){
 		value sourceType=type(arguments.source);
 		value entries=arguments.resultClass.getAttributes<>().filter(filterObjectAndIdentifiableAttributes).map((Attribute<Nothing,Anything,Nothing> destAttribute) {

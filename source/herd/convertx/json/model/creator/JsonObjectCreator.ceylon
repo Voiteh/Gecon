@@ -15,7 +15,7 @@ import ceylon.json {
 	JsonObject
 }
 
-shared wired class JsonObjectCreator() satisfies Creator<JsonObject,JsonPartialization>{
+shared wired class JsonObjectCreator() satisfies Creator<JsonPartialization,JsonObject>{
 	shared actual JsonObject create(Context context, Class<JsonObject,Nothing> kind, JsonPartialization arguments) => JsonObject(arguments.parts);
 	
 }

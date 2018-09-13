@@ -7,16 +7,19 @@ import herd.convertx.core.api.component {
 	TypedCreator,
 	TypedConverter
 }
+
+
+
 import herd.convertx.core {
 	logger
 }
 
-shared alias Container => HashMap<Findable,Executable>;
-Container container=> HashMap<Findable,Executable>();
+shared alias ComponentContainer => HashMap<Findable,Executable>;
+ComponentContainer componentContainer=> HashMap<Findable,Executable>();
 shared class Registry {
-	shared Container converters=container;
-	shared Container resolvers=container;
-	shared Container creators=container;
+	shared ComponentContainer converters=componentContainer;
+	shared ComponentContainer resolvers=componentContainer;
+	shared ComponentContainer creators=componentContainer;
 	
 	Findable.Adapter findableAdapter=defaultFindableAdapter;
 	Executable.Adapter executableAdapter=defaultExecutableAdapter;
@@ -43,7 +46,6 @@ shared class Registry {
 				logger.warn("Replaced: ``replaced``, with: ``executable``");
 			}
 		});
-		
 	}
 	
 	

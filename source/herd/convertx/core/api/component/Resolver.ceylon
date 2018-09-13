@@ -9,28 +9,30 @@ import herd.convertx.core.internal {
 import herd.convertx.core.api {
 	Context
 }
+import ceylon.language.meta {
+	typeLiteral,
+	type
+}
 
-shared sealed interface TypedResolver<out Output=Anything,in OutputType=Nothing, in Input=Nothing> satisfies Component
+shared sealed interface TypedResolver<in Source=Nothing, out Output=Anything, in OutputType=Nothing> satisfies Component
 		given OutputType satisfies Type<Output> {
-	shared formal Class<Output> resolve(Context context,Input input,OutputType outputType);
-	
+	shared formal Class<Output> resolve(Context context, Source input, OutputType outputType);
 	
 	shared interface Matcher {
-		shared formal Boolean match(Input input,OutputType outputType);
+		shared formal Boolean match(Source input, OutputType outputType);
 		shared formal Integer priority;
 	}
 	
-	shared default Matcher? matcher=>null;
+	shared default Matcher? matcher => null;
+}
+
+shared interface Resolver<Source, Result> satisfies TypedResolver<Source,Result,Type<Result>> {
 	
+	throws (`class ResolvanceException`)
+	shared formal actual Class<Result> resolve(Context context, Source source, Type<Result> resultType);
 	
 	shared actual Findable toFindable(Findable.Adapter visitor) => visitor.adaptResolver(this);
 	shared actual Executable toExecutable(Executable.Adapter visitor) => visitor.adaptResolver(this);
-}
-
-shared interface Resolver<Output,Input=Output> satisfies TypedResolver<Output,Type<Output>,Input> {
 	
-	throws (`class ResolvanceException`)
-	shared formal actual Class<Output> resolve(Context context,Input type,Type<Output> outputType);
-	
-	
+	string => "``type(this).declaration.name``, Source type: ``typeLiteral<Source>()``, Result type: ``typeLiteral<Result>()``";
 }

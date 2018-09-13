@@ -17,7 +17,7 @@ import herd.convertx.core.api {
 	Context
 }
 
-shared wired class MapToMapResolver() satisfies Resolver<Map<>> {
+shared wired class MapToMapResolver() satisfies Resolver<Map<>,Map<>> {
 	
 	shared actual Class<Map<>,Nothing> resolve(Context context,Map<> input,Type<Map<>> outputType) {
 		assert(is ClassOrInterface<Map<>> outputType);

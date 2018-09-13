@@ -8,14 +8,17 @@ import herd.convertx.core.internal {
 import herd.convertx.core.api {
 	Context
 }
+import ceylon.language.meta {
+	type,
+	typeLiteral
+}
 
-shared sealed interface TypedCreator<out Result=Anything, in Kind=Nothing, in Args=Nothing> satisfies Component given Kind satisfies Result {
+shared sealed interface TypedCreator<in Args=Nothing,out Result=Anything, in Kind=Nothing> satisfies Component given Kind satisfies Result {
 	
 	throws (`class ConvertionException`)
 	shared formal Result create(Context context,Class<Kind> kind, Args arguments);
 	
-	shared actual Executable toExecutable(Executable.Adapter visitor) => visitor.adaptCreator(this);
-	shared actual Findable toFindable(Findable.Adapter visitor) => visitor.adaptCreator(this);
+	
 	
 	shared interface Matcher {
 		shared formal Boolean match(Class<Kind> kind, Args arguments);
@@ -24,9 +27,15 @@ shared sealed interface TypedCreator<out Result=Anything, in Kind=Nothing, in Ar
 	
 	shared default Matcher? matcher => null;
 }
-shared interface Creator<Result, Args> satisfies  TypedCreator<Result,Result,Args> {
+shared interface Creator<Args,Result > satisfies  TypedCreator<Args,Result,Result> {
 	
 	throws (`class ConvertionException`)
 	shared formal actual Result create(Context context,Class<Result> kind, Args arguments);
+
+
+	shared actual Executable toExecutable(Executable.Adapter visitor) => visitor.adaptCreator(this);
+	shared actual Findable toFindable(Findable.Adapter visitor) => visitor.adaptCreator(this);
 	
+	
+	string => "``type(this).declaration.name``, Args type: ``typeLiteral<Args>()``, Result type: ``typeLiteral<Result>()``"; 
 }

@@ -16,7 +16,7 @@ import herd.convertx.core.api {
 }
 
 
-shared wired class MutableListResolver() satisfies Resolver<List<>,{Anything*}> {
+shared wired class MutableListResolver() satisfies Resolver<{Anything*},List<>> {
 	shared actual Class<List<>,Nothing> resolve(Context context,{Anything*} input, Type<List<>> outputType) {
 		assert(is ClassOrInterface<List<>> outputType);
 		value typeForIterable = iterableTypeArgument(outputType);

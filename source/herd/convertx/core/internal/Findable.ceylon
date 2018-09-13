@@ -8,19 +8,22 @@ import ceylon.language.meta {
 	typeLiteral
 }
 import herd.convertx.core.api.component {
-	TypedResolver,
-	TypedCreator,
-	TypedConverter
+	Resolver,
+	Creator,
+	Converter
 }
+
+
+
 
 import herd.convertx.core {
 	logger
 }
 shared interface Findable of Hashable|Matchable{
 	shared static interface Adapter{
-		shared formal Findable adaptConverter<Source, ResultType,Result>(TypedConverter<Source,ResultType,Result> converter);
-		shared formal Findable adaptResolver<Output,OutputType,Input>(TypedResolver<Output,OutputType,Input> resolver);
-		shared formal Findable adaptCreator<Result,Kind,Args>(TypedCreator<Result,Kind,Args> creator);
+		shared formal Findable adaptConverter<Source,Result>(Converter<Source,Result> converter);
+		shared formal Findable adaptResolver<Source,Result>(Resolver<Source,Result> resolver);
+		shared formal Findable adaptCreator<Args,Result>(Creator<Args,Result> creator);
 	}
 	
 	 
@@ -30,18 +33,18 @@ shared interface Findable of Hashable|Matchable{
 String matchingResultLog(Boolean result) =>"Matching ``if (result) then "SUCCESS" else "FAILURE"``";
 
 Findable.Adapter defaultFindableAdapter=> object satisfies Findable.Adapter{
-	shared actual Findable adaptConverter<Source, ResultType,Result>(TypedConverter<Source,ResultType,Result> converter){
+	shared actual Findable adaptConverter<Source,Result>(Converter<Source,Result> converter){
 		if (exists matcher = converter.matcher) {
 			return object satisfies Matchable {
 				shared actual Boolean match(Anything[] args) {
 					Boolean result;
-					if (is [Source, ResultType] args) {
+					if (is [Source, Type<Result>] args) {
 						result= matcher.match(*args);
 					}
 					else{
 						result=false;
 					}
-					logger.trace("``matchingResultLog(result)``,for Converter: ``converter`` to: ``args``");
+					logger.trace("``matchingResultLog(result)``,for Converter: ``converter`` ");
 					return result;
 				}
 				
@@ -57,41 +60,41 @@ Findable.Adapter defaultFindableAdapter=> object satisfies Findable.Adapter{
 		
 		
 	}
-	shared actual Findable adaptResolver<Output,OutputType,Input>(TypedResolver<Output,OutputType,Input> resolver){
+	shared actual Findable adaptResolver<Source,Result>(Resolver<Source,Result> resolver){
 		if (exists matcher = resolver.matcher) {
 			return object satisfies Matchable {
 				shared actual Boolean match(Anything[] args) {
 					Boolean result;
-					if (is [Input,OutputType] args) {
+					if (is [Source,Type<Result>] args) {
 						result= matcher.match(*args);
 					}
 					else{
 						result =false;
 					}
-					logger.trace("``matchingResultLog(result)``, for Resolver: ``resolver`` to: ``args``");
+					logger.trace("``matchingResultLog(result)``, for Resolver: ``resolver`` ");
 					return result;
 				}
 				shared actual Integer priority = matcher.priority;
 			};
 			
 		}
-		value input = typeLiteral<Input>();
-		value output = typeLiteral<Output>();
+		value input = typeLiteral<Source>();
+		value output = typeLiteral<Result>();
 		
 		return Hashable(input,output);
 	}
-	shared actual Findable adaptCreator<Result,Kind,Args>(TypedCreator<Result,Kind,Args> creator){
+	shared actual Findable adaptCreator<Args,Result>(Creator<Args,Result> creator){
 		if(exists matcher=creator.matcher){
 			return object satisfies Matchable{
 				shared actual Boolean match(Anything[] args) {
 					Boolean result;
-					if(is [Class<Kind> , Args ] args){
+					if(is [Class<Result> ,Args] args){
 						result=matcher.match(*args);
 					}
 					else {
 						result=false;
 					}
-					logger.trace("``matchingResultLog(result)``, for Creator: ``creator`` to: ``args``");
+					logger.trace("``matchingResultLog(result)``, for Creator: ``creator``");
 					return result;
 				}
 				
@@ -100,8 +103,9 @@ Findable.Adapter defaultFindableAdapter=> object satisfies Findable.Adapter{
 				string = "Matchable for creator - ``creator``";
 			};
 		}
-		value kind=typeLiteral<Kind>();
+		value kind=typeLiteral<Result>();
 		value args =typeLiteral<Args>();
+		
 		return Hashable(kind,args);
 	}
 	
@@ -136,7 +140,7 @@ shared sealed class Hashable(Anything* toHash) satisfies Findable {
 	
 	hash =toHash.fold(0)((Integer initial, Anything element) => 32*initial+extractType(element).hash);
 	
-	string ="Hashed: ``toHash``, value: ``hash.string``";
+	string ="Value: ``hash.string``,Hashed: ``toHash``, ";
 	
 	
 	shared actual Boolean equals(Object that) {

@@ -9,12 +9,6 @@ import ceylon.collection {
 import herd.convertx.core.api.component {
 	ConvertionException
 }
-import ceylon.logging {
-	debug
-}
-import herd.convertx.core {
-	logger
-}
 shared class IterableTest() extends BaseTest(){
 	
 	
@@ -126,7 +120,6 @@ shared class IterableTest() extends BaseTest(){
 	
 	shared test
 	void shouldConvertIterableToSequence(){
-		logger.priority=debug;
 		value result=convertx.convert(testData.iterable.integer.stream,`[String*]`);
 		assertEquals{
 			actual=result;

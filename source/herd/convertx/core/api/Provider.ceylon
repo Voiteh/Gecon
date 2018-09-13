@@ -7,5 +7,4 @@ import ceylon.collection {
 shared interface Provider {
 	
 	shared formal MutableList<Component> components;
-	
 }
