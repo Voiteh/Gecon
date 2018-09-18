@@ -21,7 +21,7 @@ shared sealed interface TypedConverter<in Source=Nothing ,out Result=Anything,in
 	shared formal Result convert(Context context,Source source,ResultType resultType);
 	
 	
-	
+	shared actual [Findable, Executable] register(Visitor visitor) => visitor.prepareConverterRegistration(this);
 	
 	shared interface Matcher {
 		shared formal Boolean match(Source source,ResultType resultType);

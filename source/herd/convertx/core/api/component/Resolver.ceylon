@@ -18,6 +18,8 @@ shared sealed interface TypedResolver<in Source=Nothing, out Output=Anything, in
 		given OutputType satisfies Type<Output> {
 	shared formal Class<Output> resolve(Context context, Source input, OutputType outputType);
 	
+	shared actual [Findable, Executable] register(Visitor visitor) => visitor.prepareResolverRegistration(this);
+	
 	shared interface Matcher {
 		shared formal Boolean match(Source input, OutputType outputType);
 		shared formal Integer priority;
