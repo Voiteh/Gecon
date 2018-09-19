@@ -7,8 +7,8 @@ import herd.convertx.core.internal {
 	Registry
 }
 import herd.convertx.core.model {
-	DefaultContext,
-	CoreProvider
+	CoreProvider,
+	DefaultContext
 }
 import ceylon.language.meta.model {
 	Type

@@ -4,7 +4,8 @@ import ceylon.language.meta.model {
 }
 import herd.convertx.core.internal {
 	Executable,
-	Findable
+	Findable,
+	Flatten
 }
 import herd.convertx.core.api {
 	Context
@@ -18,7 +19,7 @@ shared sealed interface TypedResolver<in Source=Nothing, out Output=Anything, in
 		given OutputType satisfies Type<Output> {
 	shared formal Class<Output> resolve(Context context, Source input, OutputType outputType);
 	
-	shared actual [Findable, Executable] register(Visitor visitor) => visitor.prepareResolverRegistration(this);
+	shared actual [Findable, Flatten] register(Visitor visitor) => visitor.prepareResolverRegistration(this);
 	
 	shared interface Matcher {
 		shared formal Boolean match(Source input, OutputType outputType);

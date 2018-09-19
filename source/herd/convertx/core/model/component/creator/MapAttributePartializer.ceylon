@@ -14,8 +14,8 @@ import herd.convertx.core.api.meta {
 	AttributePartialization
 }
 
-wired
-shared class MapAttributePartializer() extends AttributePartializer<Map<String,Anything>,Object>(){
+
+shared wired class MapAttributePartializer() extends AttributePartializer<Map<String,Anything>,Object>(){
 	shared actual String[] extractKeys(Map<String,Anything> source) => source.keys.sequence();
 	
 	shared actual Anything extractValue(Map<String,Anything> source, String key) => source.get(key);

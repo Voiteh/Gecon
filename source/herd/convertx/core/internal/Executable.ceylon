@@ -30,7 +30,7 @@ shared sealed interface Executable {
 		shared formal Executable adaptCreator<Arguments,Result>(Creator<Arguments,Result> creator);
 	}
 	
-	shared formal Anything execute(Anything[] args);
+	shared formal Anything execute(Anything* args);
 	
 	
 	
@@ -64,7 +64,7 @@ shared Executable.FindStrategy defaultFindStrategy =>  object satisfies Executab
 
 Executable.Adapter defaultExecutableAdapter=> object satisfies Executable.Adapter{
 	shared actual Executable adaptConverter<Source,Result>(Converter<Source,Result> converter) => object satisfies Executable{
-		shared actual Anything execute(Anything[] args) {
+		shared actual Anything execute(Anything* args) {
 			assert(is [Context,Source, Type<Result>] args);
 			return converter.convert(*args);
 		}
@@ -72,7 +72,7 @@ Executable.Adapter defaultExecutableAdapter=> object satisfies Executable.Adapte
 	};
 	
 	shared actual Executable adaptCreator<Args,Result>(Creator<Args,Result> creator) => object satisfies Executable{
-		shared actual Anything execute(Anything[] args) {
+		shared actual Anything execute(Anything* args) {
 			assert(is [Context,Class<Result>,Args] args);
 			return creator.create(*args);
 		}
@@ -81,7 +81,7 @@ Executable.Adapter defaultExecutableAdapter=> object satisfies Executable.Adapte
 	
 	
 	shared actual Executable adaptResolver<Source,Result>(Resolver<Source,Result> resolver) => object satisfies Executable{
-		shared actual Anything execute(Anything[] args) {
+		shared actual Anything execute(Anything* args) {
 			assert(is [Context,Source,Type<Result>] args);
 			return resolver.resolve(*args);
 		}

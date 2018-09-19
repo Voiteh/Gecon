@@ -1,55 +1,40 @@
-import ceylon.collection {
-	HashMap
-}
 import herd.convertx.core.api.component {
+	Visitor,
 	Component,
+	TypedConverter,
 	TypedResolver,
-	TypedCreator,
-	TypedConverter
+	TypedCreator
 }
-
-
-
 import herd.convertx.core {
 	logger
 }
-
-shared alias ComponentContainer => HashMap<Findable,Executable>;
-ComponentContainer componentContainer=> HashMap<Findable,Executable>();
 shared class Registry {
-	shared ComponentContainer converters=componentContainer;
-	shared ComponentContainer resolvers=componentContainer;
-	shared ComponentContainer creators=componentContainer;
 	
-	Findable.Adapter findableAdapter=defaultFindableAdapter;
-	Executable.Adapter executableAdapter=defaultExecutableAdapter;
+	shared Container converters=Container();
+	shared Container resolvers=Container();
+	shared Container creators=Container();
 	
-	
-	shared sealed new(Component[] components){
-		
+	shared new(Component[] components,Visitor visitor=DefaultVisitor()){
 		components.each((Component element) {
-			value findable=element.toFindable(findableAdapter);
-			value executable=element.toExecutable(executableAdapter);
-			Executable? replaced;
+			value flat=element.register(visitor);
+			Flatten? replaced;
 			switch(element)
 			case (is TypedConverter<>) {
-				replaced=converters.put(findable,executable);
+				replaced=converters.put(*flat);
 			}
 			case (is TypedResolver<>) {
-				replaced=resolvers.put(findable, executable);
+				replaced=resolvers.put(*flat);
 			}
 			case (is TypedCreator<>) {
-				replaced=creators.put(findable, executable);
+				replaced=creators.put(*flat);
 			}
 			logger.trace("Registered: ``element``");
 			if(exists replaced){
-				logger.warn("Replaced: ``replaced``, with: ``executable``");
+				logger.warn("Replaced: ``replaced``, with: ``element``");
 			}
 		});
+		
 	}
-	
-	
-	
 	
 	
 }
