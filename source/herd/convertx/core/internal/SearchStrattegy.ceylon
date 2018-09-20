@@ -1,5 +1,8 @@
 import herd.convertx.core.api.component {
-	ComponentFindingException
+	ComponentFindingException,
+	Executable,
+	Matchable,
+	Findable
 }
 import ceylon.logging {
 	trace
@@ -18,7 +21,7 @@ shared interface SearchStrattegy {
 shared SearchStrattegy defaultStrategy => object satisfies SearchStrattegy{
 	shared actual Executable search(Container container, [Anything*] args) {
 		//until resolved https://github.com/eclipse/ceylon/issues/7389 hashing for Touple arg will fail. 
-		value hashable=Hashable(*args);
+		value hashable=DefaultHashable(*args);
 		logger.debug("Looking for Executable using Hashable:``hashable``");
 		if (exists findable = container.get(hashable)) {
 			logger.debug("FOUND Executable ``findable``");
@@ -27,7 +30,7 @@ shared SearchStrattegy defaultStrategy => object satisfies SearchStrattegy{
 		logger.debug("Executable NOT FOUND by Hashable ``hashable``");
 		if(logger.priority>=trace){
 			logger.trace("Available Hashables were:");
-			container.filter((Findable elementKey -> Executable elementItem) => elementKey is Hashable)
+			container.filter((Findable elementKey -> Executable elementItem) => elementKey is DefaultHashable)
 					.each((Findable findable -> Executable executable) => logger.trace("``findable``-> ``executable``"));
 		}
 		if (exists matchable = container.keys.narrow<Matchable>()

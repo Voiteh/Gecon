@@ -5,10 +5,7 @@ import ceylon.language.meta.model {
 import herd.convertx.core.api {
 	Context
 }
-import herd.convertx.core.internal {
-	Executable,
-	Findable
-}
+
 import ceylon.language.meta {
 	typeLiteral,
 	type

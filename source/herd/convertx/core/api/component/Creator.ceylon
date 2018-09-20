@@ -1,10 +1,7 @@
 import ceylon.language.meta.model {
 	Class
 }
-import herd.convertx.core.internal {
-	Executable,
-	Findable
-}
+
 import herd.convertx.core.api {
 	Context
 }

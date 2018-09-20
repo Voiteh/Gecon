@@ -3,7 +3,8 @@ import herd.convertx.core.api.component {
 	Component,
 	TypedConverter,
 	TypedResolver,
-	TypedCreator
+	TypedCreator,
+	Executable
 }
 import herd.convertx.core {
 	logger

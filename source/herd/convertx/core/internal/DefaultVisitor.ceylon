@@ -2,7 +2,10 @@ import herd.convertx.core.api.component {
 	Visitor,
 	TypedConverter,
 	TypedCreator,
-	TypedResolver
+	TypedResolver,
+	Executable,
+	Matchable,
+	Findable
 }
 import ceylon.language.meta.model {
 	Class
@@ -16,6 +19,8 @@ import herd.convertx.core {
 import herd.convertx.core.api {
 	Context
 }
+
+String matchingResultLog(Boolean result) =>"Matching ``if (result) then "SUCCESS" else "FAILURE"``";
 shared class DefaultVisitor() satisfies Visitor{
 	shared actual [Findable, Executable] prepareConverterRegistration<Source, Result, ResultType>(TypedConverter<Source,Result,ResultType> converter) {
 		Findable findable;
@@ -40,7 +45,7 @@ shared class DefaultVisitor() satisfies Visitor{
 		}else{
 			value sourceType = typeLiteral<Source>();
 			value resultType = typeLiteral<Result>();
-			findable= Hashable(sourceType, resultType);
+			findable= DefaultHashable(sourceType, resultType);
 		}
 		value executable=object satisfies Executable{
 			shared actual Result execute<Result>([Anything*] args) {
@@ -80,7 +85,7 @@ shared class DefaultVisitor() satisfies Visitor{
 			
 			value kind=typeLiteral<Result>();
 			value args =typeLiteral<Args>();
-			findable=Hashable(kind,args);
+			findable=DefaultHashable(kind,args);
 		}
 		value flatten =object satisfies Executable{
 			shared actual Result execute<Result>([Anything*] args) {
@@ -117,7 +122,7 @@ shared class DefaultVisitor() satisfies Visitor{
 		}else{
 			value input = typeLiteral<Source>();
 			value output = typeLiteral<Result>();
-			findable= Hashable(input,output);
+			findable= DefaultHashable(input,output);
 		}
 		value flatten = object satisfies Executable{
 			shared actual Result execute<Result>([Anything*] args) {
