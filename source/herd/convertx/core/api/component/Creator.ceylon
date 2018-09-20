@@ -3,8 +3,7 @@ import ceylon.language.meta.model {
 }
 import herd.convertx.core.internal {
 	Executable,
-	Findable,
-	Flatten
+	Findable
 }
 import herd.convertx.core.api {
 	Context
@@ -19,7 +18,7 @@ shared sealed interface TypedCreator<in Args=Nothing,out Result=Anything, in Kin
 	throws (`class ConvertionException`)
 	shared formal Result create(Context context,Class<Kind> kind, Args arguments);
 	
-	shared actual [Findable, Flatten] register(Visitor visitor) => visitor.prepareCreatorRegistration(this);
+	shared actual [Findable, Executable] register(Visitor visitor) => visitor.prepareCreatorRegistration(this);
 	
 	shared interface Matcher {
 		shared formal Boolean match(Class<Kind> kind, Args arguments);
@@ -33,10 +32,5 @@ shared interface Creator<Args,Result > satisfies  TypedCreator<Args,Result,Resul
 	throws (`class ConvertionException`)
 	shared formal actual Result create(Context context,Class<Result> kind, Args arguments);
 
-
-	shared actual Executable toExecutable(Executable.Adapter visitor) => visitor.adaptCreator(this);
-	shared actual Findable toFindable(Findable.Adapter visitor) => visitor.adaptCreator(this);
-	
-	
 	string => "``type(this).declaration.name``, Args type: ``typeLiteral<Args>()``, Result type: ``typeLiteral<Result>()``"; 
 }

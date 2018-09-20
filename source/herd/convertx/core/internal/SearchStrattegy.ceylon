@@ -11,12 +11,12 @@ import herd.convertx.core {
 shared interface SearchStrattegy {
 	
 	throws(`class ComponentFindingException`)
-	shared formal Flatten search(Container container,[Anything*] args); 
+	shared formal Executable search(Container container,[Anything*] args); 
 	
 }
 
 shared SearchStrattegy defaultStrategy => object satisfies SearchStrattegy{
-	shared actual Flatten search(Container container, [Anything*] args) {
+	shared actual Executable search(Container container, [Anything*] args) {
 		//until resolved https://github.com/eclipse/ceylon/issues/7389 hashing for Touple arg will fail. 
 		value hashable=Hashable(*args);
 		logger.debug("Looking for Executable using Hashable:``hashable``");
@@ -27,8 +27,8 @@ shared SearchStrattegy defaultStrategy => object satisfies SearchStrattegy{
 		logger.debug("Executable NOT FOUND by Hashable ``hashable``");
 		if(logger.priority>=trace){
 			logger.trace("Available Hashables were:");
-			container.filter((Findable elementKey -> Flatten elementItem) => elementKey is Hashable)
-					.each((Findable findable -> Flatten executable) => logger.trace("``findable``-> ``executable``"));
+			container.filter((Findable elementKey -> Executable elementItem) => elementKey is Hashable)
+					.each((Findable findable -> Executable executable) => logger.trace("``findable``-> ``executable``"));
 		}
 		if (exists matchable = container.keys.narrow<Matchable>()
 			.filter((Matchable element) => element.match(args))

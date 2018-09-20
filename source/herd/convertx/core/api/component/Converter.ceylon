@@ -7,8 +7,7 @@ import herd.convertx.core.api {
 }
 import herd.convertx.core.internal {
 	Executable,
-	Findable,
-	Flatten
+	Findable
 }
 import ceylon.language.meta {
 	typeLiteral,
@@ -22,7 +21,7 @@ shared sealed interface TypedConverter<in Source=Nothing ,out Result=Anything,in
 	shared formal Result convert(Context context,Source source,ResultType resultType);
 	
 	
-	shared actual [Findable, Flatten] register(Visitor visitor) => visitor.prepareConverterRegistration(this);
+	shared actual [Findable, Executable] register(Visitor visitor) => visitor.prepareConverterRegistration(this);
 	
 	shared interface Matcher {
 		shared formal Boolean match(Source source,ResultType resultType);
@@ -37,8 +36,6 @@ shared sealed interface TypedConverter<in Source=Nothing ,out Result=Anything,in
 shared interface Converter<Source,Result> 
 		satisfies TypedConverter<Source, Result,Type<Result>> {
 	
-	shared actual Executable toExecutable(Executable.Adapter visitor) => visitor.adaptConverter(this);
-	shared actual Findable toFindable(Findable.Adapter visitor) => visitor.adaptConverter(this);
 	
 	throws(`class ConvertionException`)
 	shared actual formal Result convert(Context context,Source source,Type<Result> resultType);

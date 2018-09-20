@@ -1,9 +1,9 @@
 import herd.convertx.core.internal {
 	Findable,
-	Flatten
+	Executable
 }
 shared interface Registrable{
 	
-	shared formal [Findable,Flatten] register(Visitor visitor);
+	shared formal [Findable,Executable] register(Visitor visitor);
 	
 }

@@ -17,7 +17,7 @@ shared class Registry {
 	shared new(Component[] components,Visitor visitor=DefaultVisitor()){
 		components.each((Component element) {
 			value flat=element.register(visitor);
-			Flatten? replaced;
+			Executable? replaced;
 			switch(element)
 			case (is TypedConverter<>) {
 				replaced=converters.put(*flat);

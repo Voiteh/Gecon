@@ -17,7 +17,7 @@ import herd.convertx.core.api {
 	Context
 }
 shared class DefaultVisitor() satisfies Visitor{
-	shared actual [Findable, Flatten] prepareConverterRegistration<Source, Result, ResultType>(TypedConverter<Source,Result,ResultType> converter) {
+	shared actual [Findable, Executable] prepareConverterRegistration<Source, Result, ResultType>(TypedConverter<Source,Result,ResultType> converter) {
 		Findable findable;
 		if (exists matcher = converter.matcher) {
 			
@@ -42,8 +42,8 @@ shared class DefaultVisitor() satisfies Visitor{
 			value resultType = typeLiteral<Result>();
 			findable= Hashable(sourceType, resultType);
 		}
-		value executable=object satisfies Flatten{
-			shared actual Result flat<Result>([Anything*] args) {
+		value executable=object satisfies Executable{
+			shared actual Result execute<Result>([Anything*] args) {
 				assert(is [Context,Source,ResultType] args);
 				assert(is Result result=converter.convert(*args));
 				return result;
@@ -56,7 +56,7 @@ shared class DefaultVisitor() satisfies Visitor{
 		return [findable,executable];
 	}
 	
-	shared actual [Findable, Flatten] prepareCreatorRegistration<Args, Result, ResultType>(TypedCreator<Args,Result,ResultType> creator) {
+	shared actual [Findable, Executable] prepareCreatorRegistration<Args, Result, ResultType>(TypedCreator<Args,Result,ResultType> creator) {
 		Findable findable;
 		if(exists matcher=creator.matcher){
 			findable=object satisfies Matchable{
@@ -82,8 +82,8 @@ shared class DefaultVisitor() satisfies Visitor{
 			value args =typeLiteral<Args>();
 			findable=Hashable(kind,args);
 		}
-		value flatten =object satisfies Flatten{
-			shared actual Result flat<Result>([Anything*] args) {
+		value flatten =object satisfies Executable{
+			shared actual Result execute<Result>([Anything*] args) {
 				assert(is [Context,Class<ResultType>, Args] args);
 				assert(is Result result= creator.create(*args));
 				return result;
@@ -96,7 +96,7 @@ shared class DefaultVisitor() satisfies Visitor{
 		return [findable,flatten];
 	}
 	
-	shared actual [Findable, Flatten] prepareResolverRegistration<Source, Result, ResultType>(TypedResolver<Source,Result,ResultType> resolver) {
+	shared actual [Findable, Executable] prepareResolverRegistration<Source, Result, ResultType>(TypedResolver<Source,Result,ResultType> resolver) {
 		Findable findable;
 		if (exists matcher = resolver.matcher) {
 			findable= object satisfies Matchable {
@@ -119,8 +119,8 @@ shared class DefaultVisitor() satisfies Visitor{
 			value output = typeLiteral<Result>();
 			findable= Hashable(input,output);
 		}
-		value flatten = object satisfies Flatten{
-			shared actual Result flat<Result>([Anything*] args) {
+		value flatten = object satisfies Executable{
+			shared actual Result execute<Result>([Anything*] args) {
 				assert(is [Context,Source,ResultType] args);
 				assert(is Result result=resolver.resolve(*args));
 				return result;

@@ -1,4 +1,4 @@
 import ceylon.collection {
 	HashMap
 }
-shared class Container() extends HashMap<Findable, Flatten>(){}
+shared class Container() extends HashMap<Findable, Executable>(){}
