@@ -20,6 +20,9 @@ import ceylon.test {
 import ceylon.test.event {
 	TestStartedEvent
 }
+import herd.convertx.core.model {
+	CoreProvider
+}
 
 beforeTestRun
 shared void setupLogger(){
@@ -45,7 +48,7 @@ shared class BaseTest() {
 	
 		shared default {Provider*} additionalProviders =>{};
 	
-		shared default Convertx convertx=>CoreConvertx(*additionalProviders);
+		shared default Convertx convertx=>CoreConvertx(CoreProvider(),*additionalProviders);
 	
 	
 	
