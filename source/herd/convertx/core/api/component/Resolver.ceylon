@@ -10,17 +10,18 @@ import ceylon.language.meta {
 	typeLiteral,
 	type
 }
-import herd.convertx.core.api.logicals {
-	Visitor,
+
+import herd.convertx.core.api.registration {
+	Executable,
 	Findable,
-	Executable
+	Visitor
 }
 
 shared sealed interface TypedResolver<in Source=Nothing, out Output=Anything, in OutputType=Nothing> satisfies Component
 		given OutputType satisfies Type<Output> {
 	shared formal Class<Output> resolve(Context context, Source input, OutputType outputType);
 	
-	shared actual [Findable, Executable] register(Visitor visitor) => visitor.prepareResolverRegistration(this);
+	shared actual [Findable, Executable] flatten(Visitor visitor) => visitor.prepareResolverRegistration(this);
 	
 	shared interface Matcher {
 		shared formal Boolean match(Source input, OutputType outputType);

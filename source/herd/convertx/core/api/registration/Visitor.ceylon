@@ -3,6 +3,7 @@ import herd.convertx.core.api.component {
 	TypedResolver,
 	TypedConverter
 }
+
 shared interface Visitor {
 	
 	shared formal [Findable,Executable] prepareConverterRegistration<Source,Result,ResultType>(TypedConverter<Source,Result,ResultType> converter);

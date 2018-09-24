@@ -12,12 +12,7 @@ import ceylon.language.meta {
 import herd.convertx.core.api {
 	Context
 }
-import herd.convertx.core.api.logicals {
-	Visitor,
-	Findable,
-	Executable,
-	Matchable
-}
+
 import herd.convertx.core.api.configuration {
 	Configurable
 }
@@ -26,6 +21,12 @@ import herd.convertx.core.configuration {
 }
 import ceylon.logging {
 	logger
+}
+import herd.convertx.core.api.registration {
+	Executable,
+	Findable,
+	Matchable,
+	Visitor
 }
 
 String matchingResultLog(Boolean result) =>"Matching ``if (result) then "SUCCESS" else "FAILURE"``";

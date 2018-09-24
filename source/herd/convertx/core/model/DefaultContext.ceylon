@@ -1,21 +1,22 @@
 import herd.convertx.core.api {
 	Context,
-	Provider
+	Provider,
+	Logical
 }
 import ceylon.language.meta.model {
 	Type,
 	Class
 }
 
-import herd.convertx.core.api.logicals {
-	Logical,
-	Registry
-}
+
 import herd.convertx.core.api.component {
 	Component
 }
 import herd.convertx.core.internal {
 	DefaultLogical
+}
+import herd.convertx.core.api.registration {
+	Registry
 }
 shared class DefaultContext satisfies Context{
 	

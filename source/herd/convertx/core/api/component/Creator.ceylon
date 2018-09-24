@@ -9,9 +9,10 @@ import ceylon.language.meta {
 	type,
 	typeLiteral
 }
-import herd.convertx.core.api.logicals {
-	Findable,
+
+import herd.convertx.core.api.registration {
 	Executable,
+	Findable,
 	Visitor
 }
 
@@ -20,7 +21,7 @@ shared sealed interface TypedCreator<in Args=Nothing,out Result=Anything, in Kin
 	throws (`class ConvertionException`)
 	shared formal Result create(Context context,Class<Kind> kind, Args arguments);
 	
-	shared actual [Findable, Executable] register(Visitor visitor) => visitor.prepareCreatorRegistration(this);
+	shared actual [Findable, Executable] flatten(Visitor visitor) => visitor.prepareCreatorRegistration(this);
 	
 	shared interface Matcher {
 		shared formal Boolean match(Class<Kind> kind, Args arguments);

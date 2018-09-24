@@ -1,9 +1,4 @@
-import herd.convertx.core.api.logicals {
-	Registrator,
-	Registry,
-	Executable,
-	Visitor
-}
+
 import herd.convertx.core.api.component {
 	Component,
 	TypedCreator,
@@ -19,6 +14,12 @@ import herd.convertx.core.api.configuration {
 import herd.convertx.core.configuration {
 	Logging
 }
+import herd.convertx.core.api.registration {
+	Executable,
+	Registry,
+	Registrator,
+	Visitor
+}
 
 shared class DefaultRegistrator() satisfies Registrator & Configurable<Logging>{
 	value log=logger(`package`);
@@ -31,7 +32,7 @@ shared class DefaultRegistrator() satisfies Registrator & Configurable<Logging>{
 	shared actual void register(Visitor visitor,Registry registry, Component[] components) {
 		
 		components.each((Component element) {
-			value flat=element.register(visitor);
+			value flat=element.flatten(visitor);
 			Executable? replaced;
 			switch(element)
 			case (is TypedConverter<>) {

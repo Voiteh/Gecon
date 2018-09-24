@@ -1,12 +1,11 @@
 
-import herd.convertx.core.api.logicals {
-	Configurator
-}
+
 import herd.convertx.core.util {
 	extractObjectType
 }
 import herd.convertx.core.api.configuration {
-	Configurable
+	Configurable,
+	Configurator
 }
 shared class DefaultConfigurator() satisfies Configurator{
 	shared actual void configure(Object target, {Object*} configurations) {

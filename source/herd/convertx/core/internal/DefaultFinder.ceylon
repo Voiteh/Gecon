@@ -6,18 +6,21 @@ import ceylon.logging {
 	logger
 }
 
-import herd.convertx.core.api.logicals {
-	Finder,
-	Executable,
-	Findable,
-	Matchable,
-	Container
-}
+
 import herd.convertx.core.configuration {
 	Logging
 }
 import herd.convertx.core.api.configuration {
 	Configurable
+}
+import herd.convertx.core.api.registration {
+	Executable,
+	Findable,
+	Matchable,
+	Container
+}
+import herd.convertx.core.api.search {
+	Finder
 }
 shared class DefaultFinder() satisfies Finder & Configurable<Logging>{
 
