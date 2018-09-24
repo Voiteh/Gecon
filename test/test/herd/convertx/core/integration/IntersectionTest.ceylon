@@ -30,11 +30,12 @@ class StringIntersectionResolver() satisfies Resolver<Anything,MutableList<Strin
 
 shared class IntersectionTest() extends BaseTest() {
 	
-	additionalProviders => { object satisfies Provider {
+	providers => [object satisfies Provider {
 			shared actual MutableList<Component> components => ArrayList<Component> {
 				elements = { StringIntersectionResolver() };
 			};
-	}};
+			shared actual MutableList<Object> configurations => ArrayList<Object>();
+		}];
 	
 	shared test
 	void shouldConvertToIntersectionContainingType() {

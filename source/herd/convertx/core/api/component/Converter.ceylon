@@ -10,6 +10,11 @@ import ceylon.language.meta {
 	typeLiteral,
 	type
 }
+import herd.convertx.core.api.logicals {
+	Findable,
+	Executable,
+	Visitor
+}
 
 shared sealed interface TypedConverter<in Source=Nothing ,out Result=Anything,in ResultType=Nothing> satisfies Component
 		given ResultType satisfies Type<Result> {

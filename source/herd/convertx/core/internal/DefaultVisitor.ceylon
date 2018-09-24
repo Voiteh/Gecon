@@ -1,11 +1,7 @@
 import herd.convertx.core.api.component {
-	Visitor,
 	TypedConverter,
 	TypedCreator,
-	TypedResolver,
-	Executable,
-	Matchable,
-	Findable
+	TypedResolver
 }
 import ceylon.language.meta.model {
 	Class
@@ -13,15 +9,34 @@ import ceylon.language.meta.model {
 import ceylon.language.meta {
 	typeLiteral
 }
-import herd.convertx.core {
-	logger
-}
 import herd.convertx.core.api {
 	Context
 }
+import herd.convertx.core.api.logicals {
+	Visitor,
+	Findable,
+	Executable,
+	Matchable
+}
+import herd.convertx.core.api.configuration {
+	Configurable
+}
+import herd.convertx.core.configuration {
+	Logging
+}
+import ceylon.logging {
+	logger
+}
 
 String matchingResultLog(Boolean result) =>"Matching ``if (result) then "SUCCESS" else "FAILURE"``";
-shared class DefaultVisitor() satisfies Visitor{
+shared class DefaultVisitor() satisfies Visitor & Configurable<Logging>{
+	
+	
+	value log=logger(`package`);
+	shared actual void configure(Logging configuration) {
+		
+	}
+	
 	shared actual [Findable, Executable] prepareConverterRegistration<Source, Result, ResultType>(TypedConverter<Source,Result,ResultType> converter) {
 		Findable findable;
 		if (exists matcher = converter.matcher) {
@@ -35,7 +50,7 @@ shared class DefaultVisitor() satisfies Visitor{
 					else{
 						result=false;
 					}
-					logger.trace("``matchingResultLog(result)``,for Converter: ``converter`` ");
+					log.trace("``matchingResultLog(result)``,for Converter: ``converter`` ");
 					return result;
 				}
 				
@@ -73,7 +88,7 @@ shared class DefaultVisitor() satisfies Visitor{
 					else {
 						result=false;
 					}
-					logger.trace("``matchingResultLog(result)``, for Creator: ``creator``");
+					log.trace("``matchingResultLog(result)``, for Creator: ``creator``");
 					return result;
 				}
 				
@@ -113,7 +128,7 @@ shared class DefaultVisitor() satisfies Visitor{
 					else{
 						result =false;
 					}
-					logger.trace("``matchingResultLog(result)``, for Resolver: ``resolver`` ");
+					log.trace("``matchingResultLog(result)``, for Resolver: ``resolver`` ");
 					return result;
 				}
 				shared actual Integer priority = matcher.priority;
@@ -135,5 +150,7 @@ shared class DefaultVisitor() satisfies Visitor{
 		};
 		return [findable,flatten];
 	}
+
+	
 	
 }

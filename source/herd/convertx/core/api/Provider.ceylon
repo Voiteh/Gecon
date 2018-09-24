@@ -5,6 +5,6 @@ import ceylon.collection {
 	MutableList
 }
 shared interface Provider {
-	
 	shared formal MutableList<Component> components;
+	shared formal MutableList<Object> configurations;
 }

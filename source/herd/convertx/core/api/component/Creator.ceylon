@@ -9,6 +9,11 @@ import ceylon.language.meta {
 	type,
 	typeLiteral
 }
+import herd.convertx.core.api.logicals {
+	Findable,
+	Executable,
+	Visitor
+}
 
 shared sealed interface TypedCreator<in Args=Nothing,out Result=Anything, in Kind=Nothing> satisfies Component given Kind satisfies Result {
 	

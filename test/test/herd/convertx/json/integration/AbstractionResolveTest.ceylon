@@ -29,11 +29,11 @@ shared class AbstractionResolveTest() extends BaseJsonIntegrationTest(){
 				JsonObjectToTestResolveInterfaceResolver()
 			};
 	};
-		
+		shared actual MutableList<Object> configurations => ArrayList<Object>();
 		
 	}
 	
-	shared actual {Provider*} additionalProviders => super.additionalProviders.follow(resolvingProvider);
+	shared actual [Provider+] providers => super.providers.follow(resolvingProvider).sequence();
 	
 	shared test
 	void shouldConvertTypeResolveOneIntoJsonObject(){

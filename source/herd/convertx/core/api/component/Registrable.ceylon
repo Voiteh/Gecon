@@ -1,3 +1,8 @@
+import herd.convertx.core.api.logicals {
+	Visitor,
+	Findable,
+	Executable
+}
 
 shared interface Registrable{
 	

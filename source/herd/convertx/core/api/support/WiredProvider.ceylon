@@ -14,16 +14,33 @@ import ceylon.collection {
 	ArrayList,
 	MutableList
 }
-import ceylon.language.meta.model {
-	Class
+import herd.convertx.core.api.configuration {
+	ConfigurationAnnotation
 }
 
-shared class WiredProvider(Module* modules) satisfies Provider {
-	shared actual MutableList<Component> components {
-		value created= modules.flatMap((Module modul) => modul.members)
-		.flatMap((Package pakage) => pakage.annotatedMembers<ClassDeclaration, WiredAnnotation>())
-		.map((ClassDeclaration element) => element.classApply<Component>())
-		.map((Class<Component> element) => element.apply());
-		return ArrayList<Component>{elements=created;};
+shared class WiredProvider(Module \imodule) satisfies Provider {
+	
+	{ClassDeclaration*} annotatedDeclaration<Annotation>(Package|Module owner) given Annotation satisfies ConstrainedAnnotation<> {
+		switch (owner)
+		case (is Package) {
+			return owner.annotatedMembers<ClassDeclaration,Annotation>();
+		}
+		case (is Module) {
+			return owner.members
+				.flatMap((Package element) => annotatedDeclaration<Annotation>(element));
+		}
 	}
+	
+	Instance instantaiate<Instance>(ClassDeclaration declaration) => declaration.classApply<Instance>().apply();
+	
+	shared actual MutableList<Component> components = ArrayList<Component> {
+		elements = annotatedDeclaration<WiredAnnotation>(\imodule)
+			.map((ClassDeclaration declaration) => instantaiate<Component>(declaration))
+			.sequence();
+	};
+	shared actual MutableList<Object> configurations = ArrayList<Object> {
+		elements = annotatedDeclaration<ConfigurationAnnotation>(\imodule)
+			.map((ClassDeclaration declaration) => instantaiate<Object>(declaration))
+			.sequence();
+	};
 }

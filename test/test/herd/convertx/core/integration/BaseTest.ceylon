@@ -2,18 +2,13 @@ import herd.convertx.core.api {
 	Provider,
 	Convertx
 }
-import herd.convertx.core {
-	CoreConvertx,
-	logger
-}
 import ceylon.logging {
 	addLogWriter,
 	writeSimpleLog,
-	info
+	logger
 }
 import ceylon.test {
 	beforeTestRun,
-	beforeTest,
 	TestListener,
 	testExtension
 }
@@ -21,7 +16,8 @@ import ceylon.test.event {
 	TestStartedEvent
 }
 import herd.convertx.core.model {
-	CoreProvider
+	CoreProvider,
+	DefaultContext
 }
 
 beforeTestRun
@@ -30,9 +26,10 @@ shared void setupLogger(){
 }
 
 class LoggingTestExtension() satisfies TestListener{
+	value log =logger(`module`);
 	shared actual void testStarted(TestStartedEvent event) {
 		if (exists instance=event.instance) {
-			logger.info("----- TEST--STARTED ----- ``event.description`` -----");
+			log.info("----- TEST--STARTED ----- ``event.description`` -----");
 		}
 	}
 }
@@ -40,16 +37,15 @@ class LoggingTestExtension() satisfies TestListener{
 testExtension(`class LoggingTestExtension`)
 shared class BaseTest() {
 	
-		shared beforeTest 
-		default void setupLogger(){
-			logger.priority=info;
-		}
 	
 	
-		shared default {Provider*} additionalProviders =>{};
+	shared default [Provider+] providers =>[CoreProvider()];
 	
-		shared default Convertx convertx=>CoreConvertx(CoreProvider(),*additionalProviders);
-	
+	shared default Convertx convertx=>Convertx{
+		context=DefaultContext{
+			providers = this.providers;
+		};
+	};
 	
 	
 }
