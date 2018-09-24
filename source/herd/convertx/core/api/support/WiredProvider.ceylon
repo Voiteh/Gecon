@@ -1,11 +1,6 @@
 import herd.convertx.core.api {
 	Provider
 }
-import ceylon.language.meta.declaration {
-	Module,
-	Package,
-	ClassDeclaration
-}
 import herd.convertx.core.api.component {
 	Component,
 	WiredAnnotation
@@ -15,7 +10,12 @@ import ceylon.collection {
 	MutableList
 }
 import herd.convertx.core.api.configuration {
-	ConfigurationAnnotation
+	Configuration
+}
+import ceylon.language.meta.declaration {
+	Package,
+	Module,
+	ClassDeclaration
 }
 
 shared class WiredProvider(Module \imodule) satisfies Provider {
@@ -31,6 +31,8 @@ shared class WiredProvider(Module \imodule) satisfies Provider {
 		}
 	}
 	
+	
+	
 	Instance instantaiate<Instance>(ClassDeclaration declaration) => declaration.classApply<Instance>().apply();
 	
 	shared actual MutableList<Component> components = ArrayList<Component> {
@@ -38,9 +40,10 @@ shared class WiredProvider(Module \imodule) satisfies Provider {
 			.map((ClassDeclaration declaration) => instantaiate<Component>(declaration))
 			.sequence();
 	};
-	shared actual MutableList<Object> configurations = ArrayList<Object> {
-		elements = annotatedDeclaration<ConfigurationAnnotation>(\imodule)
-			.map((ClassDeclaration declaration) => instantaiate<Object>(declaration))
-			.sequence();
+	shared actual MutableList<Configuration> configurations = ArrayList<Configuration> {
+		elements = \imodule.members
+				.flatMap((Package element) => element.members<ClassDeclaration>())
+				.filter((ClassDeclaration element) => element.satisfiedTypes.contains(`interface Configuration`))
+				.map((ClassDeclaration element) => instantaiate<Configuration>(element));
 	};
 }

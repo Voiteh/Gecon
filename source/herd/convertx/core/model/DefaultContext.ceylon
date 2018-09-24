@@ -18,6 +18,10 @@ import herd.convertx.core.internal {
 import herd.convertx.core.api.registration {
 	Registry
 }
+import herd.convertx.core.api.configuration {
+	Configuration,
+	Configurable
+}
 shared class DefaultContext satisfies Context{
 	
 	Registry registry;
@@ -25,13 +29,19 @@ shared class DefaultContext satisfies Context{
 	shared new(Logical logical=DefaultLogical(),[Provider+] providers=[CoreProvider()]){
 		this.registry=Registry();
 		this.logical=logical;
-		Object[] configurations=providers.flatMap((Provider element) => element.configurations).sequence();
+		Configuration[] configurations=providers.flatMap((Provider element) => element.configurations).sequence();
 		Component[] components=providers.flatMap((Provider element) => element.components).sequence();
-		
-		logical.configurator.configure(logical.finder, configurations);
-		logical.configurator.configure(logical.visitor, configurations);
-		logical.configurator.configure(logical.registrator, configurations);
-		components.each((Component element) => logical.configurator.configure(element, configurations));
+		if(is Configurable<> finder=logical.finder){
+			logical.configurator.configure(finder, configurations);
+		}
+		if(is Configurable<> visitor=logical.visitor){
+			logical.configurator.configure(visitor,configurations);
+		}
+		if(is Configurable<> registrator=logical.registrator){
+			logical.configurator.configure(registrator,configurations);
+		}
+		components.narrow<Configurable<>>()
+				.each((Configurable<> element) => logical.configurator.configure(element, configurations));
 		logical.registrator.register(logical.visitor, registry, providers.flatMap((Provider element) => element.components).sequence());
 		
 	}

@@ -17,6 +17,9 @@ import herd.convertx.core.api {
 import ceylon.test {
 	test
 }
+import herd.convertx.core.api.configuration {
+	Configuration
+}
 
 class StringIntersectionResolver() satisfies Resolver<Anything,MutableList<String>&SearchableList<String>> {
 	shared actual Class<MutableList<String>&SearchableList<String>,Nothing> resolve(Context context, Anything input, Type<MutableList<String>&SearchableList<String>> outputType) => `ArrayList<String>`;
@@ -34,7 +37,7 @@ shared class IntersectionTest() extends BaseTest() {
 			shared actual MutableList<Component> components => ArrayList<Component> {
 				elements = { StringIntersectionResolver() };
 			};
-			shared actual MutableList<Object> configurations => ArrayList<Object>();
+			shared actual MutableList<Configuration> configurations => ArrayList<Configuration>();
 		}];
 	
 	shared test

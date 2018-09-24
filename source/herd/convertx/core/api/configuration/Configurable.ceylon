@@ -1,3 +1,3 @@
-shared interface Configurable<in Configuration=Object> {
-	shared formal void configure(Configuration configuration);
+shared interface Configurable<in Config=Configuration> given Config satisfies Configuration {
+	shared formal void configure(Config configuration);
 }

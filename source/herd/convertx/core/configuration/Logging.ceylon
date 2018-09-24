@@ -3,6 +3,10 @@ import ceylon.logging {
 	info
 }
 import ceylon.language.meta.declaration {
-	Package
+	Package,
+	Module
 }
-shared class Logging(shared Priority priority=info, shared Package? \ipackage=null) {}
+import herd.convertx.core.api.configuration {
+	Configuration
+}
+shared class Logging(shared Priority priority=info, shared actual Package|Module category=`module`) satisfies Configuration{}

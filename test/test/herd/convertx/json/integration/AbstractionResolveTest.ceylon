@@ -21,6 +21,9 @@ import herd.convertx.core.api.component {
 import ceylon.json {
 	JsonObject
 }
+import herd.convertx.core.api.configuration {
+	Configuration
+}
 shared class AbstractionResolveTest() extends BaseJsonIntegrationTest(){
 	
 	object resolvingProvider satisfies Provider{
@@ -29,7 +32,7 @@ shared class AbstractionResolveTest() extends BaseJsonIntegrationTest(){
 				JsonObjectToTestResolveInterfaceResolver()
 			};
 	};
-		shared actual MutableList<Object> configurations => ArrayList<Object>();
+		shared actual MutableList<Configuration> configurations => ArrayList<Configuration>();
 		
 	}
 	
