@@ -31,8 +31,6 @@ shared class WiredProvider(Module \imodule) satisfies Provider {
 		}
 	}
 	
-	
-	
 	Instance instantaiate<Instance>(ClassDeclaration declaration) => declaration.classApply<Instance>().apply();
 	
 	shared actual MutableList<Component> components = ArrayList<Component> {
@@ -40,10 +38,5 @@ shared class WiredProvider(Module \imodule) satisfies Provider {
 			.map((ClassDeclaration declaration) => instantaiate<Component>(declaration))
 			.sequence();
 	};
-	shared actual MutableList<Configuration> configurations = ArrayList<Configuration> {
-		elements = \imodule.members
-				.flatMap((Package element) => element.members<ClassDeclaration>())
-				.filter((ClassDeclaration element) => element.satisfiedTypes.contains(`interface Configuration`))
-				.map((ClassDeclaration element) => instantaiate<Configuration>(element));
-	};
+	shared actual MutableList<Configuration> configurations = ArrayList<Configuration>();
 }
