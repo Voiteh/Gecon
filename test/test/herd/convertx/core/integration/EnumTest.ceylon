@@ -5,6 +5,9 @@ import ceylon.test {
 import herd.convertx.api {
 	ConvertionException
 }
+import test.base.herd.convertx.integration {
+	BaseTest
+}
 shared class EnumTest() extends BaseTest() {
 	
 	

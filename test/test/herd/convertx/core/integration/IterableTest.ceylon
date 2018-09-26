@@ -10,6 +10,9 @@ import ceylon.collection {
 import herd.convertx.api {
 	ConvertionException
 }
+import test.base.herd.convertx.integration {
+	BaseTest
+}
 shared class IterableTest() extends BaseTest(){
 	
 	

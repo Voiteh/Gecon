@@ -1,6 +1,9 @@
 import ceylon.test {
 	test
 }
+import test.base.herd.convertx.integration {
+	BaseTest
+}
 shared class UnionTest() extends BaseTest(){
 	
 	

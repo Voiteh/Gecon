@@ -36,7 +36,7 @@ shared class AbstractionResolveTest() extends BaseJsonIntegrationTest(){
 		
 	}
 	
-	shared actual [Provider+] providers => super.providers.follow(resolvingProvider).sequence();
+	shared actual Provider[] providers => super.providers.follow(resolvingProvider).sequence();
 	
 	shared test
 	void shouldConvertTypeResolveOneIntoJsonObject(){

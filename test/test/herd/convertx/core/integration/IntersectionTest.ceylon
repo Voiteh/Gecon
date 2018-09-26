@@ -17,6 +17,9 @@ import ceylon.test {
 import herd.convertx.api.operation {
 	Resolvance
 }
+import test.base.herd.convertx.integration {
+	BaseTest
+}
 
 class StringIntersectionResolver() satisfies Resolver<Anything,<MutableList<String>&SearchableList<String>>> {
 	shared actual Class<MutableList<String>&SearchableList<String>,Nothing> resolve(Context context, Anything input, Type<MutableList<String>&SearchableList<String>> outputType) => `ArrayList<String>`;
