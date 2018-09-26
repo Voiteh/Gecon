@@ -10,6 +10,9 @@ import ceylon.language.meta.model {
 	Class,
 	Type
 }
+import herd.convertx.api.operation {
+	Convertion
+}
 
 shared wired class EntryConverter() satisfies Converter<Object->Anything,Object->Anything> {
 	shared actual Object->Anything convert(Context context, Object->Anything source, Type<Object->Anything> resultType) {
@@ -26,11 +29,12 @@ shared wired class EntryConverter() satisfies Converter<Object->Anything,Object-
 		value instance = context.create(resolvedType, { convertedKey, convertedItem });
 		return instance;
 	}
-shared actual Converter<Object->Anything,Object->Anything>.Matcher? matcher => object satisfies Converter<Object->Anything,Object->Anything>.Matcher{
 	
-	shared actual Boolean match(Object->Anything source, Type<Object->Anything> resultType) => resultType is Class<Object->Anything>;
+	shared actual Convertion<Object->Anything,Object->Anything,Type<Object->Anything>>.Matcher? matcher => object satisfies Convertion<Object->Anything,Object->Anything,Type<Object->Anything>>.Matcher{
+		shared actual Boolean match(Object->Anything source, Type<Object->Anything> resultType) => resultType is Class<Object->Anything>;
+		
+		shared actual Integer priority => 1;		
+	};
 	
-	shared actual Integer priority => 1;
-	
-};	
 }
+

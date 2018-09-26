@@ -10,6 +10,7 @@ import ceylon.language.meta {
 
 
 shared sealed interface Operation of Convertion<> | Resolvance<> | Creation<> {
+	
 	shared formal [Findable,Executable] flatten(Visitor visitor);
 	
 	string => "``type(this).declaration.name``";

@@ -14,7 +14,6 @@ shared interface Creator<Args,Result> satisfies  Creation<Args,Result,Result> {
 	shared formal actual Result create(Context context,Class<Result> kind, Args arguments);
 
 
-	shared actual default Creator<Args,Result >.Matcher? matcher => null;
 }
 
 

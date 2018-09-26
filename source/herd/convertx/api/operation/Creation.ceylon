@@ -24,5 +24,5 @@ shared sealed interface Creation<in Args=Nothing,out Result=Anything, in Kind=No
 		shared formal Integer priority;
 	}
 	
-	shared formal Matcher? matcher;
+	shared default Matcher? matcher=>null;
 }

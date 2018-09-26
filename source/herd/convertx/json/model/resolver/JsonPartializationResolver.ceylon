@@ -18,19 +18,20 @@ import herd.convertx.json.model.meta {
 import ceylon.json {
 	JsonObject
 }
+import herd.convertx.api.operation {
+	Resolvance
+}
 wired
 shared class JsonPartializationResolver() satisfies Resolver<Relation<Object, JsonObject>,Partialization>{
 	shared actual Class<Partialization,Nothing> resolve(Context context, Relation<Object, JsonObject> input, Type<Partialization> outputType) => `JsonPartialization`;
 	
 	
-	matcher => object satisfies JsonPartializationResolver.Matcher{
+	shared actual Resolvance<Relation<Object,JsonObject>,Partialization,Type<Partialization>>.Matcher? matcher => object satisfies Resolvance<Relation<Object,JsonObject>,Partialization,Type<Partialization>>.Matcher{
 		shared actual Boolean match(Relation<Object, JsonObject> input, Type<Partialization> outputType) => true;
 		
 		shared actual Integer priority => 2;
-		
-		
 	};
 	
 	
-	
 }
+

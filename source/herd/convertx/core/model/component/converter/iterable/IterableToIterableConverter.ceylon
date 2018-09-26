@@ -12,6 +12,9 @@ import herd.convertx.core.util {
 	typeHierarchy,
 	runtimeCall
 }
+import herd.convertx.api.operation {
+	Convertion
+}
 
 shared wired class IterableToIterableConverter() satisfies Converter<{Anything*},{Anything*}> {
 	shared actual {Anything*} convert(Context context, {Anything*} source, Type<{Anything*}> resultType){
@@ -25,15 +28,13 @@ shared wired class IterableToIterableConverter() satisfies Converter<{Anything*}
 	}
 	
 	
-	matcher =>  object satisfies IterableToIterableConverter.Matcher{
+	shared actual Convertion<{Anything*},{Anything*},Type<{Anything*}>>.Matcher? matcher => object satisfies Convertion<{Anything*},{Anything*},Type<{Anything*}>>.Matcher{
+		
 		shared actual Boolean match({Anything*} source, Type<{Anything*}> resultType) => resultType is ClassOrInterface<{Anything*}>;
 		
 		shared actual Integer priority => 1;
-		
-		
+
 	};
-	
 	
 		
 }
-

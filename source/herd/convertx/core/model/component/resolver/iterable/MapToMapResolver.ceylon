@@ -15,6 +15,9 @@ import herd.convertx.api {
 	Resolver,
 	wired
 }
+import herd.convertx.api.operation {
+	Resolvance
+}
 
 shared wired class MapToMapResolver() satisfies Resolver<Map<>,Map<>> {
 	
@@ -26,10 +29,10 @@ shared wired class MapToMapResolver() satisfies Resolver<Map<>,Map<>> {
 		assert (exists itemType = iterableType.typeArgumentList.rest.first);
 		return `class HashMap`.classApply<Map<>>(keyType, itemType);
 	}
-	matcher => object satisfies MapToMapResolver.Matcher {
-		
+	
+	shared actual Resolvance<Map<Object,Anything>,Map<Object,Anything>,Type<Map<Object,Anything>>>.Matcher? matcher => object satisfies Resolvance<Map<Object,Anything>,Map<Object,Anything>,Type<Map<Object,Anything>>>.Matcher{
 		shared actual Integer priority => 1;
 		shared actual Boolean match(Map<> input, Type<Map<>> outputType) => outputType is ClassOrInterface<Map<>>;
-		
 	};
 }
+

@@ -8,6 +8,9 @@ import herd.convertx.api {
 	Creator,
 	wired
 }
+import herd.convertx.api.operation {
+	Creation
+}
 
 wired
 shared class TupleCreator() satisfies  Creator<{Anything*},AnyTuple> {
@@ -22,7 +25,8 @@ shared class TupleCreator() satisfies  Creator<{Anything*},AnyTuple> {
 			return kind.apply(first, subTuple);
 		}
 	}
-	matcher => object satisfies TupleCreator.Matcher {
+	
+	shared actual Creation<{Anything*},AnyTuple,AnyTuple>.Matcher? matcher => object satisfies Creation<{Anything*},AnyTuple,AnyTuple>.Matcher{
 		shared actual Boolean match(Class<AnyTuple> kind, {Anything*} arguments) => true;
 		
 		shared actual Integer priority => 1;

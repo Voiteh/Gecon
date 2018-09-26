@@ -11,13 +11,16 @@ import herd.convertx.api {
 	Creator,
 	wired
 }
+import herd.convertx.api.operation {
+	Creation
+}
 wired
 shared class TreeSetCreator() satisfies  Creator<{Anything*},Set<>> {
 	shared actual Set<> create(Context context,Class<Set<>,Nothing> kind, {Anything*} arguments) {
 		value factoryMethod = `function naturalOrderTreeSet`.apply<Set<>>(*kind.typeArgumentList);
 		return factoryMethod.apply(*arguments);
 	}
-	matcher => object satisfies TreeSetCreator.Matcher {
+	shared actual Creation<{Anything*},Set<Object>,Set<Object>>.Matcher? matcher => object satisfies Creation<{Anything*},Set<Object>,Set<Object>>.Matcher{
 		shared actual Boolean match(Class<Set<>,Nothing> kind, {Anything*} arguments) {
 			return kind.declaration==`class TreeSet`;
 		}
@@ -25,3 +28,4 @@ shared class TreeSetCreator() satisfies  Creator<{Anything*},Set<>> {
 		shared actual Integer priority => 1;
 	};
 }
+

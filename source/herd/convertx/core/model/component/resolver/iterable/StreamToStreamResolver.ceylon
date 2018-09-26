@@ -13,6 +13,9 @@ import herd.convertx.api {
 import ceylon.language.meta {
 	type
 }
+import herd.convertx.api.operation {
+	Resolvance
+}
 shared wired class StreamToStreamResolver() satisfies  Resolver<{Anything*},{Anything*}>{
 	
 	Class<AnyTuple|Empty> createSequentialType(Type<>[] args){
@@ -31,12 +34,11 @@ shared wired class StreamToStreamResolver() satisfies  Resolver<{Anything*},{Any
 		return tupleType;
 	}
 	
-	matcher => object satisfies StreamToStreamResolver.Matcher{
+	shared actual Resolvance<{Anything*},{Anything*},Type<{Anything*}>>.Matcher? matcher => object satisfies Resolvance<{Anything*},{Anything*},Type<{Anything*}>>.Matcher{
 		
 		shared actual Integer priority => 0;
 		shared actual Boolean match({Anything*} input, Type<{Anything*}> outputType) => outputType is Interface<{Anything*}>;
-		
-		
-		
+
 	};
+	
 }

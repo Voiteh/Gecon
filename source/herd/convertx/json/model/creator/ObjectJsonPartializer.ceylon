@@ -20,6 +20,9 @@ import ceylon.json {
 import herd.convertx.api.meta.component {
 	ObjectPartializer
 }
+import herd.convertx.api.operation {
+	Creation
+}
 
 shared wired class ObjectJSONPartializer() extends ObjectPartializer<JsonPartialization, {<String->Value>*}, JsonObject>(){
 	shared actual JsonPartialization createPartialization({<String->Value>*} holder) => JsonPartialization(holder);
@@ -34,12 +37,12 @@ shared wired class ObjectJSONPartializer() extends ObjectPartializer<JsonPartial
 		}
 	});
 	
-	matcher => object satisfies ObjectJSONPartializer.Matcher{
+	shared actual Creation<Relation<Object,JsonObject>,JsonPartialization,JsonPartialization>.Matcher? matcher => object satisfies Creation<Relation<Object,JsonObject>,JsonPartialization,JsonPartialization>.Matcher{
 		shared actual Boolean match(Class<JsonPartialization,Nothing> kind, Relation<Object,JsonObject> arguments) => true;
 		
 		shared actual Integer priority => 2;
 		
-		
 	};
-	
+		
 }
+

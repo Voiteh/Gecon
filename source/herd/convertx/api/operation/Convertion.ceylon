@@ -25,6 +25,6 @@ shared sealed interface Convertion<in Source=Nothing ,out Result=Anything,in Res
 		shared formal Integer priority;
 	}
 	
-	shared formal Matcher? matcher;
+	shared default Matcher? matcher=>null;
 	
 }

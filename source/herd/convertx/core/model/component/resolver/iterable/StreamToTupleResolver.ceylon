@@ -12,6 +12,9 @@ import herd.convertx.api {
 import ceylon.language.meta {
 	type
 }
+import herd.convertx.api.operation {
+	Resolvance
+}
 
 shared class StreamToTupleResolver() satisfies Resolver<{Anything*},AnyTuple>{
 	
@@ -31,13 +34,12 @@ shared class StreamToTupleResolver() satisfies Resolver<{Anything*},AnyTuple>{
 		return tupleType;
 	}
 	
-	
-	matcher => object satisfies StreamToTupleResolver.Matcher{
-		
+	shared actual Resolvance<{Anything*},AnyTuple,Type<AnyTuple>>.Matcher? matcher => object satisfies Resolvance<{Anything*},AnyTuple,Type<AnyTuple>>.Matcher{
 		shared actual Integer priority => 1;
 		shared actual Boolean match({Anything*} input, Type<AnyTuple> outputType) => !input.empty;
-		
+
 	};
 	
 	
 }
+

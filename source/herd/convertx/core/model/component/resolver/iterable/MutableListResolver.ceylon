@@ -13,6 +13,9 @@ import herd.convertx.api {
 	Resolver,
 	wired
 }
+import herd.convertx.api.operation {
+	Resolvance
+}
 
 
 shared wired class MutableListResolver() satisfies Resolver<{Anything*},List<>> {
@@ -21,12 +24,13 @@ shared wired class MutableListResolver() satisfies Resolver<{Anything*},List<>> 
 		value typeForIterable = iterableTypeArgument(outputType);
 		return `class ArrayList`.classApply<List<>>(typeForIterable);
 	}
-	
-	matcher => object satisfies MutableListResolver.Matcher {
+
+	shared actual Resolvance<{Anything*},List<Anything>,Type<List<Anything>>>.Matcher? matcher => object satisfies Resolvance<{Anything*},List<Anything>,Type<List<Anything>>>.Matcher{
 		
 		shared actual Integer priority => 1;
 		shared actual Boolean match({Anything*} input, Type<List<>> outputType) {
 			return outputType is ClassOrInterface<List<>> && outputType.subtypeOf(`ListMutator<Nothing>`);
 		}
 	};
+	
 }

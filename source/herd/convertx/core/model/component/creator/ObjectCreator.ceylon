@@ -17,6 +17,9 @@ import herd.convertx.api {
 import herd.convertx.api.meta {
 	AttributePartialization
 }
+import herd.convertx.api.operation {
+	Creation
+}
 
 
 shared wired class ObjectCreator() satisfies Creator<AttributePartialization,Object> {
@@ -35,7 +38,7 @@ shared wired class ObjectCreator() satisfies Creator<AttributePartialization,Obj
 		}
 	}
 	
-	matcher => object satisfies ObjectCreator.Matcher {
+	shared actual Creation<AttributePartialization,Object,Object>.Matcher? matcher => object satisfies Creation<AttributePartialization,Object,Object>.Matcher{
 		shared actual Boolean match(Class<Object,Nothing> kind, AttributePartialization arguments) =>true;
 		
 		shared actual Integer priority => 0;

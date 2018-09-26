@@ -13,6 +13,9 @@ import herd.convertx.api {
 import ceylon.json {
 	JsonObject
 }
+import herd.convertx.api.operation {
+	Resolvance
+}
 
 shared serializable
 class SimpleModel(
@@ -106,9 +109,9 @@ shared class JsonObjectToTestResolveInterfaceResolver() satisfies Resolver<JsonO
 			return `TypeResolveTwo`;
 		}
 	}
-	shared actual JsonObjectToTestResolveInterfaceResolver.Matcher matcher => object satisfies JsonObjectToTestResolveInterfaceResolver.Matcher{
+	shared actual Resolvance<JsonObject,TypeResolveInterface,Type<TypeResolveInterface>>.Matcher? matcher => object satisfies Resolvance<JsonObject,TypeResolveInterface,Type<TypeResolveInterface>>.Matcher{
 		shared actual Boolean match(JsonObject input, Type<TypeResolveInterface> outputType) => true;
-		
+	
 		shared actual Integer priority => 1;
 	};
 }

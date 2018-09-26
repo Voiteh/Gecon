@@ -14,16 +14,19 @@ import herd.convertx.api {
 import ceylon.test {
 	test
 }
+import herd.convertx.api.operation {
+	Resolvance
+}
 
-class StringIntersectionResolver() satisfies Resolver<Anything,MutableList<String>&SearchableList<String>> {
+class StringIntersectionResolver() satisfies Resolver<Anything,<MutableList<String>&SearchableList<String>>> {
 	shared actual Class<MutableList<String>&SearchableList<String>,Nothing> resolve(Context context, Anything input, Type<MutableList<String>&SearchableList<String>> outputType) => `ArrayList<String>`;
 	
-	shared actual StringIntersectionResolver.Matcher matcher => object satisfies StringIntersectionResolver.Matcher {
-		shared actual Boolean match(Anything input, Type<MutableList<String>&SearchableList<String>> outputType) => true;
-		
+	shared actual Resolvance<Anything,MutableList<String>&SearchableList<String>,Type<MutableList<String>&SearchableList<String>>>.Matcher? matcher => object satisfies Resolvance<Anything,MutableList<String>&SearchableList<String>,Type<MutableList<String>&SearchableList<String>>>.Matcher {
 		shared actual Integer priority => 1;
+		shared actual Boolean match(Anything input, Type<MutableList<String>&SearchableList<String>> outputType) => true;
 	};
 }
+
 shared class IntersectionTest() extends BaseTest() {
 	
 	providers => super.providers.follow(object satisfies Provider {

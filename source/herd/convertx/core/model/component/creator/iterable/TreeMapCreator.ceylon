@@ -14,13 +14,17 @@ import herd.convertx.api {
 	Creator,
 	wired
 }
+import herd.convertx.api.operation {
+	Creation
+}
 wired
 shared class TreeMapCreator() satisfies Creator<{Anything*},Map<>> {
 	shared actual Map<> create(Context context,Class<Map<>,Nothing> kind, {Anything*} arguments) {
 		value factoryMethod = `function naturalOrderTreeMap`.apply<Map<>>(*kind.typeArgumentList);
 		return factoryMethod.apply(*arguments);
 	}
-	matcher => object satisfies TreeMapCreator.Matcher {
+	
+	shared actual Creation<{Anything*},Map<Object,Anything>,Map<Object,Anything>>.Matcher? matcher => object satisfies Creation<{Anything*},Map<Object,Anything>,Map<Object,Anything>>.Matcher{
 		shared actual Boolean match(Class<Map<>,Nothing> kind, {Anything*} arguments) {
 			return typeHierarchy(kind).findByDeclaration(`class TreeMap`) exists;
 		}
@@ -28,3 +32,4 @@ shared class TreeMapCreator() satisfies Creator<{Anything*},Map<>> {
 		shared actual Integer priority => 1;
 	};
 }
+

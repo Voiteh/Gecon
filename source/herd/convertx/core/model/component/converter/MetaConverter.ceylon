@@ -15,6 +15,9 @@ import herd.convertx.api.meta {
 import ceylon.language.meta {
 	type
 }
+import herd.convertx.api.operation {
+	Convertion
+}
 
 shared wired class MetaConverter() satisfies Converter<Object,Object> {
 	shared actual Object convert(Context context, Object source, Type<Object> resultType) {
@@ -25,12 +28,11 @@ shared wired class MetaConverter() satisfies Converter<Object,Object> {
 			return context.create(resolvedType, partialization);
 	}
 	
-	matcher => object satisfies MetaConverter.Matcher{
+	shared actual Convertion<Object,Object,Type<Object>>.Matcher? matcher => object satisfies Convertion<Object,Object,Type<Object>>.Matcher{
 		shared actual Boolean match(Object source, Type<Object> resultType) => resultType is ClassOrInterface<Object>;
 		
 		shared actual Integer priority = 0;
-		
-		
 	};
+}		
 
-}
+

@@ -10,6 +10,9 @@ import ceylon.language.meta.model {
 import ceylon.language.meta {
 	type
 }
+import herd.convertx.api.operation {
+	Convertion
+}
 
 shared wired class JsonStringToEnumeratedObjectConverter() satisfies Converter<String,Object>{
 	shared actual Object convert(Context context, String source, Type<Object> resultType) {
@@ -17,17 +20,14 @@ shared wired class JsonStringToEnumeratedObjectConverter() satisfies Converter<S
 		assert(exists objectValue=resultType.caseValues.find((Object elem) => type(elem).declaration.name==source));
 		return objectValue;
 	}
-	matcher => object satisfies JsonStringToEnumeratedObjectConverter.Matcher{
+	shared actual Convertion<String,Object,Type<Object>>.Matcher? matcher => object satisfies Convertion<String,Object,Type<Object>>.Matcher{
 		shared actual Boolean match(String source, Type<Object> resultType) {
 			if(is ClassOrInterface<Object> resultType, !resultType.caseValues.empty,exists objectValue=resultType.caseValues.find((Object elem) => type(elem).declaration.name==source)){
 				return true;
 			}
-			return false;
+			return false; 
 		}
 		
-		
 		shared actual Integer priority => 1;
-		
-		
 	};
 }

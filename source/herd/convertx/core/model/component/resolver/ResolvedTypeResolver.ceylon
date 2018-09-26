@@ -8,6 +8,9 @@ import herd.convertx.api {
 	Resolver,
 	wired
 }
+import herd.convertx.api.operation {
+	Resolvance
+}
 
 
 shared wired class ResolvedTypeResolver() satisfies Resolver<Anything,Anything> {
@@ -15,8 +18,7 @@ shared wired class ResolvedTypeResolver() satisfies Resolver<Anything,Anything> 
 		assert (is Class<> outputType);
 		return outputType;
 	}
-	
-	matcher => object satisfies ResolvedTypeResolver.Matcher {
+	shared actual Resolvance<Anything,Anything,Type<Anything>>.Matcher? matcher => object satisfies Resolvance<Anything,Anything,Type<Anything>>.Matcher{
 		
 		shared actual Integer priority => runtime.maxIntegerValue;
 		shared actual Boolean match(Anything input, Type<Anything> outputType) {
@@ -24,6 +26,7 @@ shared wired class ResolvedTypeResolver() satisfies Resolver<Anything,Anything> 
 				return true;
 			}
 			return false;
-		}
+		}		
 	};
+	
 }

@@ -11,6 +11,9 @@ import herd.convertx.api {
 	Resolver,
 	wired
 }
+import herd.convertx.api.operation {
+	Resolvance
+}
 
 shared wired class IterableToSetResolver() satisfies Resolver<{Anything*},Set<>>{
 	
@@ -20,15 +23,10 @@ shared wired class IterableToSetResolver() satisfies Resolver<{Anything*},Set<>>
 		return `class HashSet`.classApply<Set<>>(typeForIterable);
 	}		
 	
-	matcher => object satisfies IterableToSetResolver.Matcher{
+	shared actual Resolvance<{Anything*},Set<Object>,Type<Set<Object>>>.Matcher? matcher => object satisfies Resolvance<{Anything*},Set<Object>,Type<Set<Object>>>.Matcher{
 		shared actual Integer priority => 1;
 		shared actual Boolean match({Anything*} input, Type<Set<>> outputType) => outputType is Interface<Set<>>;
-		
-		
-		
-		
 	};
 	
-	
-	
 }
+

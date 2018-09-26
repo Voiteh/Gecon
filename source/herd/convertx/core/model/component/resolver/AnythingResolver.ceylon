@@ -11,6 +11,9 @@ import herd.convertx.api {
 import ceylon.language.meta {
 	type
 }
+import herd.convertx.api.operation {
+	Resolvance
+}
 
 wired
 shared class AnythingResolver() satisfies Resolver<Anything,Anything> {
@@ -28,9 +31,11 @@ shared class AnythingResolver() satisfies Resolver<Anything,Anything> {
 			return `Null`;
 		}
 	}
-	matcher => object satisfies AnythingResolver.Matcher {
+	shared actual Resolvance<Anything,Anything,Type<Anything>>.Matcher? matcher => object satisfies Resolvance<Anything,Anything,Type<Anything>>.Matcher{
 		shared actual Boolean match(Anything input, Type<Anything> outputType) => outputType == `Anything`;
 		
 		shared actual Integer priority => 0;
+
 	};
+	
 }

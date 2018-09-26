@@ -10,6 +10,9 @@ import herd.convertx.api {
 	ConvertionException,
 	wired
 }
+import herd.convertx.api.operation {
+	Convertion
+}
 
 shared wired class IterableToTupleConverter() satisfies Converter<{Anything*},AnyTuple>{
 	
@@ -37,11 +40,12 @@ shared wired class IterableToTupleConverter() satisfies Converter<{Anything*},An
 		value resolvedType=context.resolve(converted,resultType);
 		return context.create(resolvedType, converted);
 	}
-	matcher =>  object satisfies IterableToTupleConverter.Matcher{
+	
+	shared actual Convertion<{Anything*},AnyTuple,Type<AnyTuple>>.Matcher? matcher => object satisfies Convertion<{Anything*},AnyTuple,Type<AnyTuple>>.Matcher{
+		
 		shared actual Boolean match({Anything*} source, Type<AnyTuple> resultType) => resultType is Class<AnyTuple>;
 		
 		shared actual Integer priority => 2;
-		
+
 	};
-	
 }

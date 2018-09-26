@@ -11,6 +11,9 @@ import herd.convertx.api {
 	Converter,
 	wired
 }
+import herd.convertx.api.operation {
+	Convertion
+}
 
 
 shared wired class MapToMapConverter() satisfies Converter<Map<>,Map<>> {
@@ -33,12 +36,11 @@ shared wired class MapToMapConverter() satisfies Converter<Map<>,Map<>> {
 		return context.create(resolvedType, creatorArgs);
 	}
 	
-	matcher => object satisfies MapToMapConverter.Matcher{
+	shared actual Convertion<Map<Object,Anything>,Map<Object,Anything>,Type<Map<Object,Anything>>>.Matcher? matcher => object satisfies Convertion<Map<Object,Anything>,Map<Object,Anything>,Type<Map<Object,Anything>>>.Matcher{
 		shared actual Boolean match(Map<Object,Anything> source, Type<Map<Object,Anything>> resultType) => resultType is ClassOrInterface<Map<Object,Anything>>;
 		
 		shared actual Integer priority => 2;
-		
-		
 	};
 	
 }
+

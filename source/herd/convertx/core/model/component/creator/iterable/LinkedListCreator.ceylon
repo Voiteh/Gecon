@@ -10,16 +10,20 @@ import herd.convertx.api {
 	Creator,
 	wired
 }
+import herd.convertx.api.operation {
+	Creation
+}
 wired
 shared class LinkedListCreator() satisfies Creator<{Anything*},List<Anything>> {
 	shared actual List<Anything> create(Context context,Class<List<Anything>,Nothing> kind, {Anything*} arguments) {
 		return kind.apply(arguments);
 	}
-	matcher => object satisfies LinkedListCreator.Matcher {
+	
+	shared actual Creation<{Anything*},List<Anything>,List<Anything>>.Matcher? matcher => object satisfies Creation<{Anything*},List<Anything>,List<Anything>>.Matcher{
 		shared actual Boolean match(Class<List<Anything>,Nothing> kind, {Anything*} arguments) {
 			return kind.declaration==`class LinkedList`;
 		}
 		
-		shared actual Integer priority => 1;
+		shared actual Integer priority => 1;	
 	};
 }

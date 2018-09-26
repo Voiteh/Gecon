@@ -15,6 +15,9 @@ import herd.convertx.api {
 import herd.convertx.core.util {
 	typeHierarchy
 }
+import herd.convertx.api.operation {
+	Convertion
+}
 
 shared wired
 class EnumToEnumConverter() satisfies Converter<Object,Object> {
@@ -32,7 +35,7 @@ class EnumToEnumConverter() satisfies Converter<Object,Object> {
 		throw ConvertionException(source, resultType, Exception("No such index: ``index``, in case types of ``resultType``"));
 	}
 	
-	matcher => object satisfies EnumToEnumConverter.Matcher {
+	shared actual Convertion<Object,Object,Type<Object>>.Matcher? matcher => object satisfies Convertion<Object,Object,Type<Object>>.Matcher{
 		shared actual Boolean match(Object source, Type<Object> resultType) {
 			if (is ClassOrInterface<Object> resultType) {
 				value sourceType = type(source);
@@ -43,6 +46,7 @@ class EnumToEnumConverter() satisfies Converter<Object,Object> {
 			return false;
 		}
 		
-		shared actual Integer priority => 1;
+		shared actual Integer priority => 1;	
 	};
 }
+

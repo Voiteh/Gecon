@@ -21,6 +21,9 @@ import herd.convertx.api.meta {
 	AttributePartialization,
 	filterObjectAndIdentifiableAttributes
 }
+import herd.convertx.api.operation {
+	Creation
+}
 
 
 
@@ -35,12 +38,12 @@ shared wired class AttributePartializationCreator() satisfies Creator<Relation<O
 		});
 		return AttributePartialization(HashMap<Attribute<>,Anything>{entries=entries;});
 	}
-	
-	matcher => object satisfies AttributePartializationCreator.Matcher{
+
+	shared actual Creation<Relation<Object,Object>,AttributePartialization,AttributePartialization>.Matcher? matcher => object satisfies Creation<Relation<Object,Object>,AttributePartialization,AttributePartialization>.Matcher{
 		shared actual Boolean match(Class<AttributePartialization,Nothing> kind, Relation<Object,Object> arguments) => true;
 		
-		shared actual Integer priority => 0;
-		
-		
+		shared actual Integer priority => 0;		
 	};
+	
 }
+

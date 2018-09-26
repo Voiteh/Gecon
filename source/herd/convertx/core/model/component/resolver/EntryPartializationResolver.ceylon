@@ -1,4 +1,3 @@
-
 import herd.convertx.api.meta {
 	Partialization,
 	Relation,
@@ -13,19 +12,17 @@ import herd.convertx.api {
 	Resolver,
 	wired
 }
-
+import herd.convertx.api.operation {
+	Resolvance
+}
 
 wired
-shared class EntryPartializationResolver() satisfies Resolver<Relation<Object,Map<String,Anything>>,Partialization>{
-	shared actual Class<Partialization,Nothing> resolve(Context context, Relation<Object,Map<String,Anything>> type, Type<Partialization> outputType) =>`EntryPartialization`;
+shared class EntryPartializationResolver() satisfies Resolver<Relation<Object,Map<String,Anything>>,Partialization> {
+	shared actual Class<Partialization,Nothing> resolve(Context context, Relation<Object,Map<String,Anything>> type, Type<Partialization> outputType) => `EntryPartialization`;
 	
-
-	matcher=> object satisfies EntryPartializationResolver.Matcher{
+	shared actual Resolvance<Relation<Object,Map<String,Anything>>,Partialization,Type<Partialization>>.Matcher? matcher => object satisfies Resolvance<Relation<Object,Map<String,Anything>>,Partialization,Type<Partialization>>.Matcher {
 		shared actual Boolean match(Relation<Object,Map<String,Anything>> input, Type<Partialization> outputType) => true;
 		
 		shared actual Integer priority => 1;
-		
-		
 	};
-		
 }
