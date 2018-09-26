@@ -8,7 +8,7 @@ import herd.convertx.core.model.component.resolver {
 import ceylon.collection {
 	HashMap
 }
-import herd.convertx.core.api.meta {
+import herd.convertx.api.meta {
 	Partialization,
 	Relation
 }

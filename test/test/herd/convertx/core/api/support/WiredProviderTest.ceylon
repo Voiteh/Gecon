@@ -1,14 +1,11 @@
 import ceylon.test {
 	test
 }
-import herd.convertx.core.api.support {
+import herd.convertx.api.support {
 	WireingProvider
 }
-import herd.convertx.core.api.component {
+import herd.convertx.api.component {
 	Component
-}
-import test.herd.convertx.core.api {
-	WiredConverter
 }
 shared class WiredProviderTest() {
 	
@@ -17,7 +14,7 @@ shared class WiredProviderTest() {
 	
 	shared test
 	void shouldProvideWiredConverter(){
-		assert(exists converter=wiredProvider.components.find((Component elem) => elem is WiredConverter));
+		assert(exists converter=wiredProvider.components.find((Component elem) => elem is WireingProvider));
 	}
 	
 	

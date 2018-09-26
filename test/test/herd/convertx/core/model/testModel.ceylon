@@ -2,10 +2,10 @@ import ceylon.language.meta.model {
 	Type,
 	Class
 }
-import herd.convertx.core.api.component {
+import herd.convertx.api.component {
 	ComponentFindingException
 }
-import herd.convertx.core.api {
+import herd.convertx.api {
 	Context
 }
 shared class MockContext() satisfies Context{

@@ -1,10 +1,10 @@
-import herd.convertx.core.api.support {
+import herd.convertx.api.support {
 	WireingProvider
 }
-import herd.convertx.core.api.component {
+import herd.convertx.api.component {
 	Component
 }
-import herd.convertx.core.api.configuration {
+import herd.convertx.api.configuration {
 	Configuration
 }
 

@@ -1,14 +1,14 @@
-import herd.convertx.core.api.component {
+import herd.convertx.api.component {
 	Converter,
 	wired
 }
-import herd.convertx.core.api {
+import herd.convertx.api {
 	Context
 }
 import ceylon.language.meta.model {
 	Type
 }
-import herd.convertx.core.util {
+import herd.convertx.api.meta {
 	extractObjectType
 }
 

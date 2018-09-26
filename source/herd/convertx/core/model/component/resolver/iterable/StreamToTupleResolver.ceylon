@@ -1,4 +1,4 @@
-import herd.convertx.core.api.component {
+import herd.convertx.api.component {
 	Resolver
 }
 import ceylon.language.meta.model {
@@ -6,7 +6,7 @@ import ceylon.language.meta.model {
 	Type,
 	ClassModel
 }
-import herd.convertx.core.api {
+import herd.convertx.api {
 	Context,
 	AnyTuple
 }

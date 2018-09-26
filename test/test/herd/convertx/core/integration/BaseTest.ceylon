@@ -1,4 +1,4 @@
-import herd.convertx.core.api {
+import herd.convertx.api {
 	Provider,
 	Convertx
 }
@@ -23,7 +23,7 @@ import herd.convertx.core.model {
 import herd.convertx.core.configuration {
 	Logging
 }
-import herd.convertx.core.api.configuration {
+import herd.convertx.api.configuration {
 	Configuration
 }
 

@@ -1,8 +1,8 @@
-import herd.convertx.core.api.component {
+import herd.convertx.api.component {
 	wired,
 	Creator
 }
-import herd.convertx.core.api {
+import herd.convertx.api {
 	Context
 }
 import ceylon.language.meta.model {

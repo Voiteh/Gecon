@@ -6,7 +6,7 @@ import ceylon.language.meta {
 	type
 }
 
-import herd.convertx.core.api.registration {
+import herd.convertx.api.registration {
 	Hashable
 }
 shared sealed class DefaultHashable(Anything* toHash) satisfies Hashable {

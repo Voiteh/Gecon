@@ -1,4 +1,4 @@
-import herd.convertx.core.api.component {
+import herd.convertx.api.component {
 	wired,
 	Converter
 }
@@ -6,7 +6,7 @@ import ceylon.language.meta.model {
 	IntersectionType,
 	Type
 }
-import herd.convertx.core.api {
+import herd.convertx.api {
 	Context
 }
 

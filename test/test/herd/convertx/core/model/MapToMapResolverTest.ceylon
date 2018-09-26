@@ -10,7 +10,7 @@ import ceylon.collection {
 import ceylon.language.meta.model {
 	Class
 }
-import herd.convertx.core.api {
+import herd.convertx.api {
 	Context
 }
 shared class MapToMapResolverTest() {

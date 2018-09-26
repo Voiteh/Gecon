@@ -6,7 +6,7 @@ import ceylon.language.meta.declaration {
 	Package,
 	Module
 }
-import herd.convertx.core.api.configuration {
+import herd.convertx.api.configuration {
 	Configuration
 }
 shared class Logging(

@@ -1,4 +1,4 @@
-import herd.convertx.core.api.meta {
+import herd.convertx.api.meta {
 	Partialization
 }
 import ceylon.collection {

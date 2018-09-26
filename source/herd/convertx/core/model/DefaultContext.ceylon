@@ -1,4 +1,4 @@
-import herd.convertx.core.api {
+import herd.convertx.api {
 	Context,
 	Provider
 }
@@ -8,7 +8,7 @@ import ceylon.language.meta.model {
 }
 
 
-import herd.convertx.core.api.component {
+import herd.convertx.api.component {
 	Component
 }
 import herd.convertx.core.internal {
@@ -17,16 +17,16 @@ import herd.convertx.core.internal {
 	DefaultRegistrator,
 	DefaultConfigurator
 }
-import herd.convertx.core.api.registration {
+import herd.convertx.api.registration {
 	Registry,
 	Visitor,
 	Registrator
 }
-import herd.convertx.core.api.configuration {
+import herd.convertx.api.configuration {
 	Configuration,
 	Configurator
 }
-import herd.convertx.core.api.search {
+import herd.convertx.api.search {
 	Finder
 }
 shared class DefaultContext satisfies Context{

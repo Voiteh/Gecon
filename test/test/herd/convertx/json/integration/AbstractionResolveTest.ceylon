@@ -8,20 +8,20 @@ import test.herd.convertx.json.integration.data {
 	JsonObjectToTestResolveInterfaceResolver
 }
 
-import herd.convertx.core.api {
+import herd.convertx.api {
 	Provider
 }
 import ceylon.collection {
 	MutableList,
 	ArrayList
 }
-import herd.convertx.core.api.component {
+import herd.convertx.api.component {
 	Component
 }
 import ceylon.json {
 	JsonObject
 }
-import herd.convertx.core.api.configuration {
+import herd.convertx.api.configuration {
 	Configuration
 }
 shared class AbstractionResolveTest() extends BaseJsonIntegrationTest(){

@@ -1,4 +1,4 @@
-import herd.convertx.core.api.component {
+import herd.convertx.api.component {
 	TypedConverter,
 	TypedCreator,
 	TypedResolver
@@ -10,11 +10,11 @@ import ceylon.language.meta.model {
 import ceylon.language.meta {
 	typeLiteral
 }
-import herd.convertx.core.api {
+import herd.convertx.api {
 	Context
 }
 
-import herd.convertx.core.api.configuration {
+import herd.convertx.api.configuration {
 	Configurable
 }
 import herd.convertx.core.configuration {
@@ -23,7 +23,7 @@ import herd.convertx.core.configuration {
 import ceylon.logging {
 	logger
 }
-import herd.convertx.core.api.registration {
+import herd.convertx.api.registration {
 	Executable,
 	Findable,
 	Matchable,

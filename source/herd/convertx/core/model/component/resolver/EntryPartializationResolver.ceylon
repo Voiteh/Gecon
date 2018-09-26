@@ -1,22 +1,21 @@
-import herd.convertx.core.api.component {
+import herd.convertx.api.component {
 	Resolver,
 	wired
 }
-import herd.convertx.core.api.meta {
+import herd.convertx.api.meta {
 	Partialization,
-	Relation
+	Relation,
+	EntryPartialization
 }
 import ceylon.language.meta.model {
 	Class,
 	Type
 }
-import herd.convertx.core.api {
+import herd.convertx.api {
 	Context
 }
 
-import herd.convertx.core.model.meta {
-	EntryPartialization
-}
+
 wired
 shared class EntryPartializationResolver() satisfies Resolver<Relation<Object,Map<String,Anything>>,Partialization>{
 	shared actual Class<Partialization,Nothing> resolve(Context context, Relation<Object,Map<String,Anything>> type, Type<Partialization> outputType) =>`EntryPartialization`;

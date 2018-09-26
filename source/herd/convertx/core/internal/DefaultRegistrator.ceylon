@@ -1,5 +1,5 @@
 
-import herd.convertx.core.api.component {
+import herd.convertx.api.component {
 	Component,
 	TypedCreator,
 	TypedConverter,
@@ -8,13 +8,13 @@ import herd.convertx.core.api.component {
 import ceylon.logging {
 	logger
 }
-import herd.convertx.core.api.configuration {
+import herd.convertx.api.configuration {
 	Configurable
 }
 import herd.convertx.core.configuration {
 	Logging
 }
-import herd.convertx.core.api.registration {
+import herd.convertx.api.registration {
 	Executable,
 	Registry,
 	Registrator,

@@ -1,7 +1,7 @@
 import ceylon.test {
 	test
 }
-import herd.convertx.core.api.component {
+import herd.convertx.api.component {
 	ConvertionException
 }
 shared class EnumTest() extends BaseTest() {

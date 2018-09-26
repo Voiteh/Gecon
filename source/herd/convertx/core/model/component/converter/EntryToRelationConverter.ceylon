@@ -1,4 +1,4 @@
-import herd.convertx.core.api.component {
+import herd.convertx.api.component {
 	wired,
 	Converter
 }
@@ -7,18 +7,17 @@ import ceylon.language.meta.model {
 	Type,
 	Class
 }
-import herd.convertx.core.api.meta {
-	Relation
+import herd.convertx.api.meta {
+	Relation,
+	ObjectRelation
 }
-import herd.convertx.core.api {
+import herd.convertx.api {
 	Context
 }
 import ceylon.language.meta {
 	type
 }
-import herd.convertx.core.model.meta {
-	ObjectRelation
-}
+
 wired
 shared class EntryToRelationConverter() satisfies Converter<Object->ClassOrInterface<>,Relation<>>{
 	shared actual Relation<Anything,Anything> convert(Context context, Object->ClassOrInterface<Anything> source, Type<Relation<Anything,Anything>> resultType) {

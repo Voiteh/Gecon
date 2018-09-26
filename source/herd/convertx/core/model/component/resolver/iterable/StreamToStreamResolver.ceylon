@@ -3,11 +3,11 @@ import ceylon.language.meta.model {
 	Interface,
 	Type
 }
-import herd.convertx.core.api.component {
+import herd.convertx.api.component {
 	wired,
 	Resolver
 }
-import herd.convertx.core.api {
+import herd.convertx.api {
 	Context,
 	AnyTuple
 }

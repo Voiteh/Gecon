@@ -2,24 +2,26 @@ import ceylon.language.meta.model {
 	Attribute,
 	Class
 }
-import herd.convertx.core.api.component {
+import herd.convertx.api.component {
 	wired
 }
 
 
 
-import herd.convertx.core.api.component.support.meta {
-	ObjectPartializer
-}
-import herd.convertx.core.api {
+import herd.convertx.api {
 	Context
 }
-import herd.convertx.core.api.meta {
-	Relation
-}
-import herd.convertx.core.model.meta {
+import herd.convertx.api.meta {
+	Relation,
 	EntryPartialization
 }
+import herd.convertx.api.meta.component {
+	ObjectPartializer
+}
+
+
+
+
 
 
 shared wired class EntryPartializer() extends ObjectPartializer<EntryPartialization,{<String->Anything>*},Map<String,Anything>>() {

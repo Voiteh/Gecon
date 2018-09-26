@@ -3,14 +3,14 @@ import ceylon.collection {
 	linked,
 	HashMap
 }
-import herd.convertx.core.api.component {
+import herd.convertx.api.component {
 	Creator,
 	wired
 }
 import ceylon.language.meta.model {
 	Class
 }
-import herd.convertx.core.api {
+import herd.convertx.api {
 	Context
 }
 wired

@@ -1,4 +1,4 @@
-import herd.convertx.core.api.component {
+import herd.convertx.api.component {
 	wired
 }
 import herd.convertx.json.model.meta {
@@ -8,18 +8,18 @@ import ceylon.language.meta.model {
 	Attribute,
 	Class
 }
-import herd.convertx.core.api {
+import herd.convertx.api {
 	Context
 }
-import herd.convertx.core.api.component.support.meta {
-	ObjectPartializer
-}
-import herd.convertx.core.api.meta {
+import herd.convertx.api.meta {
 	Relation
 }
 import ceylon.json {
 	Value,
 	JsonObject
+}
+import herd.convertx.api.meta.component {
+	ObjectPartializer
 }
 
 shared wired class ObjectJSONPartializer() extends ObjectPartializer<JsonPartialization, {<String->Value>*}, JsonObject>(){
