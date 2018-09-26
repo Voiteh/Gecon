@@ -9,4 +9,7 @@ import ceylon.language.meta.declaration {
 import herd.convertx.core.api.configuration {
 	Configuration
 }
-shared class Logging(shared Priority priority=info, shared actual Package|Module category=`module`) satisfies Configuration{}
+shared class Logging(
+		shared variable Priority priority=info,
+		shared actual Package|Module category=`module`
+	) satisfies Configuration{}

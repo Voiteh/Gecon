@@ -18,8 +18,9 @@ import ceylon.language.meta.declaration {
 	ClassDeclaration
 }
 
-shared class WiredProvider(Module \imodule) satisfies Provider {
+shared class WireingProvider(Module \imodule,{Component*} additionalComponents={},{Configuration*} additionalConfiguration={}) satisfies Provider {
 	
+
 	{ClassDeclaration*} annotatedDeclaration<Annotation>(Package|Module owner) given Annotation satisfies ConstrainedAnnotation<> {
 		switch (owner)
 		case (is Package) {
@@ -31,12 +32,15 @@ shared class WiredProvider(Module \imodule) satisfies Provider {
 		}
 	}
 	
-	Instance instantaiate<Instance>(ClassDeclaration declaration) => declaration.classApply<Instance>().apply();
+	Instance instantiate<Instance>(ClassDeclaration declaration) => declaration.classApply<Instance>().apply();
 	
-	shared actual MutableList<Component> components = ArrayList<Component> {
-		elements = annotatedDeclaration<WiredAnnotation>(\imodule)
-			.map((ClassDeclaration declaration) => instantaiate<Component>(declaration))
-			.sequence();
+	shared actual MutableList<Component> components =ArrayList<Component>{
+		elements=annotatedDeclaration<WiredAnnotation>(\imodule)
+			.map((ClassDeclaration declaration) => instantiate<Component>(declaration)).chain(additionalComponents);
 	};
-	shared actual MutableList<Configuration> configurations = ArrayList<Configuration>();
+	
+	shared actual MutableList<Configuration> configurations => ArrayList<Configuration>{
+		elements=additionalConfiguration;
+	};
+	
 }

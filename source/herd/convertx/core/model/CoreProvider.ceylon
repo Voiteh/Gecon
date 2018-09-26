@@ -1,6 +1,14 @@
 import herd.convertx.core.api.support {
-	WiredProvider
+	WireingProvider
+}
+import herd.convertx.core.api.component {
+	Component
+}
+import herd.convertx.core.api.configuration {
+	Configuration
 }
 
-shared class CoreProvider() extends WiredProvider(`module`) {
-}
+shared class CoreProvider(
+	{Component*} additionalComponents={},
+	{Configuration*} additionalConfiguration={}
+) extends WireingProvider(`module`,additionalComponents,additionalConfiguration) {}

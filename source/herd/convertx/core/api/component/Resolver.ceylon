@@ -6,10 +6,6 @@ import ceylon.language.meta.model {
 import herd.convertx.core.api {
 	Context
 }
-import ceylon.language.meta {
-	typeLiteral,
-	type
-}
 
 import herd.convertx.core.api.registration {
 	Executable,
@@ -36,5 +32,4 @@ shared interface Resolver<Source, Result> satisfies TypedResolver<Source,Result,
 	throws (`class ResolvanceException`)
 	shared formal actual Class<Result> resolve(Context context, Source source, Type<Result> resultType);
 	
-	string => "``type(this).declaration.name``, Source type: ``typeLiteral<Source>()``, Result type: ``typeLiteral<Result>()``";
 }

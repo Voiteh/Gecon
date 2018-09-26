@@ -11,8 +11,8 @@ import ceylon.language.meta.model {
 import herd.convertx.core.api {
 	Context
 }
-wired
-shared class ArrayListCreator() satisfies Creator<{Anything*},List<>> {
+
+shared wired class ArrayListCreator() satisfies Creator<{Anything*},List<>> {
 	shared actual List<> create(Context context,Class<List<>> kind, {Anything*} arguments) {
 		return kind.apply(0, 1.5, arguments);
 	}

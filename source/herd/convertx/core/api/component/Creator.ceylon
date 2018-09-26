@@ -5,10 +5,6 @@ import ceylon.language.meta.model {
 import herd.convertx.core.api {
 	Context
 }
-import ceylon.language.meta {
-	type,
-	typeLiteral
-}
 
 import herd.convertx.core.api.registration {
 	Executable,
@@ -35,5 +31,4 @@ shared interface Creator<Args,Result > satisfies  TypedCreator<Args,Result,Resul
 	throws (`class ConvertionException`)
 	shared formal actual Result create(Context context,Class<Result> kind, Args arguments);
 
-	string => "``type(this).declaration.name``, Args type: ``typeLiteral<Args>()``, Result type: ``typeLiteral<Result>()``"; 
 }

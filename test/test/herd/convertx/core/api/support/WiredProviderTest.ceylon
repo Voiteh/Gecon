@@ -2,7 +2,7 @@ import ceylon.test {
 	test
 }
 import herd.convertx.core.api.support {
-	WiredProvider
+	WireingProvider
 }
 import herd.convertx.core.api.component {
 	Component
@@ -12,7 +12,7 @@ import test.herd.convertx.core.api {
 }
 shared class WiredProviderTest() {
 	
-	value wiredProvider=WiredProvider(`module`);
+	value wiredProvider=WireingProvider(`module`);
 	
 	
 	shared test

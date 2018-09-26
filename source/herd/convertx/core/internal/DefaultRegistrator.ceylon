@@ -44,7 +44,7 @@ shared class DefaultRegistrator() satisfies Registrator & Configurable<Logging>{
 			case (is TypedCreator<>) {
 				replaced=registry.creators.put(*flat);
 			}
-			log.trace("Registered: ``element``");
+			log.debug("Registered: ``element``");
 			if(exists replaced){
 				log.warn("Replaced: ``replaced``, with: ``element``");
 			}

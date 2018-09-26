@@ -33,6 +33,7 @@ shared class DefaultFinder() satisfies Finder & Configurable<Logging>{
 
 	shared actual Executable find(Container container, Anything[] args) {
 		//until resolved https://github.com/eclipse/ceylon/issues/7389 hashing for Touple arg will fail. 
+		log.trace("Finding component for arguments ``args``"); 
 		value hashable=DefaultHashable(*args);
 		log.debug("Looking for Executable using Hashable:``hashable``");
 		if (exists findable = container.get(hashable)) {
@@ -47,9 +48,12 @@ shared class DefaultFinder() satisfies Finder & Configurable<Logging>{
 		}
 		if (exists matchable = container.keys.narrow<Matchable>()
 			.filter((Matchable element) => element.match(args))
+				.map((Matchable element) { log.trace("Matched ``element`` to ``args``"); return element;})
 				.sort((Matchable x, Matchable y) => y.priority.compare(x.priority))
 				.first){
+			
 			if(exists findable= container.get(matchable)){
+				log.debug("Found ``findable``,for :``args``");
 				return findable;
 			}
 		}

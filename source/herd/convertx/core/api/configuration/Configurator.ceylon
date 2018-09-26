@@ -1,5 +1,5 @@
 shared interface Configurator {
 	
-	shared formal void configure(Configurable<> configurable, {Configuration*} configurations);
+	shared formal void configure(Object configurable, {Configuration*} configurations);
 	
 }

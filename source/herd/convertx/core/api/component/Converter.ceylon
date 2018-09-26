@@ -6,10 +6,6 @@ import herd.convertx.core.api {
 	Context
 }
 
-import ceylon.language.meta {
-	typeLiteral,
-	type
-}
 
 import herd.convertx.core.api.registration {
 	Executable,
@@ -43,6 +39,5 @@ shared interface Converter<Source,Result>
 	throws(`class ConvertionException`)
 	shared actual formal Result convert(Context context,Source source,Type<Result> resultType);
 	
-	string => "``type(this).declaration.name``, Source type: ``typeLiteral<Source>()``, Result type: ``typeLiteral<Result>()``";
 	
 }
