@@ -1,13 +1,12 @@
 import ceylon.language.meta.model {
 	Class
 }
-import herd.convertx.api.component {
-	Creator,
-	wired
-}
+
 import herd.convertx.api {
 	Context,
-	AnyTuple
+	AnyTuple,
+	Creator,
+	wired
 }
 
 wired

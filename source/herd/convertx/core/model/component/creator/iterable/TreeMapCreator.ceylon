@@ -5,15 +5,14 @@ import ceylon.collection {
 import herd.convertx.core.util {
 	typeHierarchy
 }
-import herd.convertx.api.component {
-	Creator,
-	wired
-}
+
 import ceylon.language.meta.model {
 	Class
 }
 import herd.convertx.api {
-	Context
+	Context,
+	Creator,
+	wired
 }
 wired
 shared class TreeMapCreator() satisfies Creator<{Anything*},Map<>> {

@@ -1,7 +1,4 @@
-import herd.convertx.api.component {
-	wired,
-	Converter
-}
+
 import ceylon.language.meta.model {
 	ClassOrInterface,
 	Type,
@@ -12,7 +9,9 @@ import herd.convertx.api.meta {
 	ObjectRelation
 }
 import herd.convertx.api {
-	Context
+	Context,
+	Converter,
+	wired
 }
 import ceylon.language.meta {
 	type

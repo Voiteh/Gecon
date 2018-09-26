@@ -2,14 +2,13 @@ import ceylon.language.meta.model {
 	UnionType,
 	Type
 }
-import herd.convertx.api.component {
+
+import herd.convertx.api {
+	Context,
+	Converter,
 	ConvertionException,
 	ConvertxException,
-	wired,
-	Converter
-}
-import herd.convertx.api {
-	Context
+	wired
 }
 
 shared wired class UnionConverter() satisfies Converter<Anything,Anything>{

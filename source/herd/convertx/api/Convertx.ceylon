@@ -1,9 +1,7 @@
 import ceylon.language.meta.model {
 	Type
 }
-import herd.convertx.api.component {
-	ConvertxException
-}
+
 import herd.convertx.api {
 	Context
 }

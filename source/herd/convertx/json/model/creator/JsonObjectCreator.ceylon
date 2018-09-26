@@ -1,12 +1,11 @@
 import herd.convertx.json.model.meta {
 	JsonPartialization
 }
-import herd.convertx.api.component {
+
+import herd.convertx.api {
+	Context,
 	Creator,
 	wired
-}
-import herd.convertx.api {
-	Context
 }
 import ceylon.language.meta.model {
 	Class

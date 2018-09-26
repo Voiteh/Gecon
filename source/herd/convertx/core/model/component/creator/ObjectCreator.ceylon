@@ -1,8 +1,3 @@
-import herd.convertx.api.component {
-	Creator,
-	CreationException,
-	wired
-}
 import ceylon.language.meta.model {
 	Class,
 	Attribute
@@ -12,7 +7,10 @@ import ceylon.language.serialization {
 	deserialization
 }
 import herd.convertx.api {
-	Context
+	Context,
+	CreationException,
+	Creator,
+	wired
 }
 
 
@@ -20,8 +18,8 @@ import herd.convertx.api.meta {
 	AttributePartialization
 }
 
-wired
-shared class ObjectCreator() satisfies Creator<AttributePartialization,Object> {
+
+shared wired class ObjectCreator() satisfies Creator<AttributePartialization,Object> {
 	shared actual Object create(Context context,Class<Object,Nothing> kind, AttributePartialization partialization) {
 		value instanceId = kind.string;
 		value deserializationContext = deserialization<String>();

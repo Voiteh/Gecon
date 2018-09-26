@@ -1,15 +1,14 @@
 import ceylon.collection {
 	ArrayList
 }
-import herd.convertx.api.component {
-	Creator,
-	wired
-}
+
 import ceylon.language.meta.model {
 	Class
 }
 import herd.convertx.api {
-	Context
+	Context,
+	Creator,
+	wired
 }
 
 shared wired class ArrayListCreator() satisfies Creator<{Anything*},List<>> {

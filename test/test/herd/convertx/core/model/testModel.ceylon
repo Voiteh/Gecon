@@ -2,11 +2,10 @@ import ceylon.language.meta.model {
 	Type,
 	Class
 }
-import herd.convertx.api.component {
-	ComponentFindingException
-}
+
 import herd.convertx.api {
-	Context
+	Context,
+	ComponentFindingException
 }
 shared class MockContext() satisfies Context{
 	shared actual Result convert<Result>(Anything source, Type<Result> resultType) { throw ComponentFindingException("Not found");}

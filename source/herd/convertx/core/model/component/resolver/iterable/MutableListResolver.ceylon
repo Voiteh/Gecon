@@ -7,12 +7,11 @@ import ceylon.language.meta.model {
 	ClassOrInterface,
 	Type
 }
-import herd.convertx.api.component {
-	wired,
-	Resolver
-}
+
 import herd.convertx.api {
-	Context
+	Context,
+	Resolver,
+	wired
 }
 
 

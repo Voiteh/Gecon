@@ -1,10 +1,8 @@
 import herd.convertx.api {
-	Provider
-}
-import herd.convertx.api.component {
-	Component,
+	Provider,
 	WiredAnnotation
 }
+
 import ceylon.collection {
 	ArrayList,
 	MutableList
@@ -17,8 +15,11 @@ import ceylon.language.meta.declaration {
 	Module,
 	ClassDeclaration
 }
+import herd.convertx.api.operation {
+	Operation
+}
 
-shared class WireingProvider(Module \imodule,{Component*} additionalComponents={},{Configuration*} additionalConfiguration={}) satisfies Provider {
+shared class WireingProvider(Module \imodule,{Operation*} additionalComponents={},{Configuration*} additionalConfiguration={}) satisfies Provider {
 	
 
 	{ClassDeclaration*} annotatedDeclaration<Annotation>(Package|Module owner) given Annotation satisfies ConstrainedAnnotation<> {
@@ -34,9 +35,9 @@ shared class WireingProvider(Module \imodule,{Component*} additionalComponents={
 	
 	Instance instantiate<Instance>(ClassDeclaration declaration) => declaration.classApply<Instance>().apply();
 	
-	shared actual MutableList<Component> components =ArrayList<Component>{
+	shared actual MutableList<Operation> components =ArrayList<Operation>{
 		elements=annotatedDeclaration<WiredAnnotation>(\imodule)
-			.map((ClassDeclaration declaration) => instantiate<Component>(declaration)).chain(additionalComponents);
+			.map((ClassDeclaration declaration) => instantiate<Operation>(declaration)).chain(additionalComponents);
 	};
 	
 	shared actual MutableList<Configuration> configurations => ArrayList<Configuration>{

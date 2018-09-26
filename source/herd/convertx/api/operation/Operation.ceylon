@@ -8,7 +8,8 @@ import ceylon.language.meta {
 }
 
 
-shared interface Component of TypedConverter<> | TypedResolver<> | TypedCreator<> {
+
+shared sealed interface Operation of Convertion<> | Resolvance<> | Creation<> {
 	shared formal [Findable,Executable] flatten(Visitor visitor);
 	
 	string => "``type(this).declaration.name``";

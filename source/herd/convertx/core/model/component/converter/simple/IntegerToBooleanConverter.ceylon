@@ -1,13 +1,12 @@
 import ceylon.language.meta.model {
 	Type
 }
-import herd.convertx.api.component {
-	ConvertionException,
-	Converter,
-	wired
-}
+
 import herd.convertx.api {
-	Context
+	Context,
+	Converter,
+	ConvertionException,
+	wired
 }
 wired
 shared class IntegerToBooleanConverter() satisfies Converter<Integer,Boolean>  {

@@ -5,13 +5,12 @@ import ceylon.language.meta.model {
 import ceylon.language.meta {
 	type
 }
-import herd.convertx.api.component {
-	ConvertionException,
-	wired,
-	Converter
-}
+
 import herd.convertx.api {
-	Context
+	Context,
+	Converter,
+	ConvertionException,
+	wired
 }
 import herd.convertx.core.util {
 	typeHierarchy

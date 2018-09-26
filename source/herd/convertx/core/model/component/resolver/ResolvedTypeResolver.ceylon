@@ -2,12 +2,11 @@ import ceylon.language.meta.model {
 	Class,
 	Type
 }
-import herd.convertx.api.component {
+
+import herd.convertx.api {
+	Context,
 	Resolver,
 	wired
-}
-import herd.convertx.api {
-	Context
 }
 
 

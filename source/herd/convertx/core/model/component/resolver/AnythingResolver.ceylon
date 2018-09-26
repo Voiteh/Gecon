@@ -1,13 +1,12 @@
-import herd.convertx.api.component {
-	wired,
-	Resolver
-}
+
 import ceylon.language.meta.model {
 	Class,
 	Type
 }
 import herd.convertx.api {
-	Context
+	Context,
+	Resolver,
+	wired
 }
 import ceylon.language.meta {
 	type

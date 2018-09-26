@@ -1,6 +1,4 @@
-import herd.convertx.api.component {
-	wired
-}
+
 
 
 import ceylon.language.meta.model {
@@ -12,6 +10,9 @@ import herd.convertx.api.meta {
 }
 import herd.convertx.api.meta.component {
 	AttributePartializer
+}
+import herd.convertx.api {
+	wired
 }
 
 

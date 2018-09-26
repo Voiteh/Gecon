@@ -1,13 +1,12 @@
-import herd.convertx.api.component {
-	wired,
-	Converter
-}
+
 import ceylon.language.meta.model {
 	IntersectionType,
 	Type
 }
 import herd.convertx.api {
-	Context
+	Context,
+	Converter,
+	wired
 }
 
 shared wired class IntersectionConverter() satisfies Converter<Anything, Anything>{

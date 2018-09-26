@@ -1,19 +1,17 @@
+import herd.convertx.api.registration {
+	Visitor,
+	Findable,
+	Executable
+}
 import ceylon.language.meta.model {
 	Type
 }
 
 import herd.convertx.api {
-	Context
+	Context,
+	ConvertionException
 }
-
-
-import herd.convertx.api.registration {
-	Executable,
-	Findable,
-	Visitor
-}
-
-shared sealed interface TypedConverter<in Source=Nothing ,out Result=Anything,in ResultType=Nothing> satisfies Component
+shared sealed interface Convertion<in Source=Nothing ,out Result=Anything,in ResultType=Nothing> satisfies Operation
 		given ResultType satisfies Type<Result> {
 	
 	throws(`class ConvertionException`)
@@ -27,17 +25,6 @@ shared sealed interface TypedConverter<in Source=Nothing ,out Result=Anything,in
 		shared formal Integer priority;
 	}
 	
-	shared default Matcher? matcher=>null;
-	
-}
-
-
-shared interface Converter<Source,Result> 
-		satisfies TypedConverter<Source, Result,Type<Result>> {
-	
-	
-	throws(`class ConvertionException`)
-	shared actual formal Result convert(Context context,Source source,Type<Result> resultType);
-	
+	shared formal Matcher? matcher;
 	
 }

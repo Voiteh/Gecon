@@ -6,12 +6,10 @@ import ceylon.language.meta.model {
 import ceylon.collection {
 	HashSet
 }
-import herd.convertx.api.component {
-	wired,
-	Resolver
-}
 import herd.convertx.api {
-	Context
+	Context,
+	Resolver,
+	wired
 }
 
 shared wired class IterableToSetResolver() satisfies Resolver<{Anything*},Set<>>{

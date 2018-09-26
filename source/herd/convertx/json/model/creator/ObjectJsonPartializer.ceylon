@@ -1,6 +1,4 @@
-import herd.convertx.api.component {
-	wired
-}
+
 import herd.convertx.json.model.meta {
 	JsonPartialization
 }
@@ -9,7 +7,8 @@ import ceylon.language.meta.model {
 	Class
 }
 import herd.convertx.api {
-	Context
+	Context,
+	wired
 }
 import herd.convertx.api.meta {
 	Relation

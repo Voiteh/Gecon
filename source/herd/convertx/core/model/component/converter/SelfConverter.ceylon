@@ -1,9 +1,7 @@
-import herd.convertx.api.component {
+import herd.convertx.api {
+	Context,
 	Converter,
 	wired
-}
-import herd.convertx.api {
-	Context
 }
 import ceylon.language.meta.model {
 	Type
@@ -12,8 +10,8 @@ import herd.convertx.api.meta {
 	extractObjectType
 }
 
-wired
-shared class SelfConverter() satisfies Converter<Anything,Anything> {
+
+shared wired class SelfConverter() satisfies Converter<Anything,Anything> {
 	shared actual Anything convert(Context context, Anything source, Type<Anything> resultType) {
 		return source;
 	}

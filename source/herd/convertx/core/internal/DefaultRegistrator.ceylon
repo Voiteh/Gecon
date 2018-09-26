@@ -1,10 +1,4 @@
 
-import herd.convertx.api.component {
-	Component,
-	TypedCreator,
-	TypedConverter,
-	TypedResolver
-}
 import ceylon.logging {
 	logger
 }
@@ -20,6 +14,12 @@ import herd.convertx.api.registration {
 	Registrator,
 	Visitor
 }
+import herd.convertx.api.operation {
+	Operation,
+	Convertion,
+	Resolvance,
+	Creation
+}
 
 shared class DefaultRegistrator() satisfies Registrator & Configurable<Logging>{
 	value log=logger(`package`);
@@ -29,19 +29,19 @@ shared class DefaultRegistrator() satisfies Registrator & Configurable<Logging>{
 	}
 
 
-	shared actual void register(Visitor visitor,Registry registry, Component[] components) {
+	shared actual void register(Visitor visitor,Registry registry, Operation[] components) {
 		
-		components.each((Component element) {
+		components.each((Operation element) {
 			value flat=element.flatten(visitor);
 			Executable? replaced;
 			switch(element)
-			case (is TypedConverter<>) {
+			case (is Convertion<>) {
 				replaced=registry.converters.put(*flat);
 			}
-			case (is TypedResolver<>) {
+			case (is Resolvance<>) {
 				replaced=registry.resolvers.put(*flat);
 			}
-			case (is TypedCreator<>) {
+			case (is Creation<>) {
 				replaced=registry.creators.put(*flat);
 			}
 			log.debug("Registered: ``element``");

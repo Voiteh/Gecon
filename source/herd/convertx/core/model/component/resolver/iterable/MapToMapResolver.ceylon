@@ -6,15 +6,14 @@ import ceylon.language.meta.model {
 	ClassOrInterface,
 	Type
 }
-import herd.convertx.api.component {
-	Resolver,
-	wired
-}
+
 import herd.convertx.core.util {
 	typeHierarchy
 }
 import herd.convertx.api {
-	Context
+	Context,
+	Resolver,
+	wired
 }
 
 shared wired class MapToMapResolver() satisfies Resolver<Map<>,Map<>> {

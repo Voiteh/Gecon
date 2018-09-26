@@ -9,14 +9,13 @@ import ceylon.language.meta.model {
 	Attribute
 }
 import herd.convertx.api {
-	Context
+	Context,
+	Creator
 }
 import ceylon.language.meta {
 	type
 }
-import herd.convertx.api.component {
-	Creator
-}
+
 shared abstract class ObjectPartializer<ThePartialization,Holder,Result>() satisfies Creator<Relation<Object,Result>,ThePartialization> given ThePartialization satisfies Partialization {
 	shared actual ThePartialization create(Context context, Class<ThePartialization,Nothing> kind, Relation<Object,Result> arguments) {
 		value sourceType=type(arguments.source);

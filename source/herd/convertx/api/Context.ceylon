@@ -2,12 +2,7 @@ import ceylon.language.meta.model {
 	Type,
 	Class
 }
-import herd.convertx.api.component {
-	ConvertionException,
-	ComponentFindingException,
-	ResolvanceException,
-	CreationException
-}
+
 shared interface Context {
 	
 	

@@ -7,12 +7,11 @@ import herd.convertx.core.util {
 	runtimeCall
 }
 import herd.convertx.api {
-	Context
+	Context,
+	Converter,
+	wired
 }
-import herd.convertx.api.component {
-	wired,
-	Converter
-}
+
 
 shared wired class MapToMapConverter() satisfies Converter<Map<>,Map<>> {
 	shared actual Map<Object,Anything> convert(Context context, Map<Object,Anything> source, Type<Map<Object,Anything>> resultType){

@@ -1,9 +1,7 @@
-import herd.convertx.api.component {
+import herd.convertx.api {
+	Context,
 	Converter,
 	wired
-}
-import herd.convertx.api {
-	Context
 }
 import ceylon.language.meta.model {
 	Type
@@ -11,8 +9,8 @@ import ceylon.language.meta.model {
 import ceylon.language.meta {
 	type
 }
-wired
-shared class EnumeratedObjectToJsonStringConverter() satisfies Converter<Object,String> {
+
+shared wired class EnumeratedObjectToJsonStringConverter() satisfies Converter<Object,String> {
 	shared actual String convert(Context context, Object source, Type<String> resultType) => type(source).declaration.name;
 	
 	

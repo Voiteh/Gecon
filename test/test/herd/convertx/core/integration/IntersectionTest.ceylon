@@ -1,6 +1,3 @@
-import herd.convertx.api.component {
-	Resolver
-}
 import ceylon.collection {
 	MutableList,
 	ArrayList
@@ -11,7 +8,8 @@ import ceylon.language.meta.model {
 }
 import herd.convertx.api {
 	Context,
-	Provider
+	Provider,
+	Resolver
 }
 import ceylon.test {
 	test
@@ -20,16 +18,14 @@ import ceylon.test {
 class StringIntersectionResolver() satisfies Resolver<Anything,MutableList<String>&SearchableList<String>> {
 	shared actual Class<MutableList<String>&SearchableList<String>,Nothing> resolve(Context context, Anything input, Type<MutableList<String>&SearchableList<String>> outputType) => `ArrayList<String>`;
 	
-	matcher => object satisfies StringIntersectionResolver.Matcher {
+	shared actual StringIntersectionResolver.Matcher matcher => object satisfies StringIntersectionResolver.Matcher {
 		shared actual Boolean match(Anything input, Type<MutableList<String>&SearchableList<String>> outputType) => true;
 		
 		shared actual Integer priority => 1;
 	};
 }
-
 shared class IntersectionTest() extends BaseTest() {
-
-
+	
 	providers => super.providers.follow(object satisfies Provider {
 			components => { StringIntersectionResolver() };
 			configurations => {};

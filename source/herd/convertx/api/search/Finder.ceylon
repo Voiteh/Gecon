@@ -1,9 +1,10 @@
-import herd.convertx.api.component {
-	ComponentFindingException
-}
+
 import herd.convertx.api.registration {
 	Executable,
 	Container
+}
+import herd.convertx.api {
+	ComponentFindingException
 }
 
 shared interface  Finder {

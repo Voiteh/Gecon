@@ -1,13 +1,12 @@
-import herd.convertx.api.component {
-	Converter,
-	ConvertionException,
-	wired
-}
+
 import ceylon.language.meta.model {
 	Type
 }
 import herd.convertx.api {
-	Context
+	Context,
+	Converter,
+	ConvertionException,
+	wired
 }
 wired
 shared class StringToBooleanConverter() satisfies Converter<String,Boolean>  {

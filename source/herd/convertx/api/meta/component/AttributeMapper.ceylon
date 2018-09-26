@@ -3,7 +3,8 @@ import ceylon.language.meta.model {
 	Attribute
 }
 import herd.convertx.api {
-	Context
+	Context,
+	Creator
 }
 
 import ceylon.collection {
@@ -14,9 +15,7 @@ import herd.convertx.api.meta {
 	Relation,
 	AttributePartialization
 }
-import herd.convertx.api.component {
-	Creator
-}
+
 
 shared abstract class AttributeMapper<Source,Result>()
 		 satisfies Creator<Relation<Source, Result>,AttributePartialization>

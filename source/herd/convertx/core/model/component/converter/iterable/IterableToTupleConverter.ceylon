@@ -3,14 +3,12 @@ import ceylon.language.meta.model {
 	Interface,
 	Class
 }
-import herd.convertx.api.component {
-	ConvertionException,
-	wired,
-	Converter
-}
 import herd.convertx.api {
 	Context,
-	AnyTuple
+	AnyTuple,
+	Converter,
+	ConvertionException,
+	wired
 }
 
 shared wired class IterableToTupleConverter() satisfies Converter<{Anything*},AnyTuple>{

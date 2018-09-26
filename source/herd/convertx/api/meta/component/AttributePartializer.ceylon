@@ -5,16 +5,14 @@ import ceylon.language.meta.model {
 	Class
 }
 import herd.convertx.api {
-	Context
+	Context,
+	CreationException,
+	Creator
 }
 import herd.convertx.api.meta {
 	Relation,
 	AttributePartialization,
 	filterObjectAndIdentifiableAttributes
-}
-import herd.convertx.api.component {
-	CreationException,
-	Creator
 }
 
 

@@ -1,7 +1,4 @@
-import herd.convertx.api.component {
-	Resolver,
-	wired
-}
+
 import herd.convertx.api.meta {
 	Partialization,
 	Relation,
@@ -12,7 +9,9 @@ import ceylon.language.meta.model {
 	Type
 }
 import herd.convertx.api {
-	Context
+	Context,
+	Resolver,
+	wired
 }
 
 

@@ -2,14 +2,10 @@ import ceylon.language.meta.model {
 	Attribute,
 	Class
 }
-import herd.convertx.api.component {
-	wired
-}
-
-
 
 import herd.convertx.api {
-	Context
+	Context,
+	wired
 }
 import herd.convertx.api.meta {
 	Relation,

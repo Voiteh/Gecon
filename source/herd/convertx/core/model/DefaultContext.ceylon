@@ -8,9 +8,6 @@ import ceylon.language.meta.model {
 }
 
 
-import herd.convertx.api.component {
-	Component
-}
 import herd.convertx.core.internal {
 	DefaultVisitor,
 	DefaultFinder,
@@ -29,6 +26,9 @@ import herd.convertx.api.configuration {
 import herd.convertx.api.search {
 	Finder
 }
+import herd.convertx.api.operation {
+	Operation
+}
 shared class DefaultContext satisfies Context{
 	
 	Registry registry;
@@ -42,11 +42,11 @@ shared class DefaultContext satisfies Context{
 		this.registry=Registry();
 		this.finder=finder;
 		Configuration[] configurations=providers.flatMap((Provider element) => element.configurations).sequence();
-		Component[] components=providers.flatMap((Provider element) => element.components).sequence();
+		Operation[] components=providers.flatMap((Provider element) => element.components).sequence();
 		configurator.configure(finder, configurations);
 		configurator.configure(visitor,configurations);
 		configurator.configure(registrator,configurations);
-		components.each((Component element) => configurator.configure(element, configurations));
+		components.each((Operation element) => configurator.configure(element, configurations));
 		registrator.register(visitor, registry, providers.flatMap((Provider element) => element.components).sequence());
 		
 	}

@@ -2,11 +2,9 @@ import herd.convertx.core.util {
 	typeHierarchy
 }
 import herd.convertx.api {
-	Context
-}
-import herd.convertx.api.component {
-	wired,
-	Converter
+	Context,
+	Converter,
+	wired
 }
 import ceylon.language.meta.model {
 	Class,
@@ -28,12 +26,11 @@ shared wired class EntryConverter() satisfies Converter<Object->Anything,Object-
 		value instance = context.create(resolvedType, { convertedKey, convertedItem });
 		return instance;
 	}
-	matcher => object satisfies EntryConverter.Matcher{
-		shared actual Boolean match(Object->Anything source, Type<Object->Anything> resultType) => resultType is Class<Object->Anything>;
-		
-		shared actual Integer priority => 1;
-		
-		
-	};
+shared actual Converter<Object->Anything,Object->Anything>.Matcher? matcher => object satisfies Converter<Object->Anything,Object->Anything>.Matcher{
 	
+	shared actual Boolean match(Object->Anything source, Type<Object->Anything> resultType) => resultType is Class<Object->Anything>;
+	
+	shared actual Integer priority => 1;
+	
+};	
 }

@@ -1,6 +1,4 @@
-import herd.convertx.api.component {
-	ComponentFindingException
-}
+
 import ceylon.logging {
 	trace,
 	logger
@@ -21,6 +19,9 @@ import herd.convertx.api.registration {
 }
 import herd.convertx.api.search {
 	Finder
+}
+import herd.convertx.api {
+	ComponentFindingException
 }
 shared class DefaultFinder() satisfies Finder & Configurable<Logging>{
 

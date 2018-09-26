@@ -1,12 +1,11 @@
-import herd.convertx.api.component {
-	Creator,
-	wired
-}
+
 import ceylon.language.meta.model {
 	Class
 }
 import herd.convertx.api {
-	Context
+	Context,
+	Creator,
+	wired
 }
 
 shared wired class EntryCreator() satisfies Creator<{Anything*},Entry<Object,Anything>> {

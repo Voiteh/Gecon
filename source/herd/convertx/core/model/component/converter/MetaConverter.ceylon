@@ -1,9 +1,8 @@
-import herd.convertx.api.component {
-	wired,
-	Converter
-}
+
 import herd.convertx.api {
-	Context
+	Context,
+	Converter,
+	wired
 }
 import ceylon.language.meta.model {
 	ClassOrInterface,

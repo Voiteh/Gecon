@@ -1,9 +1,9 @@
-import herd.convertx.api.component {
-	Component
+import herd.convertx.api.operation {
+	Operation
 }
 
 shared interface Registrator {
 	
-	shared formal void register(Visitor visitor,Registry registry,Component[] components);
+	shared formal void register(Visitor visitor,Registry registry,Operation[] operations);
 	
 }

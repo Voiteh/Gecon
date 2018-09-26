@@ -2,16 +2,15 @@ import herd.convertx.api.meta {
 	Partialization,
 	Relation
 }
-import herd.convertx.api.component {
-	Resolver,
-	wired
-}
+
 import ceylon.language.meta.model {
 	Class,
 	Type
 }
 import herd.convertx.api {
-	Context
+	Context,
+	Resolver,
+	wired
 }
 import herd.convertx.json.model.meta {
 	JsonPartialization

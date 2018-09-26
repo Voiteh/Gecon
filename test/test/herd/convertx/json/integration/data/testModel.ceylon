@@ -1,15 +1,14 @@
 import ceylon.language.meta {
 	type
 }
-import herd.convertx.api.component {
-	Resolver
-}
+
 import ceylon.language.meta.model {
 	Class,
 	Type
 }
 import herd.convertx.api {
-	Context
+	Context,
+	Resolver
 }
 import ceylon.json {
 	JsonObject
@@ -107,7 +106,7 @@ shared class JsonObjectToTestResolveInterfaceResolver() satisfies Resolver<JsonO
 			return `TypeResolveTwo`;
 		}
 	}
-	matcher => object satisfies JsonObjectToTestResolveInterfaceResolver.Matcher {
+	shared actual JsonObjectToTestResolveInterfaceResolver.Matcher matcher => object satisfies JsonObjectToTestResolveInterfaceResolver.Matcher{
 		shared actual Boolean match(JsonObject input, Type<TypeResolveInterface> outputType) => true;
 		
 		shared actual Integer priority => 1;
