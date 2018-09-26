@@ -48,9 +48,7 @@ shared class DefaultRegistrator() satisfies Registrator & Configurable<Logging>{
 			if(exists replaced){
 				log.warn("Replaced: ``replaced``, with: ``element``");
 			}
-		
-		
-	});
+		});
 	}
 	
 	
