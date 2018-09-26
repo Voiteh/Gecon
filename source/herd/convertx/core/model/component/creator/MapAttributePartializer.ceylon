@@ -1,18 +1,20 @@
-import herd.convertx.core.api.component {
+import herd.convertx.api.component {
 	wired
 }
 
-import herd.convertx.core.api.component.support.meta {
-	AttributePartializer
-}
 
 import ceylon.language.meta.model {
 	Class
 }
-import herd.convertx.core.api.meta {
+import herd.convertx.api.meta {
 	Relation,
 	AttributePartialization
 }
+import herd.convertx.api.meta.component {
+	AttributePartializer
+}
+
+
 
 
 shared wired class MapAttributePartializer() extends AttributePartializer<Map<String,Anything>,Object>(){

@@ -1,4 +1,4 @@
-import herd.convertx.core.api.support {
+import herd.convertx.api.support {
  WireingProvider
 }
 shared class JsonProvider() extends WireingProvider(`module`){}

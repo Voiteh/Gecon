@@ -1,7 +1,7 @@
 import ceylon.test {
 	beforeTestRun
 }
-import herd.convertx.core.api {
+import herd.convertx.api {
 	Provider,
 	Convertx
 }

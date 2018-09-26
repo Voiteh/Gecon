@@ -6,7 +6,7 @@ import ceylon.test {
 import ceylon.collection {
 	MutableList
 }
-import herd.convertx.core.api.component {
+import herd.convertx.api.component {
 	ConvertionException
 }
 shared class IterableTest() extends BaseTest(){

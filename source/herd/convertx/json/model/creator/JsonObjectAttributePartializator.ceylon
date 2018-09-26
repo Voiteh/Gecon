@@ -1,11 +1,11 @@
-import herd.convertx.core.api.component.support.meta {
-	AttributePartializer
-}
-import herd.convertx.core.api.component {
+import herd.convertx.api.component {
 	wired
 }
 import ceylon.json {
 	JsonObject
+}
+import herd.convertx.api.meta.component {
+	AttributePartializer
 }
 shared wired class JsonObjectToAttributePartializator() extends AttributePartializer<JsonObject, Object>() {
 	shared actual String[] extractKeys(JsonObject source) => source.keys.sequence();

@@ -1,9 +1,9 @@
-import herd.convertx.core.api.component {
+import herd.convertx.api.component {
 	Converter,
 	ConvertionException,
 	wired
 }
-import herd.convertx.core.api {
+import herd.convertx.api {
 	Context
 }
 import ceylon.language.meta.model {

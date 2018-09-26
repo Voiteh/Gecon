@@ -1,10 +1,10 @@
 import ceylon.test {
 	test
 }
-import herd.convertx.core.api.support {
+import herd.convertx.api.support {
 	WireingProvider
 }
-import herd.convertx.core.api.component {
+import herd.convertx.api.component {
 	Component
 }
 import test.herd.convertx.core.api {

@@ -1,7 +1,7 @@
 import ceylon.collection {
 	HashMap
 }
-import herd.convertx.core.api.registration {
+import herd.convertx.api.registration {
 	Executable,
 	Findable
 }

@@ -1,4 +1,4 @@
-import herd.convertx.core.api.component {
+import herd.convertx.api.component {
 	Resolver,
 	wired
 }
@@ -6,7 +6,7 @@ import ceylon.language.meta.model {
 	Class,
 	Type
 }
-import herd.convertx.core.api {
+import herd.convertx.api {
 	Context
 }
 import ceylon.collection {

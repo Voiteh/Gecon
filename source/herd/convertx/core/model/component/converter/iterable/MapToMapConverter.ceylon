@@ -6,10 +6,10 @@ import herd.convertx.core.util {
 	typeHierarchy,
 	runtimeCall
 }
-import herd.convertx.core.api {
+import herd.convertx.api {
 	Context
 }
-import herd.convertx.core.api.component {
+import herd.convertx.api.component {
 	wired,
 	Converter
 }

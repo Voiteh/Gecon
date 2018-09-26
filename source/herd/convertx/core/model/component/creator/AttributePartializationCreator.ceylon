@@ -1,4 +1,4 @@
-import herd.convertx.core.api.component {
+import herd.convertx.api.component {
 	Creator,
 	wired
 }
@@ -6,27 +6,26 @@ import ceylon.language.meta.model {
 	Class,
 	Attribute
 }
-import herd.convertx.core.api {
+import herd.convertx.api {
 	Context
 }
 
 import ceylon.language.meta {
 	type
 }
-import herd.convertx.core.util {
-	filterObjectAndIdentifiableAttributes
-}
 
 import ceylon.collection {
 	HashMap
 }
-import herd.convertx.core.api.meta {
+import herd.convertx.api.meta {
 	Relation,
-	AttributePartialization
+	AttributePartialization,
+	filterObjectAndIdentifiableAttributes
 }
 
-wired
-shared class AttributePartializationCreator() satisfies Creator<Relation<Object,Object>,AttributePartialization>{
+
+
+shared wired class AttributePartializationCreator() satisfies Creator<Relation<Object,Object>,AttributePartialization>{
 	shared actual AttributePartialization create(Context context, Class<AttributePartialization,Nothing> kind, Relation<Object,Object> arguments){
 		value sourceType=type(arguments.source);
 		value entries=arguments.resultClass.getAttributes<>().filter(filterObjectAndIdentifiableAttributes).map((Attribute<Nothing,Anything,Nothing> destAttribute) {

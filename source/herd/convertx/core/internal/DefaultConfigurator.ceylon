@@ -2,7 +2,7 @@ import herd.convertx.core.util {
 	typeHierarchy,
 	runtimeCall
 }
-import herd.convertx.core.api.configuration {
+import herd.convertx.api.configuration {
 	Configurable,
 	Configurator,
 	Configuration
