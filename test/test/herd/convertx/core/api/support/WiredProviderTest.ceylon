@@ -7,9 +7,6 @@ import herd.convertx.api.support {
 import herd.convertx.api.component {
 	Component
 }
-import test.herd.convertx.core.api {
-	WiredConverter
-}
 shared class WiredProviderTest() {
 	
 	value wiredProvider=WireingProvider(`module`);
@@ -17,7 +14,7 @@ shared class WiredProviderTest() {
 	
 	shared test
 	void shouldProvideWiredConverter(){
-		assert(exists converter=wiredProvider.components.find((Component elem) => elem is WiredConverter));
+		assert(exists converter=wiredProvider.components.find((Component elem) => elem is WireingProvider));
 	}
 	
 	
