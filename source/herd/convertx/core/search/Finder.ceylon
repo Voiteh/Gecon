@@ -4,7 +4,7 @@
 import herd.convertx.core.registration {
 	Container
 }
-import herd.convertx.core.operations {
+import herd.convertx.core.operation {
 	Executable
 }
 import herd.convertx.api.operation {

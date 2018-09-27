@@ -15,8 +15,7 @@ import ceylon.test {
 import ceylon.test.event {
 	TestStartedEvent
 }
-import herd.convertx.core.model {
-	CoreProvider,
+import herd.convertx.core.operation {
 	DefaultContext
 }
 import herd.convertx.core.configuration {
@@ -27,6 +26,10 @@ import herd.convertx.api.configuration {
 }
 import herd.convertx.api.provision {
 	Provider
+}
+
+import herd.convertx.core.provisioning {
+	CoreProvider
 }
 
 beforeTestRun

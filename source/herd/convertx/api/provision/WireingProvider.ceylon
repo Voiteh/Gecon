@@ -1,6 +1,4 @@
-import herd.convertx.api {
-	WiredAnnotation
-}
+
 
 import herd.convertx.api.configuration {
 	Configuration
@@ -10,7 +8,8 @@ import ceylon.language.meta.declaration {
 	ClassDeclaration
 }
 import herd.convertx.api.operation {
-	Operation
+	Operation,
+	WiredAnnotation
 }
 import herd.convertx.api.meta {
 	annotatedDeclaration,

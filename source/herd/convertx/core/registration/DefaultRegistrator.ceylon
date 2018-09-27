@@ -14,7 +14,7 @@ import herd.convertx.api.operation {
 	Resolvance,
 	Creation
 }
-import herd.convertx.core.operations {
+import herd.convertx.core.operation {
 	Executable,
 	Findable
 }

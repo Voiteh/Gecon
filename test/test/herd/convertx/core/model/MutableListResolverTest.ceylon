@@ -1,4 +1,4 @@
-import herd.convertx.core.model.component.resolver.iterable {
+import herd.convertx.core.component.resolver.iterable {
 	MutableListResolver
 }
 import ceylon.test {

@@ -2,7 +2,7 @@ import ceylon.test {
 	test,
 	assertEquals
 }
-import herd.convertx.core.model.component.converter {
+import herd.convertx.core.component.converter {
 	SelfConverter
 }
 shared class SelfConverterTest() {

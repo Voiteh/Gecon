@@ -18,7 +18,7 @@ import herd.convertx.core.search {
 import herd.convertx.core.registration {
 	Container
 }
-import herd.convertx.core.operations {
+import herd.convertx.core.operation {
 	DefaultHashable,
 	Executable,
 	Findable,

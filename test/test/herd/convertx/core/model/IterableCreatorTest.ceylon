@@ -2,7 +2,7 @@ import ceylon.test {
 	test,
 	ignore
 }
-import herd.convertx.core.model.component.creator.iterable {
+import herd.convertx.core.component.creator.iterable {
 	ArrayCreator
 }
 shared class IterableCreatorTest() {

@@ -1,7 +1,7 @@
 import ceylon.collection {
 	HashMap
 }
-import herd.convertx.core.operations {
+import herd.convertx.core.operation {
 	Findable,
 	Executable
 }

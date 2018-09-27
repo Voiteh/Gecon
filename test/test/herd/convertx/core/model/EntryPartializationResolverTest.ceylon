@@ -2,7 +2,7 @@ import ceylon.test {
 	test,
 	assertEquals
 }
-import herd.convertx.core.model.component.resolver {
+import herd.convertx.core.component.resolver {
 	EntryPartializationResolver
 }
 import ceylon.collection {
