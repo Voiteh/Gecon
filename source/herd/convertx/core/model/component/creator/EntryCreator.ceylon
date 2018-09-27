@@ -3,16 +3,18 @@ import ceylon.language.meta.model {
 	Class
 }
 import herd.convertx.api {
-	Context,
-	Creator,
 	wired
 }
 import herd.convertx.api.operation {
-	Creation
+	Creation,
+	Delegator
+}
+import herd.convertx.api.component {
+	Creator
 }
 
 shared wired class EntryCreator() satisfies Creator<{Anything*},Entry<Object,Anything>> {
-	shared actual Object->Anything create(Context context,Class<Object->Anything,Nothing> kind, {Anything*} arguments) {
+	shared actual Object->Anything create(Delegator delegator,Class<Object->Anything,Nothing> kind, {Anything*} arguments) {
 		value key = arguments.first;
 		assert (exists key);
 		value item = arguments.rest.first;

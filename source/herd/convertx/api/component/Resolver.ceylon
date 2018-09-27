@@ -3,15 +3,16 @@ import ceylon.language.meta.model {
 	Type
 }
 
-
-
 import herd.convertx.api.operation {
-	Resolvance
+	Resolvance,
+	ResolvanceError,
+	Delegator
 }
+
 shared interface Resolver<Source, Result> satisfies Resolvance<Source,Result,Type<Result>> {
 	
-	throws (`class ResolvanceException`)
-	shared formal actual Class<Result> resolve(Context context, Source source, Type<Result> resultType);
+	throws (`class ResolvanceError`)
+	shared formal actual Class<Result> resolve(Delegator delegator, Source source, Type<Result> resultType);
 
 	
 }

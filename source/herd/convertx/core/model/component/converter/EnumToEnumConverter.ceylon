@@ -7,21 +7,23 @@ import ceylon.language.meta {
 }
 
 import herd.convertx.api {
-	Context,
-	Converter,
-	ConvertionException,
 	wired
 }
 import herd.convertx.core.util {
 	typeHierarchy
 }
 import herd.convertx.api.operation {
-	Convertion
+	Convertion,
+	ConvertionError,
+	Delegator
+}
+import herd.convertx.api.component {
+	Converter
 }
 
 shared wired
 class EnumToEnumConverter() satisfies Converter<Object,Object> {
-	shared actual Object convert(Context context, Object source, Type<Object> resultType) {
+	shared actual Object convert(Delegator delegator, Object source, Type<Object> resultType) {
 		assert(is ClassOrInterface<Object> resultType);
 		value hierarchy = typeHierarchy(type(source));
 		assert (exists sourceType = hierarchy.allParent
@@ -32,7 +34,7 @@ class EnumToEnumConverter() satisfies Converter<Object,Object> {
 		if (exists selectedObject = resultType.caseValues.get(index)) {
 			return selectedObject;
 		}
-		throw ConvertionException(source, resultType, Exception("No such index: ``index``, in case types of ``resultType``"));
+		throw ConvertionError(source, resultType, Exception("No such index: ``index``, in case types of ``resultType``"));
 	}
 	
 	shared actual Convertion<Object,Object,Type<Object>>.Matcher? matcher => object satisfies Convertion<Object,Object,Type<Object>>.Matcher{

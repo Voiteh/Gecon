@@ -1,20 +1,15 @@
-import herd.convertx.api {
-	Context
-}
+
 import ceylon.language.meta.model {
 	Type,
 	Class
 }
-
-
-
 import herd.convertx.api.configuration {
-	Configuration,
-	Configurator
+	Configuration
 }
 
 import herd.convertx.api.operation {
-	Operation
+	Operation,
+	Delegator
 }
 import herd.convertx.api.provision {
 	Provider
@@ -28,20 +23,19 @@ import herd.convertx.core.registration {
 	DefaultRegistrator,
 	Registrator
 }
-import herd.convertx.core.flattening {
-	DefaultVisitor
+import herd.convertx.core.operations {
+	DefaultFlatter
 }
 import herd.convertx.core.configuration {
-	DefaultConfigurator
+	DefaultConfigurator,
+	Configurator
 }
-import herd.convertx.api.flattening {
-	Visitor
-}
-shared class DefaultContext satisfies Context{
+
+shared class DefaultContext satisfies Delegator{
 	
 	Registry registry;
 	Finder finder;
-	shared new(Visitor visitor=DefaultVisitor(),
+	shared new(Operation.Flatter visitor=DefaultFlatter(),
 		Finder finder=DefaultFinder(),
 		Registrator registrator=DefaultRegistrator(),
 		Configurator configurator=DefaultConfigurator(),

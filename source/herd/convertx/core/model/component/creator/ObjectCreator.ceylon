@@ -7,9 +7,6 @@ import ceylon.language.serialization {
 	deserialization
 }
 import herd.convertx.api {
-	Context,
-	CreationException,
-	Creator,
 	wired
 }
 
@@ -18,12 +15,17 @@ import herd.convertx.api.meta {
 	AttributePartialization
 }
 import herd.convertx.api.operation {
-	Creation
+	Creation,
+	CreationError,
+	Delegator
+}
+import herd.convertx.api.component {
+	Creator
 }
 
 
 shared wired class ObjectCreator() satisfies Creator<AttributePartialization,Object> {
-	shared actual Object create(Context context,Class<Object,Nothing> kind, AttributePartialization partialization) {
+	shared actual Object create(Delegator delegator,Class<Object,Nothing> kind, AttributePartialization partialization) {
 		value instanceId = kind.string;
 		value deserializationContext = deserialization<String>();
 		try {
@@ -34,7 +36,7 @@ shared wired class ObjectCreator() satisfies Creator<AttributePartialization,Obj
 			});
 			return deserializationContext.reconstruct<Object>(instanceId);
 		} catch (Exception x) {
-			throw CreationException(kind, x);
+			throw CreationError(kind, x);
 		}
 	}
 	

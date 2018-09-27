@@ -1,6 +1,4 @@
 import herd.convertx.api {
-	Context,
-	Converter,
 	wired
 }
 import ceylon.language.meta.model {
@@ -10,11 +8,15 @@ import ceylon.language.meta {
 	type
 }
 import herd.convertx.api.operation {
-	Convertion
+	Convertion,
+	Delegator
+}
+import herd.convertx.api.component {
+	Converter
 }
 
 shared wired class EnumeratedObjectToJsonStringConverter() satisfies Converter<Object,String> {
-	shared actual String convert(Context context, Object source, Type<String> resultType) => type(source).declaration.name;
+	shared actual String convert(Delegator delegator, Object source, Type<String> resultType) => type(source).declaration.name;
 	
 	
 

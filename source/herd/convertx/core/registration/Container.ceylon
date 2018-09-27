@@ -1,9 +1,9 @@
 import ceylon.collection {
 	HashMap
 }
-import herd.convertx.api.flattening {
-	Executable,
-	Findable
+import herd.convertx.core.operations {
+	Findable,
+	Executable
 }
 
 

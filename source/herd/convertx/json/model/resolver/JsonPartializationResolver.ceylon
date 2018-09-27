@@ -8,8 +8,6 @@ import ceylon.language.meta.model {
 	Type
 }
 import herd.convertx.api {
-	Context,
-	Resolver,
 	wired
 }
 import herd.convertx.json.model.meta {
@@ -19,11 +17,15 @@ import ceylon.json {
 	JsonObject
 }
 import herd.convertx.api.operation {
-	Resolvance
+	Resolvance,
+	Delegator
+}
+import herd.convertx.api.component {
+	Resolver
 }
 wired
 shared class JsonPartializationResolver() satisfies Resolver<Relation<Object, JsonObject>,Partialization>{
-	shared actual Class<Partialization,Nothing> resolve(Context context, Relation<Object, JsonObject> input, Type<Partialization> outputType) => `JsonPartialization`;
+	shared actual Class<Partialization,Nothing> resolve(Delegator delegator, Relation<Object, JsonObject> input, Type<Partialization> outputType) => `JsonPartialization`;
 	
 	
 	shared actual Resolvance<Relation<Object,JsonObject>,Partialization,Type<Partialization>>.Matcher? matcher => object satisfies Resolvance<Relation<Object,JsonObject>,Partialization,Type<Partialization>>.Matcher{

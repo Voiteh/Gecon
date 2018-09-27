@@ -7,17 +7,19 @@ import ceylon.collection {
 	HashSet
 }
 import herd.convertx.api {
-	Context,
-	Resolver,
 	wired
 }
 import herd.convertx.api.operation {
-	Resolvance
+	Resolvance,
+	Delegator
+}
+import herd.convertx.api.component {
+	Resolver
 }
 
 shared wired class IterableToSetResolver() satisfies Resolver<{Anything*},Set<>>{
 	
-	shared actual Class<Set<>> resolve(Context context,{Anything*} input,Type<Set<>> outputType) { 
+	shared actual Class<Set<>> resolve(Delegator delegator,{Anything*} input,Type<Set<>> outputType) { 
 		assert(is Interface<Set<>> outputType);
 		value typeForIterable = iterableTypeArgument(outputType);
 		return `class HashSet`.classApply<Set<>>(typeForIterable);

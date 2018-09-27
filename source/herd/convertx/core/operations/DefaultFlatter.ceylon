@@ -1,7 +1,9 @@
 import herd.convertx.api.operation {
 	Convertion,
 	Creation,
-	Resolvance
+	Resolvance,
+	Operation,
+	Delegator
 }
 import ceylon.language.meta.model {
 	Class,
@@ -10,9 +12,7 @@ import ceylon.language.meta.model {
 import ceylon.language.meta {
 	typeLiteral
 }
-import herd.convertx.api {
-	Context
-}
+
 
 import herd.convertx.api.configuration {
 	Configurable
@@ -23,16 +23,10 @@ import herd.convertx.core.configuration {
 import ceylon.logging {
 	logger
 }
-import herd.convertx.api.flattening {
-	Matchable,
-	Findable,
-	Executable,
-	Visitor
-}
 
 
 String matchingResultLog(Boolean result) =>"Matching ``if (result) then "SUCCESS" else "FAILURE"``";
-shared class DefaultVisitor() satisfies Visitor & Configurable<Logging>{
+shared class DefaultFlatter() satisfies Operation.Flatter & Configurable<Logging>{
 	
 	
 	value log=logger(`package`);
@@ -40,7 +34,7 @@ shared class DefaultVisitor() satisfies Visitor & Configurable<Logging>{
 		log.priority=configuration.priority;
 	}
 	
-	shared actual [Findable, Executable] prepareConverterRegistration
+	shared actual [Findable, Executable] flattenConverter
 			<Source, Result, ResultType>
 			(Convertion<Source,Result,ResultType> converter)
 			given ResultType satisfies Type<Result> 
@@ -72,7 +66,7 @@ shared class DefaultVisitor() satisfies Visitor & Configurable<Logging>{
 		}
 		value executable=object satisfies Executable{
 			shared actual Result execute<Result>([Anything*] args) {
-				assert(is [Context,Source,ResultType] args);
+				assert(is [Delegator,Source,ResultType] args);
 				log.debug("[``converter``] Converting ``args.rest.first else "null"`` to ``args.rest.rest.first``");
 				
 				assert(is Result result=converter.convert(*args));
@@ -88,7 +82,7 @@ shared class DefaultVisitor() satisfies Visitor & Configurable<Logging>{
 		return [findable,executable];
 	}
 	
-	shared actual [Findable, Executable] prepareCreatorRegistration<Args, Result, ResultType>
+	shared actual [Findable, Executable] flattenCreator<Args, Result, ResultType>
 			(Creation<Args,Result,ResultType> creator)
 			given ResultType satisfies Result 
 	{
@@ -118,7 +112,7 @@ shared class DefaultVisitor() satisfies Visitor & Configurable<Logging>{
 		}
 		value flatten =object satisfies Executable{
 			shared actual Result execute<Result>([Anything*] args) {
-				assert(is [Context,Class<ResultType>, Args] args);
+				assert(is [Delegator,Class<ResultType>, Args] args);
 				log.debug("[``creator``] Creating ``args.rest.first``, using arguments: ``args.rest.rest.first else "null"``");
 				assert(is Result result= creator.create(*args));
 				log.info("[``creator``] Created ``result else "null"``, using arguments: ``args.rest.rest.first else "null"``");
@@ -132,7 +126,7 @@ shared class DefaultVisitor() satisfies Visitor & Configurable<Logging>{
 		return [findable,flatten];
 	}
 	
-	shared actual [Findable, Executable] prepareResolverRegistration<Source, Result, ResultType>
+	shared actual [Findable, Executable] flattenResolver<Source, Result, ResultType>
 			(Resolvance<Source,Result,ResultType> resolver) 
 			given ResultType satisfies Type<Result>
 	{
@@ -160,7 +154,7 @@ shared class DefaultVisitor() satisfies Visitor & Configurable<Logging>{
 		}
 		value flatten = object satisfies Executable{
 			shared actual Result execute<Result>([Anything*] args) {
-				assert(is [Context,Source,ResultType] args);
+				assert(is [Delegator,Source,ResultType] args);
 				log.debug("[``resolver``] Resolving ``args.rest.first else "null" ``, to ``args.rest.rest.first``");
 				assert(is Result result=resolver.resolve(*args));
 				log.info("[``resolver``] Resolved ``args.rest.first else "null"`` to ``result``");

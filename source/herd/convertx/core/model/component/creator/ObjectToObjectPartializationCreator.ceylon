@@ -5,8 +5,6 @@ import ceylon.language.meta.model {
 	Attribute
 }
 import herd.convertx.api {
-	Context,
-	Creator,
 	wired
 }
 
@@ -24,17 +22,21 @@ import herd.convertx.api.meta {
 	filterObjectAndIdentifiableAttributes
 }
 import herd.convertx.api.operation {
-	Creation
+	Creation,
+	Delegator
+}
+import herd.convertx.api.component {
+	Creator
 }
 wired
 shared class ObjectToObjectPartializationCreator() satisfies Creator<Object->Type<Object>,AttributePartialization>{
-	shared actual AttributePartialization create(Context context, Class<AttributePartialization,Nothing> kind, Object->Type<Object> arguments){
+	shared actual AttributePartialization create(Delegator delegator, Class<AttributePartialization,Nothing> kind, Object->Type<Object> arguments){
 		assert(is Class<Object> clazz=arguments.item);
 		value sourceType=type(arguments.key);
 		value entries=clazz.getAttributes<>().filter(filterObjectAndIdentifiableAttributes).map((Attribute<Nothing,Anything,Nothing> destAttribute) {
 			value sourceAttribute = sourceType.getAttribute<>(destAttribute.declaration.name);
 			value sourcePartValue=sourceAttribute?.bind(arguments.key)?.get();
-			value destPartValue=context.convert(sourcePartValue,destAttribute.type);
+			value destPartValue=delegator.convert(sourcePartValue,destAttribute.type);
 			return destAttribute->destPartValue;
 		});
 		return AttributePartialization(HashMap<Attribute<>,Anything>{entries=entries;});

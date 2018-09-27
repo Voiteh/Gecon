@@ -7,11 +7,11 @@ import ceylon.collection {
 	MutableList
 }
 
-import herd.convertx.api {
-	ConvertionException
-}
 import test.base.herd.convertx.integration {
 	BaseTest
+}
+import herd.convertx.api.operation {
+	ConvertionError
 }
 shared class IterableTest() extends BaseTest(){
 	
@@ -96,11 +96,11 @@ shared class IterableTest() extends BaseTest(){
 	
 	shared test
 	void shouldNotConvertIterableToToupleToFewArguments(){
-		assert(is ConvertionException error=convertx.convert({1,2,3}, `[String,String,String,String]`));
+		assert(is ConvertionError error=convertx.convert({1,2,3}, `[String,String,String,String]`));
 	}
 	shared test
 	void shouldNotConvertIterableToToupleToManyArguments(){
-		assert(is ConvertionException error=convertx.convert({1,2,3,4}, `[String,String,String]`));
+		assert(is ConvertionError error=convertx.convert({1,2,3,4}, `[String,String,String]`));
 	}
 	
 	shared test 

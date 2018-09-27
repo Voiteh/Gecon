@@ -6,15 +6,16 @@ import ceylon.language.meta.model {
 	Class,
 	Type
 }
-import herd.convertx.api {
-	Context,
-	Resolver
-}
+
 import ceylon.json {
 	JsonObject
 }
 import herd.convertx.api.operation {
-	Resolvance
+	Resolvance,
+	Delegator
+}
+import herd.convertx.api.component {
+	Resolver
 }
 
 shared serializable
@@ -98,9 +99,9 @@ class ResolvableClass(resolved) {
 }
 
 shared class JsonObjectToTestResolveInterfaceResolver() satisfies Resolver<JsonObject,TypeResolveInterface> {
-	shared actual Class<TypeResolveInterface,Nothing> resolve(Context context, JsonObject input, Type<TypeResolveInterface> outputType) {
+	shared actual Class<TypeResolveInterface,Nothing> resolve(Delegator delegator, JsonObject input, Type<TypeResolveInterface> outputType) {
 		value typeInfo = input.get(`TypeResolveInterface.type`.declaration.name);
-		value dataType = context.convert(typeInfo, `DataType`);
+		value dataType = delegator.convert(typeInfo, `DataType`);
 		switch (dataType)
 		case (typeOne) {
 			return `TypeResolveOne`;

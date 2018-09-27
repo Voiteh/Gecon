@@ -1,17 +1,21 @@
 import herd.convertx.api {
-	Context,
-	Converter,
 	wired
 }
 import ceylon.language.meta.model {
 	Type
 }
+import herd.convertx.api.component {
+	Converter
+}
+import herd.convertx.api.operation {
+	Delegator
+}
 
 
 shared wired class ByteToBooleanConverter() satisfies Converter<Byte,Boolean> {
-	shared actual Boolean convert(Context context, Byte source, Type<Boolean> resultType) {
-		value convert = context.convert(source, `Integer`);
-		return context.convert(convert, `Boolean`);
+	shared actual Boolean convert(Delegator delegator, Byte source, Type<Boolean> resultType) {
+		value convert = delegator.convert(source, `Integer`);
+		return delegator.convert(convert, `Boolean`);
 	}
 	
 }

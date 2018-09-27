@@ -10,8 +10,9 @@ import ceylon.collection {
 import ceylon.language.meta.model {
 	Class
 }
-import herd.convertx.api {
-	Context
+
+import herd.convertx.api.operation {
+	Delegator
 }
 shared class MapToMapResolverTest() {
 	
@@ -20,8 +21,8 @@ shared class MapToMapResolverTest() {
 	
 	shared test 
 	void shouldResolveToHashMap(){
-		Context context=MockContext();
-		assert(is Class<HashMap<String,Integer>> resolved=mapResolver.resolve(context,HashMap<Integer,String>(),`Map<String,Integer>`));
+		Delegator delegator=MockContext();
+		assert(is Class<HashMap<String,Integer>> resolved=mapResolver.resolve(delegator,HashMap<Integer,String>(),`Map<String,Integer>`));
 	}
 	
 	

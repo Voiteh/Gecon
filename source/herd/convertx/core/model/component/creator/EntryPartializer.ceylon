@@ -4,7 +4,6 @@ import ceylon.language.meta.model {
 }
 
 import herd.convertx.api {
-	Context,
 	wired
 }
 import herd.convertx.api.meta {
@@ -15,7 +14,8 @@ import herd.convertx.api.meta.component {
 	ObjectPartializer
 }
 import herd.convertx.api.operation {
-	Creation
+	Creation,
+	Delegator
 }
 
 
@@ -26,7 +26,7 @@ import herd.convertx.api.operation {
 shared wired class EntryPartializer() extends ObjectPartializer<EntryPartialization,{<String->Anything>*},Map<String,Anything>>() {
 	shared actual EntryPartialization createPartialization({<String->Anything>*} holder) => EntryPartialization(holder);
 	
-	shared actual {<String->Anything>*} mapAttributes(Context context, Object source, {Attribute<Nothing,Anything,Nothing>*} attributes) => attributes.map((Attribute<Nothing,Anything,Nothing> element) => element.declaration.name -> element.bind(source).get());
+	shared actual {<String->Anything>*} mapAttributes(Delegator delegator, Object source, {Attribute<Nothing,Anything,Nothing>*} attributes) => attributes.map((Attribute<Nothing,Anything,Nothing> element) => element.declaration.name -> element.bind(source).get());
 	
 	shared actual Creation<Relation<Object,Map<String,Anything>>,EntryPartialization,EntryPartialization>.Matcher? matcher => object satisfies Creation<Relation<Object,Map<String,Anything>>,EntryPartialization,EntryPartialization>.Matcher{
 		shared actual Integer priority => 1;

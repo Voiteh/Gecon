@@ -2,15 +2,15 @@ import ceylon.language.meta.model {
 	Type,
 	Class
 }
-import herd.convertx.api {
-	Context
+
+
+
+shared class ResolvanceError extends OperationError {
+	shared new (Type<Anything> provisioningType, Throwable? cause = null)
+			extends OperationError("Can't resolve concrete type, for ``provisioningType`` type", cause) {
+	}
 }
 
-import herd.convertx.api.flattening {
-	Findable,
-	Executable,
-	Visitor
-}
 shared sealed interface Resolvance<in Source=Nothing, out Output=Anything, in OutputType=Nothing> satisfies Operation
 		given OutputType satisfies Type<Output> {
 	
@@ -19,9 +19,9 @@ shared sealed interface Resolvance<in Source=Nothing, out Output=Anything, in Ou
 		shared formal Integer priority;
 	}
 	
-	shared formal Class<Output> resolve(Context context, Source input, OutputType outputType);
+	shared formal Class<Output> resolve(Delegator delegator, Source input, OutputType outputType);
 	
-	shared actual [Findable, Executable] flatten(Visitor visitor) => visitor.prepareResolverRegistration(this);
+	shared actual Anything flatten(Flatter visitor) => visitor.flattenResolver(this);
 	
 	
 	

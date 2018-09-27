@@ -3,14 +3,18 @@ import ceylon.language.meta.model {
 }
 
 import herd.convertx.api {
-	Context,
-	Converter,
-	ConvertionException,
 	wired
+}
+import herd.convertx.api.operation {
+	ConvertionError,
+	Delegator
+}
+import herd.convertx.api.component {
+	Converter
 }
 wired
 shared class IntegerToBooleanConverter() satisfies Converter<Integer,Boolean>  {
-	shared actual Boolean convert(Context context, Integer source, Type<Boolean> resultType) {
+	shared actual Boolean convert(Delegator delegator, Integer source, Type<Boolean> resultType) {
 		switch (source)
 		case (0) {
 			return false;
@@ -19,7 +23,7 @@ shared class IntegerToBooleanConverter() satisfies Converter<Integer,Boolean>  {
 			return true;
 		}
 		else {
-			throw ConvertionException(source, resultType, Exception("Only 0/1 values are convertable to Boolean"));
+			throw ConvertionError(source, resultType, Exception("Only 0/1 values are convertable to Boolean"));
 		}
 	}
 	

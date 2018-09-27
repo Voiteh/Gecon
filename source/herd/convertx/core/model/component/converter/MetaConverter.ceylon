@@ -1,7 +1,5 @@
 
 import herd.convertx.api {
-	Context,
-	Converter,
 	wired
 }
 import ceylon.language.meta.model {
@@ -16,16 +14,20 @@ import ceylon.language.meta {
 	type
 }
 import herd.convertx.api.operation {
-	Convertion
+	Convertion,
+	Delegator
+}
+import herd.convertx.api.component {
+	Converter
 }
 
 shared wired class MetaConverter() satisfies Converter<Object,Object> {
-	shared actual Object convert(Context context, Object source, Type<Object> resultType) {
-			value resolvedType = context.resolve(source,resultType);
-			value relation=context.convert(source->type(resolvedType), `Relation<>`);
-			value partializationType=context.resolve(relation, `Partialization`);
-			value partialization=context.create(partializationType,relation);
-			return context.create(resolvedType, partialization);
+	shared actual Object convert(Delegator delegator, Object source, Type<Object> resultType) {
+			value resolvedType = delegator.resolve(source,resultType);
+			value relation=delegator.convert(source->type(resolvedType), `Relation<>`);
+			value partializationType=delegator.resolve(relation, `Partialization`);
+			value partialization=delegator.create(partializationType,relation);
+			return delegator.create(resolvedType, partialization);
 	}
 	
 	shared actual Convertion<Object,Object,Type<Object>>.Matcher? matcher => object satisfies Convertion<Object,Object,Type<Object>>.Matcher{

@@ -9,17 +9,19 @@ import ceylon.language.meta.model {
 }
 
 import herd.convertx.api {
-	Context,
-	Resolver,
 	wired
 }
 import herd.convertx.api.operation {
-	Resolvance
+	Resolvance,
+	Delegator
+}
+import herd.convertx.api.component {
+	Resolver
 }
 
 
 shared wired class MutableListResolver() satisfies Resolver<{Anything*},List<>> {
-	shared actual Class<List<>,Nothing> resolve(Context context,{Anything*} input, Type<List<>> outputType) {
+	shared actual Class<List<>,Nothing> resolve(Delegator delegator,{Anything*} input, Type<List<>> outputType) {
 		assert(is ClassOrInterface<List<>> outputType);
 		value typeForIterable = iterableTypeArgument(outputType);
 		return `class ArrayList`.classApply<List<>>(typeForIterable);

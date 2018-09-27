@@ -6,16 +6,18 @@ import ceylon.language.meta.model {
 	Class
 }
 import herd.convertx.api {
-	Context,
-	Creator,
 	wired
 }
 import herd.convertx.api.operation {
-	Creation
+	Creation,
+	Delegator
+}
+import herd.convertx.api.component {
+	Creator
 }
 
 shared wired class ArrayListCreator() satisfies Creator<{Anything*},List<>> {
-	shared actual List<> create(Context context,Class<List<>> kind, {Anything*} arguments) {
+	shared actual List<> create(Delegator delegator,Class<List<>> kind, {Anything*} arguments) {
 		return kind.apply(0, 1.5, arguments);
 	}
 	

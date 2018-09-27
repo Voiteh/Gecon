@@ -3,18 +3,22 @@ import ceylon.language.meta.model {
 }
 
 import herd.convertx.api {
-	Context,
-	Converter,
-	ConvertionException,
 	wired
+}
+import herd.convertx.api.operation {
+	ConvertionError,
+	Delegator
+}
+import herd.convertx.api.component {
+	Converter
 }
 wired
 shared class StringToCharacterConverter() satisfies Converter<String,Character> {
-	shared actual Character convert(Context context, String source, Type<Character> resultType) {
+	shared actual Character convert(Delegator delegator, String source, Type<Character> resultType) {
 		if (exists char = source.first) {
 			return char;
 		}
-		throw ConvertionException(source, resultType, Exception("Can't convert empty string to Character"));
+		throw ConvertionError(source, resultType, Exception("Can't convert empty string to Character"));
 	}
 	
 }

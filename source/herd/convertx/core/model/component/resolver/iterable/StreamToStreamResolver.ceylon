@@ -5,16 +5,18 @@ import ceylon.language.meta.model {
 }
 
 import herd.convertx.api {
-	Context,
 	AnyTuple,
-	Resolver,
 	wired
 }
 import ceylon.language.meta {
 	type
 }
 import herd.convertx.api.operation {
-	Resolvance
+	Resolvance,
+	Delegator
+}
+import herd.convertx.api.component {
+	Resolver
 }
 shared wired class StreamToStreamResolver() satisfies  Resolver<{Anything*},{Anything*}>{
 	
@@ -28,7 +30,7 @@ shared wired class StreamToStreamResolver() satisfies  Resolver<{Anything*},{Any
 		return emptyType;
 	}
 	
-	shared actual Class<{Anything*},Nothing> resolve(Context context,{Anything*} input, Type<{Anything*}> outputType){
+	shared actual Class<{Anything*},Nothing> resolve(Delegator delegator,{Anything*} input, Type<{Anything*}> outputType){
 		value tupleArgs=input.map((Anything element) => type(element)).sequence();
 		assert(is Class<AnyTuple> tupleType=createSequentialType(tupleArgs));
 		return tupleType;

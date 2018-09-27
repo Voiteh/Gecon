@@ -1,6 +1,4 @@
 import herd.convertx.api {
-	Context,
-	Converter,
 	wired
 }
 
@@ -13,18 +11,22 @@ import herd.convertx.core.util {
 	runtimeCall
 }
 import herd.convertx.api.operation {
-	Convertion
+	Convertion,
+	Delegator
+}
+import herd.convertx.api.component {
+	Converter
 }
 
 shared wired class IterableToIterableConverter() satisfies Converter<{Anything*},{Anything*}> {
-	shared actual {Anything*} convert(Context context, {Anything*} source, Type<{Anything*}> resultType){
+	shared actual {Anything*} convert(Delegator delegator, {Anything*} source, Type<{Anything*}> resultType){
 			assert(is ClassOrInterface<{Anything*}> resultType);
 			assert(exists explictIterableType = typeHierarchy(resultType).findByDeclaration(`interface Iterable`));
 			assert(exists elementType=explictIterableType.typeArgumentList.first);
-			value args = source.map((Anything element) => context.convert(element, elementType)).sequence();
+			value args = source.map((Anything element) => delegator.convert(element, elementType)).sequence();
 			value narrowedArgs=runtimeCall.iterable.narrow(args, elementType);
-			value resolvedType=context.resolve(args,resultType);
-			return context.create(resolvedType, narrowedArgs);
+			value resolvedType=delegator.resolve(args,resultType);
+			return delegator.create(resolvedType, narrowedArgs);
 	}
 	
 	

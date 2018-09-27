@@ -4,7 +4,6 @@ import herd.convertx.core.util {
 }
 import herd.convertx.api.configuration {
 	Configurable,
-	Configurator,
 	Configuration
 }
 import ceylon.language.meta {

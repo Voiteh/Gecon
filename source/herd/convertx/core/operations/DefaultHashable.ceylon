@@ -8,9 +8,6 @@ import ceylon.language.meta {
 
 
 
-import herd.convertx.api.flattening {
-	Hashable
-}
 shared sealed class DefaultHashable(Anything* toHash) satisfies Hashable {
 	
 	Type<> extractType(Anything data){

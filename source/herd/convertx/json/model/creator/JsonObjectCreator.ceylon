@@ -3,8 +3,6 @@ import herd.convertx.json.model.meta {
 }
 
 import herd.convertx.api {
-	Context,
-	Creator,
 	wired
 }
 import ceylon.language.meta.model {
@@ -13,8 +11,14 @@ import ceylon.language.meta.model {
 import ceylon.json {
 	JsonObject
 }
+import herd.convertx.api.component {
+	Creator
+}
+import herd.convertx.api.operation {
+	Delegator
+}
 
 shared wired class JsonObjectCreator() satisfies Creator<JsonPartialization,JsonObject>{
-	shared actual JsonObject create(Context context, Class<JsonObject,Nothing> kind, JsonPartialization arguments) => JsonObject(arguments.parts);
+	shared actual JsonObject create(Delegator delegator, Class<JsonObject,Nothing> kind, JsonPartialization arguments) => JsonObject(arguments.parts);
 	
 }

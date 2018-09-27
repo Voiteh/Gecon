@@ -4,15 +4,18 @@ import ceylon.language.meta.model {
 	Attribute,
 	Class
 }
-import herd.convertx.api {
-	Context,
-	CreationException,
-	Creator
-}
+
 import herd.convertx.api.meta {
 	Relation,
 	AttributePartialization,
 	filterObjectAndIdentifiableAttributes
+}
+import herd.convertx.api.operation {
+	CreationError,
+	Delegator
+}
+import herd.convertx.api.component {
+	Creator
 }
 
 
@@ -27,18 +30,18 @@ shared abstract class AttributePartializer<Source, Result>()
 	shared default Attribute<>? findAttribute(String key,Attribute<>[] resultAttributes)
 			=>resultAttributes.find((Attribute<> attribute) => attribute.declaration.name==key);
 	
-	shared actual AttributePartialization create(Context context, Class<AttributePartialization,Nothing> kind, Relation<Source,Result> arguments) {
+	shared actual AttributePartialization create(Delegator delegator, Class<AttributePartialization,Nothing> kind, Relation<Source,Result> arguments) {
 		value attributes=arguments.resultClass.getAttributes<>().filter(filterObjectAndIdentifiableAttributes).sequence();
 		value entries=extractKeys(arguments.source)
 				.map((String key) {
 			value attribute=findAttribute(key, attributes);
 			if(exists attribute){
 				value toConvert=extractValue(arguments.source, key);
-				value part=context.convert(toConvert, attribute.type);
+				value part=delegator.convert(toConvert, attribute.type);
 				return attribute->part;
 			}
 			else{
-				throw CreationException(kind,Exception("Can't find attribute by name: ``key`` in ``arguments.resultClass`` type"));
+				throw CreationError(kind,Exception("Can't find attribute by name: ``key`` in ``arguments.resultClass`` type"));
 			}
 		});
 		return AttributePartialization(entries);

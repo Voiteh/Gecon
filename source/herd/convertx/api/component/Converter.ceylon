@@ -5,14 +5,17 @@ import ceylon.language.meta.model {
 
 
 import herd.convertx.api.operation {
-	Convertion
+	Convertion,
+	ConvertionError,
+	Delegator
 }
+
 
 shared interface Converter<Source,Result> 
 		satisfies Convertion<Source, Result,Type<Result>> {
 
-	throws(`class ConvertionException`)
-	shared actual formal Result convert(Context context,Source source,Type<Result> resultType);
+	throws(`class ConvertionError`)
+	shared actual formal Result convert(Delegator delegator,Source source,Type<Result> resultType);
 	
 	
 	

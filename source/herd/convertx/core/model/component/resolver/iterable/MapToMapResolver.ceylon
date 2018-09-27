@@ -11,17 +11,19 @@ import herd.convertx.core.util {
 	typeHierarchy
 }
 import herd.convertx.api {
-	Context,
-	Resolver,
 	wired
 }
 import herd.convertx.api.operation {
-	Resolvance
+	Resolvance,
+	Delegator
+}
+import herd.convertx.api.component {
+	Resolver
 }
 
 shared wired class MapToMapResolver() satisfies Resolver<Map<>,Map<>> {
 	
-	shared actual Class<Map<>,Nothing> resolve(Context context,Map<> input,Type<Map<>> outputType) {
+	shared actual Class<Map<>,Nothing> resolve(Delegator delegator,Map<> input,Type<Map<>> outputType) {
 		assert(is ClassOrInterface<Map<>> outputType);
 		value hierarchy = typeHierarchy(outputType);
 		assert (exists iterableType = hierarchy.findByDeclaration(`interface Map`));

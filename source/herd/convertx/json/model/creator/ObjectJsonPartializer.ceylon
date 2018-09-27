@@ -7,7 +7,6 @@ import ceylon.language.meta.model {
 	Class
 }
 import herd.convertx.api {
-	Context,
 	wired
 }
 import herd.convertx.api.meta {
@@ -21,19 +20,20 @@ import herd.convertx.api.meta.component {
 	ObjectPartializer
 }
 import herd.convertx.api.operation {
-	Creation
+	Creation,
+	Delegator
 }
 
 shared wired class ObjectJSONPartializer() extends ObjectPartializer<JsonPartialization, {<String->Value>*}, JsonObject>(){
 	shared actual JsonPartialization createPartialization({<String->Value>*} holder) => JsonPartialization(holder);
 	
-	shared actual {<String->Value>*} mapAttributes(Context context,Object source, {Attribute<Nothing,Anything,Nothing>*} attributes) => attributes.map((Attribute<> element) {
+	shared actual {<String->Value>*} mapAttributes(Delegator delegator,Object source, {Attribute<Nothing,Anything,Nothing>*} attributes) => attributes.map((Attribute<> element) {
 		value val=element.bind(source).get();
 		if(is Value val ){
 			return element.declaration.name->val;
 		}
 		else{
-			return element.declaration.name->context.convert(val, `Value`);
+			return element.declaration.name->delegator.convert(val, `Value`);
 		}
 	});
 	

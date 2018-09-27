@@ -3,21 +3,25 @@ import ceylon.language.meta.model {
 }
 
 import herd.convertx.api {
-	Context,
-	Converter,
-	ConvertionException,
 	wired
+}
+import herd.convertx.api.operation {
+	ConvertionError,
+	Delegator
+}
+import herd.convertx.api.component {
+	Converter
 }
 wired
 shared class StringToIntegerConverter() satisfies Converter<String,Integer>  {
-	shared actual Integer convert(Context context, String source, Type<Integer> resultType) {
+	shared actual Integer convert(Delegator delegator, String source, Type<Integer> resultType) {
 		value parse = Integer.parse(source);
 		switch (parse)
 		case (is Integer) {
 			return parse;
 		}
 		case (is ParseException) {
-			throw ConvertionException(source, resultType, parse);
+			throw ConvertionError(source, resultType, parse);
 		}
 	}
 	

@@ -4,14 +4,16 @@ import ceylon.language.meta.model {
 	Class
 }
 import herd.convertx.api {
-	Context,
 	AnyTuple,
-	Converter,
-	ConvertionException,
 	wired
 }
 import herd.convertx.api.operation {
-	Convertion
+	Convertion,
+	ConvertionError,
+	Delegator
+}
+import herd.convertx.api.component {
+	Converter
 }
 
 shared wired class IterableToTupleConverter() satisfies Converter<{Anything*},AnyTuple>{
@@ -29,16 +31,16 @@ shared wired class IterableToTupleConverter() satisfies Converter<{Anything*},An
 		}
 	}
 	
-	shared actual Tuple<Anything,Anything,Anything> convert(Context context, {Anything*} source, Type<AnyTuple> resultType) {
+	shared actual Tuple<Anything,Anything,Anything> convert(Delegator delegator, {Anything*} source, Type<AnyTuple> resultType) {
 		value argsType = extractArgsType(resultType);
 		if(source.size!=argsType.size){
-			throw ConvertionException(source, resultType,Exception("Different sizes of provided source ``source`` to touple argument types ``argsType`` "));
+			throw ConvertionError(source, resultType,Exception("Different sizes of provided source ``source`` to touple argument types ``argsType`` "));
 		}
 		value sourceIterator=source.iterator();
 		value converted=argsType.map((Type<Anything> element) => element->sourceIterator.next())
-				.map((Type<Anything> type -> Anything item) => context.convert(item, type)).sequence();
-		value resolvedType=context.resolve(converted,resultType);
-		return context.create(resolvedType, converted);
+				.map((Type<Anything> type -> Anything item) => delegator.convert(item, type)).sequence();
+		value resolvedType=delegator.resolve(converted,resultType);
+		return delegator.create(resolvedType, converted);
 	}
 	
 	shared actual Convertion<{Anything*},AnyTuple,Type<AnyTuple>>.Matcher? matcher => object satisfies Convertion<{Anything*},AnyTuple,Type<AnyTuple>>.Matcher{

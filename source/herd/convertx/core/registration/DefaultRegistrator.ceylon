@@ -14,9 +14,9 @@ import herd.convertx.api.operation {
 	Resolvance,
 	Creation
 }
-import herd.convertx.api.flattening {
+import herd.convertx.core.operations {
 	Executable,
-	Visitor
+	Findable
 }
 
 
@@ -28,10 +28,10 @@ shared class DefaultRegistrator() satisfies Registrator & Configurable<Logging>{
 	}
 
 
-	shared actual void register(Visitor visitor,Registry registry, Operation[] components) {
+	shared actual void register(Operation.Flatter visitor,Registry registry, Operation[] components) {
 		
 		components.each((Operation element) {
-			value flat=element.flatten(visitor);
+			assert(is [Findable,Executable] flat=element.flatten(visitor));
 			Executable? replaced;
 			switch(element)
 			case (is Convertion<>) {

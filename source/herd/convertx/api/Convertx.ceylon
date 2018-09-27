@@ -2,24 +2,28 @@ import ceylon.language.meta.model {
 	Type
 }
 
-import herd.convertx.api {
-	Context
+
+import herd.convertx.api.operation {
+	OperationError,
+	Delegator,
+	ComponentFindingException
 }
 shared class Convertx{
 	
-	Context context;
+	Delegator delegator;
 	
-	shared new (Context context){
-		this.context=context;
+	shared new (Delegator delegator){
+		this.delegator=delegator;
 	}
 	
 	
-	shared Result|ConvertxException convert<Result>(Anything source, Type<Result> resultType){
+	shared Result|OperationError|ComponentFindingException convert<Result>(Anything source, Type<Result> resultType){
 		try {
-			value result =context.convert(source, resultType);
+			value result =delegator.convert(source, resultType);
 			return result;
-		} catch (ConvertxException x) {
+		} catch (OperationError|ComponentFindingException x) {
 			return x;
 		}
 	}
 }
+

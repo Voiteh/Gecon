@@ -10,16 +10,18 @@ import ceylon.language.meta.model {
 	Class
 }
 import herd.convertx.api {
-	Context,
-	Creator,
 	wired
 }
 import herd.convertx.api.operation {
-	Creation
+	Creation,
+	Delegator
+}
+import herd.convertx.api.component {
+	Creator
 }
 wired
 shared class TreeMapCreator() satisfies Creator<{Anything*},Map<>> {
-	shared actual Map<> create(Context context,Class<Map<>,Nothing> kind, {Anything*} arguments) {
+	shared actual Map<> create(Delegator delegator,Class<Map<>,Nothing> kind, {Anything*} arguments) {
 		value factoryMethod = `function naturalOrderTreeMap`.apply<Map<>>(*kind.typeArgumentList);
 		return factoryMethod.apply(*arguments);
 	}

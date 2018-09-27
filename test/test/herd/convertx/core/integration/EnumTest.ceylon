@@ -2,11 +2,11 @@ import ceylon.test {
 	test
 }
 
-import herd.convertx.api {
-	ConvertionException
-}
 import test.base.herd.convertx.integration {
 	BaseTest
+}
+import herd.convertx.api.operation {
+	ConvertionError
 }
 shared class EnumTest() extends BaseTest() {
 	
@@ -25,7 +25,7 @@ shared class EnumTest() extends BaseTest() {
 	
 	shared test
 	void shouldFailConvertEnumOneToEnumTwoWithIndexToHigh(){
-		assert(is ConvertionException adapt = convertx.convert(fourth, `EnumTwo`));
+		assert(is ConvertionError adapt = convertx.convert(fourth, `EnumTwo`));
 		
 	}
 	

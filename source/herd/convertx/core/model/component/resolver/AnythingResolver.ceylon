@@ -4,20 +4,22 @@ import ceylon.language.meta.model {
 	Type
 }
 import herd.convertx.api {
-	Context,
-	Resolver,
 	wired
 }
 import ceylon.language.meta {
 	type
 }
 import herd.convertx.api.operation {
-	Resolvance
+	Resolvance,
+	Delegator
+}
+import herd.convertx.api.component {
+	Resolver
 }
 
 wired
 shared class AnythingResolver() satisfies Resolver<Anything,Anything> {
-	shared actual Class<Anything,Nothing> resolve(Context context, Anything input, Type<Anything> outputType) {
+	shared actual Class<Anything,Nothing> resolve(Delegator delegator, Anything input, Type<Anything> outputType) {
 		
 		switch (input)
 		case (is Object) {
