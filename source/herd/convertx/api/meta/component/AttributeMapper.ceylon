@@ -7,10 +7,6 @@ import herd.convertx.api {
 	Creator
 }
 
-import ceylon.collection {
-	HashMap
-}
-
 import herd.convertx.api.meta {
 	Relation,
 	AttributePartialization
@@ -28,7 +24,7 @@ shared abstract class AttributeMapper<Source,Result>()
 			value resultPartValue=context.convert(sourcePartValue,destAttribute.type);
 			return destAttribute->resultPartValue;
 		});
-		return AttributePartialization(HashMap<Attribute<>,Anything>{entries=entries;});
+		return AttributePartialization(entries);
 	}
 	
 }

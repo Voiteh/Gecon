@@ -1,5 +1,5 @@
 shared interface Partialization {
 	
-	shared formal Map<Anything,Anything> parts;
+	shared formal {<Object->Anything>*} parts;
 	
 }

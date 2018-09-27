@@ -1,8 +1,3 @@
-import herd.convertx.api.registration {
-	Visitor,
-	Findable,
-	Executable
-}
 
 import herd.convertx.api {
 	Context,
@@ -10,6 +5,12 @@ import herd.convertx.api {
 }
 import ceylon.language.meta.model {
 	Class
+}
+
+import herd.convertx.api.flattening {
+	Findable,
+	Executable,
+	Visitor
 }
 
 shared sealed interface Creation<in Args=Nothing,out Result=Anything, in Kind=Nothing> satisfies Operation given Kind satisfies Result {

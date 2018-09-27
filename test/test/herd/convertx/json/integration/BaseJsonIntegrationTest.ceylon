@@ -1,6 +1,3 @@
-import herd.convertx.api {
-	Provider
-}
 import herd.convertx.json {
 	JsonProvider
 }
@@ -9,6 +6,9 @@ import herd.convertx.core.model {
 }
 import test.base.herd.convertx.integration {
 	BaseTest
+}
+import herd.convertx.api.provision {
+	Provider
 }
 shared class BaseJsonIntegrationTest()  extends BaseTest(){
 	

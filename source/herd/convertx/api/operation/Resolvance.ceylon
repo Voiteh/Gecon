@@ -1,14 +1,15 @@
-import herd.convertx.api.registration {
-	Visitor,
-	Findable,
-	Executable
-}
 import ceylon.language.meta.model {
 	Type,
 	Class
 }
 import herd.convertx.api {
 	Context
+}
+
+import herd.convertx.api.flattening {
+	Findable,
+	Executable,
+	Visitor
 }
 shared sealed interface Resolvance<in Source=Nothing, out Output=Anything, in OutputType=Nothing> satisfies Operation
 		given OutputType satisfies Type<Output> {

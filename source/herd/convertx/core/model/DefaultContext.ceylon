@@ -1,6 +1,5 @@
 import herd.convertx.api {
-	Context,
-	Provider
+	Context
 }
 import ceylon.language.meta.model {
 	Type,
@@ -8,26 +7,35 @@ import ceylon.language.meta.model {
 }
 
 
-import herd.convertx.core.internal {
-	DefaultVisitor,
-	DefaultFinder,
-	DefaultRegistrator,
-	DefaultConfigurator
-}
-import herd.convertx.api.registration {
-	Registry,
-	Visitor,
-	Registrator
-}
+
 import herd.convertx.api.configuration {
 	Configuration,
 	Configurator
 }
-import herd.convertx.api.search {
-	Finder
-}
+
 import herd.convertx.api.operation {
 	Operation
+}
+import herd.convertx.api.provision {
+	Provider
+}
+import herd.convertx.core.search {
+	Finder,
+	DefaultFinder
+}
+import herd.convertx.core.registration {
+	Registry,
+	DefaultRegistrator,
+	Registrator
+}
+import herd.convertx.core.flattening {
+	DefaultVisitor
+}
+import herd.convertx.core.configuration {
+	DefaultConfigurator
+}
+import herd.convertx.api.flattening {
+	Visitor
 }
 shared class DefaultContext satisfies Context{
 	
@@ -42,12 +50,12 @@ shared class DefaultContext satisfies Context{
 		this.registry=Registry();
 		this.finder=finder;
 		Configuration[] configurations=providers.flatMap((Provider element) => element.configurations).sequence();
-		Operation[] components=providers.flatMap((Provider element) => element.components).sequence();
+		Operation[] components=providers.flatMap((Provider element) => element.operations).sequence();
 		configurator.configure(finder, configurations);
 		configurator.configure(visitor,configurations);
 		configurator.configure(registrator,configurations);
 		components.each((Operation element) => configurator.configure(element, configurations));
-		registrator.register(visitor, registry, providers.flatMap((Provider element) => element.components).sequence());
+		registrator.register(visitor, registry, providers.flatMap((Provider element) => element.operations).sequence());
 		
 	}
 	

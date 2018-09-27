@@ -1,8 +1,3 @@
-import herd.convertx.api.registration {
-	Visitor,
-	Findable,
-	Executable
-}
 import ceylon.language.meta.model {
 	Type
 }
@@ -10,6 +5,12 @@ import ceylon.language.meta.model {
 import herd.convertx.api {
 	Context,
 	ConvertionException
+}
+
+import herd.convertx.api.flattening {
+	Findable,
+	Executable,
+	Visitor
 }
 shared sealed interface Convertion<in Source=Nothing ,out Result=Anything,in ResultType=Nothing> satisfies Operation
 		given ResultType satisfies Type<Result> {

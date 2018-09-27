@@ -1,10 +1,13 @@
 
-import herd.convertx.api.registration {
-	Executable,
-	Container
-}
 import herd.convertx.api {
 	ComponentFindingException
+}
+
+import herd.convertx.api.flattening {
+	Executable
+}
+import herd.convertx.core.registration {
+	Container
 }
 
 shared interface  Finder {

@@ -8,7 +8,6 @@ import ceylon.language.meta.model {
 }
 import herd.convertx.api {
 	Context,
-	Provider,
 	Resolver
 }
 import ceylon.test {
@@ -19,6 +18,9 @@ import herd.convertx.api.operation {
 }
 import test.base.herd.convertx.integration {
 	BaseTest
+}
+import herd.convertx.api.provision {
+	Provider
 }
 
 class StringIntersectionResolver() satisfies Resolver<Anything,<MutableList<String>&SearchableList<String>>> {
@@ -33,7 +35,7 @@ class StringIntersectionResolver() satisfies Resolver<Anything,<MutableList<Stri
 shared class IntersectionTest() extends BaseTest() {
 	
 	providers => super.providers.follow(object satisfies Provider {
-			components => { StringIntersectionResolver() };
+			operations => { StringIntersectionResolver() };
 			configurations => {};
 		}).sequence();
 	

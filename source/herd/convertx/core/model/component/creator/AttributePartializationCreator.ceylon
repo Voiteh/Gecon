@@ -13,9 +13,6 @@ import ceylon.language.meta {
 	type
 }
 
-import ceylon.collection {
-	HashMap
-}
 import herd.convertx.api.meta {
 	Relation,
 	AttributePartialization,
@@ -36,7 +33,7 @@ shared wired class AttributePartializationCreator() satisfies Creator<Relation<O
 			value destPartValue=context.convert(sourcePartValue,destAttribute.type);
 			return destAttribute->destPartValue;
 		});
-		return AttributePartialization(HashMap<Attribute<>,Anything>{entries=entries;});
+		return AttributePartialization(entries);
 	}
 
 	shared actual Creation<Relation<Object,Object>,AttributePartialization,AttributePartialization>.Matcher? matcher => object satisfies Creation<Relation<Object,Object>,AttributePartialization,AttributePartialization>.Matcher{

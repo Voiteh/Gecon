@@ -5,6 +5,6 @@ import herd.convertx.api.operation {
 	Operation
 }
 shared interface Provider {
-	shared formal {Operation*} components;
+	shared formal {Operation*} operations;
 	shared formal {Configuration*} configurations;
 }

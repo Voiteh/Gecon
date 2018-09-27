@@ -23,12 +23,13 @@ import herd.convertx.core.configuration {
 import ceylon.logging {
 	logger
 }
-import herd.convertx.api.registration {
-	Executable,
-	Findable,
+import herd.convertx.api.flattening {
 	Matchable,
+	Findable,
+	Executable,
 	Visitor
 }
+
 
 String matchingResultLog(Boolean result) =>"Matching ``if (result) then "SUCCESS" else "FAILURE"``";
 shared class DefaultVisitor() satisfies Visitor & Configurable<Logging>{

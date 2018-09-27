@@ -15,8 +15,8 @@ import herd.convertx.api.operation {
 	Creation
 }
 
-wired
-shared class JsonArrayCreator() satisfies Creator<{Value*},JsonArray> {
+
+shared wired class JsonArrayCreator() satisfies Creator<{Value*},JsonArray> {
 	shared actual JsonArray create(Context context, Class<JsonArray,Nothing> kind, {Value*} arguments) => JsonArray(arguments);
 	
 

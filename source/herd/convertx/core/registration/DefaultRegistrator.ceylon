@@ -8,18 +8,17 @@ import herd.convertx.api.configuration {
 import herd.convertx.core.configuration {
 	Logging
 }
-import herd.convertx.api.registration {
-	Executable,
-	Registry,
-	Registrator,
-	Visitor
-}
 import herd.convertx.api.operation {
 	Operation,
 	Convertion,
 	Resolvance,
 	Creation
 }
+import herd.convertx.api.flattening {
+	Executable,
+	Visitor
+}
+
 
 shared class DefaultRegistrator() satisfies Registrator & Configurable<Logging>{
 	value log=logger(`package`);

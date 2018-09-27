@@ -1,10 +1,11 @@
-import herd.convertx.api.registration {
-	Executable,
-	Findable,
-	Visitor
-}
 import ceylon.language.meta {
 	type
+}
+
+import herd.convertx.api.flattening {
+	Findable,
+	Executable,
+	Visitor
 }
 
 

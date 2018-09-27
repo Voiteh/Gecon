@@ -8,9 +8,7 @@ import test.herd.convertx.json.integration.data {
 	JsonObjectToTestResolveInterfaceResolver
 }
 
-import herd.convertx.api {
-	Provider
-}
+
 import ceylon.collection {
 	MutableList,
 	ArrayList
@@ -24,10 +22,13 @@ import ceylon.json {
 import herd.convertx.api.configuration {
 	Configuration
 }
+import herd.convertx.api.provision {
+	Provider
+}
 shared class AbstractionResolveTest() extends BaseJsonIntegrationTest(){
 	
 	object resolvingProvider satisfies Provider{
-		shared actual MutableList<Operation> components = ArrayList<Operation>{
+		shared actual MutableList<Operation> operations = ArrayList<Operation>{
 			elements = {
 				JsonObjectToTestResolveInterfaceResolver()
 			};

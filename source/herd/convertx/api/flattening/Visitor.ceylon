@@ -7,6 +7,7 @@ import herd.convertx.api.operation {
 	Creation
 }
 
+
 shared interface Visitor {
 	
 	shared formal [Findable,Executable] prepareConverterRegistration<Source,Result,ResultType>

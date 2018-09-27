@@ -1,4 +1,19 @@
-import herd.convertx.api.support {
- WireingProvider
+
+import herd.convertx.api.provision {
+	WireingProvider,
+	provideOperations
 }
-shared class JsonProvider() extends WireingProvider(`module`){}
+import ceylon.collection {
+	ArrayList,
+	MutableList
+}
+import herd.convertx.api.operation {
+	Operation
+}
+import herd.convertx.api.configuration {
+	Configuration
+}
+shared class JsonProvider() extends WireingProvider(`module`,{}) { 
+	shared actual MutableList<Operation> operations=ArrayList<Operation>{elements=provideOperations(`module`);};
+	shared actual MutableList<Configuration> configurations=ArrayList<Configuration>();
+}
