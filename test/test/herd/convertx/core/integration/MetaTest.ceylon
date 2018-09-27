@@ -6,10 +6,10 @@ import ceylon.collection {
 	HashMap
 }
 import test.base.herd.convertx.integration {
-	BaseTest
+	IntegrationTest
 }
 
-shared class MetaTest() extends BaseTest() {
+shared class MetaTest() extends CoreIntegration() {
 	
 	shared test
 	void shouldConvertTestModelOneToTwo() {

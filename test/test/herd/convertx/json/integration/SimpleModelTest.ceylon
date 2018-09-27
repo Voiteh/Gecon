@@ -11,7 +11,7 @@ import ceylon.json {
 	JsonObject,
 	Value
 }
-shared class SimpleModelTest() extends BaseJsonIntegrationTest() {
+shared class SimpleModelTest() extends JsonIntegration() {
 	
 	shared test 
 	void shouldConvertJsonObjectToModel(){

@@ -25,19 +25,15 @@ import herd.convertx.api.configuration {
 import herd.convertx.api.provision {
 	Provider
 }
-shared class AbstractionResolveTest() extends BaseJsonIntegrationTest(){
+Provider resolvingProvider =object satisfies Provider{
+	shared actual {Configuration*} configurations = {};
 	
-	object resolvingProvider satisfies Provider{
-		shared actual MutableList<Operation> operations = ArrayList<Operation>{
-			elements = {
-				JsonObjectToTestResolveInterfaceResolver()
-			};
-	};
-		shared actual MutableList<Configuration> configurations => ArrayList<Configuration>();
-		
-	}
+	shared actual {Operation*} operations = [JsonObjectToTestResolveInterfaceResolver()];
 	
-	shared actual Provider[] providers => super.providers.follow(resolvingProvider).sequence();
+};
+
+shared class AbstractionResolveTest() extends JsonIntegration([resolvingProvider]){
+	
 	
 	shared test
 	void shouldConvertTypeResolveOneIntoJsonObject(){
@@ -62,7 +58,5 @@ shared class AbstractionResolveTest() extends BaseJsonIntegrationTest(){
 		value result=convertx.convert(testData.resolveTwoJsonObject,`TypeResolveInterface`);
 		assertEquals(result,testData.resolveTwo);
 	}
-	
-	
 	
 }

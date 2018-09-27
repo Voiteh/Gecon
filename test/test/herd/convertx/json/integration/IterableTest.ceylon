@@ -11,7 +11,7 @@ import ceylon.json {
 	Value
 }
 
-shared class IterableTest() extends BaseJsonIntegrationTest() {
+shared class IterableTest() extends JsonIntegration() {
 	
 	Boolean checkIterableEquality<Type,Item>(Anything result, Anything target) 
 			given Type satisfies {Item*} {

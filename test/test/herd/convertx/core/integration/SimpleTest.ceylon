@@ -3,10 +3,10 @@ import ceylon.test {
 	test
 }
 import test.base.herd.convertx.integration {
-	BaseTest
+	IntegrationTest
 }
 
-shared class SimpleTest() extends BaseTest() {
+shared class SimpleTest() extends CoreIntegration() {
 	
 	
 	shared test

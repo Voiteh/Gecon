@@ -8,12 +8,12 @@ import ceylon.collection {
 }
 
 import test.base.herd.convertx.integration {
-	BaseTest
+	IntegrationTest
 }
 import herd.convertx.api.operation {
 	ConvertionError
 }
-shared class IterableTest() extends BaseTest(){
+shared class IterableTest() extends CoreIntegration(){
 	
 	
 	Boolean checkIterableEquality<Type,Item>(Anything result, Anything target) 

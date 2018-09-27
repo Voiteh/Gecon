@@ -1,6 +1,0 @@
-shared class ExecutableTest() {
-	
-	
-	
-	
-}

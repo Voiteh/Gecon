@@ -15,7 +15,7 @@ import herd.convertx.api.operation {
 	Delegator
 }
 import test.base.herd.convertx.integration {
-	BaseTest
+	IntegrationTest
 }
 import herd.convertx.api.provision {
 	Provider
@@ -32,13 +32,11 @@ class StringIntersectionResolver() satisfies Resolver<Anything,<MutableList<Stri
 		shared actual Boolean match(Anything input, Type<MutableList<String>&SearchableList<String>> outputType) => true;
 	};
 }
-
-shared class IntersectionTest() extends BaseTest() {
-	
-	providers => super.providers.follow(object satisfies Provider {
-			operations => { StringIntersectionResolver() };
-			configurations => {};
-		}).sequence();
+Provider intersectionProvider=object satisfies Provider {
+	operations => { StringIntersectionResolver() };
+	configurations => {};
+};
+shared class IntersectionTest() extends CoreIntegration([intersectionProvider]) {
 	
 	shared test
 	void shouldConvertToIntersectionContainingType() {

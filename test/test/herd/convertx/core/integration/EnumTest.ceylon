@@ -3,12 +3,12 @@ import ceylon.test {
 }
 
 import test.base.herd.convertx.integration {
-	BaseTest
+	IntegrationTest
 }
 import herd.convertx.api.operation {
 	ConvertionError
 }
-shared class EnumTest() extends BaseTest() {
+shared class EnumTest() extends CoreIntegration() {
 	
 	
 	shared test

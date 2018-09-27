@@ -6,9 +6,9 @@ import ceylon.language.meta {
 	type
 }
 import test.base.herd.convertx.integration {
-	BaseTest
+	IntegrationTest
 }
-shared class SelfTest() extends BaseTest() {
+shared class SelfTest() extends CoreIntegration() {
 	
 	shared test  
 	void shouldConvertIntegerToInteger(){

@@ -1,1 +1,1 @@
-shared package test.herd.convertx.core;
+package test.herd.convertx.core;
