@@ -5,9 +5,6 @@ import ceylon.test {
 import ceylon.collection {
 	HashMap
 }
-import test.base.herd.convertx.integration {
-	IntegrationTest
-}
 
 shared class MetaTest() extends CoreIntegration() {
 	

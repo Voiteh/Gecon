@@ -2,9 +2,6 @@ import ceylon.test {
 	assertEquals,
 	test
 }
-import test.base.herd.convertx.integration {
-	IntegrationTest
-}
 
 shared class SimpleTest() extends CoreIntegration() {
 	

@@ -14,9 +14,6 @@ import herd.convertx.api.operation {
 	Resolvance,
 	Delegator
 }
-import test.base.herd.convertx.integration {
-	IntegrationTest
-}
 import herd.convertx.api.provision {
 	Provider
 }

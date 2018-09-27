@@ -9,10 +9,6 @@ import test.herd.convertx.json.integration.data {
 }
 
 
-import ceylon.collection {
-	MutableList,
-	ArrayList
-}
 import herd.convertx.api.operation {
 	Operation
 }

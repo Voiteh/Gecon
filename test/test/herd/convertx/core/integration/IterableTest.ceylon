@@ -7,9 +7,6 @@ import ceylon.collection {
 	MutableList
 }
 
-import test.base.herd.convertx.integration {
-	IntegrationTest
-}
 import herd.convertx.api.operation {
 	ConvertionError
 }

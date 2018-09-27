@@ -2,9 +2,6 @@ import ceylon.test {
 	test
 }
 
-import test.base.herd.convertx.integration {
-	IntegrationTest
-}
 import herd.convertx.api.operation {
 	ConvertionError
 }

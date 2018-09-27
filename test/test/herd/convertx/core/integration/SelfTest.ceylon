@@ -5,9 +5,6 @@ import ceylon.test {
 import ceylon.language.meta {
 	type
 }
-import test.base.herd.convertx.integration {
-	IntegrationTest
-}
 shared class SelfTest() extends CoreIntegration() {
 	
 	shared test  

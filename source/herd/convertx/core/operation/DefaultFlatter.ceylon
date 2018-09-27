@@ -68,7 +68,6 @@ shared class DefaultFlatter() satisfies Operation.Flatter & Configurable<Logging
 			shared actual Result execute<Result>([Anything*] args) {
 				assert(is [Delegator,Source,ResultType] args);
 				log.debug("[``converter``] Converting ``args.rest.first else "null"`` to ``args.rest.rest.first``");
-				
 				assert(is Result result=converter.convert(*args));
 				log.debug("[``converter``] Converted ``args.rest.first else "null"`` to ``result else "null"``");
 
@@ -115,7 +114,7 @@ shared class DefaultFlatter() satisfies Operation.Flatter & Configurable<Logging
 				assert(is [Delegator,Class<ResultType>, Args] args);
 				log.debug("[``creator``] Creating ``args.rest.first``, using arguments: ``args.rest.rest.first else "null"``");
 				assert(is Result result= creator.create(*args));
-				log.info("[``creator``] Created ``result else "null"``, using arguments: ``args.rest.rest.first else "null"``");
+				log.debug("[``creator``] Created ``result else "null"``, using arguments: ``args.rest.rest.first else "null"``");
 				return result;
 			}
 			
@@ -157,7 +156,7 @@ shared class DefaultFlatter() satisfies Operation.Flatter & Configurable<Logging
 				assert(is [Delegator,Source,ResultType] args);
 				log.debug("[``resolver``] Resolving ``args.rest.first else "null" ``, to ``args.rest.rest.first``");
 				assert(is Result result=resolver.resolve(*args));
-				log.info("[``resolver``] Resolved ``args.rest.first else "null"`` to ``result``");
+				log.debug("[``resolver``] Resolved ``args.rest.first else "null"`` to ``result``");
 				return result;
 
 			}
