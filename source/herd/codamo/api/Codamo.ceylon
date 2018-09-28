@@ -8,16 +8,35 @@ import herd.codamo.api.operation {
 	Delegator,
 	ComponentFindingError
 }
+
+
+"Main entry point for accessing convertion API for Codamo"
+by("Wojciech Potiopa")
 shared class Codamo{
 	
+	"Delegates responsibilites of convertion"
 	Delegator delegator;
 	
-	shared new (Delegator delegator){
+	"Default constructor, requires [[delegator]] to handle converiton calls. 
+	 This can be used with [[Delegator]] provided by [[`module herd.codamo.core`]], 
+	 or any other, user defined delegator (only for testing and tinkering purposes)"
+	shared new (
+		"Handles delegation of convertion"
+		Delegator delegator){
 		this.delegator=delegator;
 	}
 	
-	
-	shared Result|OperationError|ComponentFindingError convert<Result>(Anything source, Type<Result> resultType){
+	"API for converting specific [[source]] data into [[resultType]] type.
+	 This method handles errors the same way as positive results.</br>
+	 `return`s:</br>
+	 - Converted [[Result]] - when convertion succeeds,</br>
+	 - [[OperationError]] - when one of component operation fails.</br>
+	 - [[ComponentFindingError]] - when related component for convertion is not found."
+	shared Result|OperationError|ComponentFindingError convert<Result>(
+		"User input of converted data"
+		Anything source,
+		"Result type to which convertion will be executed"
+		Type<Result> resultType){
 		try {
 			value result =delegator.convert(source, resultType);
 			return result;
