@@ -16,10 +16,11 @@ import herd.codamo.api.meta {
 	instantiate
 }
 
+"Extracts and instantiates [[Operation]]s from a [[module]]"
 shared {Operation*} provideOperations(Module \imodule)=>annotatedDeclaration<WiredAnnotation>(\imodule)
 		.map((ClassDeclaration declaration) => instantiate<Operation>(declaration));
 
-
+"Provider which handles provisioning of [[WiredAnnotation]] annotated [[Operation]]s"
 shared class WireingProvider(Module \imodule,
 	shared actual default {Operation*} operations =provideOperations(\imodule),
 	shared actual default {Configuration*} configurations={}

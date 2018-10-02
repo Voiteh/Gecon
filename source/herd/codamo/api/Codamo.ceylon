@@ -27,11 +27,7 @@ shared class Codamo{
 	}
 	
 	"API for converting specific [[source]] data into [[resultType]] type.
-	 This method handles errors the same way as positive results.</br>
-	 `return`s:</br>
-	 - Converted [[Result]] - when convertion succeeds,</br>
-	 - [[OperationError]] - when one of component operation fails.</br>
-	 - [[ComponentFindingError]] - when related component for convertion is not found."
+	 This method handles errors the same way as positive results."
 	shared Result|OperationError|ComponentFindingError convert<Result>(
 		"User input of converted data"
 		Anything source,
