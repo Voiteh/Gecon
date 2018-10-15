@@ -4,12 +4,14 @@ import ceylon.language.meta.model {
 
 
 "Should be thrown whenever there is [[Convertion]] error"
+by("Wojciech Potiopa")
 shared class ConvertionError extends OperationError{
 	shared new (Anything source, Type<Anything> destinationType, Throwable? cause = null)
 			extends OperationError("Can't adapt ``source else "null"`` to ``destinationType``", cause) {}
 }
 
-"Base interface identifying API for convertion of data into other specified type"
+"Base API for convertion of data into other specified type. For now this interface is selead and should be used inside of the [[herd.codamo.api module]] only. "
+by("Wojciech Potiopa")
 shared sealed interface Convertion<in Source=Nothing ,out Result=Anything,in ResultType=Nothing> satisfies Operation
 		given ResultType satisfies Type<Result> {
 	
@@ -23,10 +25,11 @@ shared sealed interface Convertion<in Source=Nothing ,out Result=Anything,in Res
 		"Data type which needs to be produced by [[Convertion]]"
 		ResultType resultType);
 	
-	
+	"Used inside framework only"
 	shared actual Anything flatten(Flatter visitor) => visitor.flattenConverter(this);
 	
 	"Allows matching for generic [[Operation]]s which are not hashable by their definition. This API may change."
+	by("Wojciech Potiopa")
 	shared interface Matcher {
 		"Checks wheter given arguments for [[Convertion]] will be applicable"
 		shared formal Boolean match(Source source,ResultType resultType);
