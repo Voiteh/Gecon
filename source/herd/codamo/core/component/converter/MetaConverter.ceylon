@@ -5,7 +5,7 @@ import ceylon.language.meta.model {
 	Type
 }
 import herd.codamo.api.meta {
-	Partialization,
+	Mapping,
 	Relation
 }
 import ceylon.language.meta {
@@ -24,9 +24,9 @@ shared wired class MetaConverter() satisfies Converter<Object,Object> {
 	shared actual Object convert(Delegator delegator, Object source, Type<Object> resultType) {
 			value resolvedType = delegator.resolve(source,resultType);
 			value relation=delegator.convert(source->type(resolvedType), `Relation<>`);
-			value partializationType=delegator.resolve(relation, `Partialization`);
-			value partialization=delegator.create(partializationType,relation);
-			return delegator.create(resolvedType, partialization);
+			value mappingType=delegator.resolve(relation, `Mapping`);
+			value mapping=delegator.create(mappingType,relation);
+			return delegator.create(resolvedType, mapping);
 	}
 	
 	shared actual Convertion<Object,Object,Type<Object>>.Matcher? matcher => object satisfies Convertion<Object,Object,Type<Object>>.Matcher{

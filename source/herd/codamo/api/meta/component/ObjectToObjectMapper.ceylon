@@ -1,6 +1,6 @@
 
 import herd.codamo.api.meta {
-	Partialization,
+	Mapping,
 	Relation,
 	filterObjectAndIdentifiableAttributes
 }
@@ -19,16 +19,16 @@ import herd.codamo.api.operation {
 	Delegator
 }
 
-shared abstract class ObjectPartializer<ThePartialization,Holder,Result>() satisfies Creator<Relation<Object,Result>,ThePartialization> given ThePartialization satisfies Partialization {
-	shared actual ThePartialization create(Delegator delegator, Class<ThePartialization,Nothing> kind, Relation<Object,Result> arguments) {
+shared abstract class ObjectToObjectMapper<SourceToResultMapping,Holder,Result>() satisfies Creator<Relation<Object,Result>,SourceToResultMapping> given SourceToResultMapping satisfies Mapping {
+	shared actual SourceToResultMapping create(Delegator delegator, Class<SourceToResultMapping,Nothing> kind, Relation<Object,Result> arguments) {
 		value sourceType=type(arguments.source);
 		value attributes=sourceType.getAttributes<>().filter(filterObjectAndIdentifiableAttributes);
 		value holder=mapAttributes(delegator,arguments.source,attributes);
-		return createPartialization(holder);
+		return createMapping(holder);
 	}
 	shared formal Holder mapAttributes(Delegator delegator,Object source,{Attribute<>*} attributes);
 	
-	shared formal ThePartialization createPartialization(Holder holder);
+	shared formal SourceToResultMapping createMapping(Holder holder);
 
 	
 	

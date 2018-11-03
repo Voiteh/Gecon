@@ -10,7 +10,7 @@ import ceylon.language.serialization {
 
 
 import herd.codamo.api.meta {
-	AttributePartialization
+	AttributesMapping
 }
 import herd.codamo.api.operation {
 	Creation,
@@ -23,13 +23,13 @@ import herd.codamo.api.component {
 }
 
 
-shared wired class ObjectCreator() satisfies Creator<AttributePartialization,Object> {
-	shared actual Object create(Delegator delegator,Class<Object,Nothing> kind, AttributePartialization partialization) {
+shared wired class ObjectCreator() satisfies Creator<AttributesMapping,Object> {
+	shared actual Object create(Delegator delegator,Class<Object,Nothing> kind, AttributesMapping mapping) {
 		value instanceId = kind.string;
 		value deserializationContext = deserialization<String>();
 		try {
 			deserializationContext.instance(instanceId, kind);
-			partialization.parts.each((Attribute<> resultAttribute-> Anything resultPartValue) {
+			mapping.mappings.each((Attribute<> resultAttribute-> Anything resultPartValue) {
 				deserializationContext.attribute(instanceId, resultAttribute.declaration, resultAttribute.declaration.name);
 				deserializationContext.instanceValue(resultAttribute.declaration.name, resultPartValue);
 			});
@@ -39,8 +39,8 @@ shared wired class ObjectCreator() satisfies Creator<AttributePartialization,Obj
 		}
 	}
 	
-	shared actual Creation<AttributePartialization,Object,Object>.Matcher? matcher => object satisfies Creation<AttributePartialization,Object,Object>.Matcher{
-		shared actual Boolean match(Class<Object,Nothing> kind, AttributePartialization arguments) =>true;
+	shared actual Creation<AttributesMapping,Object,Object>.Matcher? matcher => object satisfies Creation<AttributesMapping,Object,Object>.Matcher{
+		shared actual Boolean match(Class<Object,Nothing> kind, AttributesMapping arguments) =>true;
 		
 		shared actual Integer priority => 0;
 	};

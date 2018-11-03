@@ -16,7 +16,7 @@ import ceylon.collection {
 
 
 import herd.codamo.api.meta {
-	AttributePartialization,
+	AttributesMapping,
 	filterObjectAndIdentifiableAttributes
 }
 import herd.codamo.api.operation {
@@ -28,8 +28,8 @@ import herd.codamo.api.component {
 	Creator
 }
 wired
-shared class ObjectToObjectPartializationCreator() satisfies Creator<Object->Type<Object>,AttributePartialization>{
-	shared actual AttributePartialization create(Delegator delegator, Class<AttributePartialization,Nothing> kind, Object->Type<Object> arguments){
+shared class FromObjectToObjectRelationAttributeMappingCreator() satisfies Creator<Object->Type<Object>,AttributesMapping>{
+	shared actual AttributesMapping create(Delegator delegator, Class<AttributesMapping,Nothing> kind, Object->Type<Object> arguments){
 		assert(is Class<Object> clazz=arguments.item);
 		value sourceType=type(arguments.key);
 		value entries=clazz.getAttributes<>().filter(filterObjectAndIdentifiableAttributes).map((Attribute<Nothing,Anything,Nothing> destAttribute) {
@@ -38,11 +38,11 @@ shared class ObjectToObjectPartializationCreator() satisfies Creator<Object->Typ
 			value destPartValue=delegator.convert(sourcePartValue,destAttribute.type);
 			return destAttribute->destPartValue;
 		});
-		return AttributePartialization(HashMap<Attribute<>,Anything>{entries=entries;});
+		return AttributesMapping(HashMap<Attribute<>,Anything>{entries=entries;});
 	}
 	
-	shared actual Creation<Object->Type<Object>,AttributePartialization,AttributePartialization>.Matcher? matcher => object satisfies Creation<Object->Type<Object>,AttributePartialization,AttributePartialization>.Matcher{
-		shared actual Boolean match(Class<AttributePartialization,Nothing> kind, Object->Type<Object> arguments) => true;
+	shared actual Creation<Object->Type<Object>,AttributesMapping,AttributesMapping>.Matcher? matcher => object satisfies Creation<Object->Type<Object>,AttributesMapping,AttributesMapping>.Matcher{
+		shared actual Boolean match(Class<AttributesMapping,Nothing> kind, Object->Type<Object> arguments) => true;
 		
 		shared actual Integer priority => 0;		
 	};
