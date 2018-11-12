@@ -11,7 +11,7 @@ shared class ResolvanceError extends OperationError {
 			extends OperationError("Can't resolve concrete type, for ``provisioningType`` type", cause) {
 	}
 }
-"Base interface for selecting class implementation for provided interface or abstract class, used as support [[Operation]]"
+"Base interface for selecting class implementation, for provided interface or abstract class, used as support [[Operation]]"
 by("Wojciech Potiopa")
 shared sealed interface Resolvance<in Source=Nothing, out Output=Anything, in OutputType=Nothing> satisfies Operation
 		given OutputType satisfies Type<Output> {

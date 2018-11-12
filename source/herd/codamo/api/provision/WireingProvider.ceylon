@@ -1,5 +1,3 @@
-
-
 import herd.codamo.api.configuration {
 	Configuration
 }
@@ -17,6 +15,7 @@ import herd.codamo.api.meta {
 }
 
 "Extracts and instantiates [[Operation]]s from a [[module]]"
+by("Wojciech Potiopa")
 shared {Operation*} provideOperations(Module \imodule)=>annotatedDeclaration<WiredAnnotation>(\imodule)
 		.map((ClassDeclaration declaration) => instantiate<Operation>(declaration));
 

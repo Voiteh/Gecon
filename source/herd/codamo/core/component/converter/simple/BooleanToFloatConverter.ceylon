@@ -10,7 +10,15 @@ import herd.codamo.api.operation {
 	wired
 }
 
-
+"Converts provied [[Boolean]] value into [[Float]] type. 
+ 
+ Possible corelations, source -> result:
+ 
+ true -> 1.0
+ 
+ false -> 0.0 "
+tagged("Basic")
+by("Wojciech Potiopa")
 shared wired class BooleanToFloatConverter() satisfies Converter<Boolean,Float>  {
 	shared actual Float convert(Delegator delegator, Boolean source, Type<Float> resultType) {
 		switch(source)

@@ -14,7 +14,7 @@ import herd.codamo.api.operation {
 by("Wojciech Potiopa")
 shared class Codamo{
 	
-	"Delegates responsibilites of convertion"
+	"Delegates operations to components"
 	Delegator delegator;
 	
 	"Default constructor, requires [[delegator]] to handle converiton calls. 

@@ -10,8 +10,9 @@ import herd.codamo.api.operation {
 	wired
 }
 
-wired
-shared class IntegerToByteConverter() satisfies Converter<Integer,Byte>{
+tagged("Basic")
+by("Wojciech Potiopa")
+shared wired class IntegerToByteConverter() satisfies Converter<Integer,Byte>{
 	shared actual Byte convert(Delegator delegator, Integer source, Type<Byte> resultType) => source.byte;
 	
 }

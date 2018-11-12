@@ -16,7 +16,8 @@ import herd.codamo.api.component {
 	Converter
 }
 
-
+"Converts [[Map]] value to other [[Map]] type. For Example [[`Map<Boolean,Integer>`]] into [[`Map<String,String>`]]."
+by("Wojciech Potiopa")
 shared wired class MapToMapConverter() satisfies Converter<Map<>,Map<>> {
 	shared actual Map<Object,Anything> convert(Delegator delegator, Map<Object,Anything> source, Type<Map<Object,Anything>> resultType){
 		value resolvedType=delegator.resolve(source,resultType);

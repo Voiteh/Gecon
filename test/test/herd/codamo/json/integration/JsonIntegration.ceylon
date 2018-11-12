@@ -16,7 +16,7 @@ import ceylon.logging {
 	Priority
 }
 import herd.codamo.core.operation {
-	DefaultContext
+	DefaultDelegator
 }
 import herd.codamo.api {
 	Codamo
@@ -32,5 +32,5 @@ shared class JsonIntegration extends IntegrationTest {
 			JsonProvider(), *providers], [Logging(loggingPrio, `module herd.codamo.core`),
 			Logging(loggingPrio, `module herd.codamo.json`)]) {}
 	
-	shared actual Codamo convertx => Codamo(DefaultContext { providers = providers; });
+	shared actual Codamo convertx => Codamo(DefaultDelegator { providers = providers; });
 }

@@ -4,6 +4,7 @@ import ceylon.language.meta.model {
 }
 
 "Thrown whenever component has not been found for further operations"
+by("Wojciech Potiopa")
 shared class ComponentFindingError(String message) extends Exception(message){}
 
 "Delegates execution to other [[Operation]]s"

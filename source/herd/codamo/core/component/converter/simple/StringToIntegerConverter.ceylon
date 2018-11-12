@@ -11,8 +11,16 @@ import herd.codamo.api.operation {
 import herd.codamo.api.component {
 	Converter
 }
-wired
-shared class StringToIntegerConverter() satisfies Converter<String,Integer>  {
+
+
+"Converts [[String]] value into [[Integer]]
+ 
+ Given [[String]] x, [[Integer]] y, x=y.string then Integer.parse(x).
+ Else given [[String]] x then [[ConvertionError]]
+ "
+tagged("Basic")
+by("Wojciech Potiopa")
+shared wired class StringToIntegerConverter() satisfies Converter<String,Integer>  {
 	shared actual Integer convert(Delegator delegator, String source, Type<Integer> resultType) {
 		value parse = Integer.parse(source);
 		switch (parse)

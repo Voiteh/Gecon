@@ -32,8 +32,8 @@ import herd.codamo.core.configuration {
 import herd.codamo.core.provisioning {
 	CoreProvider
 }
-
-shared class DefaultContext satisfies Delegator{
+by("Wojciech Potiopa")
+shared class DefaultDelegator satisfies Delegator{
 	
 	Registry registry;
 	Finder finder;

@@ -18,7 +18,8 @@ import herd.codamo.api.component {
 import herd.codamo.api.operation {
 	Delegator
 }
-
+"Mapper providing API for generic Object type mapping. Usable only for generic applications"
+by("Wojciech Potiopa")
 shared abstract class ObjectToObjectMapper<SourceToResultMapping,Holder,Result>() satisfies Creator<Relation<Object,Result>,SourceToResultMapping> given SourceToResultMapping satisfies Mapping {
 	shared actual SourceToResultMapping create(Delegator delegator, Class<SourceToResultMapping,Nothing> kind, Relation<Object,Result> arguments) {
 		value sourceType=type(arguments.source);

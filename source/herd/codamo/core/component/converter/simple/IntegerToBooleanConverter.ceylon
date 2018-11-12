@@ -11,8 +11,19 @@ import herd.codamo.api.operation {
 import herd.codamo.api.component {
 	Converter
 }
-wired
-shared class IntegerToBooleanConverter() satisfies Converter<Integer,Boolean>  {
+
+"Converts [[Integer]] value into [[Boolean]].
+ 
+ Possible corelations source -> result:
+ 
+ 0 -> false
+ 
+ 1 -> true
+ 
+ Given [[Integer]] x, x < 0 | x > 1 -> ConvertionError"
+tagged("Basic")
+by("Wojciech Potiopa")
+shared wired class IntegerToBooleanConverter() satisfies Converter<Integer,Boolean>  {
 	shared actual Boolean convert(Delegator delegator, Integer source, Type<Boolean> resultType) {
 		switch (source)
 		case (0) {

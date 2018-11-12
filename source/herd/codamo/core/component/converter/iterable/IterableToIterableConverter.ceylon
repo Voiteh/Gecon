@@ -16,7 +16,8 @@ import herd.codamo.api.operation {
 import herd.codamo.api.component {
 	Converter
 }
-
+"Converts one generic [[Iterable]] to another. Uses matcher for matching for finding if this converter is applicable."
+by("Wojciech Potiopa")
 shared wired class IterableToIterableConverter() satisfies Converter<{Anything*},{Anything*}> {
 	shared actual {Anything*} convert(Delegator delegator, {Anything*} source, Type<{Anything*}> resultType){
 			assert(is ClassOrInterface<{Anything*}> resultType);
@@ -27,7 +28,6 @@ shared wired class IterableToIterableConverter() satisfies Converter<{Anything*}
 			value resolvedType=delegator.resolve(args,resultType);
 			return delegator.create(resolvedType, narrowedArgs);
 	}
-	
 	
 	shared actual Convertion<{Anything*},{Anything*},Type<{Anything*}>>.Matcher? matcher => object satisfies Convertion<{Anything*},{Anything*},Type<{Anything*}>>.Matcher{
 		

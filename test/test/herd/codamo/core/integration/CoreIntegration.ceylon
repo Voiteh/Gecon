@@ -15,7 +15,7 @@ import herd.codamo.api {
 	Codamo
 }
 import herd.codamo.core.operation {
-	DefaultContext
+	DefaultDelegator
 }
 import herd.codamo.api.provision {
 	Provider
@@ -26,5 +26,5 @@ shared class CoreIntegration extends IntegrationTest {
 	shared new (Provider[] providers=[], Priority loggingPrio = info) 
 			extends IntegrationTest([CoreProvider(),*providers], [Logging(loggingPrio, `module herd.codamo.core`)]) {}
 	
-	shared actual Codamo convertx => Codamo(DefaultContext { providers = providers; });
+	shared actual Codamo convertx => Codamo(DefaultDelegator { providers = providers; });
 }
