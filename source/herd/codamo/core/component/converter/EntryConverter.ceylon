@@ -15,6 +15,14 @@ import herd.codamo.api.component {
 	Converter
 }
 
+
+"Converts an [[Entry]] type value, into othe [[Entry]] type value. 
+ 
+ Given Source: Key->Item, result type: Type< KeyResult -> ItemResult >.
+ 
+ Key converted to KeyResult, Item to ItemResult  "
+tagged("Generic")
+by("Wojciech Potiopa")
 shared wired class EntryConverter() satisfies Converter<Object->Anything,Object->Anything> {
 	shared actual Object->Anything convert(Delegator delegator, Object->Anything source, Type<Object->Anything> resultType) {
 		value key = source.key;

@@ -20,6 +20,9 @@ import herd.codamo.api.component {
 	Converter
 }
 
+"Converts a Source Object into Result type object. This [[Converter]] is heart of the Codamo. Usage of this component is expensive."
+tagged("Generic")
+by("Wojciech Potiopa")
 shared wired class MetaConverter() satisfies Converter<Object,Object> {
 	shared actual Object convert(Delegator delegator, Object source, Type<Object> resultType) {
 			value resolvedType = delegator.resolve(source,resultType);

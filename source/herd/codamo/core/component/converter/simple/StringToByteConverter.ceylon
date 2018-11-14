@@ -13,8 +13,6 @@ import herd.codamo.api.operation {
 
 "Converts [[String]] value into [[Byte]]
  
- Possible corelation source -> result:
- 
  Given [[String]] x, [[Integer]] y, y >= -128, y <= 127, x = y.string then Integer.parse(x).byte.
  
  Else given [[String]] x then ConvertionError

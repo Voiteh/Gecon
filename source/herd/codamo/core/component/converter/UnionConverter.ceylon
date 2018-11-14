@@ -16,6 +16,12 @@ import herd.codamo.api.component {
 	Converter
 }
 
+"Converts Source object into Result union type. The result type object will be first convertable type.
+ 
+ So Converting \"2.0\" to Integer|Float will give other result thant to Float|Integer 
+ (if both String -> Integer and String -> Float converters are available)"
+tagged("Generic")
+by("Wojciech Potiopa")
 shared wired class UnionConverter() satisfies Converter<Anything,Anything>{
 	shared actual Anything convert(Delegator delegator, Anything source, Type<Anything> resultType) {
 		assert(is UnionType<Anything> resultType);

@@ -2,6 +2,8 @@ import ceylon.language.meta.model {
 	Class
 }
 "API for defining relations between [[Source]] data and [[Result]] class."
+tagged("Generic")
+by("Wojciech Potiopa")
 shared interface Relation<out Source=Anything,out Result=Anything> {
 	
 	""

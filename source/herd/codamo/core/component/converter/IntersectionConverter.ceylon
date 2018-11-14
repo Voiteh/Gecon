@@ -13,6 +13,9 @@ import herd.codamo.api.component {
 	Converter
 }
 
+"Converts source intersection type value into result type. There will be required Resolver for intersection type."
+tagged("Generic")
+by("Wojciech Potiopa")
 shared wired class IntersectionConverter() satisfies Converter<Anything, Anything>{
 	shared actual Anything convert(Delegator delegator, Anything source, Type<Anything> resultType) {
 		assert(is IntersectionType<> resultType);
