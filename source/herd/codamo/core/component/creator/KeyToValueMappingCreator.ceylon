@@ -20,8 +20,9 @@ import herd.codamo.api.operation {
 
 
 
-
-
+"Creator for [[KeyToValueMapping]]."
+tagged("Generic")
+by("Wojciech Potiopa")
 shared wired class KeyToValueMappingCreator() extends ObjectToObjectMapper<KeyToValueMapping,{<String->Anything>*},Map<String,Anything>>() {
 	shared actual KeyToValueMapping createMapping({<String->Anything>*} holder) => KeyToValueMapping(holder);
 	

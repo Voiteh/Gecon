@@ -8,6 +8,8 @@ import ceylon.language.meta.declaration {
 	ClassDeclaration
 }
 
+
+"Type hierarchy interface. Uses for extracting specific types out ot [[ClassOrInterface]]"
 shared interface TypeHierarchy{
 	
 	shared formal ClassOrInterface<>? findByDeclaration(ClassOrInterfaceDeclaration declaration);
@@ -16,7 +18,7 @@ shared interface TypeHierarchy{
 	shared formal {InterfaceModel<>*} interfaces;
 	shared formal {ClassOrInterface<>*} allParent;
 }
-
+"Implementation of [[TypeHierarchy]]"
 shared TypeHierarchy typeHierarchy(ClassOrInterface<> type) => object satisfies TypeHierarchy{
 	
 	{ClassModel<>*} extractSuperTypes(ClassOrInterface<> model) {

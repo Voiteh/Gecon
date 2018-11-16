@@ -15,6 +15,8 @@ import herd.codamo.api.component {
 	Resolver
 }
 
+
+"Resolves any object to [[HashMap]]"
 shared wired class ObjectToMapResolver() satisfies Resolver<Object,Map<String,Anything>>{
 	shared actual Class<Map<String,Anything>,Nothing> resolve(Delegator delegator, Object type, Type<Map<String,Anything>> outputType) => `HashMap<String,Anything>`;
 	

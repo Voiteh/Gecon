@@ -20,6 +20,10 @@ import herd.codamo.api.component {
 import herd.codamo.core.component {
 	AnyTuple
 }
+
+"Resolves any iterable to [[Tuple]]"
+tagged("Generic")
+by("Wojciech Potiopa")
 shared wired class StreamToStreamResolver() satisfies  Resolver<{Anything*},{Anything*}>{
 	
 	Class<AnyTuple|Empty> createSequentialType(Type<>[] args){

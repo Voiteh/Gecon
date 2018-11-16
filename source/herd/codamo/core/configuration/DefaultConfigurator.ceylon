@@ -16,6 +16,7 @@ import ceylon.language.meta.declaration {
 	Package
 }
 
+"Default configurator implementation"
 shared class DefaultConfigurator() satisfies Configurator {
 	
 	shared actual void configure(Object configurable, {Configuration*} configurations) {
@@ -29,7 +30,7 @@ shared class DefaultConfigurator() satisfies Configurator {
 				.bind(configurable);
 			value narrowed = runtimeCall.iterable.narrow(configurations, configType);
 			value filtered = narrowed.filter((Configuration element) {
-					switch (category = element.category)
+					switch (category = element.scope)
 					case (is Package) {
 						return \ipackage == category;
 					}

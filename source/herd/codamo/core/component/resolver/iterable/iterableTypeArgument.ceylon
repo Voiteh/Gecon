@@ -5,6 +5,7 @@ import ceylon.language.meta.model {
 import herd.codamo.core.util {
 	typeHierarchy
 }
+"Provides type of iterable type argument"
 shared Type<> iterableTypeArgument(ClassOrInterface<{Anything*}> iterableType){
 	value hierarchy = typeHierarchy(iterableType);
 	assert(exists explictIterable=hierarchy.findByDeclaration(`interface Iterable`));

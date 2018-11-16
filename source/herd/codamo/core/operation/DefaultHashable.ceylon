@@ -7,7 +7,7 @@ import ceylon.language.meta {
 }
 
 
-
+"Hashable implementation"
 shared sealed class DefaultHashable(Anything* toHash) satisfies Hashable {
 	
 	Type<> extractType(Anything data){

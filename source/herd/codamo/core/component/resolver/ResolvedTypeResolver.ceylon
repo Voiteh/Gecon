@@ -13,7 +13,7 @@ import herd.codamo.api.component {
 	Resolver
 }
 
-
+"Whenever there is no need for resolvance, this [[Resolver]] will be used."
 shared wired class ResolvedTypeResolver() satisfies Resolver<Anything,Anything> {
 	shared actual Class<Anything,Nothing> resolve(Delegator delegator, Anything input, Type<Anything> outputType) {
 		assert (is Class<> outputType);

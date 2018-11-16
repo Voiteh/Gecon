@@ -11,8 +11,10 @@ import herd.codamo.api.operation {
 import herd.codamo.api.component {
 	Creator
 }
-wired
-shared class ArrayCreator() satisfies  Creator<{Anything*},List<>> {
+"Creator for [[Array]], using any iterable as argumets."
+tagged("Generic")
+by("Wojciech Potiopa")
+shared wired class ArrayCreator() satisfies  Creator<{Anything*},List<>> {
 	shared actual List<> create(Delegator delegator,Class<List<>,Nothing> kind, {Anything*} arguments) {
 		return kind.apply(arguments);
 	}

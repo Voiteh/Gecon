@@ -12,6 +12,9 @@ import herd.codamo.api.component {
 	Creator
 }
 
+"Creator for [[Entry]] using iterable as arguments, only first two items will be taken in consideration. Arguments size must be equals 2."
+tagged("Generic")
+by("Wojciech Potiopa")
 shared wired class EntryCreator() satisfies Creator<{Anything*},Entry<Object,Anything>> {
 	shared actual Object->Anything create(Delegator delegator,Class<Object->Anything,Nothing> kind, {Anything*} arguments) {
 		value key = arguments.first;
