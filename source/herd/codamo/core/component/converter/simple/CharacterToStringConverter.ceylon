@@ -10,8 +10,10 @@ import herd.codamo.api.operation {
 	wired
 }
 
-wired
-shared class CharacterToStringConverter() satisfies Converter<Character,String>  {
+"Converts [[Character]] value into [[String]].Result will be exactly as calling [[Character.string]]" 
+tagged("Basic")
+by("Wojciech Potiopa")
+shared wired class CharacterToStringConverter() satisfies Converter<Character,String>  {
 	shared actual String convert(Delegator delegator, Character source, Type<String> resultType) =>  source.string;
 	
 }

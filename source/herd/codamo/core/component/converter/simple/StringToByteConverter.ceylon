@@ -10,8 +10,16 @@ import herd.codamo.api.operation {
 	Delegator,
 	wired
 }
-wired
-shared class StringToByteConverter() satisfies Converter<String,Byte> {
+
+"Converts [[String]] value into [[Byte]]
+ 
+ Given [[String]] x, [[Integer]] y, y >= -128, y <= 127, x = y.string then Integer.parse(x).byte.
+ 
+ Else given [[String]] x then ConvertionError
+ "
+tagged("Basic")
+by("Wojciech Potiopa")
+shared wired class StringToByteConverter() satisfies Converter<String,Byte> {
 	shared actual Byte convert(Delegator delegator, String source, Type<Byte> resultType){
 		value convert=delegator.convert(source,`Integer`);
 		return convert.byte;

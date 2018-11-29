@@ -10,8 +10,19 @@ import herd.codamo.api.operation {
 	Delegator,
 	wired
 }
-wired
-shared class BooleanToStringConverter() satisfies Converter<Boolean,String>  {
+
+
+"Converts [[Boolean]] type value into [[String]]. 
+ 
+ Possible corelations source -> result:
+ 
+ true -> \"true\"
+ 
+ false -> \"false\"
+ "
+tagged("Basic")
+by("Wojciech Potiopa")
+shared wired class BooleanToStringConverter() satisfies Converter<Boolean,String>  {
 	shared actual String convert(Delegator delegator, Boolean source, Type<String> resultType) =>  source.string;
 	
 }

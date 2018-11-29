@@ -18,7 +18,7 @@ import herd.codamo.api.configuration {
 	Configurable
 }
 import herd.codamo.core.configuration {
-	Logging
+	LoggingConfiguration
 }
 import ceylon.logging {
 	logger
@@ -26,11 +26,13 @@ import ceylon.logging {
 
 
 String matchingResultLog(Boolean result) =>"Matching ``if (result) then "SUCCESS" else "FAILURE"``";
-shared class DefaultFlatter() satisfies Operation.Flatter & Configurable<Logging>{
+
+"Default implementatio of flatter"
+shared class DefaultFlatter() satisfies Operation.Flatter & Configurable<LoggingConfiguration>{
 	
 	
 	value log=logger(`package`);
-	shared actual void configure(Logging configuration) {
+	shared actual void configure(LoggingConfiguration configuration) {
 		log.priority=configuration.priority;
 	}
 	

@@ -10,8 +10,10 @@ import herd.codamo.api.operation {
 	wired
 }
 
-wired
-shared class FloatToIntegerConverter() satisfies Converter<Float,Integer>  {
+"Converts [[Float]] value into [[Integer]]. Exactly as calling [[Float.integer]]"
+tagged("Basic")
+by("Wojciech Potiopa")
+shared wired class FloatToIntegerConverter() satisfies Converter<Float,Integer>  {
 	shared actual Integer convert(Delegator delegator, Float source, Type<Integer> resultType) => source.integer;
 	
 }

@@ -32,15 +32,24 @@ import herd.codamo.core.configuration {
 import herd.codamo.core.provisioning {
 	CoreProvider
 }
-
-shared class DefaultContext satisfies Delegator{
+"Defaykt implementation of delegator"
+by("Wojciech Potiopa")
+shared class DefaultDelegator satisfies Delegator{
 	
+	"Registry which helds components"
 	Registry registry;
+	"Finder for finding an operation"
 	Finder finder;
-	shared new(Operation.Flatter visitor=DefaultFlatter(),
+	shared new(
+		"A flatter for operation flattening"
+		Operation.Flatter visitor=DefaultFlatter(),
+		"Finder for finding an operation"
 		Finder finder=DefaultFinder(),
+		"Registrates operations in [[Registry]]"
 		Registrator registrator=DefaultRegistrator(),
+		"Configurates configurable objects using [[Configuration]]"
 		Configurator configurator=DefaultConfigurator(),
+		"Providers uses for extracting operations"
 		{Provider*} providers=[CoreProvider()]
 	){
 		this.registry=Registry();

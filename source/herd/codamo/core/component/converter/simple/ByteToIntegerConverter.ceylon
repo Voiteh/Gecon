@@ -10,8 +10,20 @@ import herd.codamo.api.operation {
 	Delegator,
 	wired
 }
-wired
-shared class ByteToIntegerConverter() satisfies Converter<Byte,Integer>  {
+
+
+"Converts [[Byte]] value into [[Integer]]. The result will be signed value exactly as calling [[Byte.signed]]
+ 
+ For example:
+ 
+   -125.byte -> -125
+   
+   93.byte -> 93
+   
+    "
+tagged("Basic")
+by("Wojciech Potiopa")
+shared wired class ByteToIntegerConverter() satisfies Converter<Byte,Integer>  {
 	shared actual Integer convert(Delegator delegator, Byte source, Type<Integer> resultType) => source.signed;
 	
 }

@@ -1,5 +1,5 @@
 import herd.codamo.json.meta {
-	JsonPartialization
+	JsonMapping
 }
 
 
@@ -16,8 +16,9 @@ import herd.codamo.api.operation {
 	Delegator,
 	wired
 }
-
-shared wired class JsonObjectCreator() satisfies Creator<JsonPartialization,JsonObject>{
-	shared actual JsonObject create(Delegator delegator, Class<JsonObject,Nothing> kind, JsonPartialization arguments) => JsonObject(arguments.parts);
+"Creates [[JsonObject]] out of [[JsonMapping]]"
+by("Wojciech Potiopa")
+shared wired class JsonObjectCreator() satisfies Creator<JsonMapping,JsonObject>{
+	shared actual JsonObject create(Delegator delegator, Class<JsonObject,Nothing> kind, JsonMapping arguments) => JsonObject(arguments.mappings);
 	
 }

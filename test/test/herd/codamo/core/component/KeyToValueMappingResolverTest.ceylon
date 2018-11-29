@@ -3,13 +3,13 @@ import ceylon.test {
 	assertEquals
 }
 import herd.codamo.core.component.resolver {
-	EntryPartializationResolver
+	KeyToValueMappingResolver
 }
 import ceylon.collection {
 	HashMap
 }
 import herd.codamo.api.meta {
-	Partialization,
+	Mapping,
 	Relation
 }
 import ceylon.language.meta.model {
@@ -21,12 +21,12 @@ class TestModel(id,name){
 	String name;
 }
 
-shared class EntryPartializationResolverTest() {
+shared class KeyToValueMappingResolverTest() {
 	
-	EntryPartializationResolver resolver = EntryPartializationResolver();
+	KeyToValueMappingResolver resolver = KeyToValueMappingResolver();
 	
 	shared test 
-	void shouldMatchToEntryPartializationResolver(){
+	void shouldMatchToEntryMappingResolver(){
 		assert(exists matcher=resolver.matcher);
 		value model=TestModel(1,"ble");
 		object relation satisfies Relation<TestModel,HashMap<String,Anything>>{
@@ -36,7 +36,7 @@ shared class EntryPartializationResolverTest() {
 			
 			
 		}
-		value result=matcher.match(relation, `Partialization`);
+		value result=matcher.match(relation, `Mapping`);
 		assertEquals(result,true);
 	}
 	

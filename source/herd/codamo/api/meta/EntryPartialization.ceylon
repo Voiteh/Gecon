@@ -1,1 +1,0 @@
-shared class EntryPartialization(shared actual{<String->Anything>*} parts) satisfies Partialization {}

@@ -18,6 +18,8 @@ import herd.codamo.core.component {
 	AnyTuple
 }
 
+"Convetes one iterable to tuple. Provided tuple type for example [String,Integer,Boolean] with size 3, must match provided source iterable size."
+by("Wojciech Potiopa")
 shared wired class IterableToTupleConverter() satisfies Converter<{Anything*},AnyTuple>{
 	
 	{Type<Anything>*} extractArgsType(Type<Anything> toupleType){

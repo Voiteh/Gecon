@@ -1,18 +1,11 @@
 import ceylon.language.meta.model {
-	Class,
 	Type
 }
 
 import herd.codamo.api.operation {
-	Resolvance,
-	ResolvanceError,
-	Delegator
+	Resolvance
 }
-
-shared interface Resolver<Source, Result> satisfies Resolvance<Source,Result,Type<Result>> {
-	
-	throws (`class ResolvanceError`)
-	shared formal actual Class<Result> resolve(Delegator delegator, Source source, Type<Result> resultType);
-
-	
+"Resolves provided type into class. This is support API only needed for resolvance"
+by("Wojciech Potiopa")
+shared interface Resolver<Source, Result> satisfies Resolvance<Source,Result,Type<Result>> {	
 }

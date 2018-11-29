@@ -1,6 +1,6 @@
 
 import herd.codamo.json.meta {
-	JsonPartialization
+	JsonMapping
 }
 import ceylon.language.meta.model {
 	Attribute,
@@ -15,7 +15,7 @@ import ceylon.json {
 	JsonObject
 }
 import herd.codamo.api.meta.component {
-	ObjectPartializer
+	ObjectToObjectMapper
 }
 import herd.codamo.api.operation {
 	Creation,
@@ -23,8 +23,10 @@ import herd.codamo.api.operation {
 	wired
 }
 
-shared wired class ObjectJSONPartializer() extends ObjectPartializer<JsonPartialization, {<String->Value>*}, JsonObject>(){
-	shared actual JsonPartialization createPartialization({<String->Value>*} holder) => JsonPartialization(holder);
+"Creates [[JsonMapping]] from [[Relation]] between generic object and [[JsonObject]] type"
+by("Wojciech Potiopa")
+shared wired class ObjectToJsonObjectMapper() extends ObjectToObjectMapper<JsonMapping, {<String->Value>*}, JsonObject>(){
+	shared actual JsonMapping createMapping({<String->Value>*} holder) => JsonMapping(holder);
 	
 	shared actual {<String->Value>*} mapAttributes(Delegator delegator,Object source, {Attribute<Nothing,Anything,Nothing>*} attributes) => attributes.map((Attribute<> element) {
 		value val=element.bind(source).get();
@@ -36,8 +38,8 @@ shared wired class ObjectJSONPartializer() extends ObjectPartializer<JsonPartial
 		}
 	});
 	
-	shared actual Creation<Relation<Object,JsonObject>,JsonPartialization,JsonPartialization>.Matcher? matcher => object satisfies Creation<Relation<Object,JsonObject>,JsonPartialization,JsonPartialization>.Matcher{
-		shared actual Boolean match(Class<JsonPartialization,Nothing> kind, Relation<Object,JsonObject> arguments) => true;
+	shared actual Creation<Relation<Object,JsonObject>,JsonMapping,JsonMapping>.Matcher? matcher => object satisfies Creation<Relation<Object,JsonObject>,JsonMapping,JsonMapping>.Matcher{
+		shared actual Boolean match(Class<JsonMapping,Nothing> kind, Relation<Object,JsonObject> arguments) => true;
 		
 		shared actual Integer priority => 2;
 		

@@ -14,8 +14,10 @@ import herd.codamo.api.operation {
 import herd.codamo.api.component {
 	Creator
 }
-wired
-shared class LinkedListCreator() satisfies Creator<{Anything*},List<Anything>> {
+"Creator for [[LinkedList]] using any iterable as arguments"
+tagged("Generic")
+by("Wojciech Potiopa")
+shared wired class LinkedListCreator() satisfies Creator<{Anything*},List<Anything>> {
 	shared actual List<Anything> create(Delegator delegator,Class<List<Anything>,Nothing> kind, {Anything*} arguments) {
 		return kind.apply(arguments);
 	}

@@ -15,6 +15,8 @@ import herd.codamo.api.component {
 	Converter
 }
 
+
+"Converts string constants into anymous object instances. This implementation is naive but can handle simple constants mapping."
 shared wired class JsonStringToEnumeratedObjectConverter() satisfies Converter<String,Object>{
 	shared actual Object convert(Delegator delegator, String source, Type<Object> resultType) {
 		assert(is ClassOrInterface<Object> resultType);

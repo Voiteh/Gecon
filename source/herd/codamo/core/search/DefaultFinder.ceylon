@@ -5,7 +5,7 @@ import ceylon.logging {
 
 
 import herd.codamo.core.configuration {
-	Logging
+	LoggingConfiguration
 }
 import herd.codamo.api.configuration {
 	Configurable
@@ -27,11 +27,12 @@ import herd.codamo.core.operation {
 import herd.codamo.api.operation {
 	ComponentFindingError
 }
-shared class DefaultFinder() satisfies Finder & Configurable<Logging>{
+" Default finder implementation"
+shared class DefaultFinder() satisfies Finder & Configurable<LoggingConfiguration>{
 
 	value log =logger(`package`);
 	
-	shared actual void configure(Logging configuration) {
+	shared actual void configure(LoggingConfiguration configuration) {
 		log.priority=configuration.priority;
 	}
 	

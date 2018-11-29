@@ -8,23 +8,31 @@ import ceylon.language.meta.declaration {
 	ClassDeclaration
 }
 
+
+"Type hierarchy interface. Uses for extracting specific types out ot [[ClassOrInterface]]"
 shared interface TypeHierarchy{
 	
+	"Finds [[ClassOrInterface]]|[[Null]] with [[declaration]] in extracted type hierarchy of an object"
 	shared formal ClassOrInterface<>? findByDeclaration(ClassOrInterfaceDeclaration declaration);
 	
+	"Super types of provided object. The oldest ancestors will be at the begginig of this iterable. The youngest at the end."
 	shared formal {ClassModel<>*} superTypes;
+	"All interfaces satisfied by provided object and it's ancestors (currently duplicates may occur)"
 	shared formal {InterfaceModel<>*} interfaces;
+	"All of parents, mixin of [[superTypes]] and [[interfaces]]"
 	shared formal {ClassOrInterface<>*} allParent;
 }
-
+"Implementation of [[TypeHierarchy]]"
 shared TypeHierarchy typeHierarchy(ClassOrInterface<> type) => object satisfies TypeHierarchy{
 	
+	"Recursive implementation of super types extraction"
 	{ClassModel<>*} extractSuperTypes(ClassOrInterface<> model) {
 		if (exists extendendType = model.extendedType) {
 			return { extendendType, *extractSuperTypes(extendendType) };
 		}
 		return empty;
 	}
+	"Recursive implementation of interfaces extraction "
 	{InterfaceModel<>*} extractSatisfiedTypes(ClassOrInterface<> model) {
 		if (is InterfaceModel<> model) {
 			return { model, *model.satisfiedTypes.flatMap((InterfaceModel<> element) => extractSatisfiedTypes(element)) };

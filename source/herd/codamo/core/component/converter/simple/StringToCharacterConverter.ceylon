@@ -11,8 +11,15 @@ import herd.codamo.api.operation {
 import herd.codamo.api.component {
 	Converter
 }
-wired
-shared class StringToCharacterConverter() satisfies Converter<String,Character> {
+
+"Converts [[String]] value into [[Character]]
+ 
+ Given [[String]] x = \"\" then [[ConvertionError]]
+ 
+ Else given [[String]] x then x.first"
+tagged("Basic")
+by("Wojciech Potiopa")
+shared wired class StringToCharacterConverter() satisfies Converter<String,Character> {
 	shared actual Character convert(Delegator delegator, String source, Type<Character> resultType) {
 		if (exists char = source.first) {
 			return char;

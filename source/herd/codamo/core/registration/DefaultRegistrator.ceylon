@@ -6,7 +6,7 @@ import herd.codamo.api.configuration {
 	Configurable
 }
 import herd.codamo.core.configuration {
-	Logging
+	LoggingConfiguration
 }
 import herd.codamo.api.operation {
 	Operation,
@@ -19,11 +19,11 @@ import herd.codamo.core.operation {
 	Findable
 }
 
-
-shared class DefaultRegistrator() satisfies Registrator & Configurable<Logging>{
+"Default Registrator implementation"
+shared class DefaultRegistrator() satisfies Registrator & Configurable<LoggingConfiguration>{
 	value log=logger(`package`);
 
-	shared actual void configure(Logging configuration) {
+	shared actual void configure(LoggingConfiguration configuration) {
 		log.priority=configuration.priority;
 	}
 

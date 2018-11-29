@@ -16,7 +16,8 @@ import herd.codamo.api.component {
 	Creator
 }
 
-
+"Creates [[JsonArray]] out of iterable of [[Value]]."
+by("Wojciech Potiopa")
 shared wired class JsonArrayCreator() satisfies Creator<{Value*},JsonArray> {
 	shared actual JsonArray create(Delegator delegator, Class<JsonArray,Nothing> kind, {Value*} arguments) => JsonArray(arguments);
 	

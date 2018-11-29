@@ -17,8 +17,9 @@ import herd.codamo.api.operation {
 import herd.codamo.api.component {
 	Resolver
 }
-
-
+"Resolves any iterable to [[ArrayList]]"
+tagged("Generic")
+by("Wojciech Potiopa")
 shared wired class MutableListResolver() satisfies Resolver<{Anything*},List<>> {
 	shared actual Class<List<>,Nothing> resolve(Delegator delegator,{Anything*} input, Type<List<>> outputType) {
 		assert(is ClassOrInterface<List<>> outputType);

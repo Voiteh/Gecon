@@ -10,8 +10,10 @@ import herd.codamo.api.operation {
 	wired
 }
 
-wired
-shared class IntegerToStringConverter() satisfies Converter<Integer,String>  {
+"Converts [[Integer]] value into [[String]]. Exactly as calling [[Integer.string]]"
+tagged("Basic")
+by("Wojciech Potiopa")
+shared wired class IntegerToStringConverter() satisfies Converter<Integer,String>  {
 	shared actual String convert(Delegator delegator, Integer source, Type<String> resultType) =>  source.string;
 	
 }

@@ -15,7 +15,9 @@ import herd.codamo.api.operation {
 import herd.codamo.api.component {
 	Creator
 }
-
+"Creator for [[HashSet]] using any iterable as arguments"
+tagged("Generic")
+by("Wojciech Potiopa")
 shared wired class HashSetCreator() satisfies  Creator<{Anything*},Set<>> {
 	shared actual Set<> create(Delegator delegator,Class<Set<>,Nothing> kind, {Anything*} arguments) {
 		return kind.apply(linked, Hashtable(), arguments);

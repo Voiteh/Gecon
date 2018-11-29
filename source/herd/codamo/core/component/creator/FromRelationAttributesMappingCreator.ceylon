@@ -11,7 +11,7 @@ import ceylon.language.meta {
 
 import herd.codamo.api.meta {
 	Relation,
-	AttributePartialization,
+	AttributesMapping,
 	filterObjectAndIdentifiableAttributes
 }
 import herd.codamo.api.operation {
@@ -23,10 +23,11 @@ import herd.codamo.api.component {
 	Creator
 }
 
-
-
-shared wired class AttributePartializationCreator() satisfies Creator<Relation<Object,Object>,AttributePartialization>{
-	shared actual AttributePartialization create(Delegator delegator, Class<AttributePartialization,Nothing> kind, Relation<Object,Object> arguments){
+"Creator for [[AttributesMapping]], uses [[Relation]] as arguments."
+tagged("Generic")
+by("Wojciech Potiopa")
+shared wired class FromRelationAttributesMappingCreator() satisfies Creator<Relation<Object,Object>,AttributesMapping>{
+	shared actual AttributesMapping create(Delegator delegator, Class<AttributesMapping,Nothing> kind, Relation<Object,Object> arguments){
 		value sourceType=type(arguments.source);
 		value entries=arguments.resultClass.getAttributes<>().filter(filterObjectAndIdentifiableAttributes).map((Attribute<Nothing,Anything,Nothing> destAttribute) {
 			value sourceAttribute = sourceType.getAttribute<>(destAttribute.declaration.name);
@@ -34,11 +35,11 @@ shared wired class AttributePartializationCreator() satisfies Creator<Relation<O
 			value destPartValue=delegator.convert(sourcePartValue,destAttribute.type);
 			return destAttribute->destPartValue;
 		});
-		return AttributePartialization(entries);
+		return AttributesMapping(entries);
 	}
 
-	shared actual Creation<Relation<Object,Object>,AttributePartialization,AttributePartialization>.Matcher? matcher => object satisfies Creation<Relation<Object,Object>,AttributePartialization,AttributePartialization>.Matcher{
-		shared actual Boolean match(Class<AttributePartialization,Nothing> kind, Relation<Object,Object> arguments) => true;
+	shared actual Creation<Relation<Object,Object>,AttributesMapping,AttributesMapping>.Matcher? matcher => object satisfies Creation<Relation<Object,Object>,AttributesMapping,AttributesMapping>.Matcher{
+		shared actual Boolean match(Class<AttributesMapping,Nothing> kind, Relation<Object,Object> arguments) => true;
 		
 		shared actual Integer priority => 0;		
 	};

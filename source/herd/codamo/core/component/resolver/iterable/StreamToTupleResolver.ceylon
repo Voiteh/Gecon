@@ -20,6 +20,7 @@ import herd.codamo.core.component {
 	AnyTuple
 }
 
+"Resolves any iterable to [[Tuple]]"
 shared class StreamToTupleResolver() satisfies Resolver<{Anything*},AnyTuple>{
 	
 	
