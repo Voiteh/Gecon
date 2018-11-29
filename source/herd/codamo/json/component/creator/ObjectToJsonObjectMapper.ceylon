@@ -23,6 +23,8 @@ import herd.codamo.api.operation {
 	wired
 }
 
+"Creates [[JsonMapping]] from [[Relation]] between generic object and [[JsonObject]] type"
+by("Wojciech Potiopa")
 shared wired class ObjectToJsonObjectMapper() extends ObjectToObjectMapper<JsonMapping, {<String->Value>*}, JsonObject>(){
 	shared actual JsonMapping createMapping({<String->Value>*} holder) => JsonMapping(holder);
 	

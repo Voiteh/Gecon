@@ -22,8 +22,10 @@ import herd.codamo.api.operation {
 import herd.codamo.api.component {
 	Resolver
 }
-wired
-shared class JsonMappingResolver() satisfies Resolver<Relation<Object, JsonObject>,Mapping>{
+
+"Resolves [[Relation]] to [[JsonMapping]]" 
+by("Wojciech Potiopa")
+shared wired class JsonMappingResolver() satisfies Resolver<Relation<Object, JsonObject>,Mapping>{
 	shared actual Class<Mapping,Nothing> resolve(Delegator delegator, Relation<Object, JsonObject> input, Type<Mapping> outputType) => `JsonMapping`;
 	
 	

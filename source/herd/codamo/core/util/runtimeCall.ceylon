@@ -5,8 +5,9 @@ import ceylon.language.meta.model {
 "Runtime call provider object"
 shared object runtimeCall {
 	
-	
+	"Iterable related object"
 	shared object iterable{
+		"narrow function reference"
 		value narrowRef = `function Iterable.narrow`;
 		"[[{}.narrow]] runtime equivalent"
 		shared {Result*} narrow<Result=Anything>({Anything*} container,Type<Result> narrowTo){

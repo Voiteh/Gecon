@@ -13,6 +13,8 @@ import herd.codamo.api.operation {
 import herd.codamo.api.configuration {
 	Configuration
 }
+"Provides all Json convertion related operations"
+by("Wojciech Potiopa")
 shared class JsonProvider() extends WireingProvider(`module`,{}) { 
 	shared actual MutableList<Operation> operations=ArrayList<Operation>{elements=provideOperations(`module`);};
 	shared actual MutableList<Configuration> configurations=ArrayList<Configuration>();

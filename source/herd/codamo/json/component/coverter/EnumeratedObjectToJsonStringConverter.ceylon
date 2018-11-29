@@ -14,6 +14,8 @@ import herd.codamo.api.component {
 	Converter
 }
 
+"Converts enumerated objects to string. The implementation is naive but can handle simple constant values."
+by("Wojciech Potiopa")
 shared wired class EnumeratedObjectToJsonStringConverter() satisfies Converter<Object,String> {
 	shared actual String convert(Delegator delegator, Object source, Type<String> resultType) => type(source).declaration.name;
 	
