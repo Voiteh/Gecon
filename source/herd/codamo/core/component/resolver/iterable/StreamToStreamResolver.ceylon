@@ -11,7 +11,7 @@ import ceylon.language.meta {
 import herd.codamo.api.operation {
 	Resolvance,
 	Delegator,
-	wired
+	provided
 }
 import herd.codamo.api.component {
 	Resolver
@@ -24,7 +24,7 @@ import herd.codamo.core.component {
 "Resolves any iterable to [[Tuple]]"
 tagged("Generic")
 by("Wojciech Potiopa")
-shared wired class StreamToStreamResolver() satisfies  Resolver<{Anything*},{Anything*}>{
+shared provided class StreamToStreamResolver() satisfies  Resolver<{Anything*},{Anything*}>{
 	
 	Class<AnyTuple|Empty> createSequentialType(Type<>[] args){
 		

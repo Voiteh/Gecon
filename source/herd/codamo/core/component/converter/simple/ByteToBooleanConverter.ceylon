@@ -7,7 +7,7 @@ import herd.codamo.api.component {
 }
 import herd.codamo.api.operation {
 	Delegator,
-	wired
+	provided
 }
 
 "Converts [[Byte]] type value into [[Boolean]]
@@ -21,7 +21,7 @@ import herd.codamo.api.operation {
  Given [[Byte]] x, x < 0.byte | x > 1.byte. x -> ConvertionError"
 tagged("Basic")
 by("Wojciech Potiopa")
-shared wired class ByteToBooleanConverter() satisfies Converter<Byte,Boolean> {
+shared provided class ByteToBooleanConverter() satisfies Converter<Byte,Boolean> {
 	shared actual Boolean convert(Delegator delegator, Byte source, Type<Boolean> resultType) {
 		value convert = delegator.convert(source, `Integer`);
 		return delegator.convert(convert, `Boolean`);

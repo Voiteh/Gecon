@@ -8,7 +8,7 @@ import herd.codamo.api.component {
 }
 import herd.codamo.api.operation {
 	Delegator,
-	wired
+	provided
 }
 
 
@@ -23,7 +23,7 @@ import herd.codamo.api.operation {
     "
 tagged("Basic")
 by("Wojciech Potiopa")
-shared wired class ByteToIntegerConverter() satisfies Converter<Byte,Integer>  {
+shared provided class ByteToIntegerConverter() satisfies Converter<Byte,Integer>  {
 	shared actual Integer convert(Delegator delegator, Byte source, Type<Integer> resultType) => source.signed;
 	
 }

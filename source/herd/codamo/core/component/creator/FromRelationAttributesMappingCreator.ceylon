@@ -17,7 +17,7 @@ import herd.codamo.api.meta {
 import herd.codamo.api.operation {
 	Creation,
 	Delegator,
-	wired
+	provided
 }
 import herd.codamo.api.component {
 	Creator
@@ -26,7 +26,7 @@ import herd.codamo.api.component {
 "Creator for [[AttributesMapping]], uses [[Relation]] as arguments."
 tagged("Generic")
 by("Wojciech Potiopa")
-shared wired class FromRelationAttributesMappingCreator() satisfies Creator<Relation<Object,Object>,AttributesMapping>{
+shared provided class FromRelationAttributesMappingCreator() satisfies Creator<Relation<Object,Object>,AttributesMapping>{
 	shared actual AttributesMapping create(Delegator delegator, Class<AttributesMapping,Nothing> kind, Relation<Object,Object> arguments){
 		value sourceType=type(arguments.source);
 		value entries=arguments.resultClass.getAttributes<>().filter(filterObjectAndIdentifiableAttributes).map((Attribute<Nothing,Anything,Nothing> destAttribute) {

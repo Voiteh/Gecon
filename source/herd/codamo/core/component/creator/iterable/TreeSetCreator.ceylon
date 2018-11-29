@@ -10,12 +10,12 @@ import ceylon.language.meta.model {
 import herd.codamo.api.operation {
 	Creation,
 	Delegator,
-	wired
+	provided
 }
 import herd.codamo.api.component {
 	Creator
 }
-wired
+provided
 shared class TreeSetCreator() satisfies  Creator<{Anything*},Set<>> {
 	shared actual Set<> create(Delegator delegator,Class<Set<>,Nothing> kind, {Anything*} arguments) {
 		value factoryMethod = `function naturalOrderTreeSet`.apply<Set<>>(*kind.typeArgumentList);

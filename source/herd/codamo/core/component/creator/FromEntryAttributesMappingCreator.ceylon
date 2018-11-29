@@ -22,7 +22,7 @@ import herd.codamo.api.meta {
 import herd.codamo.api.operation {
 	Creation,
 	Delegator,
-	wired
+	provided
 }
 import herd.codamo.api.component {
 	Creator
@@ -31,7 +31,7 @@ import herd.codamo.api.component {
 "Creator for [[AttributesMapping]], uses [[Entry]] of Source->Type< Result > as arguments "
 tagged("Generic")
 by("Wojciech Potiopa")
-shared wired class FromEntryAttributesMappingCreator() satisfies Creator<Object->Type<Object>,AttributesMapping>{
+shared provided class FromEntryAttributesMappingCreator() satisfies Creator<Object->Type<Object>,AttributesMapping>{
 	shared actual AttributesMapping create(Delegator delegator, Class<AttributesMapping,Nothing> kind, Object->Type<Object> arguments){
 		assert(is Class<Object> clazz=arguments.item);
 		value sourceType=type(arguments.key);

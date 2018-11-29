@@ -8,7 +8,7 @@ import herd.codamo.api.operation {
 	Convertion,
 	ConvertionError,
 	Delegator,
-	wired
+	provided
 }
 import herd.codamo.api.component {
 	Converter
@@ -20,7 +20,7 @@ import herd.codamo.core.component {
 
 "Convetes one iterable to tuple. Provided tuple type for example [String,Integer,Boolean] with size 3, must match provided source iterable size."
 by("Wojciech Potiopa")
-shared wired class IterableToTupleConverter() satisfies Converter<{Anything*},AnyTuple>{
+shared provided class IterableToTupleConverter() satisfies Converter<{Anything*},AnyTuple>{
 	
 	{Type<Anything>*} extractArgsType(Type<Anything> toupleType){
 		assert(is Class<Tuple<Anything,Anything,Anything>>|Interface<Empty> toupleType);

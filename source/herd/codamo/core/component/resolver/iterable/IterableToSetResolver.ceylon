@@ -10,7 +10,7 @@ import ceylon.collection {
 import herd.codamo.api.operation {
 	Resolvance,
 	Delegator,
-	wired
+	provided
 }
 import herd.codamo.api.component {
 	Resolver
@@ -18,7 +18,7 @@ import herd.codamo.api.component {
 "Resolves [[HashSet]] from any iterable type"
 tagged("Generic")
 by("Wojciech Potiopa")
-shared wired class IterableToSetResolver() satisfies Resolver<{Anything*},Set<>>{
+shared provided class IterableToSetResolver() satisfies Resolver<{Anything*},Set<>>{
 	
 	shared actual Class<Set<>> resolve(Delegator delegator,{Anything*} input,Type<Set<>> outputType) { 
 		assert(is Interface<Set<>> outputType);

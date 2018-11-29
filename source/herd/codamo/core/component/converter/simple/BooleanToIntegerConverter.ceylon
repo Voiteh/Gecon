@@ -7,7 +7,7 @@ import herd.codamo.api.component {
 }
 import herd.codamo.api.operation {
 	Delegator,
-	wired
+	provided
 }
 "Converts [[Boolean]] type value into [[Integer]] 
  
@@ -18,7 +18,7 @@ import herd.codamo.api.operation {
  false -> 0"
 tagged("Basic")
 by("Wojciech Potiopa")
-shared wired class BooleanToIntegerConverter() satisfies Converter<Boolean,Integer>  {
+shared provided class BooleanToIntegerConverter() satisfies Converter<Boolean,Integer>  {
 	"Executes the convertion"
 	shared actual Integer convert(Delegator delegator, Boolean source, Type<Integer> resultType){
 		switch (source)

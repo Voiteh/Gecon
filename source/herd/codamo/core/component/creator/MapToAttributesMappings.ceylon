@@ -11,12 +11,12 @@ import herd.codamo.api.meta.component {
 
 import herd.codamo.api.operation {
 	Creation,
-	wired
+	provided
 }
 "Creator for [[Map]]"
 tagged("Generic")
 by("Wojciech Potiopa")
-shared wired class MapToAttributesMappings() extends AttributesMapper<Map<String,Anything>,Object>() {
+shared provided class MapToAttributesMappings() extends AttributesMapper<Map<String,Anything>,Object>() {
 	shared actual String[] extractSourcePartsKey(Map<String,Anything> source) => source.keys.sequence();
 	
 	shared actual Anything extractSourcePartValue(Map<String,Anything> source, String key) => source.get(key);

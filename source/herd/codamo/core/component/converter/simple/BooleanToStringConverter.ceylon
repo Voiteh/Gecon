@@ -8,7 +8,7 @@ import herd.codamo.api.component {
 }
 import herd.codamo.api.operation {
 	Delegator,
-	wired
+	provided
 }
 
 
@@ -22,7 +22,7 @@ import herd.codamo.api.operation {
  "
 tagged("Basic")
 by("Wojciech Potiopa")
-shared wired class BooleanToStringConverter() satisfies Converter<Boolean,String>  {
+shared provided class BooleanToStringConverter() satisfies Converter<Boolean,String>  {
 	shared actual String convert(Delegator delegator, Boolean source, Type<String> resultType) =>  source.string;
 	
 }

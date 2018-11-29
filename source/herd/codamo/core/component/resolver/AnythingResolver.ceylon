@@ -10,7 +10,7 @@ import ceylon.language.meta {
 import herd.codamo.api.operation {
 	Resolvance,
 	Delegator,
-	wired
+	provided
 }
 import herd.codamo.api.component {
 	Resolver
@@ -19,7 +19,7 @@ import herd.codamo.api.component {
 "Resolves [[Anything]] type to [[Object]]|[[Null]] depending on input"
 tagged("Generic")
 by("Wojciech Potiopa")
-shared wired class AnythingResolver() satisfies Resolver<Anything,Anything> {
+shared provided class AnythingResolver() satisfies Resolver<Anything,Anything> {
 	shared actual Class<Anything,Nothing> resolve(Delegator delegator, Anything input, Type<Anything> outputType) {
 		
 		switch (input)

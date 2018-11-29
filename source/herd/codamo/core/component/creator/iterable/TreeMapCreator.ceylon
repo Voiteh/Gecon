@@ -13,7 +13,7 @@ import ceylon.language.meta.model {
 import herd.codamo.api.operation {
 	Creation,
 	Delegator,
-	wired
+	provided
 }
 import herd.codamo.api.component {
 	Creator
@@ -21,7 +21,7 @@ import herd.codamo.api.component {
 "Creator for [[TreeMap]] using any iterable as arguments"
 tagged("Generic")
 by("Wojciech Potiopa")
-shared wired class TreeMapCreator() satisfies Creator<{Anything*},Map<>> {
+shared provided class TreeMapCreator() satisfies Creator<{Anything*},Map<>> {
 	shared actual Map<> create(Delegator delegator,Class<Map<>,Nothing> kind, {Anything*} arguments) {
 		value factoryMethod = `function naturalOrderTreeMap`.apply<Map<>>(*kind.typeArgumentList);
 		return factoryMethod.apply(*arguments);

@@ -6,7 +6,7 @@ import ceylon.language.meta.model {
 import herd.codamo.api.operation {
 	ConvertionError,
 	Delegator,
-	wired
+	provided
 }
 import herd.codamo.api.component {
 	Converter
@@ -23,7 +23,7 @@ import herd.codamo.api.component {
  Given [[Integer]] x, x < 0 | x > 1 -> ConvertionError"
 tagged("Basic")
 by("Wojciech Potiopa")
-shared wired class IntegerToBooleanConverter() satisfies Converter<Integer,Boolean>  {
+shared provided class IntegerToBooleanConverter() satisfies Converter<Integer,Boolean>  {
 	shared actual Boolean convert(Delegator delegator, Integer source, Type<Boolean> resultType) {
 		switch (source)
 		case (0) {

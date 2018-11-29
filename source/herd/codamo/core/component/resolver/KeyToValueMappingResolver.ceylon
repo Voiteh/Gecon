@@ -11,7 +11,7 @@ import ceylon.language.meta.model {
 import herd.codamo.api.operation {
 	Resolvance,
 	Delegator,
-	wired
+	provided
 }
 import herd.codamo.api.component {
 	Resolver
@@ -20,7 +20,7 @@ import herd.codamo.api.component {
 "Resolves [[Mapping]] from [[Relation]]"
 tagged("Generic")
 by("Wojciech Potiopa")
-shared wired class KeyToValueMappingResolver() satisfies Resolver<Relation<Object,Map<String,Anything>>,Mapping> {
+shared provided class KeyToValueMappingResolver() satisfies Resolver<Relation<Object,Map<String,Anything>>,Mapping> {
 	shared actual Class<Mapping,Nothing> resolve(Delegator delegator, Relation<Object,Map<String,Anything>> type, Type<Mapping> outputType) => `KeyToValueMapping`;
 	
 	shared actual Resolvance<Relation<Object,Map<String,Anything>>,Mapping,Type<Mapping>>.Matcher? matcher => object satisfies Resolvance<Relation<Object,Map<String,Anything>>,Mapping,Type<Mapping>>.Matcher {

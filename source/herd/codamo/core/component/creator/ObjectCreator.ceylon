@@ -16,7 +16,7 @@ import herd.codamo.api.operation {
 	Creation,
 	CreationError,
 	Delegator,
-	wired
+	provided
 }
 import herd.codamo.api.component {
 	Creator
@@ -24,7 +24,7 @@ import herd.codamo.api.component {
 "Creates generc objects from [[AttributesMapping]], core creator"
 tagged("Generic")
 by("Wojciech Potiopa")
-shared wired class ObjectCreator() satisfies Creator<AttributesMapping,Object> {
+shared provided class ObjectCreator() satisfies Creator<AttributesMapping,Object> {
 	shared actual Object create(Delegator delegator,Class<Object,Nothing> kind, AttributesMapping mapping) {
 		value instanceId = kind.string;
 		value deserializationContext = deserialization<String>();

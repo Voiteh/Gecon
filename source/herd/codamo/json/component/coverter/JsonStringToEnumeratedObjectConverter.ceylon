@@ -9,7 +9,7 @@ import ceylon.language.meta {
 import herd.codamo.api.operation {
 	Convertion,
 	Delegator,
-	wired
+	provided
 }
 import herd.codamo.api.component {
 	Converter
@@ -17,7 +17,7 @@ import herd.codamo.api.component {
 
 
 "Converts string constants into anymous object instances. This implementation is naive but can handle simple constants mapping."
-shared wired class JsonStringToEnumeratedObjectConverter() satisfies Converter<String,Object>{
+shared provided class JsonStringToEnumeratedObjectConverter() satisfies Converter<String,Object>{
 	shared actual Object convert(Delegator delegator, String source, Type<Object> resultType) {
 		assert(is ClassOrInterface<Object> resultType);
 		assert(exists objectValue=resultType.caseValues.find((Object elem) => type(elem).declaration.name==source));

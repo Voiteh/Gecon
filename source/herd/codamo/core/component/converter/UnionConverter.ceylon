@@ -10,7 +10,7 @@ import herd.codamo.api.operation {
 	ConvertionError,
 	Delegator,
 	ComponentFindingError,
-	wired
+	provided
 }
 import herd.codamo.api.component {
 	Converter
@@ -37,7 +37,7 @@ import herd.codamo.api.component {
 "
 tagged("Generic")
 by("Wojciech Potiopa")
-shared wired class UnionConverter() satisfies Converter<Anything,Anything>{
+shared provided class UnionConverter() satisfies Converter<Anything,Anything>{
 	shared actual Anything convert(Delegator delegator, Anything source, Type<Anything> resultType) {
 		assert(is UnionType<Anything> resultType);
 		for(value type in resultType.caseTypes){

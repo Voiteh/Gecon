@@ -8,7 +8,7 @@ import herd.codamo.api.component {
 }
 import herd.codamo.api.operation {
 	Delegator,
-	wired
+	provided
 }
 
 "Converts [[String]] value into [[Byte]]
@@ -19,7 +19,7 @@ import herd.codamo.api.operation {
  "
 tagged("Basic")
 by("Wojciech Potiopa")
-shared wired class StringToByteConverter() satisfies Converter<String,Byte> {
+shared provided class StringToByteConverter() satisfies Converter<String,Byte> {
 	shared actual Byte convert(Delegator delegator, String source, Type<Byte> resultType){
 		value convert=delegator.convert(source,`Integer`);
 		return convert.byte;

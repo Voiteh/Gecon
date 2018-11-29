@@ -8,7 +8,7 @@ import herd.codamo.api.meta {
 import herd.codamo.api.operation {
 	Convertion,
 	Delegator,
-	wired
+	provided
 }
 import herd.codamo.api.component {
 	Converter
@@ -16,7 +16,7 @@ import herd.codamo.api.component {
 "If provided Source object value, is the same type as Result type, returns source object. "
 tagged("Generic")
 by("Wojciech Potiopa")
-shared wired class SelfConverter() satisfies Converter<Anything,Anything> {
+shared provided class SelfConverter() satisfies Converter<Anything,Anything> {
 	shared actual Anything convert(Delegator delegator, Anything source, Type<Anything> resultType) {
 		return source;
 	}

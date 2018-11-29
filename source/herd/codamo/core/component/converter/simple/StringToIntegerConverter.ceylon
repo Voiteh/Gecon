@@ -6,7 +6,7 @@ import ceylon.language.meta.model {
 import herd.codamo.api.operation {
 	ConvertionError,
 	Delegator,
-	wired
+	provided
 }
 import herd.codamo.api.component {
 	Converter
@@ -20,7 +20,7 @@ import herd.codamo.api.component {
  "
 tagged("Basic")
 by("Wojciech Potiopa")
-shared wired class StringToIntegerConverter() satisfies Converter<String,Integer>  {
+shared provided class StringToIntegerConverter() satisfies Converter<String,Integer>  {
 	shared actual Integer convert(Delegator delegator, String source, Type<Integer> resultType) {
 		value parse = Integer.parse(source);
 		switch (parse)

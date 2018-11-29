@@ -7,7 +7,7 @@ import ceylon.language.meta.declaration {
 }
 import herd.codamo.api.operation {
 	Operation,
-	WiredAnnotation
+	ProvidedAnnotation
 }
 import herd.codamo.api.meta {
 	annotatedDeclaration,
@@ -16,11 +16,11 @@ import herd.codamo.api.meta {
 
 "Extracts and instantiates [[Operation]]s from a [[module]]"
 by("Wojciech Potiopa")
-shared {Operation*} provideOperations(Module \imodule)=>annotatedDeclaration<WiredAnnotation>(\imodule)
+shared {Operation*} provideOperations(Module \imodule)=>annotatedDeclaration<ProvidedAnnotation>(\imodule)
 		.map((ClassDeclaration declaration) => instantiate<Operation>(declaration));
 
-"Provider which handles provisioning of [[WiredAnnotation]] annotated [[Operation]]s"
-shared class WireingProvider(
+"Provider which handles provisioning of [[ProvidedAnnotation]] annotated [[Operation]]s"
+shared class AutoProvider(
 	"[[Module]] for which provisioning is made"
 	Module \imodule,
 	"Configurations for module. This is expermiental feature, the API for it may change"

@@ -10,7 +10,7 @@ import ceylon.json {
 import herd.codamo.api.operation {
 	Creation,
 	Delegator,
-	wired
+	provided
 }
 import herd.codamo.api.component {
 	Creator
@@ -18,7 +18,7 @@ import herd.codamo.api.component {
 
 "Creates [[JsonArray]] out of iterable of [[Value]]."
 by("Wojciech Potiopa")
-shared wired class JsonArrayCreator() satisfies Creator<{Value*},JsonArray> {
+shared provided class JsonArrayCreator() satisfies Creator<{Value*},JsonArray> {
 	shared actual JsonArray create(Delegator delegator, Class<JsonArray,Nothing> kind, {Value*} arguments) => JsonArray(arguments);
 	
 
