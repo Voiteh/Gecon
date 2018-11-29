@@ -14,7 +14,7 @@ import herd.codamo.core.util {
 import herd.codamo.api.operation {
 	Resolvance,
 	Delegator,
-	wired
+	provided
 }
 import herd.codamo.api.component {
 	Resolver
@@ -22,7 +22,7 @@ import herd.codamo.api.component {
 "Resolves [[Map]] to [[HashMap]]"
 tagged("Generic")
 by("Wojciech Potiopa")
-shared wired class MapToMapResolver() satisfies Resolver<Map<>,Map<>> {
+shared provided class MapToMapResolver() satisfies Resolver<Map<>,Map<>> {
 	
 	shared actual Class<Map<>,Nothing> resolve(Delegator delegator,Map<> input,Type<Map<>> outputType) {
 		assert(is ClassOrInterface<Map<>> outputType);

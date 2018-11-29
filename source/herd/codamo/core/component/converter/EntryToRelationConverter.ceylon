@@ -15,7 +15,7 @@ import ceylon.language.meta {
 import herd.codamo.api.operation {
 	Convertion,
 	Delegator,
-	wired
+	provided
 }
 import herd.codamo.api.component {
 	Converter
@@ -23,7 +23,7 @@ import herd.codamo.api.component {
 "Converts Key->[[ClassOrInterface]]<<Item>> to [[Relation]]<<Key,Item>>."
 tagged("Generic")
 by("Wojciech Potiopa")
-shared wired class EntryToRelationConverter() satisfies Converter<Object->ClassOrInterface<>,Relation<>>{
+shared provided class EntryToRelationConverter() satisfies Converter<Object->ClassOrInterface<>,Relation<>>{
 	shared actual Relation<Anything,Anything> convert(Delegator delegator, Object->ClassOrInterface<Anything> source, Type<Relation<Anything,Anything>> resultType) {
 			assert(exists classType=source.item.typeArgumentList.first);
 			value clazz=`class ObjectRelation`.classApply<Relation<>>(type(source.key),classType);

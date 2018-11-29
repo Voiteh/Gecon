@@ -15,11 +15,11 @@ import herd.codamo.api.component {
 }
 import herd.codamo.api.operation {
 	Delegator,
-	wired
+	provided
 }
 "Creator for [[HashMap]] uses [[KeyToValueMapping]] as arguments"
 tagged("Generic")
 by("Wojciech Potiopa")
-shared wired class FromKeyToValueMappingHashMapCreator() satisfies Creator<KeyToValueMapping,HashMap<String,Anything>>{
+shared provided class FromKeyToValueMappingHashMapCreator() satisfies Creator<KeyToValueMapping,HashMap<String,Anything>>{
 	shared actual HashMap<String,Anything> create(Delegator delegator, Class<HashMap<String,Anything>,Nothing> kind, KeyToValueMapping arguments)=>HashMap<String,Anything>{entries=arguments.mappings;};	
 }

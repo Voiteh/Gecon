@@ -1,6 +1,6 @@
 
 import herd.codamo.api.provision {
-	WireingProvider,
+	AutoProvider,
 	provideOperations
 }
 import ceylon.collection {
@@ -15,7 +15,7 @@ import herd.codamo.api.configuration {
 }
 "Provides all Json convertion related operations"
 by("Wojciech Potiopa")
-shared class JsonProvider() extends WireingProvider(`module`,{}) { 
+shared class JsonProvider() extends AutoProvider(`module`,{}) { 
 	shared actual MutableList<Operation> operations=ArrayList<Operation>{elements=provideOperations(`module`);};
 	shared actual MutableList<Configuration> configurations=ArrayList<Configuration>();
 }

@@ -6,7 +6,7 @@ import ceylon.language.meta.model {
 import herd.codamo.api.operation {
 	ConvertionError,
 	Delegator,
-	wired
+	provided
 }
 import herd.codamo.api.component {
 	Converter
@@ -19,7 +19,7 @@ import herd.codamo.api.component {
  Else given [[String]] x then x.first"
 tagged("Basic")
 by("Wojciech Potiopa")
-shared wired class StringToCharacterConverter() satisfies Converter<String,Character> {
+shared provided class StringToCharacterConverter() satisfies Converter<String,Character> {
 	shared actual Character convert(Delegator delegator, String source, Type<Character> resultType) {
 		if (exists char = source.first) {
 			return char;

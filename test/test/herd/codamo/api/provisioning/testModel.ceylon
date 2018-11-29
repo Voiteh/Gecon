@@ -8,9 +8,9 @@ import herd.codamo.api.component {
 }
 import herd.codamo.api.operation {
 	Delegator,
-	wired
+	provided
 }
-wired class WiredConverter() satisfies Converter<String,Null>{
+provided class AutoProvidedConverter() satisfies Converter<String,Null>{
 	shared actual Null convert(Delegator delegator, String source, Type<Null> resultType) => null;
 	
 	

@@ -9,7 +9,7 @@ import ceylon.language.meta.model {
 import herd.codamo.api.operation {
 	Creation,
 	Delegator,
-	wired
+	provided
 }
 import herd.codamo.api.component {
 	Creator
@@ -19,7 +19,7 @@ import herd.codamo.api.component {
 "Creator for [[ArrayList]] using any iterable as arguments"
 tagged("Generic")
 by("Wojciech Potiopa")
-shared wired class ArrayListCreator() satisfies Creator<{Anything*},List<>> {
+shared provided class ArrayListCreator() satisfies Creator<{Anything*},List<>> {
 	shared actual List<> create(Delegator delegator,Class<List<>> kind, {Anything*} arguments) {
 		return kind.apply(0, 1.5, arguments);
 	}

@@ -10,7 +10,7 @@ import ceylon.language.meta.model {
 import herd.codamo.api.operation {
 	Creation,
 	Delegator,
-	wired
+	provided
 }
 import herd.codamo.api.component {
 	Creator
@@ -18,7 +18,7 @@ import herd.codamo.api.component {
 "Creator for [[HashSet]] using any iterable as arguments"
 tagged("Generic")
 by("Wojciech Potiopa")
-shared wired class HashSetCreator() satisfies  Creator<{Anything*},Set<>> {
+shared provided class HashSetCreator() satisfies  Creator<{Anything*},Set<>> {
 	shared actual Set<> create(Delegator delegator,Class<Set<>,Nothing> kind, {Anything*} arguments) {
 		return kind.apply(linked, Hashtable(), arguments);
 	}

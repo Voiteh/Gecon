@@ -14,7 +14,7 @@ import herd.codamo.api.operation {
 	Convertion,
 	ConvertionError,
 	Delegator,
-	wired
+	provided
 }
 import herd.codamo.api.component {
 	Converter
@@ -23,7 +23,7 @@ import herd.codamo.api.component {
 "Converts object instance to other object instance. Takes source object index  and tries to extract object value from Result type with the same index."
 tagged("Generic")
 by("Wojciech Potiopa")
-shared wired class  EnumToEnumConverter() satisfies Converter<Object,Object> {
+shared provided class  EnumToEnumConverter() satisfies Converter<Object,Object> {
 	shared actual Object convert(Delegator delegator, Object source, Type<Object> resultType) {
 		assert(is ClassOrInterface<Object> resultType);
 		value hierarchy = typeHierarchy(type(source));

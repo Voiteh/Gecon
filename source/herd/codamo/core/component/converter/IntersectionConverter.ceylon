@@ -7,7 +7,7 @@ import ceylon.language.meta.model {
 import herd.codamo.api.operation {
 	Convertion,
 	Delegator,
-	wired
+	provided
 }
 import herd.codamo.api.component {
 	Converter
@@ -16,7 +16,7 @@ import herd.codamo.api.component {
 "Converts source intersection type value into result type. There will be required Resolver for intersection type."
 tagged("Generic")
 by("Wojciech Potiopa")
-shared wired class IntersectionConverter() satisfies Converter<Anything, Anything>{
+shared provided class IntersectionConverter() satisfies Converter<Anything, Anything>{
 	shared actual Anything convert(Delegator delegator, Anything source, Type<Anything> resultType) {
 		assert(is IntersectionType<> resultType);
 		value resolvedType=delegator.resolve(source,resultType);

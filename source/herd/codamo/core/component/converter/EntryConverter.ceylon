@@ -9,7 +9,7 @@ import ceylon.language.meta.model {
 import herd.codamo.api.operation {
 	Convertion,
 	Delegator,
-	wired
+	provided
 }
 import herd.codamo.api.component {
 	Converter
@@ -23,7 +23,7 @@ import herd.codamo.api.component {
  Key converted to KeyResult, Item to ItemResult  "
 tagged("Generic")
 by("Wojciech Potiopa")
-shared wired class EntryConverter() satisfies Converter<Object->Anything,Object->Anything> {
+shared provided class EntryConverter() satisfies Converter<Object->Anything,Object->Anything> {
 	shared actual Object->Anything convert(Delegator delegator, Object->Anything source, Type<Object->Anything> resultType) {
 		value key = source.key;
 		value item = source.item;

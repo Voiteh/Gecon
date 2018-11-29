@@ -10,7 +10,7 @@ import ceylon.language.meta.model {
 import herd.codamo.api.operation {
 	Creation,
 	Delegator,
-	wired
+	provided
 }
 import herd.codamo.api.component {
 	Creator
@@ -19,7 +19,7 @@ import herd.codamo.api.component {
 "Creator for [[HashMap]] using [[Entry]] iterable as arguments."
 tagged("Generic")
 by("Wojciech Potiopa")
-shared wired class HashMapCreator() satisfies  Creator<{Entry<Object,Anything>*},Map<>> {
+shared provided class HashMapCreator() satisfies  Creator<{Entry<Object,Anything>*},Map<>> {
 	shared actual Map<> create(Delegator delegator,Class<Map<>,Nothing> kind, {Entry<Object,Anything>*} arguments) {
 		return kind.apply(linked, Hashtable(), arguments);
 	}

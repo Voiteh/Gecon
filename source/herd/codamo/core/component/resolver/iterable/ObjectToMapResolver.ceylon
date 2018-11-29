@@ -9,7 +9,7 @@ import ceylon.collection {
 import herd.codamo.api.operation {
 	Resolvance,
 	Delegator,
-	wired
+	provided
 }
 import herd.codamo.api.component {
 	Resolver
@@ -17,7 +17,7 @@ import herd.codamo.api.component {
 
 
 "Resolves any object to [[HashMap]]"
-shared wired class ObjectToMapResolver() satisfies Resolver<Object,Map<String,Anything>>{
+shared provided class ObjectToMapResolver() satisfies Resolver<Object,Map<String,Anything>>{
 	shared actual Class<Map<String,Anything>,Nothing> resolve(Delegator delegator, Object type, Type<Map<String,Anything>> outputType) => `HashMap<String,Anything>`;
 	
 	shared actual Resolvance<Object,Map<String,Anything>,Type<Map<String,Anything>>>.Matcher? matcher => object satisfies Resolvance<Object,Map<String,Anything>,Type<Map<String,Anything>>>.Matcher{

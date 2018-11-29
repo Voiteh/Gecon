@@ -6,7 +6,7 @@ import ceylon.language.meta.model {
 import herd.codamo.api.operation {
 	ConvertionError,
 	Delegator,
-	wired
+	provided
 }
 import herd.codamo.api.component {
 	Converter
@@ -23,7 +23,7 @@ import herd.codamo.api.component {
 
 tagged("Basic")
 by("Wojciech Potiopa")
-shared wired class StringToBooleanConverter() satisfies Converter<String,Boolean>  {
+shared provided class StringToBooleanConverter() satisfies Converter<String,Boolean>  {
 	shared actual Boolean convert(Delegator delegator, String source, Type<Boolean> resultType) {
 		value result = Boolean.parse(source);
 		switch (result)

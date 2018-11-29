@@ -14,11 +14,11 @@ import herd.codamo.api.component {
 }
 import herd.codamo.api.operation {
 	Delegator,
-	wired
+	provided
 }
 "Creates [[JsonObject]] out of [[JsonMapping]]"
 by("Wojciech Potiopa")
-shared wired class JsonObjectCreator() satisfies Creator<JsonMapping,JsonObject>{
+shared provided class JsonObjectCreator() satisfies Creator<JsonMapping,JsonObject>{
 	shared actual JsonObject create(Delegator delegator, Class<JsonObject,Nothing> kind, JsonMapping arguments) => JsonObject(arguments.mappings);
 	
 }

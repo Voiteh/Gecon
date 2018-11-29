@@ -6,7 +6,7 @@ import herd.codamo.api.configuration {
 	Configuration
 }
 import herd.codamo.api.provision {
-	WireingProvider,
+	AutoProvider,
 	provideOperations,
 	Provider
 }
@@ -19,7 +19,7 @@ import ceylon.collection {
  If there is need, to add or remove, [[Operation]] from [[Provider]], it can be done by accesing [[operations]] collection
  [[Configuration]]s must be added manually. This [[Provider]] can be used for provisioning of user modules [[Operation]]s."
 by("Wojciech Potiopa")
-shared class CoreProvider() extends WireingProvider(`module`,{}) { 
+shared class CoreProvider() extends AutoProvider(`module`,{}) { 
 	"Operations which will be provided can be manipulated using this collection"
 	shared actual MutableList<Operation> operations=ArrayList<Operation>{elements=provideOperations(`module`);};
 	

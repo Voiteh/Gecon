@@ -6,7 +6,7 @@ import ceylon.language.meta.model {
 import herd.codamo.api.operation {
 	Creation,
 	Delegator,
-	wired
+	provided
 }
 import herd.codamo.api.component {
 	Creator
@@ -19,7 +19,7 @@ import herd.codamo.core.component {
 "Creator for [[Tuple]] using any iterable as arguments, uses recurence for creating subtuple's"
 tagged("Generic")
 by("Wojciech Potiopa")
-shared wired class TupleCreator() satisfies  Creator<{Anything*},AnyTuple> {
+shared provided class TupleCreator() satisfies  Creator<{Anything*},AnyTuple> {
 	shared actual AnyTuple create(Delegator delegator,Class<AnyTuple> kind, {Anything*} arguments) {
 		value first = arguments.first;
 		assert (exists elementType = kind.typeArgumentList.first);

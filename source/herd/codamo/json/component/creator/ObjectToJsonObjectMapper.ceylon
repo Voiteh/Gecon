@@ -20,12 +20,12 @@ import herd.codamo.api.meta.component {
 import herd.codamo.api.operation {
 	Creation,
 	Delegator,
-	wired
+	provided
 }
 
 "Creates [[JsonMapping]] from [[Relation]] between generic object and [[JsonObject]] type"
 by("Wojciech Potiopa")
-shared wired class ObjectToJsonObjectMapper() extends ObjectToObjectMapper<JsonMapping, {<String->Value>*}, JsonObject>(){
+shared provided class ObjectToJsonObjectMapper() extends ObjectToObjectMapper<JsonMapping, {<String->Value>*}, JsonObject>(){
 	shared actual JsonMapping createMapping({<String->Value>*} holder) => JsonMapping(holder);
 	
 	shared actual {<String->Value>*} mapAttributes(Delegator delegator,Object source, {Attribute<Nothing,Anything,Nothing>*} attributes) => attributes.map((Attribute<> element) {

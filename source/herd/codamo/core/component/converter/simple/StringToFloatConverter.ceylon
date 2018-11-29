@@ -5,7 +5,7 @@ import ceylon.language.meta.model {
 import herd.codamo.api.operation {
 	ConvertionError,
 	Delegator,
-	wired
+	provided
 }
 import herd.codamo.api.component {
 	Converter
@@ -19,7 +19,7 @@ import herd.codamo.api.component {
  "
 tagged("Basic")
 by("Wojciech Potiopa")
-shared wired class StringToFloatConverter() satisfies Converter<String,Float> {
+shared provided class StringToFloatConverter() satisfies Converter<String,Float> {
 	shared actual Float convert(Delegator delegator, String source, Type<Float> resultType) {
 		value parse = Float.parse(source);
 		switch(parse)

@@ -6,7 +6,7 @@ import ceylon.language.meta.model {
 import herd.codamo.api.operation {
 	Creation,
 	Delegator,
-	wired
+	provided
 }
 import herd.codamo.api.component {
 	Creator
@@ -15,7 +15,7 @@ import herd.codamo.api.component {
 "Creator for [[Entry]] using iterable as arguments, only first two items will be taken in consideration. Arguments size must be equals 2."
 tagged("Generic")
 by("Wojciech Potiopa")
-shared wired class EntryCreator() satisfies Creator<{Anything*},Entry<Object,Anything>> {
+shared provided class EntryCreator() satisfies Creator<{Anything*},Entry<Object,Anything>> {
 	shared actual Object->Anything create(Delegator delegator,Class<Object->Anything,Nothing> kind, {Anything*} arguments) {
 		value key = arguments.first;
 		assert (exists key);

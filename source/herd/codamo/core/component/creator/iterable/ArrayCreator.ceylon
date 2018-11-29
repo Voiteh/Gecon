@@ -6,7 +6,7 @@ import ceylon.language.meta.model {
 import herd.codamo.api.operation {
 	Creation,
 	Delegator,
-	wired
+	provided
 }
 import herd.codamo.api.component {
 	Creator
@@ -14,7 +14,7 @@ import herd.codamo.api.component {
 "Creator for [[Array]], using any iterable as argumets."
 tagged("Generic")
 by("Wojciech Potiopa")
-shared wired class ArrayCreator() satisfies  Creator<{Anything*},List<>> {
+shared provided class ArrayCreator() satisfies  Creator<{Anything*},List<>> {
 	shared actual List<> create(Delegator delegator,Class<List<>,Nothing> kind, {Anything*} arguments) {
 		return kind.apply(arguments);
 	}

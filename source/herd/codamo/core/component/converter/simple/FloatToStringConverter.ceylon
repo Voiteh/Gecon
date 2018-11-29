@@ -7,13 +7,13 @@ import herd.codamo.api.component {
 }
 import herd.codamo.api.operation {
 	Delegator,
-	wired
+	provided
 }
 
 "Converts [[Float]] value into [[String]]. Exactly as calling [[Float.string]]"
 tagged("Basic")
 by("Wojciech Potiopa")
-shared wired class FloatToStringConverter() satisfies Converter<Float,String>  {
+shared provided class FloatToStringConverter() satisfies Converter<Float,String>  {
 	shared actual String convert(Delegator delegator, Float source, Type<String> resultType) =>  source.string;
 	
 }

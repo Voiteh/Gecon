@@ -17,7 +17,7 @@ import ceylon.json {
 import herd.codamo.api.operation {
 	Resolvance,
 	Delegator,
-	wired
+	provided
 }
 import herd.codamo.api.component {
 	Resolver
@@ -25,7 +25,7 @@ import herd.codamo.api.component {
 
 "Resolves [[Relation]] to [[JsonMapping]]" 
 by("Wojciech Potiopa")
-shared wired class JsonMappingResolver() satisfies Resolver<Relation<Object, JsonObject>,Mapping>{
+shared provided class JsonMappingResolver() satisfies Resolver<Relation<Object, JsonObject>,Mapping>{
 	shared actual Class<Mapping,Nothing> resolve(Delegator delegator, Relation<Object, JsonObject> input, Type<Mapping> outputType) => `JsonMapping`;
 	
 	

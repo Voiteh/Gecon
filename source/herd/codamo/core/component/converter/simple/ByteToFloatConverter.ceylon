@@ -7,7 +7,7 @@ import herd.codamo.api.component {
 }
 import herd.codamo.api.operation {
 	Delegator,
-	wired
+	provided
 }
 
 "Converts [[Byte]] value into [[Float]]
@@ -18,7 +18,7 @@ import herd.codamo.api.operation {
  "
 tagged("Basic")
 by("Wojciech Potiopa")
-shared wired class ByteToFloatConverter() satisfies Converter<Byte,Float>  {
+shared provided class ByteToFloatConverter() satisfies Converter<Byte,Float>  {
 	shared actual Float convert(Delegator delegator, Byte source, Type<Float> resultType){
 		value convert = delegator.convert(source, `Integer`);
 		return convert.float;

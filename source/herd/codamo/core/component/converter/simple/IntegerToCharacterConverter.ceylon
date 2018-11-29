@@ -8,13 +8,13 @@ import herd.codamo.api.component {
 }
 import herd.codamo.api.operation {
 	Delegator,
-	wired
+	provided
 }
 
 "Converts [[Integer]] value into [[Character]]. The result will be the same as calling [[Integer.character]] "
 tagged("Basic")
 by("Wojciech Potiopa")
-shared wired class IntegerToCharacterConverter() satisfies Converter<Integer,Character>{
+shared provided class IntegerToCharacterConverter() satisfies Converter<Integer,Character>{
 	shared actual Character convert(Delegator delegator, Integer source, Type<Character> resultType) => source.character;
 	
 }

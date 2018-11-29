@@ -5,10 +5,10 @@ import ceylon.language.meta.model {
 	Class
 }
 
-"Annotation class for [[wired]]f or automatic provisioning of [[Operation]], "
+"Annotation class for [[provided]]f or automatic provisioning of [[Operation]], "
 by("Wojciech Potiopa")
-shared annotation final class WiredAnnotation() satisfies OptionalAnnotation<WiredAnnotation,ClassDeclaration,Class<Operation>>{}
+shared annotation final class ProvidedAnnotation() satisfies OptionalAnnotation<ProvidedAnnotation,ClassDeclaration,Class<Operation>>{}
 
 "Annotation for automatic provisioning of [[Operation]], "
 by("Wojciech Potiopa")
-shared annotation WiredAnnotation wired() => WiredAnnotation();
+shared annotation ProvidedAnnotation provided() => ProvidedAnnotation();

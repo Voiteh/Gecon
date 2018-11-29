@@ -8,7 +8,7 @@ import ceylon.language.meta {
 import herd.codamo.api.operation {
 	Convertion,
 	Delegator,
-	wired
+	provided
 }
 import herd.codamo.api.component {
 	Converter
@@ -16,7 +16,7 @@ import herd.codamo.api.component {
 
 "Converts enumerated objects to string. The implementation is naive but can handle simple constant values."
 by("Wojciech Potiopa")
-shared wired class EnumeratedObjectToJsonStringConverter() satisfies Converter<Object,String> {
+shared provided class EnumeratedObjectToJsonStringConverter() satisfies Converter<Object,String> {
 	shared actual String convert(Delegator delegator, Object source, Type<String> resultType) => type(source).declaration.name;
 	
 	

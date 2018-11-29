@@ -12,7 +12,7 @@ import ceylon.language.meta.model {
 import herd.codamo.api.operation {
 	Resolvance,
 	Delegator,
-	wired
+	provided
 }
 import herd.codamo.api.component {
 	Resolver
@@ -20,7 +20,7 @@ import herd.codamo.api.component {
 "Resolves any iterable to [[ArrayList]]"
 tagged("Generic")
 by("Wojciech Potiopa")
-shared wired class MutableListResolver() satisfies Resolver<{Anything*},List<>> {
+shared provided class MutableListResolver() satisfies Resolver<{Anything*},List<>> {
 	shared actual Class<List<>,Nothing> resolve(Delegator delegator,{Anything*} input, Type<List<>> outputType) {
 		assert(is ClassOrInterface<List<>> outputType);
 		value typeForIterable = iterableTypeArgument(outputType);
