@@ -1,27 +1,27 @@
 import test.codamo.base.integration {
 	IntegrationTest
 }
-import herd.codamo.api.provision {
+import herd.codamo.api.core.provision {
 	Provider
 }
 
-import herd.codamo.core.provisioning {
+import herd.codamo.engine.provisioning {
 	CoreProvider
 }
-import herd.codamo.json.provisioning {
+import herd.codamo.transformer.json.provisioning {
 	JsonProvider
 }
 import ceylon.logging {
 	info,
 	Priority
 }
-import herd.codamo.core.operation {
+import herd.codamo.engine.transformation {
 	DefaultDelegator
 }
-import herd.codamo.api {
+import herd.codamo.api.core {
 	Codamo
 }
-import herd.codamo.core.configuration {
+import herd.codamo.engine.configuration {
 	LoggingConfiguration
 }
 
@@ -29,8 +29,8 @@ shared class JsonIntegration extends IntegrationTest {
 	
 	shared new (Provider[] providers = [], Priority loggingPrio = info)
 			extends IntegrationTest([CoreProvider(),
-			JsonProvider(), *providers], [LoggingConfiguration(loggingPrio, `module herd.codamo.core`),
-			LoggingConfiguration(loggingPrio, `module herd.codamo.json`)]) {}
+			JsonProvider(), *providers], [LoggingConfiguration(loggingPrio, `module herd.codamo.engine`),
+			LoggingConfiguration(loggingPrio, `module herd.codamo.transformer.json`)]) {}
 	
 	shared actual Codamo convertx => Codamo(DefaultDelegator { providers = providers; });
 }

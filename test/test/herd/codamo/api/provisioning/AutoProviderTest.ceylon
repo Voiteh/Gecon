@@ -2,12 +2,13 @@ import ceylon.test {
 	test
 }
 
-import herd.codamo.api.operation {
-	Operation
-}
 
-import herd.codamo.api.provision {
+
+import herd.codamo.api.core.provision {
 	AutoProvider
+}
+import herd.codamo.api.core.transformer {
+	Transformation
 }
 
 shared class AutoProviderTest() {
@@ -17,7 +18,7 @@ shared class AutoProviderTest() {
 	
 	shared test
 	void shouldProvideWiredConverter(){
-		assert(exists converter=wiredProvider.operations.find((Operation elem) => elem is AutoProvidedConverter));
+		assert(exists converter=wiredProvider.operations.find((Transformation elem) => elem is AutoProvidedConverter));
 	}
 	
 	

@@ -2,7 +2,8 @@ import ceylon.test {
 	test,
 	assertEquals
 }
-import herd.codamo.core.component.converter {
+
+import herd.codamo.transformer.core.generic.converter {
 	SelfConverter
 }
 shared class SelfConverterTest() {

@@ -1,12 +1,13 @@
-import herd.codamo.core.component.resolver.iterable {
-	MutableListResolver
-}
+
 import ceylon.test {
 	test,
 	assertTrue
 }
 import ceylon.collection {
 	ListMutator
+}
+import herd.codamo.transformer.collection.resolver {
+	MutableListResolver
 }
 shared class MutableListResolverTest() {
 	

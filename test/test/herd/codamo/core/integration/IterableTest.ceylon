@@ -7,7 +7,8 @@ import ceylon.collection {
 	MutableList
 }
 
-import herd.codamo.api.operation {
+
+import herd.codamo.api.core.transformer {
 	ConvertionError
 }
 shared class IterableTest() extends CoreIntegration(){

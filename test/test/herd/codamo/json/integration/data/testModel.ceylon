@@ -10,12 +10,12 @@ import ceylon.language.meta.model {
 import ceylon.json {
 	JsonObject
 }
-import herd.codamo.api.operation {
-	Resolvance,
-	Delegator
+import herd.codamo.api.core.operation {
+	Resolvance
 }
-import herd.codamo.api.component {
-	Resolver
+import herd.codamo.api.core.transformer {
+	Resolver,
+	Delegator
 }
 
 shared serializable

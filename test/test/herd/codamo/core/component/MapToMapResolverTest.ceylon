@@ -1,6 +1,4 @@
-import herd.codamo.core.component.resolver.iterable {
-	MapToMapResolver
-}
+
 import ceylon.test {
 	test
 }
@@ -11,8 +9,12 @@ import ceylon.language.meta.model {
 	Class
 }
 
-import herd.codamo.api.operation {
+
+import herd.codamo.api.core.transformer {
 	Delegator
+}
+import herd.codamo.transformer.collection.resolver {
+	MapToMapResolver
 }
 shared class MapToMapResolverTest() {
 	

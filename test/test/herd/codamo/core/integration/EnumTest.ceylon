@@ -2,7 +2,8 @@ import ceylon.test {
 	test
 }
 
-import herd.codamo.api.operation {
+
+import herd.codamo.api.core.transformer {
 	ConvertionError
 }
 shared class EnumTest() extends CoreIntegration() {

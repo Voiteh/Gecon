@@ -4,7 +4,8 @@ import ceylon.language.meta.model {
 }
 
 
-import herd.codamo.api.operation {
+
+import herd.codamo.api.core.transformer {
 	Delegator,
 	ComponentFindingError
 }

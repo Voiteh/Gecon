@@ -9,22 +9,23 @@ import test.herd.codamo.json.integration.data {
 }
 
 
-import herd.codamo.api.operation {
-	Operation
-}
+
 import ceylon.json {
 	JsonObject
 }
-import herd.codamo.api.configuration {
+import herd.codamo.api.core.configuration {
 	Configuration
 }
-import herd.codamo.api.provision {
+import herd.codamo.api.core.provision {
 	Provider
+}
+import herd.codamo.api.core.transformer {
+	Transformation
 }
 Provider resolvingProvider =object satisfies Provider{
 	shared actual {Configuration*} configurations = {};
 	
-	shared actual {Operation*} operations = [JsonObjectToTestResolveInterfaceResolver()];
+	shared actual {Transformation*} operations = [JsonObjectToTestResolveInterfaceResolver()];
 	
 };
 

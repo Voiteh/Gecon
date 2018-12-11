@@ -2,18 +2,19 @@ import ceylon.test {
 	test,
 	assertEquals
 }
-import herd.codamo.core.component.resolver {
-	KeyToValueMappingResolver
-}
+
 import ceylon.collection {
 	HashMap
 }
-import herd.codamo.api.meta {
+import herd.codamo.api.core.meta {
 	Mapping,
 	Relation
 }
 import ceylon.language.meta.model {
 	Class
+}
+import herd.codamo.transformer.core.generic.resolver {
+	KeyToValueMappingResolver
 }
 
 class TestModel(id,name){

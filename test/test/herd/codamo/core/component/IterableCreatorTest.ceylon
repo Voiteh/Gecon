@@ -2,7 +2,8 @@ import ceylon.test {
 	test,
 	ignore
 }
-import herd.codamo.core.component.creator.iterable {
+
+import herd.codamo.transformer.collection.creator {
 	ArrayCreator
 }
 shared class IterableCreatorTest() {

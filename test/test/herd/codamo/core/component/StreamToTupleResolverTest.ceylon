@@ -1,9 +1,10 @@
-import herd.codamo.core.component.resolver.iterable {
-	StreamToTupleResolver
-}
+
 import ceylon.test {
 	test,
 	assertTrue
+}
+import herd.codamo.transformer.collection.resolver {
+	StreamToTupleResolver
 }
 shared class StreamToTupleResolverTest() {
 	
