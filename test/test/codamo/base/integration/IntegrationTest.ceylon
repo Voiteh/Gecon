@@ -1,13 +1,13 @@
-import herd.codamo.api {
+import herd.codamo.api.core {
 	Codamo
 }
 import ceylon.test {
 	testExtension
 }
-import herd.codamo.api.configuration {
+import herd.codamo.api.core.configuration {
 	Configuration
 }
-import herd.codamo.api.provision {
+import herd.codamo.api.core.provision {
 	Provider
 }
 
