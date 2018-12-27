@@ -11,13 +11,16 @@ import ceylon.test {
 	test
 }
 
-import herd.codamo.api.core.provision {
-	Provider
-}
 import herd.codamo.api.core.transformer {
 	Resolver,
 	Delegator,
 	Resolvance
+}
+
+import herd.codamo.engine {
+	Codamo,
+	AutoProvider,
+	ScopeProvisioning
 }
 
 class StringIntersectionResolver() satisfies Resolver<Anything,<MutableList<String>&SearchableList<String>>> {
@@ -28,15 +31,22 @@ class StringIntersectionResolver() satisfies Resolver<Anything,<MutableList<Stri
 		shared actual Boolean match(Anything input, Type<MutableList<String>&SearchableList<String>> outputType) => true;
 	};
 }
-Provider intersectionProvider=object satisfies Provider {
-	operations => { StringIntersectionResolver() };
-	configurations => {};
-};
-shared class IntersectionTest() extends CoreIntegration([intersectionProvider]) {
+
+shared class IntersectionTest() extends CoreIntegration() {
+	
+	shared actual Codamo codamo=>Codamo{ 
+		provider = AutoProvider{ 
+			transformations = ScopeProvisioning(
+				[`module herd.codamo.transformer.core`,`class StringIntersectionResolver`]
+			);
+					
+		};
+	};
+	
 	
 	shared test
 	void shouldConvertToIntersectionContainingType() {
-		value result = convertx.convert(testData.matchingIntersection, `InteresectionModel`);
+		value result = codamo.convert(testData.matchingIntersection, `InteresectionModel`);
 		assert (is InteresectionModel result);
 		assert (result.data.containsEvery({ "1", "2", "3" }));
 	}

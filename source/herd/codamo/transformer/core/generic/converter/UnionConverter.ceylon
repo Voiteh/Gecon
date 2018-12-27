@@ -11,7 +11,7 @@ import herd.codamo.api.core.transformer {
 	TransformationError,
 	ConvertionError,
 	Delegator,
-	ComponentFindingError
+	TransformationFindingError
 }
 
 "Converts Source object into Result union type. The result type object will be first convertable type of union.
@@ -41,7 +41,7 @@ shared provided class UnionConverter() satisfies Converter<Anything,Anything>{
 		for(value type in resultType.caseTypes){
 			try {
 				return delegator.convert(source, type);
-			} catch (TransformationError|ComponentFindingError x) {}
+			} catch (TransformationError|TransformationFindingError x) {}
 		}
 		throw ConvertionError(source, resultType,Exception("All converters for types: ``resultType.caseTypes`` failed"));
 	}

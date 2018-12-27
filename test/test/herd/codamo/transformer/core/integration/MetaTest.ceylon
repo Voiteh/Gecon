@@ -10,7 +10,7 @@ shared class MetaTest() extends CoreIntegration() {
 	
 	shared test
 	void shouldConvertTestModelOneToTwo() {
-		value adapt = convertx.convert(testData.testSimpleModel, `TestOtherSimpleModel`);
+		value adapt = codamo.convert(testData.testSimpleModel, `TestOtherSimpleModel`);
 		if (is Exception adapt) {
 			throw adapt;
 		}
@@ -19,7 +19,7 @@ shared class MetaTest() extends CoreIntegration() {
 	
 	shared test
 	void shouldConvertObjectToMap() {
-		value result = convertx.convert(testData.testSimpleModel, `Map<String,Anything>`);
+		value result = codamo.convert(testData.testSimpleModel, `Map<String,Anything>`);
 		assert (is Map<String,Anything> result);
 		assertEquals(result.get(`TestSimpleModel.id`.declaration.name), testData.testSimpleModel.id);
 		assertEquals(result.get(`TestSimpleModel.name`.declaration.name), testData.testSimpleModel.name);
@@ -33,7 +33,7 @@ shared class MetaTest() extends CoreIntegration() {
 				`TestSimpleModel.name`.declaration.name->testData.testSimpleModel.name
 			};
 		};
-		value result = convertx.convert(map, `TestSimpleModel`);
+		value result = codamo.convert(map, `TestSimpleModel`);
 		assertEquals(result, testData.testSimpleModel);
 	}
 }

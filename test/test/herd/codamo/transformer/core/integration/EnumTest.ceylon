@@ -11,19 +11,19 @@ shared class EnumTest() extends CoreIntegration() {
 	
 	shared test
 	void shouldConvertEnumOneToEnumTwo(){
-		assert(is EnumTwo adapt = convertx.convert(first, `EnumTwo`));
+		assert(is EnumTwo adapt = codamo.convert(first, `EnumTwo`));
 		assert(adapt==one);
 	}
 	
 	shared test
 	void shouldConvertEnumTwoToEnumOne(){
-		assert(is EnumOne adapt=convertx.convert(one, `EnumOne`));
+		assert(is EnumOne adapt=codamo.convert(one, `EnumOne`));
 		assert(adapt==first);
 	}
 	
 	shared test
 	void shouldFailConvertEnumOneToEnumTwoWithIndexToHigh(){
-		assert(is ConvertionError adapt = convertx.convert(fourth, `EnumTwo`));
+		assert(is ConvertionError adapt = codamo.convert(fourth, `EnumTwo`));
 		
 	}
 	
