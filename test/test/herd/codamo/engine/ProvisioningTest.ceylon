@@ -25,7 +25,7 @@ shared class ProvisioningTest() {
 	void shouldProvideAllTranformersFromTestModule() {
 		value codamo = Codamo {
 			 provider = AutoProvider {
-				transformations = ScopeProvisioning([`module integration.test.transformers`]);
+				transformations = ScopeProvisioning([`module test.codamo.transformer`]);
 			};
 			configuration = Configuration {
 				logging = Logging(debug);

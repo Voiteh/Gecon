@@ -25,7 +25,7 @@ shared abstract class AttributeMapper<Source,Result>()
 	
 	"Creates mappings for specific [[relations]]."
 	shared actual AttributesMapping create(Delegator delegator, Class<AttributesMapping,Nothing> kind, Relation<Source,Result> arguments) {
-		value entries=relations.map((Attribute<Source,Anything,Nothing> sourceAttribute -> Attribute<Result,Anything,Nothing> destAttribute) {
+		value entries=relations.collect((Attribute<Source,Anything,Nothing> sourceAttribute -> Attribute<Result,Anything,Nothing> destAttribute) {
 			value sourcePartValue=sourceAttribute.bind(arguments.source).get();
 			value resultPartValue=delegator.convert(sourcePartValue,destAttribute.type);
 			return destAttribute->resultPartValue;

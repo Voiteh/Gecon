@@ -23,6 +23,9 @@ import herd.codamo.api.core {
 import herd.type.declaration.support.hierarchy.api {
 	declarationHierarchy
 }
+import ceylon.language.meta {
+	type
+}
 
 shared class Registrator(Logger logger, Flatter flatter) {
 	
@@ -45,18 +48,22 @@ shared class Registrator(Logger logger, Flatter flatter) {
 	
 	void putInRegistry(Registry registry,Transformation element){
 			assert (is [Findable, Executable] flat = element.flatten(flatter));
+			value findable = flat.first;
 			Executable? replaced;
 			switch (element)
 			case (is Convertion<>) {
 				replaced = registry.converters.put(*flat);
+				logger.debug("Registered converter: ``element`` using ``type(findable)``");
 			}
 			case (is Resolvance<>) {
 				replaced = registry.resolvers.put(*flat);
+				logger.debug("Registered resolver: ``element`` using ``type(findable)``");
 			}
 			case (is Creation<>) {
 				replaced = registry.creators.put(*flat);
+				logger.debug("Registered creator: ``element`` using ``type(findable)``");
 			}
-			logger.debug("Registered: ``element``");
+		
 			if (exists replaced) {
 				throw Exception("Provided ``element`` has replaced ``replaced``,
 				                  which indicates duplication of transformators for same source and result types.");
@@ -86,7 +93,7 @@ shared class Registrator(Logger logger, Flatter flatter) {
 				}
 				return true;
 			}).distinct;
-			finalDeclrations.map(instantiate).each((Transformation element) => putInRegistry(registry, element));
+			finalDeclrations.collect(instantiate).each((Transformation element) => putInRegistry(registry, element));
 		}
 		
 	return registry;

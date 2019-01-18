@@ -30,7 +30,7 @@ shared provided class FromEntryAttributesMappingCreator() satisfies Creator<Obje
 	shared actual AttributesMapping create(Delegator delegator, Class<AttributesMapping,Nothing> kind, Object->Type<Object> arguments){
 		assert(is Class<Object> clazz=arguments.item);
 		value sourceType=type(arguments.key);
-		value entries=clazz.getAttributes<>().filter(filterObjectAndIdentifiableAttributes).map((Attribute<Nothing,Anything,Nothing> destAttribute) {
+		value entries=clazz.getAttributes<>().filter(filterObjectAndIdentifiableAttributes).collect((Attribute<Nothing,Anything,Nothing> destAttribute) {
 			value sourceAttribute = sourceType.getAttribute<>(destAttribute.declaration.name);
 			value sourcePartValue=sourceAttribute?.bind(arguments.key)?.get();
 			value destPartValue=delegator.convert(sourcePartValue,destAttribute.type);

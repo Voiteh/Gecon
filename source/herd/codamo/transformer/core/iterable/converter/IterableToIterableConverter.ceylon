@@ -21,7 +21,7 @@ class IterableToIterableConverter() satisfies Converter<{Anything*},{Anything*}>
 		assert (is ClassOrInterface<{Anything*}> resultType);
 		assert (exists explictIterableType = typeHierarchy(resultType).findByDeclaration(`interface Iterable`));
 		assert (exists elementType = explictIterableType.typeArgumentList.first);
-		value args = source.map((Anything element) => delegator.convert(element, elementType)).sequence();
+		value args = source.collect((Anything element) => delegator.convert(element, elementType)).sequence();
 		value narrowedArgs = runtimeCall.iterable.narrow(args, elementType);
 		value resolvedType = delegator.resolve(args, resultType);
 		return delegator.create(resolvedType, narrowedArgs);

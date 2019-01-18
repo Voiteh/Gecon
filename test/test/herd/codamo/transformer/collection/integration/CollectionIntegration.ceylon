@@ -16,16 +16,20 @@ import herd.codamo.engine.configuration {
 import ceylon.logging {
 	trace
 }
-
-
 testExtension(`class LoggingTestExtension`)
-shared class CoreIntegration() {
+shared class CollectionIntegration() {
 	
-	shared default Codamo codamo => Codamo{ 
+	shared default Codamo codamo => Codamo { 
 		provider = AutoProvider{ 
-			transformations = ScopeProvisioning([`module herd.codamo.transformer.core`]);
-			
+			transformations = ScopeProvisioning{
+				scopes=[`module herd.codamo.transformer.core`,`module herd.codamo.transformer.collection`];
+			};
+		 };
+		configuration = Configuration{
+			logging = Logging(trace);
 		};
-
+	
 	};
+	
+	
 }

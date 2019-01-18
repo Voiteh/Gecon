@@ -29,6 +29,8 @@ shared class AbstractionResolveTest() extends JsonIntegration(){
 			transformations = ScopeProvisioning(
 				[`module herd.codamo.transformer.json`,
 				`module herd.codamo.transformer.core`,
+				`module herd.codamo.transformer.collection`,
+				`module test.codamo.transformer`,
 				`class JsonObjectToTestResolveInterfaceResolver`]
 			);
 		};

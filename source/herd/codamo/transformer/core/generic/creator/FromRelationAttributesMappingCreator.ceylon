@@ -28,7 +28,7 @@ by("Wojciech Potiopa")
 shared provided class FromRelationAttributesMappingCreator() satisfies Creator<Relation<Object,Object>,AttributesMapping>{
 	shared actual AttributesMapping create(Delegator delegator, Class<AttributesMapping,Nothing> kind, Relation<Object,Object> arguments){
 		value sourceType=type(arguments.source);
-		value entries=arguments.resultClass.getAttributes<>().filter(filterObjectAndIdentifiableAttributes).map((Attribute<Nothing,Anything,Nothing> destAttribute) {
+		value entries=arguments.resultClass.getAttributes<>().filter(filterObjectAndIdentifiableAttributes).collect((Attribute<Nothing,Anything,Nothing> destAttribute) {
 			value sourceAttribute = sourceType.getAttribute<>(destAttribute.declaration.name);
 			value sourcePartValue=sourceAttribute?.bind(arguments.source)?.get();
 			value destPartValue=delegator.convert(sourcePartValue,destAttribute.type);

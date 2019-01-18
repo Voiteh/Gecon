@@ -23,7 +23,7 @@ shared provided class MapToMapConverter() satisfies Converter<Map<>,Map<>> {
 		assert(is Type<Object>keyDestination=explictMapType.typeArgumentList.first);
 		assert(exists itemDestination=explictMapType.typeArgumentList.rest.first);
 		value entryType=`class Entry`.classApply<Entry<Object,Anything>>(keyDestination,itemDestination);
-		value args = source.map((Object elementKey -> Anything elementItem) {
+		value args = source.collect((Object elementKey -> Anything elementItem) {
 			value resolvedKeyType=delegator.resolve(elementKey, keyDestination);
 			value convertedKey = delegator.convert(elementKey, resolvedKeyType);
 			value resolvedItemType=delegator.resolve(elementItem, itemDestination);

@@ -19,7 +19,8 @@ shared class JsonIntegration() {
 			transformations = ScopeProvisioning(
 				[
 					`module herd.codamo.transformer.json`,
-					`module herd.codamo.transformer.core`
+					`module herd.codamo.transformer.core`,
+					`module herd.codamo.transformer.collection`
 				]
 			);
 		};

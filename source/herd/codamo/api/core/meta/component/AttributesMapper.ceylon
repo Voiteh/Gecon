@@ -36,7 +36,7 @@ shared abstract class AttributesMapper<Source, Result>()
 	shared actual AttributesMapping create(Delegator delegator, Class<AttributesMapping,Nothing> kind, Relation<Source,Result> relation) {
 		value resultAttributes=relation.resultClass.getAttributes<>().filter(filterObjectAndIdentifiableAttributes).sequence();
 		value entries=extractSourcePartsKey(relation.source)
-				.map((String name) {
+				.collect((String name) {
 			value attribute=findResultAttribute(name, resultAttributes);
 			if(exists attribute){
 				value toConvert=extractSourcePartValue(relation.source, name);

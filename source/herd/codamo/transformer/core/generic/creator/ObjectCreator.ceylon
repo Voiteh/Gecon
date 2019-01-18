@@ -20,7 +20,7 @@ import herd.codamo.api.core.transformer {
 	CreationError,
 	Delegator
 }
-"Creates generc objects from [[AttributesMapping]], core creator"
+"Creates generic objects from [[AttributesMapping]], core creator"
 tagged("Generic")
 by("Wojciech Potiopa")
 shared provided class ObjectCreator() satisfies Creator<AttributesMapping,Object> {

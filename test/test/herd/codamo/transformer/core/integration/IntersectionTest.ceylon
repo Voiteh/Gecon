@@ -1,14 +1,11 @@
-import ceylon.collection {
-	MutableList,
-	ArrayList
-}
 import ceylon.language.meta.model {
 	Class,
 	Type
 }
 
 import ceylon.test {
-	test
+	test,
+	assertEquals
 }
 
 import herd.codamo.api.core.transformer {
@@ -23,31 +20,33 @@ import herd.codamo.engine {
 	ScopeProvisioning
 }
 
-class StringIntersectionResolver() satisfies Resolver<Anything,<MutableList<String>&SearchableList<String>>> {
-	shared actual Class<MutableList<String>&SearchableList<String>,Nothing> resolve(Delegator delegator, Anything input, Type<MutableList<String>&SearchableList<String>> outputType) => `ArrayList<String>`;
+
+class SearchableCharacterListAndComparableStringToStringResolver() satisfies Resolver<Anything,SearchableList<Character>&Summable<String>> {
+	shared actual Class<SearchableList<Character>&Summable<String>,Nothing> resolve(Delegator delegator, Anything input, Type<SearchableList<Character>&Summable<String>> outputType) => `String`;
 	
-	shared actual Resolvance<Anything,MutableList<String>&SearchableList<String>,Type<MutableList<String>&SearchableList<String>>>.Matcher? matcher => object satisfies Resolvance<Anything,MutableList<String>&SearchableList<String>,Type<MutableList<String>&SearchableList<String>>>.Matcher {
-		shared actual Integer priority => 1;
-		shared actual Boolean match(Anything input, Type<MutableList<String>&SearchableList<String>> outputType) => true;
+	shared actual Resolvance<Anything,SearchableList<Character>&Summable<String>,Type<SearchableList<Character>&Summable<String>>>.Matcher? matcher => object satisfies Resolvance<Anything,SearchableList<Character>&Summable<String>,Type<SearchableList<Character>&Summable<String>>>.Matcher{
+		shared actual Boolean match(Anything input, Type<SearchableList<Character>&Summable<String>> outputType) => true;
+		
+		shared actual Integer priority => 0;
+		
+		
 	};
+
 }
 
 shared class IntersectionTest() extends CoreIntegration() {
 	
-	shared actual Codamo codamo=>Codamo{ 
-		provider = AutoProvider{ 
+	shared actual Codamo codamo => Codamo {
+		provider = AutoProvider {
 			transformations = ScopeProvisioning(
-				[`module herd.codamo.transformer.core`,`class StringIntersectionResolver`]
+				[`module herd.codamo.transformer.core`, `class SearchableCharacterListAndComparableStringToStringResolver`]
 			);
-					
 		};
 	};
 	
-	
 	shared test
-	void shouldConvertToIntersectionContainingType() {
-		value result = codamo.convert(testData.matchingIntersection, `InteresectionModel`);
-		assert (is InteresectionModel result);
-		assert (result.data.containsEvery({ "1", "2", "3" }));
+	void shouldConvertIntegerToSearchableCharacterListAndSumableToString() {
+		assertEquals(codamo.convert(testData.matchingInteger, `SearchableList<Character>&Summable<String>`),
+			testData.matchingString);
 	}
 }
