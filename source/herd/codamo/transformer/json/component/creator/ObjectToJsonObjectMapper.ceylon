@@ -28,7 +28,7 @@ by("Wojciech Potiopa")
 shared provided class ObjectToJsonObjectMapper() extends ObjectToObjectMapper<JsonMapping, {<String->Value>*}, JsonObject>(){
 	shared actual JsonMapping createMapping({<String->Value>*} holder) => JsonMapping(holder);
 	
-	shared actual {<String->Value>*} mapAttributes(Delegator delegator,Object source, {Attribute<Nothing,Anything,Nothing>*} attributes) => attributes.map((Attribute<> element) {
+	shared actual {<String->Value>*} mapAttributes(Delegator delegator,Object source, {Attribute<Nothing,Anything,Nothing>*} attributes) => attributes.collect((Attribute<> element) {
 		value val=element.bind(source).get();
 		if(is Value val ){
 			return element.declaration.name->val;

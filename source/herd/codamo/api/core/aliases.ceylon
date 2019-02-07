@@ -1,5 +1,6 @@
 import ceylon.language.meta.declaration {
 	Module,
-	Package
+	Package,
+	ClassDeclaration
 }
-shared alias Scope => Module|Package;
+shared alias Scope => Module|Package|ClassDeclaration;

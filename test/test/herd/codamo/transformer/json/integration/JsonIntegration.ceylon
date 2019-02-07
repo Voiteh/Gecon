@@ -1,33 +1,28 @@
-import test.codamo.base.integration {
-	IntegrationTest
+
+import herd.codamo.engine {
+	Codamo,
+	AutoProvider,
+	ScopeProvisioning
 }
-import herd.codamo.api.core.provision {
-	Provider
+import ceylon.test {
+	testExtension
+}
+import test.codamo.extension {
+	LoggingTestExtension
 }
 
-import herd.codamo.engine.provisioning {
-	CoreProvider
-}
-
-import ceylon.logging {
-	info,
-	Priority
-}
-import herd.codamo.engine.transformation {
-	DefaultDelegator
-}
-import herd.codamo.api.core {
-	Codamo
-}
-import herd.codamo.engine.configuration {
-	LoggingConfiguration
-}
-
-shared class JsonIntegration extends IntegrationTest {
+testExtension (`class LoggingTestExtension`)
+shared class JsonIntegration() {
 	
-	shared new (Provider[] providers = [], Priority loggingPrio = info)
-			extends IntegrationTest([CoreProvider()], [LoggingConfiguration(loggingPrio, `module herd.codamo.engine`),
-			LoggingConfiguration(loggingPrio, `module herd.codamo.transformer.json`)]) {}
-	
-	shared actual Codamo convertx => Codamo(DefaultDelegator { providers = providers; });
+	shared default Codamo codamo => Codamo {
+		provider = AutoProvider {
+			transformations = ScopeProvisioning(
+				[
+					`module herd.codamo.transformer.json`,
+					`module herd.codamo.transformer.core`,
+					`module herd.codamo.transformer.collection`
+				]
+			);
+		};
+	};
 }

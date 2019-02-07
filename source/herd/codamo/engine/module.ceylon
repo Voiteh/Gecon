@@ -2,7 +2,9 @@
 
 
 module herd.codamo.engine "0.8.1" {
-	shared import ceylon.collection "1.3.3";
+	import herd.type.support "0.1.0";
+	import ceylon.collection "1.3.3";
 	shared import herd.codamo.api.core "0.8";
 	shared import ceylon.logging "1.3.3";
+	
 }

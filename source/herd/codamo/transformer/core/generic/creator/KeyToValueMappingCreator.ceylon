@@ -26,7 +26,7 @@ by("Wojciech Potiopa")
 shared provided class KeyToValueMappingCreator() extends ObjectToObjectMapper<KeyToValueMapping,{<String->Anything>*},Map<String,Anything>>() {
 	shared actual KeyToValueMapping createMapping({<String->Anything>*} holder) => KeyToValueMapping(holder);
 	
-	shared actual {<String->Anything>*} mapAttributes(Delegator delegator, Object source, {Attribute<Nothing,Anything,Nothing>*} attributes) => attributes.map((Attribute<Nothing,Anything,Nothing> element) => element.declaration.name -> element.bind(source).get());
+	shared actual {<String->Anything>*} mapAttributes(Delegator delegator, Object source, {Attribute<Nothing,Anything,Nothing>*} attributes) => attributes.collect((Attribute<Nothing,Anything,Nothing> element) => element.declaration.name -> element.bind(source).get());
 	
 	shared actual Creation<Relation<Object,Map<String,Anything>>,KeyToValueMapping,KeyToValueMapping>.Matcher? matcher => object satisfies Creation<Relation<Object,Map<String,Anything>>,KeyToValueMapping,KeyToValueMapping>.Matcher{
 		shared actual Integer priority => 1;

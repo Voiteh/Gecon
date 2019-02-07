@@ -9,27 +9,27 @@ shared class SelfTest() extends CoreIntegration() {
 	
 	shared test  
 	void shouldConvertIntegerToInteger(){
-		 	value result = convertx.convert(4, `Integer`);
+		 	value result = codamo.convert(4, `Integer`);
 		 	assertEquals(result,4);
 	}
 	
 	shared test  
 	void shouldConvertEnumToEnum(){
-		value result = convertx.convert(one, `EnumTwo`);
+		value result = codamo.convert(one, `EnumTwo`);
 		assertEquals(result,one);
 	}
 	
 	shared test
 	void shouldConvertSimpleModelToSimpleModel(){
 		value model=TestSimpleModel(1,"bla");
-		value result=convertx.convert(model, `TestSimpleModel`);
+		value result=codamo.convert(model, `TestSimpleModel`);
 		assertEquals(result,model);
 	}
 	
 	shared test
 	void shouldConvertIterableToIterable(){
 		value stream={1,2,3};
-		value result=convertx.convert(stream, type(stream));
+		value result=codamo.convert(stream, type(stream));
 		assertEquals(result,stream);
 	}
 }

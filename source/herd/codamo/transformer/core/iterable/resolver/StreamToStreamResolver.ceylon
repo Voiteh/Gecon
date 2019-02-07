@@ -38,7 +38,7 @@ shared provided class StreamToStreamResolver() satisfies  Resolver<{Anything*},{
 	}
 	
 	shared actual Class<{Anything*},Nothing> resolve(Delegator delegator,{Anything*} input, Type<{Anything*}> outputType){
-		value tupleArgs=input.map((Anything element) => type(element)).sequence();
+		value tupleArgs=input.collect((Anything element) => type(element)).sequence();
 		assert(is Class<AnyTuple> tupleType=createSequentialType(tupleArgs));
 		return tupleType;
 	}

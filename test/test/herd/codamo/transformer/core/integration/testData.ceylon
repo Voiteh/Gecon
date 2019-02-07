@@ -19,8 +19,8 @@ shared object testData {
 			shared [String+] nonEmptySequence = [ "1", "2", "3", "4" ];
 		}
 	}
-	shared MatchingIntersection matchingIntersection = MatchingIntersection({ 1, 2, 3 });
-	
+	shared Integer matchingInteger=123;
+	shared String matchingString="123";
 	shared TestSimpleModel testSimpleModel = TestSimpleModel(1, "3");
 	shared TestOtherSimpleModel testOtherSimpleModel = TestOtherSimpleModel("1", 3);
 	

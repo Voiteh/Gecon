@@ -41,8 +41,8 @@ shared provided class IterableToTupleConverter() satisfies Converter<{Anything*}
 			throw ConvertionError(source, resultType,Exception("Different sizes of provided source ``source`` to touple argument types ``argsType`` "));
 		}
 		value sourceIterator=source.iterator();
-		value converted=argsType.map((Type<Anything> element) => element->sourceIterator.next())
-				.map((Type<Anything> type -> Anything item) => delegator.convert(item, type)).sequence();
+		value converted=argsType.collect((Type<Anything> element) => element->sourceIterator.next())
+				.collect((Type<Anything> type -> Anything item) => delegator.convert(item, type)).sequence();
 		value resolvedType=delegator.resolve(converted,resultType);
 		return delegator.create(resolvedType, converted);
 	}

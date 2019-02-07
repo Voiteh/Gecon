@@ -15,19 +15,19 @@ shared class SimpleModelTest() extends JsonIntegration() {
 	
 	shared test 
 	void shouldConvertJsonObjectToModel(){
-		value result=convertx.convert(testData.simpleModelJsonObject, `SimpleModel`);
+		value result=codamo.convert(testData.simpleModelJsonObject, `SimpleModel`);
 		assertEquals(result,testData.simpleModel);
 	}
 	
 	shared test 
 	void shouldConvertModelToJsonObject(){
-		value result=convertx.convert(testData.simpleModel,`JsonObject`);
+		value result=codamo.convert(testData.simpleModel,`JsonObject`);
 		assertEquals(result,testData.simpleModelJsonObject);
 	}
 	
 	shared test
 	void shouldConvertJsonObjectToMap(){
-		value result=convertx.convert(testData.simpleModelJsonObject, `Map<String,Anything>`);
+		value result=codamo.convert(testData.simpleModelJsonObject, `Map<String,Anything>`);
 		assert(is Map<String,Anything > result);
 		testData.simpleModelJsonObject.each((String elementKey -> Value elementItem) {
 			value item=result.get(elementKey);

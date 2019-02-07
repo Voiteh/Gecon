@@ -4,7 +4,8 @@ import ceylon.language.meta {
 import ceylon.language.meta.model {
 	Type
 }
-import herd.codamo.api.core.provision { Provider }
+
+
 "Whenever there is [[Transformation]] error one of subtypes will be thrown"
 by("Wojciech Potiopa")
 shared abstract class TransformationError(String message, Throwable? cause = null) 
@@ -12,7 +13,7 @@ shared abstract class TransformationError(String message, Throwable? cause = nul
 		| CreationError
 		| ResolvanceError
 		extends Exception(message, cause){}
-"Base interface for whole operations executed by framework. Satisfiy one of subtypes and provide it via [[Provider]] to extend abilities of framework"
+"Base interface for whole operations executed by framework. Satisfiy one of subtypes and provide it to extend abilities of framework"
 by("Wojciech Potiopa")
 shared interface Transformation of Convertion<> | Resolvance<> | Creation<> {
 	"Used inside framework only"

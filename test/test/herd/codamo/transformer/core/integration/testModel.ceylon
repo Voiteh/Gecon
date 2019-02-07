@@ -1,18 +1,7 @@
-import ceylon.collection {
-	MutableList
-}
 import ceylon.language.meta {
 	type
 }
-shared serializable class InteresectionModel(data){ 
 
-		shared MutableList<String>&SearchableList<String> data;
-	
-}
-
-shared serializable class MatchingIntersection(data){
-	shared {Integer*} data; 
-}
 
 shared abstract class EnumOne() of first | second | third | fourth {}
 shared object first extends EnumOne() {}
