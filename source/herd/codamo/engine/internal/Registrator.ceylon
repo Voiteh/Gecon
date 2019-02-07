@@ -20,11 +20,12 @@ import ceylon.language.meta.declaration {
 import herd.codamo.api.core {
 	Scope
 }
-import herd.type.declaration.support.hierarchy.api {
-	declarationHierarchy
-}
+
 import ceylon.language.meta {
 	type
+}
+import herd.type.support {
+	flat
 }
 
 shared class Registrator(Logger logger, Flatter flatter) {
@@ -35,10 +36,17 @@ shared class Registrator(Logger logger, Flatter flatter) {
 			return {scope};
 		}
 		case (is Package){
-			return scope.members<ClassDeclaration>().filter((ClassDeclaration element) => 
-				declarationHierarchy(element)
-					.contains(`interface Transformation`)
-					.match
+			return scope.members<ClassDeclaration>()
+					.filter((ClassDeclaration element) {
+				if(element.string.contains("MapToAttributesMappings")){
+					value string = element.string;
+					logger.trace(string);
+				}
+				value match = flat.declarations(element)
+					.contains(`interface Transformation`);
+				logger.trace("Scope element: ``element`` match: ``match``");
+				return match;
+				}
 			);
 		}
 		case (is Module){
@@ -85,15 +93,17 @@ shared class Registrator(Logger logger, Flatter flatter) {
 		}
 		case (is AutoProvider) {
 			{ClassDeclaration*} inclusions=provider.transformations.scopes.flatMap(extractFromScope);
+			inclusions.each((ClassDeclaration element) => logger.trace("Included class ``element``"));
 			{ClassDeclaration*} exclusions=provider.transformations.exclusions.flatMap(extractFromScope);
-			{ClassDeclaration*} finalDeclrations = inclusions.filter((ClassDeclaration element) {
+			exclusions.each((ClassDeclaration element) => logger.trace("Excluded class ``element``"));
+			{ClassDeclaration*} finalDeclarations = inclusions.filter((ClassDeclaration element) {
 				if(exclusions.contains(element)){
 					logger.debug("Excluded ``element``");
 					return false;
 				}
 				return true;
 			}).distinct;
-			finalDeclrations.collect(instantiate).each((Transformation element) => putInRegistry(registry, element));
+			finalDeclarations.collect(instantiate).each((Transformation element) => putInRegistry(registry, element));
 		}
 		
 	return registry;

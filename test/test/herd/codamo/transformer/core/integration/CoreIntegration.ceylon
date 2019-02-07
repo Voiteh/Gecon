@@ -9,13 +9,7 @@ import ceylon.test {
 import test.codamo.extension {
 	LoggingTestExtension
 }
-import herd.codamo.engine.configuration {
-	Configuration,
-	Logging
-}
-import ceylon.logging {
-	trace
-}
+
 
 
 testExtension(`class LoggingTestExtension`)
