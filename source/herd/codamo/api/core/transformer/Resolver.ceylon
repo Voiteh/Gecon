@@ -5,5 +5,14 @@ import ceylon.language.meta.model {
 
 "Resolves provided type into class. This is support API only needed for resolvance"
 by("Wojciech Potiopa")
-shared interface Resolver<Source, Result> satisfies Resolvance<Source,Result,Type<Result>> {	
+shared abstract class Resolver<Source, Result,ResultType=Type<Result>>() 
+		satisfies Resolvance<Source,Result,Type<Result>> & Registrable
+		given ResultType satisfies Type<Result>
+{
+	
+	
+	Matcher<Source,ResultType>? matcher=null;
+	
+	shared actual Anything visitAdapter(Registrable.Adapter visitor) => visitor.adapt(this, matcher);
+		
 }

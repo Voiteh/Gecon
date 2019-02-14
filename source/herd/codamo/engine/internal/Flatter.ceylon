@@ -24,9 +24,9 @@ import herd.codamo.api.core.transformer {
 String matchingResultLog(Boolean result) =>"Matching ``if (result) then "SUCCESS" else "FAILURE"``";
 
 "Default implementatio of flatter"
-shared class Flatter(Logger logger) satisfies Transformation.Flatter{
+shared class Flatter(Logger logger) satisfies Transformation.Adapter{
 	
-	shared actual [Findable, Executable] flattenConverter
+	shared actual [Findable, Executable] adaptConverter
 			<Source, Result, ResultType>
 			(Convertion<Source,Result,ResultType> converter)
 			given ResultType satisfies Type<Result> 
@@ -73,7 +73,7 @@ shared class Flatter(Logger logger) satisfies Transformation.Flatter{
 		return [findable,executable];
 	}
 	
-	shared actual [Findable, Executable] flattenCreator<Args, Result, ResultType>
+	shared actual [Findable, Executable] adaptCreator<Args, Result, ResultType>
 			(Creation<Args,Result,ResultType> creator)
 			given ResultType satisfies Result 
 	{
@@ -117,7 +117,7 @@ shared class Flatter(Logger logger) satisfies Transformation.Flatter{
 		return [findable,flatten];
 	}
 	
-	shared actual [Findable, Executable] flattenResolver<Source, Result, ResultType>
+	shared actual [Findable, Executable] adaptResolver<Source, Result, ResultType>
 			(Resolvance<Source,Result,ResultType> resolver) 
 			given ResultType satisfies Type<Result>
 	{

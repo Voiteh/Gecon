@@ -55,7 +55,7 @@ shared class Registrator(Logger logger, Flatter flatter) {
 	}
 	
 	void putInRegistry(Registry registry,Transformation element){
-			assert (is [Findable, Executable] flat = element.flatten(flatter));
+			assert (is [Findable, Executable] flat = element.visitAdapter(flatter));
 			value findable = flat.first;
 			Executable? replaced;
 			switch (element)
