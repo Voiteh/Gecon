@@ -5,11 +5,8 @@ import ceylon.language.meta.model {
 import ceylon.language.meta {
 	type
 }
-
-shared alias Findable => Hashable|Matchable;
-
 "Hashable implementation"
-shared class Hashable(Anything* toHash) {
+shared class Hasher(shared actual Classificator classificator,Anything* toHash) satisfies Classificable {
 	
 	Type<> extractType(Anything data){
 		Type<> result;
@@ -42,7 +39,7 @@ shared class Hashable(Anything* toHash) {
 	
 	
 	shared actual Boolean equals(Object that) {
-		if (is Hashable that) {
+		if (is Hasher that) {
 			return this.hash==that.hash;
 		}
 		else {
@@ -50,11 +47,3 @@ shared class Hashable(Anything* toHash) {
 		}
 	}
 }
-"Findable implementation"
-shared interface Matchable {
-	shared formal Boolean match(Anything[] args);
-	
-	shared formal Integer priority;
-}
-
-

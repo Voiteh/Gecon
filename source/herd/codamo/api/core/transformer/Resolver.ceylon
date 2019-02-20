@@ -1,3 +1,4 @@
+
 import ceylon.language.meta.model {
 	Type
 }
@@ -11,8 +12,8 @@ shared abstract class Resolver<Source, Result,ResultType=Type<Result>>()
 {
 	
 	
-	Matcher<Source,ResultType>? matcher=null;
+	shared default Matchable<Source,ResultType>? matchable=null;
 	
-	shared actual Anything visitAdapter(Registrable.Adapter visitor) => visitor.adapt(this, matcher);
+	shared actual Anything visitAdapter(Registrable.Adapter visitor) => visitor.adapt(this, matchable);
 		
 }

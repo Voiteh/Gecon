@@ -11,11 +11,10 @@ shared interface Registrable {
 			"Transformation to be adapted"
 			Convertion<Source,Result,ResultType>|
 					Resolvance<Source,Result,ResultType>|
-					Creation<Source,Result,ResultType> 
+					Creation<Source,Result,Result> 
 					transformation,
 			"possible matcher "
-			Matcher<Source,ResultType>? matcher)
-				given ResultType satisfies Type<Result>;
+			Matchable<Source,ResultType>? matcher) given ResultType satisfies Object;
 		
 		
 	}

@@ -18,8 +18,8 @@ import herd.codamo.api.core.transformer {
 "Support API for creation of Codamo modules. Usefull only for generic applicatons. Provides ability to create [[AttributesMapping]]. 
  Uses mapping between [[Source]] parts based on key, like [[Map<String,Data>]] to [[Result]] attributes"
 by("Wojciech Potiopa")
-shared abstract class AttributesMapper<Source, Result>()
-		satisfies Creator<Relation<Source,Result>,AttributesMapping>
+shared abstract class AttributesMapper<Source, Result>() extends 
+	 Creator<Relation<Source,Result>,AttributesMapping>()
 		given Source satisfies Object {
 	
 	"Refine to provide source attribute names to be used for retreival of values"

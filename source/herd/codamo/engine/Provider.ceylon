@@ -1,5 +1,5 @@
 import herd.codamo.api.core.transformer {
-	Transformation
+	Registrable
 }
 import herd.codamo.api.core {
 	Scope
@@ -14,7 +14,7 @@ shared alias Provider => ManualProvider|AutoProvider;
 "Allows manual including of transformations"
 shared class ManualProvider(
 	"transformations to be included"
-	shared Transformation[] transformations
+	shared Registrable[] registrables
 	){}
 	
 shared class ScopeProvisioning(

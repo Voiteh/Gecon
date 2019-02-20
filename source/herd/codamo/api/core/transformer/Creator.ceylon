@@ -5,14 +5,13 @@ import ceylon.language.meta.model {
 
 "Creates a type out of provided class and arguments, required for creation. This is suppport API used strictly for creation"
 by("Wojciech Potiopa")
-shared abstract class Creator<Args,Result,ResultType=Class<Result>>()
-		satisfies  Creation<Args,Result,ResultType> & Registrable
-		given ResultType satisfies Class<Result> {
+shared abstract class Creator<Args,Result>()
+		satisfies  Creation<Args,Result,Result> & Registrable {
 	
 	
-	shared default Matcher<Args,ResultType>? matcher=null;
+	shared default Matchable<Args,Class<Result>>? matchable=null;
 		
-	shared actual Anything visitAdapter(Registrable.Adapter visitor) => visitor.adapt(this, matcher);
+	shared actual Anything visitAdapter(Registrable.Adapter visitor) => visitor.adapt(this, matchable);
 	
 	
 	

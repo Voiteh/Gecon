@@ -10,7 +10,7 @@ shared abstract class Converter<Source,Result,ResultType=Type<Result>>()
 		satisfies Convertion<Source, Result,ResultType> &Registrable
 given ResultType satisfies Type<Result> {
 	
-	shared Matcher<Source,ResultType>? matcher=null;
+	shared Matchable<Source,ResultType>? matcher=null;
 	
 	
 	shared actual Anything visitAdapter(Registrable.Adapter visitor) => visitor.adapt(this, matcher);

@@ -14,8 +14,7 @@ shared class CreationError extends TransformationError{
 
 "Base interface for recreating data model, used as support transformation"
 by("Wojciech Potiopa")
-shared interface Creation<in Args=Nothing,out Result=Anything, in ResultType=Nothing> 
-			given ResultType satisfies Class<Result> {
+shared interface Creation<in Args=Nothing,out Result=Anything,in ResultType=Nothing> given ResultType satisfies Result  {
 	
 	"Creates data model for provided [[kind]] using [[arguments]]. This works as a kind of a constructor"
 	throws(`class CreationError`)
@@ -23,7 +22,7 @@ shared interface Creation<in Args=Nothing,out Result=Anything, in ResultType=Not
 		"Delegates to other transformation if possible"
 		Delegator delegator,
 		"Creates provided [[ResultType]]"
-		ResultType kind,
+		Class<ResultType> kind,
 		"Arguments to be used for creation"
 		 Args arguments);
 	
