@@ -1,11 +1,11 @@
 import ceylon.language.meta.model {
 	Class
 }
+
 import herd.codamo.api.core.transformer {
 	Creator,
-	provided,
-	Creation,
-	Delegator
+	Delegator,
+	Matchable
 }
 import herd.codamo.transformer.core.iterable {
 	AnyTuple
@@ -16,7 +16,7 @@ import herd.codamo.transformer.core.iterable {
 "Creator for [[Tuple]] using any iterable as arguments, uses recurence for creating subtuple's"
 tagged("Generic")
 by("Wojciech Potiopa")
-shared provided class TupleCreator() satisfies  Creator<{Anything*},AnyTuple> {
+shared class TupleCreator() extends Creator<{Anything*},AnyTuple>() {
 	shared actual AnyTuple create(Delegator delegator,Class<AnyTuple> kind, {Anything*} arguments) {
 		value first = arguments.first;
 		assert (exists elementType = kind.typeArgumentList.first);
@@ -29,9 +29,11 @@ shared provided class TupleCreator() satisfies  Creator<{Anything*},AnyTuple> {
 		}
 	}
 	
-	shared actual Creation<{Anything*},AnyTuple,AnyTuple>.Matcher? matcher => object satisfies Creation<{Anything*},AnyTuple,AnyTuple>.Matcher{
-		shared actual Boolean match(Class<AnyTuple> kind, {Anything*} arguments) => true;
+	matchable=> object satisfies Matchable<{Anything*},Class<AnyTuple>>{
+		shared actual Boolean predicate({Anything*} source, Class<AnyTuple,Nothing> resultType) => true;
 		
-		shared actual Integer priority => 1;
+		shared actual Integer priority =1;
+		
 	};
+	
 }

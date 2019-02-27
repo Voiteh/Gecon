@@ -4,13 +4,11 @@ import ceylon.language.meta.model {
 	Class
 }
 
-
 import herd.codamo.api.core.transformer {
 	Converter,
-	provided,
-	Convertion,
 	ConvertionError,
-	Delegator
+	Delegator,
+	Matchable
 }
 import herd.codamo.transformer.core.iterable {
 	AnyTuple
@@ -20,7 +18,7 @@ import herd.codamo.transformer.core.iterable {
 
 "Convetes one iterable to tuple. Provided tuple type for example [String,Integer,Boolean] with size 3, must match provided source iterable size."
 by("Wojciech Potiopa")
-shared provided class IterableToTupleConverter() satisfies Converter<{Anything*},AnyTuple>{
+shared class IterableToTupleConverter() extends Converter<{Anything*},AnyTuple>(){
 	
 	{Type<Anything>*} extractArgsType(Type<Anything> toupleType){
 		assert(is Class<Tuple<Anything,Anything,Anything>>|Interface<Empty> toupleType);
@@ -47,11 +45,10 @@ shared provided class IterableToTupleConverter() satisfies Converter<{Anything*}
 		return delegator.create(resolvedType, converted);
 	}
 	
-	shared actual Convertion<{Anything*},AnyTuple,Type<AnyTuple>>.Matcher? matcher => object satisfies Convertion<{Anything*},AnyTuple,Type<AnyTuple>>.Matcher{
+	matchable => object satisfies Matchable<{Anything*},Type<AnyTuple>>{
+		shared actual Boolean predicate({Anything*} source, Type<AnyTuple> resultType) => resultType is Class<AnyTuple>;
 		
-		shared actual Boolean match({Anything*} source, Type<AnyTuple> resultType) => resultType is Class<AnyTuple>;
-		
-		shared actual Integer priority => 2;
-
+		shared actual Integer priority =2;		
 	};
+	
 }

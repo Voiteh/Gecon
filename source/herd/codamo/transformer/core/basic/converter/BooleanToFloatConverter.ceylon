@@ -4,7 +4,6 @@ import ceylon.language.meta.model {
 
 import herd.codamo.api.core.transformer {
 	Converter,
-	provided,
 	Delegator
 }
 
@@ -17,7 +16,7 @@ import herd.codamo.api.core.transformer {
  false -> 0.0 "
 tagged("Basic")
 by("Wojciech Potiopa")
-shared provided class BooleanToFloatConverter() satisfies Converter<Boolean,Float>  {
+shared class BooleanToFloatConverter() extends Converter<Boolean,Float,Type<Float>>()  {
 	shared actual Float convert(Delegator delegator, Boolean source, Type<Float> resultType) {
 		switch(source)
 		case (true) { return 1.0;}

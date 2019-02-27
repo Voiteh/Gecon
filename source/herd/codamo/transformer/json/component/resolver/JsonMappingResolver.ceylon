@@ -1,39 +1,37 @@
-import herd.codamo.api.core.meta {
-	Mapping,
-	Relation
+import ceylon.json {
+	JsonObject
 }
-
 import ceylon.language.meta.model {
 	Class,
 	Type
 }
 
-import herd.codamo.transformer.json.meta {
-	JsonMapping
+import herd.codamo.api.core.meta {
+	Mapping,
+	Relation
 }
-import ceylon.json {
-	JsonObject
-}
-
 import herd.codamo.api.core.transformer {
 	Resolver,
-	provided,
-	Resolvance,
-	Delegator
+	Delegator,
+	Matchable
+}
+import herd.codamo.transformer.json.meta {
+	JsonMapping
 }
 
 "Resolves [[Relation]] to [[JsonMapping]]" 
 by("Wojciech Potiopa")
-shared provided class JsonMappingResolver() satisfies Resolver<Relation<Object, JsonObject>,Mapping>{
+shared class JsonMappingResolver() extends Resolver<Relation<Object, JsonObject>,Mapping,Type<Mapping>>(){
 	shared actual Class<Mapping,Nothing> resolve(Delegator delegator, Relation<Object, JsonObject> input, Type<Mapping> outputType) => `JsonMapping`;
 	
 	
-	shared actual Resolvance<Relation<Object,JsonObject>,Mapping,Type<Mapping>>.Matcher? matcher => object satisfies Resolvance<Relation<Object,JsonObject>,Mapping,Type<Mapping>>.Matcher{
-		shared actual Boolean match(Relation<Object, JsonObject> input, Type<Mapping> outputType) => true;
+	matchable=> object satisfies Matchable<Relation<Object,JsonObject>,Type<Mapping>>{
+		shared actual Boolean predicate(Relation<Object,JsonObject> source, Type<Mapping> resultType) => true;
 		
-		shared actual Integer priority => 2;
+		shared actual Integer priority = 2;
+		
+		
 	};
-	
 	
 }
 

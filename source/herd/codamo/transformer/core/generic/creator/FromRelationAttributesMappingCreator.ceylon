@@ -1,12 +1,10 @@
 
+import ceylon.language.meta {
+	type
+}
 import ceylon.language.meta.model {
 	Class,
 	Attribute
-}
-
-
-import ceylon.language.meta {
-	type
 }
 
 import herd.codamo.api.core.meta {
@@ -14,18 +12,16 @@ import herd.codamo.api.core.meta {
 	AttributesMapping,
 	filterObjectAndIdentifiableAttributes
 }
-
 import herd.codamo.api.core.transformer {
 	Creator,
-	provided,
-	Creation,
-	Delegator
+	Delegator,
+	Matchable
 }
 
 "Creator for [[AttributesMapping]], uses [[Relation]] as arguments."
 tagged("Generic")
 by("Wojciech Potiopa")
-shared provided class FromRelationAttributesMappingCreator() satisfies Creator<Relation<Object,Object>,AttributesMapping>{
+shared class FromRelationAttributesMappingCreator() extends Creator<Relation<Object,Object>,AttributesMapping>(){
 	shared actual AttributesMapping create(Delegator delegator, Class<AttributesMapping,Nothing> kind, Relation<Object,Object> arguments){
 		value sourceType=type(arguments.source);
 		value entries=arguments.resultClass.getAttributes<>().filter(filterObjectAndIdentifiableAttributes).collect((Attribute<Nothing,Anything,Nothing> destAttribute) {
@@ -37,10 +33,12 @@ shared provided class FromRelationAttributesMappingCreator() satisfies Creator<R
 		return AttributesMapping(entries);
 	}
 
-	shared actual Creation<Relation<Object,Object>,AttributesMapping,AttributesMapping>.Matcher? matcher => object satisfies Creation<Relation<Object,Object>,AttributesMapping,AttributesMapping>.Matcher{
-		shared actual Boolean match(Class<AttributesMapping,Nothing> kind, Relation<Object,Object> arguments) => true;
+	matchable => object satisfies Matchable<Relation<Object,Object>,Class<AttributesMapping,Nothing> >{
+		shared actual Boolean predicate(Relation<Object,Object> source, Class<AttributesMapping,Nothing> resultType) => true;
 		
-		shared actual Integer priority => 0;		
+		shared actual Integer priority =0;
+		
+		
 	};
 	
 }

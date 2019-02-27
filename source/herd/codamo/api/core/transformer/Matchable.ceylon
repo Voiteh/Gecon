@@ -9,5 +9,5 @@ shared interface Matchable<Source,  ResultType> given ResultType satisfies Type<
 	shared formal Boolean predicate(Source source, ResultType resultType);
 	"Whenever same predicate is used, indicates which one should be choosen by algorithm. 
 	 The higher value, more liekly it will be choosen (by default start from 0) "
-	shared default Integer priority=>0 ;
+	shared formal Integer priority ;
 }

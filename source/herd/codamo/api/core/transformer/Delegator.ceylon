@@ -21,7 +21,7 @@ shared interface Delegator {
 	shared formal Class<Result> resolve<Result>(Anything source,Type<Result> resultType);
 	
 	"Tries to find [[Creation]] for provided [[kind]] and [[args]], then delegates execution to this transformation"
-	throws(`class CreationError`,"Creator was not able to create provided class")
+	throws(`class CreationError`,"Creator was not able to create class")
 	throws(`class TransformationFindingError`,"Creator has not been found")
 	shared formal Result create<Result>(Class<Result> kind,Anything args);
 	

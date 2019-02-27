@@ -1,18 +1,17 @@
 
+import ceylon.language.meta {
+	type
+}
 import ceylon.language.meta.model {
 	Class,
 	Type,
 	ClassModel
 }
 
-import ceylon.language.meta {
-	type
-}
-
 import herd.codamo.api.core.transformer {
 	Resolver,
 	Delegator,
-	Resolvance
+	Matchable
 }
 import herd.codamo.transformer.core.iterable {
 	AnyTuple
@@ -22,7 +21,7 @@ import herd.codamo.transformer.core.iterable {
 
 
 "Resolves any iterable to [[Tuple]]"
-shared class StreamToTupleResolver() satisfies Resolver<{Anything*},AnyTuple>{
+shared class StreamToTupleResolver() extends Resolver<{Anything*},AnyTuple>(){
 	
 	
 	Class<AnyTuple>|ClassModel<Empty> createTupleType(Type<>[] args){
@@ -40,11 +39,15 @@ shared class StreamToTupleResolver() satisfies Resolver<{Anything*},AnyTuple>{
 		return tupleType;
 	}
 	
-	shared actual Resolvance<{Anything*},AnyTuple,Type<AnyTuple>>.Matcher? matcher => object satisfies Resolvance<{Anything*},AnyTuple,Type<AnyTuple>>.Matcher{
+	matchable => object satisfies Matchable<{Anything*},Type<AnyTuple>>{
+		shared actual Boolean predicate({Anything*} source, Type<AnyTuple> resultType) => !source.empty;
+		
 		shared actual Integer priority => 1;
-		shared actual Boolean match({Anything*} input, Type<AnyTuple> outputType) => !input.empty;
-
+		
+		
 	};
+
+	
 	
 	
 }

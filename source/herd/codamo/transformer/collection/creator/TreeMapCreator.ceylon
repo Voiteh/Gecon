@@ -2,37 +2,33 @@ import ceylon.collection {
 	naturalOrderTreeMap,
 	TreeMap
 }
-
-
 import ceylon.language.meta.model {
 	Class
 }
 
-
 import herd.codamo.api.core.transformer {
 	Creator,
-	provided,
-	Creation,
-	Delegator
+	Delegator,
+	Matchable
 }
-import herd.codamo.api.core.util {
-	typeHierarchy
+import herd.type.support {
+	flat
 }
 "Creator for [[TreeMap]] using any iterable as arguments"
 tagged("Generic")
 by("Wojciech Potiopa")
-shared provided class TreeMapCreator() satisfies Creator<{Anything*},Map<>> {
+shared class TreeMapCreator() extends Creator<{Anything*},Map<>>() {
 	shared actual Map<> create(Delegator delegator,Class<Map<>,Nothing> kind, {Anything*} arguments) {
 		value factoryMethod = `function naturalOrderTreeMap`.apply<Map<>>(*kind.typeArgumentList);
 		return factoryMethod.apply(*arguments);
 	}
 	
-	shared actual Creation<{Anything*},Map<Object,Anything>,Map<Object,Anything>>.Matcher? matcher => object satisfies Creation<{Anything*},Map<Object,Anything>,Map<Object,Anything>>.Matcher{
-		shared actual Boolean match(Class<Map<>,Nothing> kind, {Anything*} arguments) {
-			return typeHierarchy(kind).findByDeclaration(`class TreeMap`) exists;
-		}
+	matchable => object satisfies Matchable<{Anything*},Class<Map<Object,Anything>>>{
+		shared actual Boolean predicate({Anything*} source, Class<Map<Object,Anything>,Nothing> resultType) => flat.declarations(resultType.declaration).contains(`class TreeMap`);
 		
-		shared actual Integer priority => 1;
+		priority =1;
 	};
+	
+	
 }
 

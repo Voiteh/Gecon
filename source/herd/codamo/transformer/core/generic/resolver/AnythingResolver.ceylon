@@ -1,24 +1,22 @@
 
+import ceylon.language.meta {
+	type
+}
 import ceylon.language.meta.model {
 	Class,
 	Type
 }
 
-import ceylon.language.meta {
-	type
-}
-
 import herd.codamo.api.core.transformer {
 	Resolver,
-	provided,
-	Resolvance,
-	Delegator
+	Delegator,
+	Matchable
 }
 
 "Resolves [[Anything]] type to [[Object]]|[[Null]] depending on input"
 tagged("Generic")
 by("Wojciech Potiopa")
-shared provided class AnythingResolver() satisfies Resolver<Anything,Anything> {
+shared class AnythingResolver() extends Resolver<Anything,Anything,Type<Anything>>() {
 	shared actual Class<Anything,Nothing> resolve(Delegator delegator, Anything input, Type<Anything> outputType) {
 		
 		switch (input)
@@ -33,11 +31,15 @@ shared provided class AnythingResolver() satisfies Resolver<Anything,Anything> {
 			return `Null`;
 		}
 	}
-	shared actual Resolvance<Anything,Anything,Type<Anything>>.Matcher? matcher => object satisfies Resolvance<Anything,Anything,Type<Anything>>.Matcher{
-		shared actual Boolean match(Anything input, Type<Anything> outputType) => outputType == `Anything`;
+	
+	matchable=> object satisfies Matchable<Anything,Type<Anything>>{
+		shared actual Boolean predicate(Anything source, Type<Anything> resultType) => resultType == `Anything`;
 		
-		shared actual Integer priority => 0;
-
+		shared actual Integer priority =0;
+		
+		
 	};
+	
+
 	
 }

@@ -5,7 +5,7 @@ import ceylon.language.meta.model {
 }
 import herd.codamo.api.core.transformer {
 	Converter,
-	provided,
+	
 	Delegator
 }
 
@@ -21,7 +21,7 @@ import herd.codamo.api.core.transformer {
     "
 tagged("Basic")
 by("Wojciech Potiopa")
-shared provided class ByteToIntegerConverter() satisfies Converter<Byte,Integer>  {
+shared class ByteToIntegerConverter() extends Converter<Byte,Integer,Type<Integer>>()  {
 	shared actual Integer convert(Delegator delegator, Byte source, Type<Integer> resultType) => source.signed;
 	
 }

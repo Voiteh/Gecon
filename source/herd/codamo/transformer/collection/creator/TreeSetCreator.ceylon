@@ -9,22 +9,23 @@ import ceylon.language.meta.model {
 
 import herd.codamo.api.core.transformer {
 	Creator,
-	provided,
-	Creation,
-	Delegator
+	Delegator,
+	Matchable
 }
-provided
-shared class TreeSetCreator() satisfies  Creator<{Anything*},Set<>> {
+
+shared class TreeSetCreator() extends Creator<{Anything*},Set<>>() {
 	shared actual Set<> create(Delegator delegator,Class<Set<>,Nothing> kind, {Anything*} arguments) {
 		value factoryMethod = `function naturalOrderTreeSet`.apply<Set<>>(*kind.typeArgumentList);
 		return factoryMethod.apply(*arguments);
 	}
-	shared actual Creation<{Anything*},Set<Object>,Set<Object>>.Matcher? matcher => object satisfies Creation<{Anything*},Set<Object>,Set<Object>>.Matcher{
-		shared actual Boolean match(Class<Set<>,Nothing> kind, {Anything*} arguments) {
-			return kind.declaration==`class TreeSet`;
-		}
+	matchable => object satisfies Matchable<{Anything*},Class<Set<>>>{
+		shared actual Boolean predicate({Anything*} source, Class<Set<Object>,Nothing> resultType) => resultType.declaration==`class TreeSet`;
 		
-		shared actual Integer priority => 1;
+		shared actual Integer priority =1;
+		
+		
 	};
+	
+
 }
 

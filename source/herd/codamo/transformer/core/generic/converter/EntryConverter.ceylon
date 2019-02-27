@@ -1,7 +1,3 @@
-import herd.codamo.api.core.util {
-	typeHierarchy
-}
-
 import ceylon.language.meta.model {
 	Class,
 	Type
@@ -9,9 +5,11 @@ import ceylon.language.meta.model {
 
 import herd.codamo.api.core.transformer {
 	Converter,
-	provided,
-	Convertion,
-	Delegator
+	Delegator,
+	Matchable
+}
+import herd.codamo.api.core.util {
+	typeHierarchy
 }
 
 
@@ -22,7 +20,7 @@ import herd.codamo.api.core.transformer {
  Key converted to KeyResult, Item to ItemResult  "
 tagged("Generic")
 by("Wojciech Potiopa")
-shared provided class EntryConverter() satisfies Converter<Object->Anything,Object->Anything> {
+shared class EntryConverter() extends Converter<Object->Anything,Object->Anything>() {
 	shared actual Object->Anything convert(Delegator delegator, Object->Anything source, Type<Object->Anything> resultType) {
 		value key = source.key;
 		value item = source.item;
@@ -38,11 +36,14 @@ shared provided class EntryConverter() satisfies Converter<Object->Anything,Obje
 		return instance;
 	}
 	
-	shared actual Convertion<Object->Anything,Object->Anything,Type<Object->Anything>>.Matcher? matcher => object satisfies Convertion<Object->Anything,Object->Anything,Type<Object->Anything>>.Matcher{
-		shared actual Boolean match(Object->Anything source, Type<Object->Anything> resultType) => resultType is Class<Object->Anything>;
+	matchable => object satisfies Matchable<Object->Anything ,Type<Object->Anything>>{
+		shared actual Boolean predicate(Object->Anything source, Type<Object->Anything> resultType) => resultType is Class<Object->Anything>;
 		
-		shared actual Integer priority => 1;		
+		shared actual Integer priority = 1;
+		
+		
 	};
 	
+		
 }
 

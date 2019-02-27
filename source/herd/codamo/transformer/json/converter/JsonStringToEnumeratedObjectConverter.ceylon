@@ -1,35 +1,31 @@
-
-import ceylon.language.meta.model {
-	ClassOrInterface,
-	Type
-}
 import ceylon.language.meta {
 	type
+}
+import ceylon.language.meta.model {
+	ClassOrInterface
 }
 
 import herd.codamo.api.core.transformer {
 	Converter,
-	provided,
-	Convertion,
-	Delegator
+	Delegator,
+	Matchable
 }
 
 
 "Converts string constants into anymous object instances. This implementation is naive but can handle simple constants mapping."
-shared provided class JsonStringToEnumeratedObjectConverter() satisfies Converter<String,Object>{
-	shared actual Object convert(Delegator delegator, String source, Type<Object> resultType) {
-		assert(is ClassOrInterface<Object> resultType);
-		assert(exists objectValue=resultType.caseValues.find((Object elem) => type(elem).declaration.name==source));
+shared class JsonStringToEnumeratedObjectConverter() extends Converter<String,Object,ClassOrInterface<Object>>() {
+	shared actual Object convert(Delegator delegator, String source, ClassOrInterface<Object> resultType) {
+		assert (exists objectValue = resultType.caseValues.find((Object elem) => type(elem).declaration.name == source));
 		return objectValue;
 	}
-	shared actual Convertion<String,Object,Type<Object>>.Matcher? matcher => object satisfies Convertion<String,Object,Type<Object>>.Matcher{
-		shared actual Boolean match(String source, Type<Object> resultType) {
-			if(is ClassOrInterface<Object> resultType, !resultType.caseValues.empty,exists objectValue=resultType.caseValues.find((Object elem) => type(elem).declaration.name==source)){
+	matchable => object satisfies Matchable<String,ClassOrInterface<Object>> {
+		shared actual Boolean predicate(String source, ClassOrInterface<Object> resultType) {
+			if (!resultType.caseValues.empty, exists objectValue = resultType.caseValues.find((Object elem) => type(elem).declaration.name == source)) {
 				return true;
 			}
-			return false; 
+			return false;
 		}
 		
-		shared actual Integer priority => 1;
+		shared actual Integer priority = 1;
 	};
 }

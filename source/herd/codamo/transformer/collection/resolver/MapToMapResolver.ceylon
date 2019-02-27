@@ -3,18 +3,13 @@ import ceylon.collection {
 }
 import ceylon.language.meta.model {
 	Class,
-	ClassOrInterface,
-	Type
+	ClassOrInterface
 }
-
-
-
 
 import herd.codamo.api.core.transformer {
 	Resolver,
-	provided,
-	Resolvance,
-	Delegator
+	Delegator,
+	Matchable
 }
 import herd.codamo.api.core.util {
 	typeHierarchy
@@ -22,10 +17,9 @@ import herd.codamo.api.core.util {
 "Resolves [[Map]] to [[HashMap]]"
 tagged("Generic")
 by("Wojciech Potiopa")
-shared provided class MapToMapResolver() satisfies Resolver<Map<>,Map<>> {
+shared class MapToMapResolver() extends Resolver<Map<>,Map<>,ClassOrInterface<Map<>>>() {
 	
-	shared actual Class<Map<>,Nothing> resolve(Delegator delegator,Map<> input,Type<Map<>> outputType) {
-		assert(is ClassOrInterface<Map<>> outputType);
+	shared actual Class<Map<>,Nothing> resolve(Delegator delegator,Map<> input,ClassOrInterface<Map<>> outputType) {
 		value hierarchy = typeHierarchy(outputType);
 		assert (exists iterableType = hierarchy.findByDeclaration(`interface Map`));
 		assert (exists keyType = iterableType.typeArgumentList.first);
@@ -33,9 +27,13 @@ shared provided class MapToMapResolver() satisfies Resolver<Map<>,Map<>> {
 		return `class HashMap`.classApply<Map<>>(keyType, itemType);
 	}
 	
-	shared actual Resolvance<Map<Object,Anything>,Map<Object,Anything>,Type<Map<Object,Anything>>>.Matcher? matcher => object satisfies Resolvance<Map<Object,Anything>,Map<Object,Anything>,Type<Map<Object,Anything>>>.Matcher{
-		shared actual Integer priority => 1;
-		shared actual Boolean match(Map<> input, Type<Map<>> outputType) => outputType is ClassOrInterface<Map<>>;
+	matchable=> object satisfies Matchable<Map<>,ClassOrInterface<Map<>>>{
+		shared actual Boolean predicate(Map<Object,Anything> source, ClassOrInterface<Map<Object,Anything>> resultType) => true;
+		
+		shared actual Integer priority =1;
+		
+		
 	};
+	
 }
 

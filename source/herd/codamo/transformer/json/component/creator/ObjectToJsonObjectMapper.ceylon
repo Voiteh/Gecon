@@ -1,6 +1,7 @@
 
-import herd.codamo.transformer.json.meta {
-	JsonMapping
+import ceylon.json {
+	Value,
+	JsonObject
 }
 import ceylon.language.meta.model {
 	Attribute,
@@ -10,22 +11,20 @@ import ceylon.language.meta.model {
 import herd.codamo.api.core.meta {
 	Relation
 }
-import ceylon.json {
-	Value,
-	JsonObject
-}
 import herd.codamo.api.core.meta.component {
 	ObjectToObjectMapper
 }
 import herd.codamo.api.core.transformer {
-	provided,
-	Creation,
-	Delegator
+	Delegator,
+	Matchable
+}
+import herd.codamo.transformer.json.meta {
+	JsonMapping
 }
 
 "Creates [[JsonMapping]] from [[Relation]] between generic object and [[JsonObject]] type"
 by("Wojciech Potiopa")
-shared provided class ObjectToJsonObjectMapper() extends ObjectToObjectMapper<JsonMapping, {<String->Value>*}, JsonObject>(){
+shared class ObjectToJsonObjectMapper() extends ObjectToObjectMapper<JsonMapping, {<String->Value>*}, JsonObject>(){
 	shared actual JsonMapping createMapping({<String->Value>*} holder) => JsonMapping(holder);
 	
 	shared actual {<String->Value>*} mapAttributes(Delegator delegator,Object source, {Attribute<Nothing,Anything,Nothing>*} attributes) => attributes.collect((Attribute<> element) {
@@ -37,11 +36,11 @@ shared provided class ObjectToJsonObjectMapper() extends ObjectToObjectMapper<Js
 			return element.declaration.name->delegator.convert(val, `Value`);
 		}
 	});
-	
-	shared actual Creation<Relation<Object,JsonObject>,JsonMapping,JsonMapping>.Matcher? matcher => object satisfies Creation<Relation<Object,JsonObject>,JsonMapping,JsonMapping>.Matcher{
-		shared actual Boolean match(Class<JsonMapping,Nothing> kind, Relation<Object,JsonObject> arguments) => true;
+	matchable => object satisfies Matchable<Relation<Object,JsonObject>,Class<JsonMapping,Nothing>>{
+		shared actual Boolean predicate(Relation<Object,JsonObject> source, Class<JsonMapping,Nothing> resultType) => true;
 		
-		shared actual Integer priority => 2;
+		shared actual Integer priority =2;
+		
 		
 	};
 		

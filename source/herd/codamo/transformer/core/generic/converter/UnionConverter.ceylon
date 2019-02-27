@@ -1,17 +1,14 @@
 import ceylon.language.meta.model {
-	UnionType,
-	Type
+	UnionType
 }
-
 
 import herd.codamo.api.core.transformer {
 	Converter,
-	provided,
-	Convertion,
 	TransformationError,
 	ConvertionError,
 	Delegator,
-	TransformationFindingError
+	TransformationFindingError,
+	Matchable
 }
 
 "Converts Source object into Result union type. The result type object will be first convertable type of union.
@@ -35,9 +32,8 @@ import herd.codamo.api.core.transformer {
 "
 tagged("Generic")
 by("Wojciech Potiopa")
-shared provided class UnionConverter() satisfies Converter<Anything,Anything>{
-	shared actual Anything convert(Delegator delegator, Anything source, Type<Anything> resultType) {
-		assert(is UnionType<Anything> resultType);
+shared class UnionConverter() extends Converter<Anything,Anything,UnionType<>>(){
+	shared actual Anything convert(Delegator delegator, Anything source, UnionType<> resultType) {
 		for(value type in resultType.caseTypes){
 			try {
 				return delegator.convert(source, type);
@@ -45,11 +41,15 @@ shared provided class UnionConverter() satisfies Converter<Anything,Anything>{
 		}
 		throw ConvertionError(source, resultType,Exception("All converters for types: ``resultType.caseTypes`` failed"));
 	}
-	shared actual Convertion<Anything,Anything,Type<Anything>>.Matcher? matcher => object satisfies Convertion<Anything,Anything,Type<Anything>>.Matcher{
-		shared actual Boolean match(Anything source, Type<Anything> resultType) => resultType is UnionType<>;
+	
+	matchable => object satisfies Matchable<Anything,UnionType<>>{
+		shared actual Boolean predicate(Anything source, UnionType<Anything> resultType) => true;
 		
 		shared actual Integer priority = 1;
-
+		
+		
 	};
+	
+
 	
 }

@@ -1,30 +1,30 @@
-import herd.codamo.api.core.meta {
-	Mapping,
-	Relation,
-	KeyToValueMapping
-}
 import ceylon.language.meta.model {
 	Class,
 	Type
 }
 
-
+import herd.codamo.api.core.meta {
+	Mapping,
+	Relation,
+	KeyToValueMapping
+}
 import herd.codamo.api.core.transformer {
 	Resolver,
-	provided,
-	Resolvance,
-	Delegator
+	Delegator,
+	Matchable
 }
 
 "Resolves [[Mapping]] from [[Relation]]"
 tagged("Generic")
 by("Wojciech Potiopa")
-shared provided class KeyToValueMappingResolver() satisfies Resolver<Relation<Object,Map<String,Anything>>,Mapping> {
+shared class KeyToValueMappingResolver() extends Resolver<Relation<Object,Map<String,Anything>>,Mapping>() {
 	shared actual Class<Mapping,Nothing> resolve(Delegator delegator, Relation<Object,Map<String,Anything>> type, Type<Mapping> outputType) => `KeyToValueMapping`;
 	
-	shared actual Resolvance<Relation<Object,Map<String,Anything>>,Mapping,Type<Mapping>>.Matcher? matcher => object satisfies Resolvance<Relation<Object,Map<String,Anything>>,Mapping,Type<Mapping>>.Matcher {
-		shared actual Boolean match(Relation<Object,Map<String,Anything>> input, Type<Mapping> outputType) => true;
+	matchable => object satisfies Matchable<Relation<Object,Map<String,Anything>>,Type<Mapping>>{
+		shared actual Boolean predicate(Relation<Object,Map<String,Anything>> source, Type<Mapping> resultType) => true;
 		
-		shared actual Integer priority => 1;
+		shared actual Integer priority =1;
+		
+		
 	};
 }
