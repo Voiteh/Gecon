@@ -12,6 +12,7 @@ given ResultType satisfies Type<Result> {
 	
 	shared default Matchable<Source,ResultType>? matchable=null;
 	
+	shared formal actual Result convert(Delegator delegator, Source source, ResultType resultType);
 	
 	shared actual Anything visitAdapter(Registrable.Adapter visitor) => visitor.convertion(this, matchable);
 	

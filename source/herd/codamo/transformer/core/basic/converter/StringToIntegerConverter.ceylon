@@ -17,7 +17,7 @@ import herd.codamo.api.core.transformer {
  "
 tagged("Basic")
 by("Wojciech Potiopa")
-shared class StringToIntegerConverter() extends Converter<String,Integer,Type<Integer>>() {
+shared class StringToIntegerConverter() extends Converter<String,Integer>() {
 	shared actual Integer convert(Delegator delegator, String source, Type<Integer> resultType) {
 		value parse = Integer.parse(source);
 		switch (parse)

@@ -1,6 +1,7 @@
 
 import ceylon.language.meta.model {
-	Type
+	Type,
+	Class
 }
 
 
@@ -11,6 +12,7 @@ shared abstract class Resolver<Source, Result,ResultType=Type<Result>>()
 		given ResultType satisfies Type<Result>
 {
 	
+	shared formal actual Class<Result,Nothing> resolve(Delegator delegator, Source input, ResultType outputType);
 	
 	shared default Matchable<Source,ResultType>? matchable=null;
 	

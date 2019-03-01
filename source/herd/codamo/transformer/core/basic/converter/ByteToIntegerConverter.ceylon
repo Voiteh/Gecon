@@ -21,7 +21,7 @@ import herd.codamo.api.core.transformer {
     "
 tagged("Basic")
 by("Wojciech Potiopa")
-shared class ByteToIntegerConverter() extends Converter<Byte,Integer,Type<Integer>>()  {
+shared class ByteToIntegerConverter() extends Converter<Byte,Integer>()  {
 	shared actual Integer convert(Delegator delegator, Byte source, Type<Integer> resultType) => source.signed;
 	
 }

@@ -16,7 +16,7 @@ import herd.codamo.api.core.transformer {
  false -> 0"
 tagged("Basic")
 by("Wojciech Potiopa")
-shared class BooleanToIntegerConverter() extends Converter<Boolean,Integer,Type<Integer>>()  {
+shared class BooleanToIntegerConverter() extends Converter<Boolean,Integer>()  {
 	"Executes the convertion"
 	shared actual Integer convert(Delegator delegator, Boolean source, Type<Integer> resultType){
 		switch (source)

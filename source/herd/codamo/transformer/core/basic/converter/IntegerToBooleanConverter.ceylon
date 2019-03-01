@@ -19,7 +19,7 @@ import herd.codamo.api.core.transformer {
  Given [[Integer]] x, x < 0 | x > 1 -> ConvertionError"
 tagged("Basic")
 by("Wojciech Potiopa")
-shared class IntegerToBooleanConverter() extends Converter<Integer,Boolean,Type<Boolean>>()  {
+shared class IntegerToBooleanConverter() extends Converter<Integer,Boolean>()  {
 	shared actual Boolean convert(Delegator delegator, Integer source, Type<Boolean> resultType) {
 		switch (source)
 		case (0) {

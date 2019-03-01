@@ -19,7 +19,7 @@ import herd.codamo.api.core.transformer {
  "
 tagged("Basic")
 by("Wojciech Potiopa")
-shared class BooleanToStringConverter() extends Converter<Boolean,String,Type<String>>()  {
+shared class BooleanToStringConverter() extends Converter<Boolean,String>()  {
 	shared actual String convert(Delegator delegator, Boolean source, Type<String> resultType) =>  source.string;
 	
 }
