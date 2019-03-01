@@ -23,6 +23,6 @@ given ResultType satisfies Type<Result> {
 	
 	
 	
-	string => "``type(this).declaration.name`` ``typeLiteral<Source>()``-> ``typeLiteral<Result>()`` ";
+	string => "``type(this).declaration.name`` ``typeLiteral<Source>()`` -> ``typeLiteral<Result>()`` ";
 	
 }

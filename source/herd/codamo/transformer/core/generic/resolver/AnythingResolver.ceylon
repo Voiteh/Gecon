@@ -16,7 +16,7 @@ import herd.codamo.api.core.transformer {
 "Resolves [[Anything]] type to [[Object]]|[[Null]] depending on input"
 tagged("Generic")
 by("Wojciech Potiopa")
-shared class AnythingResolver() extends Resolver<Anything,Anything>() {
+shared class AnythingResolver() extends Resolver<Anything,Anything,Type<Anything>>() {
 	shared actual Class<Anything,Nothing> resolve(Delegator delegator, Anything input, Type<Anything> outputType) {
 		
 		switch (input)
@@ -32,7 +32,7 @@ shared class AnythingResolver() extends Resolver<Anything,Anything>() {
 		}
 	}
 	
-	matchable=> object satisfies Matchable<Anything,Type<Anything>>{
+	matchable= object satisfies Matchable<Anything,Type<Anything>>{
 		shared actual Boolean predicate(Anything source, Type<Anything> resultType) => resultType == `Anything`;
 		
 		shared actual Integer priority =0;

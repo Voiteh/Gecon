@@ -21,7 +21,7 @@ import herd.codamo.transformer.core.iterable {
 
 
 "Resolves any iterable to [[Tuple]]"
-shared class StreamToTupleResolver() extends Resolver<{Anything*},AnyTuple>(){
+shared class StreamToTupleResolver() extends Resolver<{Anything*},AnyTuple,Type<AnyTuple>>(){
 	
 	
 	Class<AnyTuple>|ClassModel<Empty> createTupleType(Type<>[] args){

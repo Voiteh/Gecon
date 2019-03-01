@@ -18,7 +18,7 @@ import herd.codamo.api.core.transformer {
  "
 tagged("Basic")
 by("Wojciech Potiopa")
-shared class StringToFloatConverter() extends Converter<String,Float>() {
+shared class StringToFloatConverter() extends Converter<String,Float,Type<Float>>() {
 	shared actual Float convert(Delegator delegator, String source, Type<Float> resultType) {
 		value parse = Float.parse(source);
 		switch(parse)

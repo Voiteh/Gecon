@@ -16,7 +16,7 @@ import herd.codamo.api.core.transformer {
  Else given [[String]] x then x.first"
 tagged("Basic")
 by("Wojciech Potiopa")
-shared class StringToCharacterConverter() extends Converter<String,Character>() {
+shared class StringToCharacterConverter() extends Converter<String,Character,Type<Character>>() {
 	shared actual Character convert(Delegator delegator, String source, Type<Character> resultType) {
 		if (exists char = source.first) {
 			return char;

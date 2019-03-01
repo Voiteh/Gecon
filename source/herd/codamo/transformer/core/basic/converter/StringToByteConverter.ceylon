@@ -17,7 +17,7 @@ import herd.codamo.api.core.transformer {
  "
 tagged("Basic")
 by("Wojciech Potiopa")
-shared class StringToByteConverter() extends Converter<String,Byte>(){
+shared class StringToByteConverter() extends Converter<String,Byte,Type<Byte>>(){
 	shared actual Byte convert(Delegator delegator, String source, Type<Byte> resultType){
 		value convert=delegator.convert(source,`Integer`);
 		return convert.byte;

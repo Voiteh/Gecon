@@ -20,7 +20,7 @@ import herd.codamo.api.core.transformer {
 "Converts Key->[[ClassOrInterface]]<<Item>> to [[Relation]]<<Key,Item>>."
 tagged("Generic")
 by("Wojciech Potiopa")
-shared class EntryToRelationConverter() extends Converter<Object->ClassOrInterface<>,Relation<>>(){
+shared class EntryToRelationConverter() extends Converter<Object->ClassOrInterface<>,Relation<>,Type<Relation<Anything,Anything>>>(){
 	shared actual Relation<Anything,Anything> convert(Delegator delegator, Object->ClassOrInterface<Anything> source, Type<Relation<Anything,Anything>> resultType) {
 			assert(exists classType=source.item.typeArgumentList.first);
 			value clazz=`class ObjectRelation`.classApply<Relation<>>(type(source.key),classType);

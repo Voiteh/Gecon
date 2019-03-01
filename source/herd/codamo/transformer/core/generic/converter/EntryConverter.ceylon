@@ -20,7 +20,7 @@ import herd.codamo.api.core.util {
  Key converted to KeyResult, Item to ItemResult  "
 tagged("Generic")
 by("Wojciech Potiopa")
-shared class EntryConverter() extends Converter<Object->Anything,Object->Anything>() {
+shared class EntryConverter() extends Converter<Object->Anything,Object->Anything,Type<Object->Anything>>() {
 	shared actual Object->Anything convert(Delegator delegator, Object->Anything source, Type<Object->Anything> resultType) {
 		value key = source.key;
 		value item = source.item;

@@ -20,7 +20,7 @@ shared abstract class Creator<Args,Result>()
 	shared actual Anything visitAdapter(Registrable.Adapter visitor) => visitor.creation(this, matchable);
 	
 	
-	string => "``type(this).declaration.name`` ``typeLiteral<Args>()``-> ``typeLiteral<Result>()`` ";
+	string => "``type(this).declaration.name`` ``typeLiteral<Args>()`` -> ``typeLiteral<Result>()`` ";
 }
 
 

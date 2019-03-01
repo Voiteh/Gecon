@@ -22,5 +22,5 @@ shared abstract class Resolver<Source, Result,ResultType=Type<Result>>()
 	
 	shared actual Anything visitAdapter(Registrable.Adapter visitor) => visitor.resolvance(this, matchable);
 	
-	string => "``type(this).declaration.name`` ``typeLiteral<Source>()``-> ``typeLiteral<Result>()`` ";
+	string => "``type(this).declaration.name`` ``typeLiteral<Source>()`` -> ``typeLiteral<Result>()`` ";
 }
