@@ -1,6 +1,10 @@
 import ceylon.language.meta.model {
 	Type
 }
+import ceylon.language.meta {
+	type,
+	typeLiteral
+}
 
 "Converts provided data into other specific type. This is core API for providing logic into Codamo. 
  It act's as a kind of controller, for many (most of simple) convertions, it is only required component,
@@ -19,6 +23,6 @@ given ResultType satisfies Type<Result> {
 	
 	
 	
-	
+	string => "``type(this).declaration.name`` ``typeLiteral<Source>()``-> ``typeLiteral<Result>()`` ";
 	
 }

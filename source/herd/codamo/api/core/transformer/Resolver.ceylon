@@ -3,6 +3,10 @@ import ceylon.language.meta.model {
 	Type,
 	Class
 }
+import ceylon.language.meta {
+	typeLiteral,
+	type
+}
 
 
 "Resolves provided type into class. This is support API only needed for resolvance"
@@ -17,5 +21,6 @@ shared abstract class Resolver<Source, Result,ResultType=Type<Result>>()
 	shared default Matchable<Source,ResultType>? matchable=null;
 	
 	shared actual Anything visitAdapter(Registrable.Adapter visitor) => visitor.resolvance(this, matchable);
-		
+	
+	string => "``type(this).declaration.name`` ``typeLiteral<Source>()``-> ``typeLiteral<Result>()`` ";
 }
