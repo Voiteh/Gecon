@@ -1,19 +1,16 @@
+import ceylon.language.meta {
+	type
+}
 import ceylon.language.meta.model {
 	Class,
 	Interface,
 	Type
 }
 
-
-import ceylon.language.meta {
-	type
-}
-
 import herd.codamo.api.core.transformer {
 	Resolver,
-	provided,
-	Resolvance,
-	Delegator
+	Delegator,
+	Matchable
 }
 import herd.codamo.transformer.core.iterable {
 	AnyTuple
@@ -25,7 +22,7 @@ import herd.codamo.transformer.core.iterable {
 "Resolves any iterable to [[Tuple]]"
 tagged("Generic")
 by("Wojciech Potiopa")
-shared provided class StreamToStreamResolver() satisfies  Resolver<{Anything*},{Anything*}>{
+shared class StreamToStreamResolver() extends Resolver<{Anything*},{Anything*},Interface<{Anything*}>>(){
 	
 	Class<AnyTuple|Empty> createSequentialType(Type<>[] args){
 		
@@ -37,17 +34,17 @@ shared provided class StreamToStreamResolver() satisfies  Resolver<{Anything*},{
 		return emptyType;
 	}
 	
-	shared actual Class<{Anything*},Nothing> resolve(Delegator delegator,{Anything*} input, Type<{Anything*}> outputType){
+	shared actual Class<{Anything*},Nothing> resolve(Delegator delegator,{Anything*} input, Interface<{Anything*}> outputType){
 		value tupleArgs=input.collect((Anything element) => type(element)).sequence();
 		assert(is Class<AnyTuple> tupleType=createSequentialType(tupleArgs));
 		return tupleType;
 	}
 	
-	shared actual Resolvance<{Anything*},{Anything*},Type<{Anything*}>>.Matcher? matcher => object satisfies Resolvance<{Anything*},{Anything*},Type<{Anything*}>>.Matcher{
+	matchable => object satisfies Matchable<{Anything*},Interface<{Anything*}>>{
+		shared actual Boolean predicate({Anything*} source, Interface<{Anything*}> resultType) => true;
 		
-		shared actual Integer priority => 0;
-		shared actual Boolean match({Anything*} input, Type<{Anything*}> outputType) => outputType is Interface<{Anything*}>;
-
+		shared actual Integer priority =0;		
 	};
+	
 	
 }

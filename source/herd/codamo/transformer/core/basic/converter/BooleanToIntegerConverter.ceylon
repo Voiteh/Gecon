@@ -4,7 +4,6 @@ import ceylon.language.meta.model {
 
 import herd.codamo.api.core.transformer {
 	Converter,
-	provided,
 	Delegator
 }
 
@@ -17,7 +16,7 @@ import herd.codamo.api.core.transformer {
  false -> 0"
 tagged("Basic")
 by("Wojciech Potiopa")
-shared provided class BooleanToIntegerConverter() satisfies Converter<Boolean,Integer>  {
+shared class BooleanToIntegerConverter() extends Converter<Boolean,Integer,Type<Integer>>()  {
 	"Executes the convertion"
 	shared actual Integer convert(Delegator delegator, Boolean source, Type<Integer> resultType){
 		switch (source)

@@ -2,7 +2,6 @@ import ceylon.language.meta.model {
 	Class,
 	Type
 }
-
 import ceylon.test {
 	test,
 	assertEquals
@@ -11,9 +10,8 @@ import ceylon.test {
 import herd.codamo.api.core.transformer {
 	Resolver,
 	Delegator,
-	Resolvance
+	Matchable
 }
-
 import herd.codamo.engine {
 	Codamo,
 	AutoProvider,
@@ -21,16 +19,17 @@ import herd.codamo.engine {
 }
 
 
-class SearchableCharacterListAndComparableStringToStringResolver() satisfies Resolver<Anything,SearchableList<Character>&Summable<String>> {
+class SearchableCharacterListAndComparableStringToStringResolver() extends Resolver<Anything,SearchableList<Character>&Summable<String>,Type<SearchableList<Character>&Summable<String>>>() {
 	shared actual Class<SearchableList<Character>&Summable<String>,Nothing> resolve(Delegator delegator, Anything input, Type<SearchableList<Character>&Summable<String>> outputType) => `String`;
 	
-	shared actual Resolvance<Anything,SearchableList<Character>&Summable<String>,Type<SearchableList<Character>&Summable<String>>>.Matcher? matcher => object satisfies Resolvance<Anything,SearchableList<Character>&Summable<String>,Type<SearchableList<Character>&Summable<String>>>.Matcher{
-		shared actual Boolean match(Anything input, Type<SearchableList<Character>&Summable<String>> outputType) => true;
+	matchable=> object satisfies Matchable<Anything,Type<SearchableList<Character>&Summable<String>>>{
+		shared actual Boolean predicate(Anything source, Type<SearchableList<Character>&Summable<String>> resultType) => true;
 		
-		shared actual Integer priority => 0;
+		shared actual Integer priority =0;
 		
 		
 	};
+	
 
 }
 

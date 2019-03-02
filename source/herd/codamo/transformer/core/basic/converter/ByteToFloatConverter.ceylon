@@ -4,7 +4,7 @@ import ceylon.language.meta.model {
 
 import herd.codamo.api.core.transformer {
 	Converter,
-	provided,
+	
 	Delegator
 }
 "Converts [[Byte]] value into [[Float]]
@@ -15,7 +15,7 @@ import herd.codamo.api.core.transformer {
  "
 tagged("Basic")
 by("Wojciech Potiopa")
-shared provided class ByteToFloatConverter() satisfies Converter<Byte,Float>  {
+shared class ByteToFloatConverter() extends Converter<Byte,Float,Type<Float>>()  {
 	shared actual Float convert(Delegator delegator, Byte source, Type<Float> resultType){
 		value convert = delegator.convert(source, `Integer`);
 		return convert.float;

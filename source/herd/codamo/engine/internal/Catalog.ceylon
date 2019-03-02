@@ -2,7 +2,7 @@
 
 
 "Registry implementation"
-shared class Registry() {
+shared class Catalog() {
 	
 	"Converters container"
 	shared Container converters=Container();

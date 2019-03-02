@@ -11,12 +11,12 @@ import ceylon.json {
 }
 import herd.codamo.api.core.transformer {
 	Creator,
-	provided,
+	
 	Delegator
 }
 "Creates [[JsonObject]] out of [[JsonMapping]]"
 by("Wojciech Potiopa")
-shared provided class JsonObjectCreator() satisfies Creator<JsonMapping,JsonObject>{
+shared class JsonObjectCreator() extends Creator<JsonMapping,JsonObject>(){
 	shared actual JsonObject create(Delegator delegator, Class<JsonObject,Nothing> kind, JsonMapping arguments) => JsonObject(arguments.mappings);
 	
 }

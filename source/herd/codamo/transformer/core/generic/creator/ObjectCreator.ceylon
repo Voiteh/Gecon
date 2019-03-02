@@ -2,28 +2,23 @@ import ceylon.language.meta.model {
 	Class,
 	Attribute
 }
-
 import ceylon.language.serialization {
 	deserialization
 }
 
-
-
 import herd.codamo.api.core.meta {
 	AttributesMapping
 }
-
 import herd.codamo.api.core.transformer {
 	Creator,
-	provided,
-	Creation,
 	CreationError,
-	Delegator
+	Delegator,
+	Matchable
 }
 "Creates generic objects from [[AttributesMapping]], core creator"
 tagged("Generic")
 by("Wojciech Potiopa")
-shared provided class ObjectCreator() satisfies Creator<AttributesMapping,Object> {
+shared class ObjectCreator() extends Creator<AttributesMapping,Object>() {
 	shared actual Object create(Delegator delegator,Class<Object,Nothing> kind, AttributesMapping mapping) {
 		value instanceId = kind.string;
 		value deserializationContext = deserialization<String>();
@@ -38,10 +33,12 @@ shared provided class ObjectCreator() satisfies Creator<AttributesMapping,Object
 			throw CreationError(kind, x);
 		}
 	}
-	
-	shared actual Creation<AttributesMapping,Object,Object>.Matcher? matcher => object satisfies Creation<AttributesMapping,Object,Object>.Matcher{
-		shared actual Boolean match(Class<Object,Nothing> kind, AttributesMapping arguments) =>true;
+	matchable => object satisfies Matchable<AttributesMapping,Class<Object,Nothing>>{
+		shared actual Boolean predicate(AttributesMapping source, Class<Object,Nothing> resultType) => true;
 		
-		shared actual Integer priority => 0;
+		shared actual Integer priority =0;
+		
+		
 	};
+	
 }

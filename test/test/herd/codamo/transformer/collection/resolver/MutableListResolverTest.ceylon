@@ -15,8 +15,8 @@ shared class MutableListResolverTest() {
 	value resolver=MutableListResolver();
 	
 	shared test void shouldMatchToSequentialInputAndMutableListType(){
-		assert(exists matcher=resolver.matcher);
-		assertTrue(matcher.match([1,2,3], `ListMutator<String>`));
+		assert(exists matcher=resolver.matchable);
+		assertTrue(matcher.predicate([1,2,3], `ListMutator<String>`));
 	}
 	
 }

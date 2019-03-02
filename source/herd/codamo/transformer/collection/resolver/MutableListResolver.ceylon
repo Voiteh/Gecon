@@ -4,34 +4,30 @@ import ceylon.collection {
 }
 import ceylon.language.meta.model {
 	Class,
-	ClassOrInterface,
-	Type
+	ClassOrInterface
 }
-
-
 
 import herd.codamo.api.core.transformer {
 	Resolver,
-	provided,
-	Resolvance,
-	Delegator
+	Delegator,
+	Matchable
 }
 "Resolves any iterable to [[ArrayList]]"
 tagged("Generic")
 by("Wojciech Potiopa")
-shared provided class MutableListResolver() satisfies Resolver<{Anything*},List<>> {
-	shared actual Class<List<>,Nothing> resolve(Delegator delegator,{Anything*} input, Type<List<>> outputType) {
-		assert(is ClassOrInterface<List<>> outputType);
+shared class MutableListResolver() extends Resolver<{Anything*},List<>,ClassOrInterface<List<>>>() {
+	
+	shared actual Class<List<>,Nothing> resolve(Delegator delegator,{Anything*} input, ClassOrInterface<List<>> outputType) {
 		value typeForIterable = iterableTypeArgument(outputType);
 		return `class ArrayList`.classApply<List<>>(typeForIterable);
 	}
 
-	shared actual Resolvance<{Anything*},List<Anything>,Type<List<Anything>>>.Matcher? matcher => object satisfies Resolvance<{Anything*},List<Anything>,Type<List<Anything>>>.Matcher{
+	matchable => object satisfies Matchable<{Anything*},ClassOrInterface<List<>>>{
+		shared actual Boolean predicate({Anything*} source, ClassOrInterface<List<Anything>> resultType) => resultType.subtypeOf(`ListMutator<Nothing>`);
 		
-		shared actual Integer priority => 1;
-		shared actual Boolean match({Anything*} input, Type<List<>> outputType) {
-			return outputType is ClassOrInterface<List<>> && outputType.subtypeOf(`ListMutator<Nothing>`);
-		}
+		shared actual Integer priority =1;
+		
+		
 	};
-	
+
 }

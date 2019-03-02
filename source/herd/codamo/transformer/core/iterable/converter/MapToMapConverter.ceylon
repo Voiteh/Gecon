@@ -2,22 +2,21 @@ import ceylon.language.meta.model {
 	ClassOrInterface,
 	Type
 }
+
+import herd.codamo.api.core.transformer {
+	Converter,
+	Delegator,
+	Matchable
+}
 import herd.codamo.api.core.util {
 	typeHierarchy,
 	runtimeCall
 }
 
-import herd.codamo.api.core.transformer {
-	Converter,
-	provided,
-	Convertion,
-	Delegator
-}
-
 "Converts [[Map]] value to other [[Map]] type. For Example [[`Map<Boolean,Integer>`]] into [[`Map<String,String>`]]."
 by("Wojciech Potiopa")
-shared provided class MapToMapConverter() satisfies Converter<Map<>,Map<>> {
-	shared actual Map<Object,Anything> convert(Delegator delegator, Map<Object,Anything> source, Type<Map<Object,Anything>> resultType){
+shared class MapToMapConverter() extends Converter<Map<>,Map<>,ClassOrInterface<Map<>>>() {
+	shared actual Map<Object,Anything> convert(Delegator delegator, Map<Object,Anything> source, ClassOrInterface<Map<Object,Anything>> resultType){
 		value resolvedType=delegator.resolve(source,resultType);
 		assert(exists explictMapType = typeHierarchy(resolvedType).findByDeclaration(`interface Map`));
 		assert(is Type<Object>keyDestination=explictMapType.typeArgumentList.first);
@@ -36,11 +35,14 @@ shared provided class MapToMapConverter() satisfies Converter<Map<>,Map<>> {
 		return delegator.create(resolvedType, creatorArgs);
 	}
 	
-	shared actual Convertion<Map<Object,Anything>,Map<Object,Anything>,Type<Map<Object,Anything>>>.Matcher? matcher => object satisfies Convertion<Map<Object,Anything>,Map<Object,Anything>,Type<Map<Object,Anything>>>.Matcher{
-		shared actual Boolean match(Map<Object,Anything> source, Type<Map<Object,Anything>> resultType) => resultType is ClassOrInterface<Map<Object,Anything>>;
+	matchable=> object satisfies Matchable<Map<Object,Anything>,ClassOrInterface<Map<Object,Anything>>>{
+		shared actual Boolean predicate(Map<Object,Anything> source, ClassOrInterface<Map<Object,Anything>> resultType) => true;
 		
-		shared actual Integer priority => 2;
+		shared actual Integer priority =2;
+		
+		
 	};
+	
 	
 }
 

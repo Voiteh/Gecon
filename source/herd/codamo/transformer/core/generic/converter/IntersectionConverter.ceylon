@@ -1,30 +1,32 @@
 
 import ceylon.language.meta.model {
-	IntersectionType,
-	Type
+	IntersectionType
 }
 
 import herd.codamo.api.core.transformer {
 	Converter,
-	provided,
-	Convertion,
-	Delegator
+	Delegator,
+	Matchable
 }
 
-"Converts source intersection type value into result type. There will be required Resolver for intersection type."
+"Converts source intersection type value into result type. It required to have Resolver for intersection type, to select concrete intersection type class."
 tagged("Generic")
 by("Wojciech Potiopa")
-shared provided class IntersectionConverter() satisfies Converter<Anything, Anything>{
-	shared actual Anything convert(Delegator delegator, Anything source, Type<Anything> resultType) {
-		assert(is IntersectionType<> resultType);
+shared class IntersectionConverter() extends Converter<Anything, Anything,IntersectionType<>>(){
+	shared actual Anything convert(Delegator delegator, Anything source, IntersectionType<> resultType) {
 		value resolvedType=delegator.resolve(source,resultType);
 		return delegator.convert(source, resolvedType);
 	}
-	shared actual Convertion<Anything,Anything,Type<Anything>>.Matcher? matcher => object satisfies Convertion<Anything,Anything,Type<Anything>>.Matcher{
-		shared actual Boolean match(Anything source, Type<Anything> resultType) => resultType is IntersectionType<>;
+	
+	matchable => object satisfies Matchable<Anything,IntersectionType<>>{
+		shared actual Boolean predicate(Anything source, IntersectionType<Anything> resultType) => true;
 		
 		shared actual Integer priority = 1;
+		
+		 
 	};
 	
+	
+
 }
 

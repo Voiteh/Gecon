@@ -17,7 +17,7 @@ import herd.codamo.api.core.transformer {
 "Support class for generic convertion application. This API provides ability, for mapping [[Source]] to [[Result]] attributes for data model classes."
 by("Wojciech Potiopa")
 shared abstract class AttributeMapper<Source,Result>()
-		 satisfies Creator<Relation<Source, Result>,AttributesMapping>
+		 extends Creator<Relation<Source, Result>,AttributesMapping>()
 		given Source satisfies Object
 		{
 	"Defines relations between [[Source]] and [[Result]] attributes. This is working as whitelist. Any non provided mapping will be ingored."

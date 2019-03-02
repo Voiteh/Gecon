@@ -28,7 +28,7 @@ shared class KeyToValueMappingResolverTest() {
 	
 	shared test 
 	void shouldMatchToEntryMappingResolver(){
-		assert(exists matcher=resolver.matcher);
+		assert(exists matcher=resolver.matchable);
 		value model=TestModel(1,"ble");
 		object relation satisfies Relation<TestModel,HashMap<String,Anything>>{
 			shared actual Class<HashMap<String,Anything>,Nothing> resultClass => `HashMap<String,Anything>`;
@@ -37,7 +37,7 @@ shared class KeyToValueMappingResolverTest() {
 			
 			
 		}
-		value result=matcher.match(relation, `Mapping`);
+		value result=matcher.predicate(relation, `Mapping`);
 		assertEquals(result,true);
 	}
 	
