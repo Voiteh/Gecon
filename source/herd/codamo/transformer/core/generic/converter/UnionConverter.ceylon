@@ -5,7 +5,6 @@ import ceylon.language.meta.model {
 import herd.codamo.api.core.transformer {
 	Converter,
 	TransformationError,
-	ConvertionError,
 	Delegator,
 	TransformationFindingError,
 	Matchable
@@ -39,7 +38,7 @@ shared class UnionConverter() extends Converter<Anything,Anything,UnionType<>>()
 				return delegator.convert(source, type);
 			} catch (TransformationError|TransformationFindingError x) {}
 		}
-		throw ConvertionError(source, resultType,Exception("All converters for types: ``resultType.caseTypes`` failed"));
+		throw Error(source, resultType,Exception("All converters for types: ``resultType.caseTypes`` failed"));
 	}
 	
 	matchable => object satisfies Matchable<Anything,UnionType<>>{

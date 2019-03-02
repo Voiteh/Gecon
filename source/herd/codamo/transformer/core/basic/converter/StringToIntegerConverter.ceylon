@@ -4,8 +4,6 @@ import ceylon.language.meta.model {
 
 import herd.codamo.api.core.transformer {
 	Converter,
-	
-	ConvertionError,
 	Delegator
 }
 
@@ -13,7 +11,7 @@ import herd.codamo.api.core.transformer {
 "Converts [[String]] value into [[Integer]]
  
  Given [[String]] x, [[Integer]] y, x=y.string then Integer.parse(x).
- Else given [[String]] x then [[ConvertionError]]
+ Else given [[String]] x then [[Error]]
  "
 tagged("Basic")
 by("Wojciech Potiopa")
@@ -25,7 +23,7 @@ shared class StringToIntegerConverter() extends Converter<String,Integer,Type<In
 			return parse;
 		}
 		case (is ParseException) {
-			throw ConvertionError(source, resultType, parse);
+			throw Error(source, resultType, parse);
 		}
 	}
 	

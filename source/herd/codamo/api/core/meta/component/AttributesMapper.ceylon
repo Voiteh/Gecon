@@ -10,8 +10,7 @@ import herd.codamo.api.core.meta {
 }
 import herd.codamo.api.core.transformer {
 	Delegator,
-	Creator,
-	CreationError
+	Creator
 }
 
 
@@ -32,7 +31,7 @@ shared abstract class AttributesMapper<Source, Result>() extends
 	shared default Attribute<>? findResultAttribute(String sourcePartKey,Attribute<>[] resultAttributes)
 			=>resultAttributes.find((Attribute<> attribute) => attribute.declaration.name==sourcePartKey);
 	
-	"Creates [[AttributesMapping]] or throws [[CreationError]] when [[Result]] [[Attribute]] can't be found"
+	"Creates [[AttributesMapping]] or throws [[Error]] when [[Result]] [[Attribute]] can't be found"
 	shared actual AttributesMapping create(Delegator delegator, Class<AttributesMapping,Nothing> kind, Relation<Source,Result> relation) {
 		value resultAttributes=relation.resultClass.getAttributes<>().filter(filterObjectAndIdentifiableAttributes).sequence();
 		value entries=extractSourcePartsKey(relation.source)
@@ -44,7 +43,7 @@ shared abstract class AttributesMapper<Source, Result>() extends
 				return attribute->part;
 			}
 			else{
-				throw CreationError(kind,Exception("Can't find attribute by name: ``name`` in ``relation.resultClass`` type"));
+				throw Error(kind,Exception("Can't find attribute by name: ``name`` in ``relation.resultClass`` type"));
 			}
 		});
 		return AttributesMapping(entries);

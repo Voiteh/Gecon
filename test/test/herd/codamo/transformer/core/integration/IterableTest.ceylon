@@ -3,9 +3,8 @@ import ceylon.test {
 	ignore,
 	assertEquals
 }
-
 import herd.codamo.api.core.transformer {
-	ConvertionError
+	Convertion
 }
 shared class IterableTest() extends CoreIntegration(){
 	
@@ -82,11 +81,11 @@ shared class IterableTest() extends CoreIntegration(){
 	
 	shared test
 	void shouldNotConvertIterableToToupleToFewArguments(){
-		assert(is ConvertionError error=codamo.convert({1,2,3}, `[String,String,String,String]`));
+		assert(is Convertion<>.Error error=codamo.convert({1,2,3}, `[String,String,String,String]`));
 	}
 	shared test
 	void shouldNotConvertIterableToToupleToManyArguments(){
-		assert(is ConvertionError error=codamo.convert({1,2,3,4}, `[String,String,String]`));
+		assert(is Convertion<>.Error error=codamo.convert({1,2,3,4}, `[String,String,String]`));
 	}
 	
 

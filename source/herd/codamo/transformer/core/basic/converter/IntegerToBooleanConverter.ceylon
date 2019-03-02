@@ -3,8 +3,6 @@ import ceylon.language.meta.model {
 }
 import herd.codamo.api.core.transformer {
 	Converter,
-	
-	ConvertionError,
 	Delegator
 }
 
@@ -29,7 +27,7 @@ shared class IntegerToBooleanConverter() extends Converter<Integer,Boolean,Type<
 			return true;
 		}
 		else {
-			throw ConvertionError(source, resultType, Exception("Only 0/1 values are convertable to Boolean"));
+			throw Error(source, resultType, Exception("Only 0/1 values are convertable to Boolean"));
 		}
 	}
 	

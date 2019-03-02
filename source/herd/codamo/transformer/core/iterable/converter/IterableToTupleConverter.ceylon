@@ -6,7 +6,6 @@ import ceylon.language.meta.model {
 
 import herd.codamo.api.core.transformer {
 	Converter,
-	ConvertionError,
 	Delegator,
 	Matchable
 }
@@ -36,7 +35,7 @@ shared class IterableToTupleConverter() extends Converter<{Anything*},AnyTuple,T
 	shared actual Tuple<Anything,Anything,Anything> convert(Delegator delegator, {Anything*} source, Type<AnyTuple> resultType) {
 		value argsType = extractArgsType(resultType);
 		if(source.size!=argsType.size){
-			throw ConvertionError(source, resultType,Exception("Different sizes of provided source ``source`` to touple argument types ``argsType`` "));
+			throw Error(source, resultType,Exception("Different sizes of provided source ``source`` to touple argument types ``argsType`` "));
 		}
 		value sourceIterator=source.iterator();
 		value converted=argsType.collect((Type<Anything> element) => element->sourceIterator.next())
