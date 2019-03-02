@@ -5,8 +5,6 @@ import ceylon.language.meta.model {
 
 import herd.codamo.api.core.transformer {
 	Converter,
-	
-	ConvertionError,
 	Delegator
 }
 
@@ -14,7 +12,7 @@ import herd.codamo.api.core.transformer {
  
  Given [[String]] x, [[Float y]], x=y.string then Float.parse(x) 
 
- Else given [[String]] x then [[ConvertionError]]
+ Else given [[String]] x then [[Error]]
  "
 tagged("Basic")
 by("Wojciech Potiopa")
@@ -25,7 +23,7 @@ shared class StringToFloatConverter() extends Converter<String,Float,Type<Float>
 		case (is Float) {
 			return parse;
 		}else{
-			throw ConvertionError(source, resultType,parse);
+			throw Error(source, resultType,parse);
 		}
 	}
 	

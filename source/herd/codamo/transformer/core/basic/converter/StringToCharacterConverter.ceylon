@@ -4,14 +4,12 @@ import ceylon.language.meta.model {
 
 import herd.codamo.api.core.transformer {
 	Converter,
-	
-	ConvertionError,
 	Delegator
 }
 
 "Converts [[String]] value into [[Character]]
  
- Given [[String]] x = \"\" then [[ConvertionError]]
+ Given [[String]] x = \"\" then [[Error]]
  
  Else given [[String]] x then x.first"
 tagged("Basic")
@@ -21,7 +19,7 @@ shared class StringToCharacterConverter() extends Converter<String,Character,Typ
 		if (exists char = source.first) {
 			return char;
 		}
-		throw ConvertionError(source, resultType, Exception("Can't convert empty string to Character"));
+		throw Error(source, resultType, Exception("Can't convert empty string to Character"));
 	}
 	
 }

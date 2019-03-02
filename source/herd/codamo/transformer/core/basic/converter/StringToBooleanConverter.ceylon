@@ -3,11 +3,8 @@ import ceylon.language.meta.model {
 	Type
 }
 
-
 import herd.codamo.api.core.transformer {
 	Converter,
-	
-	ConvertionError,
 	Delegator
 }
 "Converts [[String]] value into [[Boolean]].
@@ -18,7 +15,7 @@ import herd.codamo.api.core.transformer {
  
  \"true\" -> true
  
- Given [[String]] x, x != \"false\" & x != \"true\", then [[ConvertionError]]"
+ Given [[String]] x, x != \"false\" & x != \"true\", then [[Convertion<>.Error]]"
 
 tagged("Basic")
 by("Wojciech Potiopa")
@@ -30,7 +27,7 @@ shared class StringToBooleanConverter() extends Converter<String,Boolean,Type<Bo
 			return result;
 		}
 		else {
-			throw ConvertionError(source, resultType, result);
+			throw Error(source, resultType, result);
 		}
 	}
 	

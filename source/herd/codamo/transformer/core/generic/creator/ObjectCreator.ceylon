@@ -11,7 +11,6 @@ import herd.codamo.api.core.meta {
 }
 import herd.codamo.api.core.transformer {
 	Creator,
-	CreationError,
 	Delegator,
 	Matchable
 }
@@ -30,7 +29,7 @@ shared class ObjectCreator() extends Creator<AttributesMapping,Object>() {
 			});
 			return deserializationContext.reconstruct<Object>(instanceId);
 		} catch (Exception x) {
-			throw CreationError(kind, x);
+			throw Error(kind, x);
 		}
 	}
 	matchable => object satisfies Matchable<AttributesMapping,Class<Object,Nothing>>{

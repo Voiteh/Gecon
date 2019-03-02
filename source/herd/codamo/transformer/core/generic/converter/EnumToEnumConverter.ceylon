@@ -7,7 +7,6 @@ import ceylon.language.meta.model {
 
 import herd.codamo.api.core.transformer {
 	Converter,
-	ConvertionError,
 	Delegator,
 	Matchable
 }
@@ -29,7 +28,7 @@ shared class  EnumToEnumConverter() extends Converter<Object,Object,ClassOrInter
 		if (exists selectedObject = resultType.caseValues.get(index)) {
 			return selectedObject;
 		}
-		throw ConvertionError(source, resultType, Exception("No such index: ``index``, in case types of ``resultType``"));
+		throw Error(source, resultType, Exception("No such index: ``index``, in case types of ``resultType``"));
 	}
 	
 	matchable => object satisfies Matchable<Object,ClassOrInterface<Object>>{
