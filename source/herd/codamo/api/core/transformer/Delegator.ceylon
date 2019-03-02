@@ -25,6 +25,9 @@ shared interface Delegator {
 	throws(`class TransformationFindingError`,"Creator has not been found")
 	shared formal Result create<Result>(Class<Result> kind,Anything args);
 	
+	throws(`class Mapping.Error`,"Mapping couldn't be compleated")
+	throws(`class TransformationFindingError`,"Creator has not been found")
+	shared formal Map<> map(Anything source,Type<> resultType);
 }
 
 

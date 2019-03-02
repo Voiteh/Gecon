@@ -29,7 +29,8 @@ import herd.codamo.engine.internal.clasification {
 	Classificable,
 	convertion,
 	creation,
-	resolvance
+	resolvance,
+	mapping
 }
 
 shared class Registrator(Registrable.Adapter adapter, Logger logger) {
@@ -48,6 +49,9 @@ shared class Registrator(Registrable.Adapter adapter, Logger logger) {
 		case (creation) {
 			replaced = registry.creators.put(classificable, transformation);
 			logger.debug("Registered creator: ``transformation`` using ``type(transformation)``");
+		}
+		case(mapping){
+			replaced = registry.mappings.put(classificable, transformation);
 		}
 		
 		if (exists replaced) {

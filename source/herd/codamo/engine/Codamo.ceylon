@@ -22,7 +22,8 @@ import herd.codamo.engine.internal {
 import herd.codamo.engine.internal.clasification {
 	convertion,
 	creation,
-	resolvance
+	resolvance,
+	mapping
 }
 "Codamo transformations class"
 by("Wojciech Potiopa")
@@ -52,6 +53,11 @@ shared class Codamo(
 			value flatten=finder.find(resolvance, [source,resultType]);
 			return flatten.transform<Class<Result>>([this,source,resultType]);
 		}
+		shared actual Map<Object,Anything> map(Anything source, Type<Anything> resultType) {
+			value flatten=finder.find(mapping, [source,resultType]);
+			return flatten.transform<Map<Object,Anything>>([source,resultType]);
+		}
+		
 		
 	}
 	"Main entry point for all transformations"
