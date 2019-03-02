@@ -1,20 +1,22 @@
+import ceylon.logging {
+	info
+}
+import ceylon.test {
+	testExtension
+}
+
 import herd.codamo.engine {
 	Codamo,
 	AutoProvider,
 	ScopeProvisioning
 }
-import ceylon.test {
-	testExtension
-}
-import test.codamo.extension {
-	LoggingTestExtension
-}
 import herd.codamo.engine.configuration {
 	Configuration,
 	Logging
 }
-import ceylon.logging {
-	trace
+
+import test.codamo.extension {
+	LoggingTestExtension
 }
 testExtension(`class LoggingTestExtension`)
 shared class CollectionIntegration() {
@@ -26,7 +28,7 @@ shared class CollectionIntegration() {
 			};
 		 };
 		configuration = Configuration{
-			logging = Logging(trace);
+			logging = Logging(info);
 		};
 	
 	};
