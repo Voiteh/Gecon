@@ -1,8 +1,7 @@
 
 import herd.codamo.api.core.meta {
 	Mapping,
-	Relation,
-	filterObjectAndIdentifiableAttributes
+	Relation
 }
 import ceylon.language.meta.model {
 	Class,
@@ -15,6 +14,9 @@ import ceylon.language.meta {
 import herd.codamo.api.core.transformer {
 	Creator,
 	Delegator
+}
+import herd.codamo.api.core.util {
+	filterObjectAndIdentifiableAttributes
 }
 
 "Mapper providing API for generic Object type mapping. Usable only for generic applications"

@@ -5,12 +5,14 @@ import ceylon.language.meta.model {
 
 import herd.codamo.api.core.meta {
 	Relation,
-	AttributesMapping,
-	filterObjectAndIdentifiableAttributes
+	AttributesMapping
 }
 import herd.codamo.api.core.transformer {
 	Delegator,
 	Creator
+}
+import herd.codamo.api.core.util {
+	filterObjectAndIdentifiableAttributes
 }
 
 

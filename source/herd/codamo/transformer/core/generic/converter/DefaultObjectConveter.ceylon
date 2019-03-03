@@ -1,16 +1,10 @@
 
 
-import ceylon.language.meta {
-	type
-}
 import ceylon.language.meta.model {
-	ClassOrInterface
+	ClassOrInterface,
+	Attribute
 }
 
-import herd.codamo.api.core.meta {
-	Mapping,
-	Relation
-}
 import herd.codamo.api.core.transformer {
 	Converter,
 	Delegator,
@@ -20,13 +14,12 @@ import herd.codamo.api.core.transformer {
 "Converts a Source Object into Result type object. This [[Converter]] is heart of the Codamo. Usage of this component is expensive."
 tagged("Generic")
 by("Wojciech Potiopa")
-shared class MetaConverter() extends Converter<Object,Object,ClassOrInterface<Object>>() {
+shared class DefaultObjectConveter() extends Converter<Object,Object,ClassOrInterface<Object>>() {
 	shared actual Object convert(Delegator delegator, Object source, ClassOrInterface<Object> resultType) {
 			value resolvedType = delegator.resolve(source,resultType);
-			value relation=delegator.convert(source->type(resolvedType), `Relation<>`);
-			value mappingType=delegator.resolve(relation, `Mapping`);
-			value mapping=delegator.create(mappingType,relation);
-			return delegator.create(resolvedType, mapping);
+			value mapping=delegator.map<Attribute<>>(source, resolvedType);
+			value converterMapping=map(mapping.map((Attribute<Nothing,Anything,Nothing> key -> Anything item) => key->delegator.convert(item, key.type)));
+			return delegator.create(resolvedType, converterMapping);
 	}
 	
 	matchable => object satisfies Matchable<Object,ClassOrInterface<Object>>{

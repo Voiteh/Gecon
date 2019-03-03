@@ -9,13 +9,15 @@ import ceylon.language.meta.model {
 }
 
 import herd.codamo.api.core.meta {
-	AttributesMapping,
-	filterObjectAndIdentifiableAttributes
+	AttributesMapping
 }
 import herd.codamo.api.core.transformer {
 	Creator,
 	Delegator,
 	Matchable
+}
+import herd.codamo.api.core.util {
+	filterObjectAndIdentifiableAttributes
 }
 
 "Creator for [[AttributesMapping]], uses [[Entry]] of Source->Type< Result > as arguments "
