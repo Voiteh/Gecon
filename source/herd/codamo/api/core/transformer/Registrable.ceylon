@@ -21,9 +21,12 @@ shared interface Registrable {
 			Creation<Source, Result, ResultType> creation,
 			Matchable<Source,Class<ResultType>>? matchable ) given ResultType satisfies Result;
 		
-		shared formal Anything mapping<Source,ResultType>(
-			Mapping<Source,ResultType> mapping,
-			Matchable<Source,ResultType>? matchable) given ResultType satisfies Type<>;
+		shared formal Anything mapping<Source,ResultType,Key,Item>(
+			Mapping<Source,ResultType,Key,Item> mapping,
+			Matchable<Source,ResultType>? matchable) 
+				given ResultType satisfies Type<>
+				given Key satisfies Object
+				;
 		
 	}
 	"Used inside framework only"

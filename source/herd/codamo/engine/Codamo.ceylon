@@ -53,9 +53,11 @@ shared class Codamo(
 			value flatten=finder.find(resolvance, [source,resultType]);
 			return flatten.transform<Class<Result>>([this,source,resultType]);
 		}
-		shared actual Map<Object,Anything> map(Anything source, Type<Anything> resultType) {
+		shared actual Map<Key,Item> map<Key,Item>(Anything source, Type<Anything> resultType) 
+		given Key satisfies Object
+		{
 			value flatten=finder.find(mapping, [source,resultType]);
-			return flatten.transform<Map<Object,Anything>>([source,resultType]);
+			return flatten.transform<Map<Key,Item>>([source,resultType]);
 		}
 		
 		

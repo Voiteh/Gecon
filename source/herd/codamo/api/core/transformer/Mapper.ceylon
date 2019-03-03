@@ -5,8 +5,10 @@ import ceylon.language.meta {
 	typeLiteral,
 	type
 }
-shared abstract class Mapper<Source,ResultType>() 
-		satisfies Mapping<Source,ResultType> & Registrable given ResultType satisfies Type<> {
+shared abstract class Mapper<Source,ResultType,Key=Object,Item=Anything>() 
+		satisfies Mapping<Source,ResultType,Key,Item> & Registrable 
+		given ResultType satisfies Type<> 
+		given Key satisfies Object {
 	
 	
 	shared default Matchable<Source,ResultType>? matchable=null;

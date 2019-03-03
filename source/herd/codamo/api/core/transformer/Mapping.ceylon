@@ -6,7 +6,10 @@ import ceylon.language.meta.model {
  it is required sometimes to define relation between parts of source and result. 
  This interface allows that, providing one to one mapping between those parts of source and result"
 by("Wojceich Potiopa")
-shared interface Mapping<in Source=Nothing,in ResultType=Nothing> given ResultType satisfies Type<> {
+shared interface Mapping<in Source=Nothing,in ResultType=Nothing,out Key=Object,out Item=Anything> 
+		given ResultType satisfies Type<> 
+		given Key satisfies Object
+		{
 	shared class Error extends TransformationError {
 		
 		shared new (Anything source, Type<> resultType, Throwable? cause = null)
@@ -15,7 +18,7 @@ shared interface Mapping<in Source=Nothing,in ResultType=Nothing> given ResultTy
 	}
 	
 	throws(`class Error`, "Whenever mapping cannot be complieateds")
-	shared formal Map<Object,Anything> map(Source source,ResultType resultType);
+	shared formal Map<Key,Item> map(Source source,ResultType resultType);
 	
 	
 }

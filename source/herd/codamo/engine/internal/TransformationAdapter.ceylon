@@ -160,8 +160,10 @@ shared class TransformationAdapter(Logger logger) satisfies Registrable.Adapter{
 		
 		return [classificable,transformation];
 	}
-	shared actual Anything mapping<Source, ResultType>(Mapping<Source,ResultType> preparee, Matchable<Source,ResultType>? matchable)
-			given ResultType satisfies Type<Anything> {
+	shared actual Anything mapping<Source, ResultType,Key,Item>(Mapping<Source,ResultType,Key,Item> preparee, Matchable<Source,ResultType>? matchable)
+			given ResultType satisfies Type<Anything>
+			given Key satisfies Object 
+			 {
 		Classificator classificator=mapper;
 		Transformation transformation= object satisfies Transformation{
 			shared actual Result transform<Result>(Anything[] args) {
