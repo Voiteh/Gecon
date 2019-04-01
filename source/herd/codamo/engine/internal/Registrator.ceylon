@@ -103,7 +103,9 @@ shared class Registrator(Registrable.Adapter adapter, Logger logger) {
 			inclusions.each((ClassDeclaration element) => logger.trace("Included class ``element``"));
 			{ClassDeclaration*} exclusions = provider.transformations.exclusions.flatMap(extractFromScope);
 			exclusions.each((ClassDeclaration element) => logger.trace("Excluded class ``element``"));
-			{ClassDeclaration*} finalDeclarations = inclusions.filter((ClassDeclaration element) {
+			{ClassDeclaration*} finalDeclarations = inclusions
+					.filter((ClassDeclaration element) => !element.abstract)
+					.filter((ClassDeclaration element) {
 					if (exclusions.contains(element)) {
 						logger.debug("Excluded ``element``");
 						return false;

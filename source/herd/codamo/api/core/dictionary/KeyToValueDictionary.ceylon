@@ -1,0 +1,1 @@
+shared class KeyToValueDictionary({<String->Anything>*} entries) extends  Dictionary<String,Anything>(entries){}

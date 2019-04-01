@@ -6,24 +6,24 @@ import ceylon.language.serialization {
 	deserialization
 }
 
-import herd.codamo.api.core.meta {
-	AttributesMapping
+import herd.codamo.api.core.dictionary {
+	AttributeDictionary
 }
 import herd.codamo.api.core.transformer {
 	Creator,
 	Delegator,
 	Matchable
 }
-"Creates generic objects from [[AttributesMapping]], core creator"
+"Creates generic objects from [[AttributeDictionary]], core creator"
 tagged("Generic")
 by("Wojciech Potiopa")
-shared class ObjectCreator() extends Creator<AttributesMapping,Object>() {
-	shared actual Object create(Delegator delegator,Class<Object,Nothing> kind, AttributesMapping mapping) {
+shared class AttributeObjectCreator() extends Creator<AttributeDictionary,Object>() {
+	shared actual Object create(Delegator delegator,Class<Object,Nothing> kind, AttributeDictionary mapping) {
 		value instanceId = kind.string;
 		value deserializationContext = deserialization<String>();
 		try {
 			deserializationContext.instance(instanceId, kind);
-			mapping.mappings.each((Attribute<> resultAttribute-> Anything resultPartValue) {
+			mapping.each((Attribute<> resultAttribute-> Anything resultPartValue) {
 				deserializationContext.attribute(instanceId, resultAttribute.declaration, resultAttribute.declaration.name);
 				deserializationContext.instanceValue(resultAttribute.declaration.name, resultPartValue);
 			});
@@ -32,8 +32,8 @@ shared class ObjectCreator() extends Creator<AttributesMapping,Object>() {
 			throw Error(kind, x);
 		}
 	}
-	matchable => object satisfies Matchable<AttributesMapping,Class<Object,Nothing>>{
-		shared actual Boolean predicate(AttributesMapping source, Class<Object,Nothing> resultType) => true;
+	matchable => object satisfies Matchable<AttributeDictionary,Class<Object,Nothing>>{
+		shared actual Boolean predicate(AttributeDictionary source, Class<Object,Nothing> resultType) => true;
 		
 		shared actual Integer priority =0;
 		

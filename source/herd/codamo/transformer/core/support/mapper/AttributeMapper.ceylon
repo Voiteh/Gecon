@@ -1,22 +1,26 @@
 import ceylon.language.meta.model {
-	Attribute,
-	ClassOrInterface
+	Attribute
 }
 
+import herd.codamo.api.core.dictionary {
+	AttributeDictionary
+}
 import herd.codamo.api.core.transformer {
-	Mapper
+	Mapper,
+	Relation
 }
 import herd.codamo.api.core.util {
 	filterObjectAndIdentifiableAttributes
 }
-shared abstract class AttributeMapper<Source,Result>() extends Mapper<Source,ClassOrInterface<Result>>() {
+shared abstract class AttributeMapper<Source,Result>() extends Mapper<Source,Result,AttributeDictionary>() given Source satisfies Object {
 	
 	shared formal Anything extractSourceValue(Attribute<Result> resultAttribute,Source source);
 		
-	shared actual Map<Attribute<>,Anything> map(Source source,ClassOrInterface<Result> resultType) {
-		value mapping=resultType.getAttributes<Result>().filter(filterObjectAndIdentifiableAttributes)
-				.tabulate((Attribute<Result,Anything,Nothing> key) => extractSourceValue(key, source));
-		return mapping;
+	shared actual AttributeDictionary map(Relation<Source,Result> relation) {
+			value mapping=relation.resultClass.getAttributes<Result>()
+					.filter(filterObjectAndIdentifiableAttributes)
+						.tabulate((Attribute<Result,Anything,Nothing> key) => extractSourceValue(key, relation.source));
+		return AttributeDictionary(mapping);
 	}
 	
 	

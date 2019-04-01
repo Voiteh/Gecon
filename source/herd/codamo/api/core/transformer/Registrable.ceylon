@@ -2,6 +2,10 @@ import ceylon.language.meta.model {
 	Class,
 	Type
 }
+
+import herd.codamo.api.core.dictionary {
+	Dictionary
+}
 shared interface Registrable {
 	
 	shared static
@@ -21,12 +25,12 @@ shared interface Registrable {
 			Creation<Source, Result, ResultType> creation,
 			Matchable<Source,Class<ResultType>>? matchable ) given ResultType satisfies Result;
 		
-		shared formal Anything mapping<Source,ResultType,Key,Item>(
-			Mapping<Source,ResultType,Key,Item> mapping,
-			Matchable<Source,ResultType>? matchable) 
-				given ResultType satisfies Type<>
-				given Key satisfies Object
-				;
+		shared formal Anything mapping<Source,Result,Dict>(
+			Mapping<Source,Result,Dict> mapping,
+			Matchable<Relation<Source,Result>,Class<Dict>>? matchable) 
+				given Source satisfies Object
+				given Dict satisfies Dictionary<Object,Anything>
+		;
 		
 	}
 	"Used inside framework only"

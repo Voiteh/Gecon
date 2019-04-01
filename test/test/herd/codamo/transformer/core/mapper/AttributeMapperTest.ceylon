@@ -9,6 +9,12 @@ import ceylon.test {
 import herd.codamo.transformer.core.support.mapper {
 	AttributeMapper
 }
+import herd.codamo.api.core.transformer {
+	Relation
+}
+import herd.codamo.api.core.dictionary {
+	AttributeDictionary
+}
 
 class SimpleModel(
 	shared String name,
@@ -39,7 +45,7 @@ shared class AttributeMapperTest() {
 	
 	shared test
 	void shouldMappModelAttributes() {
-		value map = simpleModelAttributeMapper.map(SimpleModel("abc", 123), `OtherModel`);
+		value map = simpleModelAttributeMapper.map(Relation(SimpleModel("abc", 123), `OtherModel`));
 		assertEquals(map.get(`OtherModel.active`),"abc");
 		assertEquals(map.get(`OtherModel.definiton`),123);
 	}

@@ -1,22 +1,22 @@
-import ceylon.language.meta.model {
-	Type
-}
 import ceylon.language.meta {
 	typeLiteral,
 	type
 }
-shared abstract class Mapper<Source,ResultType,Key=Object,Item=Anything>() 
-		satisfies Mapping<Source,ResultType,Key,Item> & Registrable 
-		given ResultType satisfies Type<> 
-		given Key satisfies Object {
+import ceylon.language.meta.model {
+	Class
+}
+import herd.codamo.api.core.dictionary {
+	Dictionary
+}
+
+shared abstract class Mapper<Source, Result, Dict>()
+		satisfies Mapping<Source,Result,Dict> & Registrable
+		given Source satisfies Object
+		given Dict satisfies Dictionary<Object,Anything> {
 	
+	shared default Matchable<Relation<Source,Result>,Class<Dict>>? matchable = null;
 	
-	shared default Matchable<Source,ResultType>? matchable=null;
-	
-		
 	shared actual Anything visitAdapter(Registrable.Adapter visitor) => visitor.mapping(this, matchable);
 	
-	string => "``type(this).declaration.name`` ``typeLiteral<Source>()`` -> ``typeLiteral<ResultType>()`` ";
-	
-	
+	string => "``type(this).declaration.name`` ``typeLiteral<Source>()`` -> ``typeLiteral<Result>()`` ";
 }

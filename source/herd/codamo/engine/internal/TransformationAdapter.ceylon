@@ -16,7 +16,8 @@ import herd.codamo.api.core.transformer {
 	Creation,
 	Matchable,
 	Delegator,
-	Mapping
+	Mapping,
+	Relation
 }
 import herd.codamo.engine.internal.clasification {
 	Classificable,
@@ -24,9 +25,12 @@ import herd.codamo.engine.internal.clasification {
 	creator=creation,
 	resolver=resolvance,
 	converter=convertion,
-	mapper=mapping,
+	relator=mapping,
 	Matcher,
 	Hasher
+}
+import herd.codamo.api.core.dictionary {
+	Dictionary
 }
 shared class TransformationAdapter(Logger logger) satisfies Registrable.Adapter{
 		
@@ -160,17 +164,19 @@ shared class TransformationAdapter(Logger logger) satisfies Registrable.Adapter{
 		
 		return [classificable,transformation];
 	}
-	shared actual Anything mapping<Source, ResultType,Key,Item>(Mapping<Source,ResultType,Key,Item> preparee, Matchable<Source,ResultType>? matchable)
-			given ResultType satisfies Type<Anything>
-			given Key satisfies Object 
-			 {
-		Classificator classificator=mapper;
+	shared actual Anything mapping<Source, ResultType, Dict>(Mapping<Source,ResultType,Dict> preparee, Matchable<Relation<Source,ResultType>,Class<Dict,Nothing>>? matchable)
+			given Source satisfies Object
+			given Dict satisfies Dictionary<Object,Anything>
+	{
+		Classificator classificator=relator;
+		value dicitonaryType = `given Dict`;
 		Transformation transformation= object satisfies Transformation{
 			shared actual Result transform<Result>(Anything[] args) {
-				assert(is [Source,ResultType] args);
-				logger.debug("[``preparee``] Mapping ``args.first else "null"`` to ``args.rest.first``");
+				assert(is [Relation<Source,ResultType>] args);
+				
+				logger.debug("[``preparee``] Mapping ``args.first`` to ``dicitonaryType.satisfiedTypes``");
 				assert(is Result result=preparee.map(*args));
-				logger.debug("[``preparee``] Mapped ``args.first else "null"`` to ``result``");
+				logger.debug("[``preparee``] Mapped ``args.first `` to ``result ``");
 				return result;
 				
 			}
@@ -184,7 +190,7 @@ shared class TransformationAdapter(Logger logger) satisfies Registrable.Adapter{
 			
 			Boolean match(Anything[] args){
 				Boolean result;	
-				if (is [Source,ResultType] args) {
+				if (is [Relation<Source,ResultType>,Class<Dict>] args) {
 					result= matchable.predicate(*args);
 				}
 				else{
@@ -203,6 +209,8 @@ shared class TransformationAdapter(Logger logger) satisfies Registrable.Adapter{
 		
 		return [classificable,transformation];
 	}
+	
+	
 	
 	
 

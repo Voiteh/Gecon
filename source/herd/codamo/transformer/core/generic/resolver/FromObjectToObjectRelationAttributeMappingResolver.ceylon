@@ -1,31 +1,39 @@
+
 import ceylon.language.meta.model {
-	Class,
-	Type
+	Type,
+	Attribute,
+	Model,
+	Class
 }
 
-import herd.codamo.api.core.meta {
-	Mapping,
-	Relation,
-	AttributesMapping
+import herd.codamo.api.core.dictionary {
+	Dictionary,
+	AttributeDictionary
 }
+
 import herd.codamo.api.core.transformer {
 	Resolver,
 	Delegator,
-	Matchable
+	Matchable,
+	Relation
 }
 
-"Resolves [[AttributesMapping]] from [[Relation]]"
+"Resolves [[AttributeDictionary]] from [[Relation]]"
 tagged("Generic")
 by("Wojciech Potiopa")
-shared class FromObjectToObjectRelationAttributeMappingResolver() extends Resolver<Relation<Object,Object>,Mapping,Type<Mapping>>() {
-	shared actual Class<AttributesMapping,Nothing> resolve(Delegator delegator, Relation<Object,Object> source, Type<Mapping> outputType) => `AttributesMapping`;
+shared class FromObjectToObjectRelationAttributeMappingResolver() extends Resolver<Relation<>,Dictionary<Model,Anything>,Type<Dictionary<Model,Anything>>>() {
+	shared actual Class<Dictionary<Model,Anything>,Nothing> resolve(Delegator delegator, Relation<Anything,Anything> input, Type<Dictionary<Model,Anything>> outputType) => `AttributeDictionary`;
 	
 	
-	matchable => object satisfies Matchable<Relation<Object,Object>,Type<Mapping>>{
-		shared actual Boolean predicate(Relation<Object,Object> source, Type<Mapping> resultType) => true;
+	
+	shared actual Matchable<Relation<Anything,Anything>,Type<Dictionary<Model,Anything>>>? matchable => object satisfies Matchable<Relation<Anything,Anything>,Type<Dictionary<Model,Anything>>>{
+		shared actual Boolean predicate(Relation<Anything,Anything> source, Type<Dictionary<Model,Anything>> resultType) => resultType.subtypeOf(`Dictionary<Attribute<>,Anything>`);
 		
-		shared actual Integer priority =0;
+		shared actual Integer priority => 0;
 		
 		
 	};
+	
 }
+
+

@@ -3,36 +3,40 @@ import ceylon.language.meta {
 }
 import ceylon.language.meta.model {
 	Attribute,
-	Class,
-	ClassOrInterface
+	Class
 }
 
-
+import herd.codamo.api.core.dictionary {
+	AttributeDictionary
+}
 import herd.codamo.api.core.transformer {
 	Mapper,
-	Matchable
+	Matchable,
+	Relation
 }
 import herd.codamo.api.core.util {
 	filterObjectAndIdentifiableAttributes
 }
-shared class DefaultAttributeMapper() extends Mapper<Object,ClassOrInterface<Anything>>(){
-	shared actual Map<Object,Anything> map(Object source, ClassOrInterface<Anything> resultType) {
-		value sourceType = type(source);
+shared class DefaultAttributeMapper() extends Mapper<Object,Object,AttributeDictionary>(){
+	
+	shared actual AttributeDictionary map(Relation<Object,Object> relation) {
+		value sourceType = type(relation.source);
 		value sourceAttributes=sourceType.getAttributes<>();
-		value mapping=resultType.getAttributes<>()
+		value mapping=relation.resultClass.getAttributes<>()
 				.filter(filterObjectAndIdentifiableAttributes)
-		.tabulate((Attribute<Nothing,Anything,Nothing> key) => 
+				.tabulate((Attribute<Nothing,Anything,Nothing> key) => 
 			sourceAttributes.find((Attribute<Nothing,Anything,Nothing> item) => key.declaration.name==item.declaration.name)
-				?.bind(source)?.get());
-				
-		return mapping;
+				?.bind(relation.source)?.get());
+		
+		return AttributeDictionary(mapping);
 	}
 	
-	matchable=object satisfies Matchable<Object,ClassOrInterface<>>{
-		shared actual Boolean predicate(Object source, ClassOrInterface<Anything> resultType) => resultType is Class<>;
+	matchable= object satisfies Matchable<Relation<Object,Object>,Class<AttributeDictionary>>{
+		shared actual Boolean predicate(Relation<Object,Object> source, Class<AttributeDictionary,Nothing> resultType) => true;
 		
-		shared actual Integer priority = 0;
+		shared actual Integer priority => 0;
 		
 		
 	};
+	 
 }
