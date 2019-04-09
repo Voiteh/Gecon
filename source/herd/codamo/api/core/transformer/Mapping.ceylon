@@ -27,4 +27,8 @@ shared interface Mapping<in Source=Nothing, in ResultType=Nothing, out TheDictio
 by ("Wojciech Potiopa")
 shared class Relation<out Source=Anything, out Result=Anything>(
 	shared Source source,
-	shared Class<Result> resultClass) {}
+	shared Class<Result> resultClass) {
+	
+	string => "Relation of ``source else "null" `` -> ``resultClass``";
+	
+}

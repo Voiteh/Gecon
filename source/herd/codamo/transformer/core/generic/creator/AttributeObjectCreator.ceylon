@@ -23,9 +23,10 @@ shared class AttributeObjectCreator() extends Creator<AttributeDictionary,Object
 		value deserializationContext = deserialization<String>();
 		try {
 			deserializationContext.instance(instanceId, kind);
-			mapping.each((Attribute<> resultAttribute-> Anything resultPartValue) {
+			mapping.each((Attribute<> resultAttribute-> Anything sourcePartValue) {
+				value converted = delegator.convert(sourcePartValue, resultAttribute.type);
 				deserializationContext.attribute(instanceId, resultAttribute.declaration, resultAttribute.declaration.name);
-				deserializationContext.instanceValue(resultAttribute.declaration.name, resultPartValue);
+				deserializationContext.instanceValue(resultAttribute.declaration.name, converted);
 			});
 			return deserializationContext.reconstruct<Object>(instanceId);
 		} catch (Exception x) {

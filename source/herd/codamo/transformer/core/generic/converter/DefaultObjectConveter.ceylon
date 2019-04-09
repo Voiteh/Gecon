@@ -20,7 +20,7 @@ by("Wojciech Potiopa")
 shared class DefaultObjectConveter() extends Converter<Object,Object,ClassOrInterface<Object>>() {
 	shared actual Object convert(Delegator delegator, Object source, ClassOrInterface<Object> resultType) {
 			value resolvedType = delegator.resolve(source,resultType);
-			value relation=Relation(source, resolvedType);
+			value relation=delegator.create(`Relation<>`, source->resolvedType);
 			value mappingType = delegator.resolve(relation, `Dictionary<>`);
 			value mapping=delegator.map(relation, mappingType);
 			return delegator.create(resolvedType, mapping);

@@ -57,7 +57,7 @@ shared class Codamo(
 		shared actual Dictionary map<Dictionary>(Relation<Anything,Anything> relation, Class<Dictionary,Nothing> dictionaryType)
 				given Dictionary satisfies Map<Object,Anything> {
 			value flatten=finder.find(mapping,[relation,dictionaryType]);
-			return flatten.transform<Dictionary>([relation,dictionaryType]);
+			return flatten.transform<Dictionary>([relation]);
 		}
 		
 		
