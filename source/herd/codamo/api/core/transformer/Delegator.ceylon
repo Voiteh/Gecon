@@ -2,6 +2,9 @@ import ceylon.language.meta.model {
 	Type,
 	Class
 }
+import herd.codamo.api.core.dictionary {
+	Dictionary
+}
 
 "Thrown whenever component has not been found for further operations"
 by("Wojciech Potiopa")
@@ -25,6 +28,9 @@ shared interface Delegator {
 	throws(`class TransformationFindingError`,"Creator has not been found")
 	shared formal Result create<Result>(Class<Result> kind,Anything args);
 	
+	throws(`class Mapping.Error`,"Mapping couldn't be compleated")
+	throws(`class TransformationFindingError`,"Creator has not been found")
+	shared formal Dict map<Dict>(Relation<> relation,Class<Dict> relationType) given Dict satisfies Dictionary<Object,Anything>;
 }
 
 

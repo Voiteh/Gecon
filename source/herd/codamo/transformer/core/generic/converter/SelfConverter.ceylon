@@ -3,13 +3,14 @@ import ceylon.language.meta.model {
 	Type
 }
 
-import herd.codamo.api.core.meta {
-	extractObjectType
-}
+
 import herd.codamo.api.core.transformer {
 	Converter,
 	Delegator,
 	Matchable
+}
+import herd.codamo.api.core.util {
+	extractObjectType
 }
 "If provided Source object value, is the same type as Result type, returns source object. "
 tagged("Generic")

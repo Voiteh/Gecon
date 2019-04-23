@@ -1,6 +1,7 @@
 
 
 
+
 "Registry implementation"
 shared class Catalog() {
 	
@@ -10,5 +11,8 @@ shared class Catalog() {
 	shared Container resolvers=Container();
 	"Creators container"
 	shared Container creators=Container();
+	"Mappings container"
+	shared Container mappings= Container() ;
+		
 
 }
