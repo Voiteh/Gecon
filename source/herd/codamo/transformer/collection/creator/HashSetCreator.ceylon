@@ -16,7 +16,7 @@ import herd.codamo.api.core.transformer {
 tagged("Generic")
 by("Wojciech Potiopa")
 shared class HashSetCreator() extends Creator<{Anything*},Set<>>() {
-	shared actual Set<> create(Delegator delegator,Class<Set<>,Nothing> kind, {Anything*} arguments) {
+	shared actual Set<> create(Delegator delegator, {Anything*} arguments,Class<Set<>,Nothing> kind) {
 		return kind.apply(linked, Hashtable(), arguments);
 	}
 	

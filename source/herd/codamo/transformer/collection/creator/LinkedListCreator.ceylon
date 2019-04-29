@@ -14,7 +14,7 @@ import herd.codamo.api.core.transformer {
 tagged("Generic")
 by("Wojciech Potiopa")
 shared class LinkedListCreator() extends Creator<{Anything*},List<Anything>>() {
-	shared actual List<Anything> create(Delegator delegator,Class<List<Anything>,Nothing> kind, {Anything*} arguments) {
+	shared actual List<Anything> create(Delegator delegator, {Anything*} arguments,Class<List<Anything>,Nothing> kind) {
 		return kind.apply(arguments);
 	}
 	

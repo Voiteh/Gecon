@@ -18,7 +18,7 @@ import herd.codamo.api.core.transformer {
 tagged("Generic")
 by("Wojciech Potiopa")
 shared class AttributeObjectCreator() extends Creator<AttributeDictionary,Object>() {
-	shared actual Object create(Delegator delegator,Class<Object,Nothing> kind, AttributeDictionary mapping) {
+	shared actual Object create(Delegator delegator, AttributeDictionary mapping,Class<Object,Nothing> kind) {
 		value instanceId = kind.string;
 		value deserializationContext = deserialization<String>();
 		try {

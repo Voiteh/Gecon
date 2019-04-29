@@ -11,9 +11,8 @@ shared interface Registrable {
 	shared static
 	interface Adapter {
 		
-		
-		shared formal Anything convertion<Source,Result,ResultType>(
-			Conversion<Source, Result, ResultType> convertion,
+		shared formal Anything conversion<Source,Result,ResultType>(
+			Conversion<Source, Result, ResultType> conversion,
 			Matchable<Source,ResultType>? matchable ) given ResultType satisfies Type<Result>;
 		
 		shared formal Anything resolvance<Source,Result,ResultType>(

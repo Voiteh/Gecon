@@ -13,7 +13,7 @@ import herd.codamo.api.core.transformer {
 tagged("Generic")
 by("Wojciech Potiopa")
 shared class ArrayCreator() extends Creator<{Anything*},List<>>() {
-	shared actual List<> create(Delegator delegator,Class<List<>,Nothing> kind, {Anything*} arguments) {
+	shared actual List<> create(Delegator delegator, {Anything*} arguments,Class<List<>,Nothing> kind) {
 		return kind.apply(arguments);
 	}
 	

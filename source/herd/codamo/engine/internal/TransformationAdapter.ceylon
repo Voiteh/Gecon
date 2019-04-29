@@ -36,7 +36,7 @@ shared class TransformationAdapter(Logger logger) satisfies Registrable.Adapter{
 		
 	String matchingResultLog(Boolean result) =>"Matching ``if (result) then "SUCCESS" else "FAILURE"``";
 	
-	shared actual [Classificable,Transformation] convertion<Source, Result, ResultType>(Conversion<Source,Result,ResultType> preparee, Matchable<Source,ResultType>? matchable)
+	shared actual [Classificable,Transformation] conversion<Source, Result, ResultType>(Conversion<Source,Result,ResultType> preparee, Matchable<Source,ResultType>? matchable)
 			given ResultType satisfies Type<Result> {
 		
 		Classificator classificator=converter;
@@ -85,10 +85,10 @@ shared class TransformationAdapter(Logger logger) satisfies Registrable.Adapter{
 		Classificator classificator=creator;
 		Transformation transformation= object satisfies Transformation{
 			shared actual Result transform<Result>(Anything[] args) {
-				assert(is [Delegator,Class<ResultType>,Source] args);
-				logger.debug("|Creation| [``preparee``] Creating ``args.rest.first `` from `` args.rest.rest.first else "null"``");
+				assert(is [Delegator,Source,Class<ResultType>] args);
+				logger.debug("|Creation| [``preparee``] Creating ``args.rest.rest.first `` from `` args.rest.first else "null"``");
 				assert(is Result result=preparee.create(*args));
-				logger.debug("|Creation| [``preparee``] Created ``result else "null" ``from`` args.rest.rest.first else "null"``");
+				logger.debug("|Creation| [``preparee``] Created ``result else "null" ``from`` args.rest.first else "null"``");
 				return result;
 				
 			}

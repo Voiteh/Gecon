@@ -17,7 +17,7 @@ import herd.codamo.api.core.transformer {
 tagged("Generic")
 by("Wojciech Potiopa")
 shared class HashMapCreator() extends Creator<{Entry<Object,Anything>*},Map<>>() {
-	shared actual Map<> create(Delegator delegator,Class<Map<>,Nothing> kind, {Entry<Object,Anything>*} arguments) {
+	shared actual Map<> create(Delegator delegator, {Entry<Object,Anything>*} arguments,Class<Map<>,Nothing> kind) {
 		return kind.apply(linked, Hashtable(), arguments);
 	}
 	
