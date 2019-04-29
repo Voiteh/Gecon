@@ -29,7 +29,8 @@ import herd.codamo.engine.internal.clasification {
 	Classificable,
 	convertion,
 	creation,
-	resolvance
+	resolvance,
+	mapping
 }
 
 shared class Registrator(Registrable.Adapter adapter, Logger logger) {
@@ -48,6 +49,9 @@ shared class Registrator(Registrable.Adapter adapter, Logger logger) {
 		case (creation) {
 			replaced = registry.creators.put(classificable, transformation);
 			logger.debug("Registered creator: ``transformation`` using ``type(transformation)``");
+		}
+		case(mapping){
+			replaced = registry.mappings.put(classificable, transformation);
 		}
 		
 		if (exists replaced) {
@@ -99,7 +103,9 @@ shared class Registrator(Registrable.Adapter adapter, Logger logger) {
 			inclusions.each((ClassDeclaration element) => logger.trace("Included class ``element``"));
 			{ClassDeclaration*} exclusions = provider.transformations.exclusions.flatMap(extractFromScope);
 			exclusions.each((ClassDeclaration element) => logger.trace("Excluded class ``element``"));
-			{ClassDeclaration*} finalDeclarations = inclusions.filter((ClassDeclaration element) {
+			{ClassDeclaration*} finalDeclarations = inclusions
+					.filter((ClassDeclaration element) => !element.abstract)
+					.filter((ClassDeclaration element) {
 					if (exclusions.contains(element)) {
 						logger.debug("Excluded ``element``");
 						return false;

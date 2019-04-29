@@ -11,11 +11,13 @@ import ceylon.logging {
 
 import herd.codamo.api.core.transformer {
 	Registrable,
-	Convertion,
+	Conversion,
 	Resolvance,
 	Creation,
 	Matchable,
-	Delegator
+	Delegator,
+	Mapping,
+	Relation
 }
 import herd.codamo.engine.internal.clasification {
 	Classificable,
@@ -23,14 +25,18 @@ import herd.codamo.engine.internal.clasification {
 	creator=creation,
 	resolver=resolvance,
 	converter=convertion,
+	relator=mapping,
 	Matcher,
 	Hasher
+}
+import herd.codamo.api.core.dictionary {
+	Dictionary
 }
 shared class TransformationAdapter(Logger logger) satisfies Registrable.Adapter{
 		
 	String matchingResultLog(Boolean result) =>"Matching ``if (result) then "SUCCESS" else "FAILURE"``";
 	
-	shared actual [Classificable,Transformation] convertion<Source, Result, ResultType>(Convertion<Source,Result,ResultType> preparee, Matchable<Source,ResultType>? matchable)
+	shared actual [Classificable,Transformation] convertion<Source, Result, ResultType>(Conversion<Source,Result,ResultType> preparee, Matchable<Source,ResultType>? matchable)
 			given ResultType satisfies Type<Result> {
 		
 		Classificator classificator=converter;
@@ -38,9 +44,9 @@ shared class TransformationAdapter(Logger logger) satisfies Registrable.Adapter{
 		Transformation transformation= object satisfies Transformation{
 				shared actual Result transform<Result>(Anything[] args) {
 					assert(is [Delegator,Source,ResultType] args);
-					logger.debug("[``preparee``] Converting ``args.rest.first else "null"`` to ``args.rest.rest.first``");
+					logger.debug("|Convertion| [``preparee``] Converting ``args.rest.first else "null"`` to ``args.rest.rest.first``");
 					assert(is Result result=preparee.convert(*args));
-					logger.debug("[``preparee``] Converted ``args.rest.first else "null"`` to ``result else "null"``");
+					logger.debug("|Convertion| [``preparee``] Converted ``args.rest.first else "null"`` to ``result else "null"``");
 					return result;
 					
 				}
@@ -80,9 +86,9 @@ shared class TransformationAdapter(Logger logger) satisfies Registrable.Adapter{
 		Transformation transformation= object satisfies Transformation{
 			shared actual Result transform<Result>(Anything[] args) {
 				assert(is [Delegator,Class<ResultType>,Source] args);
-				logger.debug("[``preparee``] Creating ``args.rest.first ``from`` args.rest.rest.first else "null"``");
+				logger.debug("|Creation| [``preparee``] Creating ``args.rest.first `` from `` args.rest.rest.first else "null"``");
 				assert(is Result result=preparee.create(*args));
-				logger.debug("[``preparee``] Created ``result else "null" ``from`` args.rest.rest.first else "null"``");
+				logger.debug("|Creation| [``preparee``] Created ``result else "null" ``from`` args.rest.rest.first else "null"``");
 				return result;
 				
 			}
@@ -123,9 +129,9 @@ shared class TransformationAdapter(Logger logger) satisfies Registrable.Adapter{
 		Transformation transformation= object satisfies Transformation{
 			shared actual Result transform<Result>(Anything[] args) {
 				assert(is [Delegator,Source,ResultType] args);
-				logger.debug("[``preparee``] Resolving ``args.rest.first else "null"`` to ``args.rest.rest.first``");
+				logger.debug("|Resolvance| [``preparee``] Resolving ``args.rest.first else "null"`` to ``args.rest.rest.first``");
 				assert(is Result result=preparee.resolve(*args));
-				logger.debug("[``preparee``] Resolved ``args.rest.first else "null"`` to ``result``");
+				logger.debug("|Resolvance| [``preparee``] Resolved ``args.rest.first else "null"`` to ``result``");
 				return result;
 				
 			}
@@ -158,6 +164,54 @@ shared class TransformationAdapter(Logger logger) satisfies Registrable.Adapter{
 		
 		return [classificable,transformation];
 	}
+	shared actual Anything mapping<Source, ResultType, Dict>(Mapping<Source,ResultType,Dict> preparee, Matchable<Relation<Source,ResultType>,Class<Dict,Nothing>>? matchable)
+			given Source satisfies Object
+			given Dict satisfies Dictionary<Object,Anything>
+	{
+		Classificator classificator=relator;
+		value dicitonaryType = `given Dict`;
+		Transformation transformation= object satisfies Transformation{
+			shared actual Result transform<Result>(Anything[] args) {
+				assert(is [Relation<Source,ResultType>] args);
+				
+				logger.debug("|Mapping| [``preparee``] Mapping ``args.first`` to ``dicitonaryType.satisfiedTypes``");
+				assert(is Result result=preparee.map(*args));
+				logger.debug("|Mapping| [``preparee``] Mapped ``args.first `` to ``result ``");
+				return result;
+				
+			}
+			
+			string => preparee.string;
+			
+		};
+		Classificable classificable= if(exists matchable) then Matcher { 
+			classificator = classificator;
+			priority = matchable.priority;
+			
+			Boolean match(Anything[] args){
+				Boolean result;	
+				if (is [Relation<Source,ResultType>,Class<Dict>] args) {
+					result= matchable.predicate(*args);
+				}
+				else{
+					result =false;
+				}
+				logger.trace("``matchingResultLog(result)``, for ``preparee``, Args:``args``  ");
+				return result;
+			}
+			
+			
+		}
+		else Hasher{ 
+			classificator = classificator; 
+			toHash = [typeLiteral<Source>(),typeLiteral<ResultType>()];
+		};
+		
+		return [classificable,transformation];
+	}
+	
+	
+	
 	
 
 	

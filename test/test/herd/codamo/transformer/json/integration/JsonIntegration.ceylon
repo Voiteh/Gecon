@@ -1,4 +1,3 @@
-
 import herd.codamo.engine {
 	Codamo,
 	AutoProvider,
@@ -16,13 +15,13 @@ shared class JsonIntegration() {
 	
 	shared default Codamo codamo => Codamo {
 		provider = AutoProvider {
-			transformations = ScopeProvisioning(
-				[
+			transformations = ScopeProvisioning {
+				scopes = [
 					`module herd.codamo.transformer.json`,
 					`module herd.codamo.transformer.core`,
 					`module herd.codamo.transformer.collection`
-				]
-			);
+				];
+			};
 		};
 	};
 }

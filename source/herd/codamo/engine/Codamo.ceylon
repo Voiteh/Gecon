@@ -9,7 +9,8 @@ import ceylon.logging {
 import herd.codamo.api.core.transformer {
 	Delegator,
 	TransformationFindingError,
-	TransformationError
+	TransformationError,
+	Relation
 }
 import herd.codamo.engine.configuration {
 	Configuration
@@ -22,7 +23,8 @@ import herd.codamo.engine.internal {
 import herd.codamo.engine.internal.clasification {
 	convertion,
 	creation,
-	resolvance
+	resolvance,
+	mapping
 }
 "Codamo transformations class"
 by("Wojciech Potiopa")
@@ -52,10 +54,18 @@ shared class Codamo(
 			value flatten=finder.find(resolvance, [source,resultType]);
 			return flatten.transform<Class<Result>>([this,source,resultType]);
 		}
+		shared actual Dictionary map<Dictionary>(Relation<Anything,Anything> relation, Class<Dictionary,Nothing> dictionaryType)
+				given Dictionary satisfies Map<Object,Anything> {
+			value flatten=finder.find(mapping,[relation,dictionaryType]);
+			return flatten.transform<Dictionary>([relation]);
+		}
+		
+		
+		
+				
 		
 	}
 	"Main entry point for all transformations"
-	
 	shared Result|TransformationError|TransformationFindingError convert<Result>(Anything source,Type<Result> resultType){
 		try{
 			return delegator.convert(source, resultType);

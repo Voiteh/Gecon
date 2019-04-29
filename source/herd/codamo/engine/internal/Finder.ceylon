@@ -9,7 +9,8 @@ import herd.codamo.engine.internal.clasification {
 	Classificable,
 	convertion,
 	resolvance,
-	creation
+	creation,
+	mapping
 }
 import herd.codamo.api.core.transformer {
 	TransformationFindingError
@@ -34,6 +35,9 @@ shared class Finder(Logger logger,Catalog catalog) {
 		}
 		case (creation) {
 			container=catalog.creators;
+		}
+		case (mapping) {
+			container=catalog.mappings;
 		}
 		
 		if (exists findable = container.get(hashable)) {

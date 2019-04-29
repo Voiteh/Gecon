@@ -3,7 +3,7 @@ import ceylon.test {
 }
 
 import herd.codamo.api.core.transformer {
-	Convertion
+	Conversion
 }
 
 
@@ -25,7 +25,7 @@ shared class EnumTest() extends CoreIntegration() {
 	
 	shared test
 	void shouldFailConvertEnumOneToEnumTwoWithIndexToHigh(){
-		assert(is Convertion<>.Error adapt = codamo.convert(fourth, `EnumTwo`));
+		assert(is Conversion<>.Error adapt = codamo.convert(fourth, `EnumTwo`));
 		
 	}
 	

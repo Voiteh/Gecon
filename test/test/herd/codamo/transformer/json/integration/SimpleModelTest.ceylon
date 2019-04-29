@@ -28,7 +28,7 @@ shared class SimpleModelTest() extends JsonIntegration() {
 	shared test
 	void shouldConvertJsonObjectToMap(){
 		value result=codamo.convert(testData.simpleModelJsonObject, `Map<String,Anything>`);
-		assert(is Map<String,Anything > result);
+		assert(is Map<String,Anything> result);
 		testData.simpleModelJsonObject.each((String elementKey -> Value elementItem) {
 			value item=result.get(elementKey);
 			assertEquals(item,elementItem);

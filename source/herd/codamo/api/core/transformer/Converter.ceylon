@@ -11,7 +11,7 @@ import ceylon.language.meta {
   which needs to be implemented and registered."
 by("Wojciech Potiopa")
 shared abstract class Converter<Source,Result,ResultType=Type<Result>>() 
-		satisfies Convertion<Source, Result,ResultType> & Registrable
+		satisfies Conversion<Source, Result,ResultType> & Registrable
 given ResultType satisfies Type<Result> {
 	
 	shared default Matchable<Source,ResultType>? matchable=null;

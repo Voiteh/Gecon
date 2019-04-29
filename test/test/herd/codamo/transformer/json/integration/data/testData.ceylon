@@ -1,4 +1,3 @@
-
 import ceylon.collection {
 	ArrayList,
 	HashSet
@@ -17,11 +16,9 @@ shared object testData {
 	shared Null nullVal = null;
 	shared SimpleModel simpleModel = SimpleModel(name, id, nullVal);
 	shared JsonObject simpleModelJsonObject = JsonObject {
-		values = {
-			`nullVal`.declaration.name->null,
-			`name`.declaration.name->name,
-			`id`.declaration.name->id
-		};
+		`nullVal`.declaration.name->null,
+		`name`.declaration.name->name,
+		`id`.declaration.name->id
 	};
 	
 	shared JsonArray simpleJsonArrayWithNull = JsonArray({ name, id, nullVal });
@@ -59,9 +56,9 @@ shared object testData {
 		};
 	};
 	
-	shared JsonObject resolvableJsonObject = JsonObject{
-		values={
-			`ResolvableClass.resolved`.declaration.name -> resolveTwoJsonObject
+	shared JsonObject resolvableJsonObject = JsonObject {
+		values = {
+			`ResolvableClass.resolved`.declaration.name->resolveTwoJsonObject
 		};
 	};
 }
