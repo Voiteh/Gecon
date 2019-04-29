@@ -5,7 +5,7 @@ import ceylon.language.meta.model {
 
 
 
-"Base API for convertion of data into other specified type. For now this interface is selead and should be used inside of the [[herd.codamo.api module]] only. "
+"Base API for conversion of data into other specified type. For now this interface is selead and should be used inside of the [[herd.codamo.api module]] only. "
 by("Wojciech Potiopa")
 shared sealed interface Conversion<in Source=Nothing ,out Result=Anything,in ResultType=Nothing> 
 		given ResultType satisfies Type<Result> {
@@ -16,8 +16,8 @@ shared sealed interface Conversion<in Source=Nothing ,out Result=Anything,in Res
 				extends TransformationError("Can't adapt ``source else "null"`` to ``destinationType``", cause) {}
 	}
 	
-	"Main convertion API"
-	throws(`class Error`,"Whenever there is an error durring convertion")
+	"Main conversion API"
+	throws(`class Error`,"Whenever there is an error durring conversion")
 	shared formal Result convert(
 		"Converter may delegate execution of flow to other components via [[Delegator]]"
 		Delegator delegator,

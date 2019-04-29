@@ -36,7 +36,7 @@ shared class TransformationAdapter(Logger logger) satisfies Registrable.Adapter{
 		
 	String matchingResultLog(Boolean result) =>"Matching ``if (result) then "SUCCESS" else "FAILURE"``";
 	
-	shared actual [Classificable,Transformation] convertion<Source, Result, ResultType>(Conversion<Source,Result,ResultType> preparee, Matchable<Source,ResultType>? matchable)
+	shared actual [Classificable,Transformation] conversion<Source, Result, ResultType>(Conversion<Source,Result,ResultType> preparee, Matchable<Source,ResultType>? matchable)
 			given ResultType satisfies Type<Result> {
 		
 		Classificator classificator=converter;
