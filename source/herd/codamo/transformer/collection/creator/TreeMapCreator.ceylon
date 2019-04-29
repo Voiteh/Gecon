@@ -18,7 +18,7 @@ import herd.type.support {
 tagged("Generic")
 by("Wojciech Potiopa")
 shared class TreeMapCreator() extends Creator<{Anything*},Map<>>() {
-	shared actual Map<> create(Delegator delegator,Class<Map<>,Nothing> kind, {Anything*} arguments) {
+	shared actual Map<> create(Delegator delegator, {Anything*} arguments,Class<Map<>,Nothing> kind) {
 		value factoryMethod = `function naturalOrderTreeMap`.apply<Map<>>(*kind.typeArgumentList);
 		return factoryMethod.apply(*arguments);
 	}

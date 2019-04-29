@@ -16,7 +16,7 @@ import herd.codamo.api.core.transformer {
 tagged("Generic")
 by("Wojciech Potiopa")
 shared class ArrayListCreator() extends Creator<{Anything*},List<>>() {
-	shared actual List<> create(Delegator delegator,Class<List<>> kind, {Anything*} arguments) {
+	shared actual List<> create(Delegator delegator, {Anything*} arguments,Class<List<>> kind) {
 		return kind.apply(0, 1.5, arguments);
 	}
 	

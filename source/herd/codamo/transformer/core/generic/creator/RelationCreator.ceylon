@@ -12,7 +12,7 @@ import ceylon.language.meta {
 	type
 }
 shared class RelationCreator() extends Creator<Object->ClassOrInterface<>,Relation<>>(){
-	shared actual Relation<Anything,Anything> create(Delegator delegator, Class<Relation<Anything,Anything>,Nothing> kind, Object->ClassOrInterface<> arguments) {
+	shared actual Relation<Anything,Anything> create(Delegator delegator, Object->ClassOrInterface<> arguments, Class<Relation<Anything,Anything>,Nothing> kind) {
 		value relation = `class Relation`.classApply<Relation<>>(type(arguments.key),arguments.item);
 		return relation.apply(arguments.key,arguments.item);
 	}

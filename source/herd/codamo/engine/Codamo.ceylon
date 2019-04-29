@@ -47,7 +47,7 @@ shared class Codamo(
 		
 		shared actual Result create<Result>(Class<Result,Nothing> kind, Anything args) {
 			value flatten=finder.find(creation, [args,kind]);
-			return flatten.transform<Result>([this,kind,args]);
+			return flatten.transform<Result>([this,args,kind]);
 		}
 		
 		shared actual Class<Result,Nothing> resolve<Result>(Anything source, Type<Result> resultType) {

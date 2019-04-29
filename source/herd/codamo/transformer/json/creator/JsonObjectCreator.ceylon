@@ -17,7 +17,7 @@ import herd.codamo.api.core.dictionary {
 "Creates [[JsonObject]] out of [[KeyToValueDictionary]]"
 by ("Wojciech Potiopa")
 shared class JsonObjectCreator() extends Creator<KeyToValueDictionary,JsonObject>() {
-	shared actual JsonObject create(Delegator delegator, Class<JsonObject,Nothing> kind, KeyToValueDictionary arguments) => JsonObject {
+	shared actual JsonObject create(Delegator delegator, KeyToValueDictionary arguments, Class<JsonObject,Nothing> kind) => JsonObject {
 		values = arguments.map((String elementKey -> Anything elementItem) {
 			if(is Value elementItem){
 				return elementKey -> elementItem;

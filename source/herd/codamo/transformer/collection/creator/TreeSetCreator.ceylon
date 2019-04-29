@@ -14,7 +14,7 @@ import herd.codamo.api.core.transformer {
 }
 
 shared class TreeSetCreator() extends Creator<{Anything*},Set<>>() {
-	shared actual Set<> create(Delegator delegator,Class<Set<>,Nothing> kind, {Anything*} arguments) {
+	shared actual Set<> create(Delegator delegator, {Anything*} arguments,Class<Set<>,Nothing> kind) {
 		value factoryMethod = `function naturalOrderTreeSet`.apply<Set<>>(*kind.typeArgumentList);
 		return factoryMethod.apply(*arguments);
 	}

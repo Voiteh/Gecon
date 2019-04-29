@@ -13,7 +13,7 @@ import herd.codamo.api.core.transformer {
 tagged("Generic")
 by("Wojciech Potiopa")
 shared class EntryCreator() extends Creator<{Anything*},Entry<Object,Anything>>() {
-	shared actual Object->Anything create(Delegator delegator,Class<Object->Anything,Nothing> kind, {Anything*} arguments) {
+	shared actual Object->Anything create(Delegator delegator, {Anything*} arguments,Class<Object->Anything,Nothing> kind) {
 		value key = arguments.first;
 		assert (exists key);
 		value item = arguments.rest.first;
