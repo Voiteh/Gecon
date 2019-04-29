@@ -4,7 +4,6 @@ import ceylon.language.meta.model {
 	Class
 }
 import herd.codamo.api.core.transformer {
-	Mapper,
 	Relation,
 	Resolver,
 	Delegator,

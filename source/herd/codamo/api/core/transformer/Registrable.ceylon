@@ -13,7 +13,7 @@ shared interface Registrable {
 		
 		
 		shared formal Anything convertion<Source,Result,ResultType>(
-			Convertion<Source, Result, ResultType> convertion,
+			Conversion<Source, Result, ResultType> convertion,
 			Matchable<Source,ResultType>? matchable ) given ResultType satisfies Type<Result>;
 		
 		shared formal Anything resolvance<Source,Result,ResultType>(

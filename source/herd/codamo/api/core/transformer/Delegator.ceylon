@@ -13,8 +13,8 @@ shared class TransformationFindingError(String message) extends Exception(messag
 "Delegates execution to other transformations"
 shared interface Delegator {
 	
-	"Tries to find [[Convertion]] for provided [[source]] and [[resultType]], then delegates execution to this transformation"
-	throws(`class Convertion.Error`,"[[Convertion]] was not able, to convert [[source]] to specific [[resultType]]")
+	"Tries to find [[Conversion]] for provided [[source]] and [[resultType]], then delegates execution to this transformation"
+	throws(`class Conversion.Error`,"[[Conversion]] was not able, to convert [[source]] to specific [[resultType]]")
 	throws(`class TransformationFindingError`,"Converter has not been found")
 		shared formal Result convert<Result>(Anything source,Type<Result> resultType);
 	

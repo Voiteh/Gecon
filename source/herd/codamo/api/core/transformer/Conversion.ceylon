@@ -7,9 +7,9 @@ import ceylon.language.meta.model {
 
 "Base API for convertion of data into other specified type. For now this interface is selead and should be used inside of the [[herd.codamo.api module]] only. "
 by("Wojciech Potiopa")
-shared sealed interface Convertion<in Source=Nothing ,out Result=Anything,in ResultType=Nothing> 
+shared sealed interface Conversion<in Source=Nothing ,out Result=Anything,in ResultType=Nothing> 
 		given ResultType satisfies Type<Result> {
-	"Should be thrown whenever there is [[Convertion]] error"
+	"Should be thrown whenever there is [[Conversion]] error"
 
 	shared class Error extends TransformationError{
 		shared new (Anything source, Type<> destinationType, Throwable? cause = null)
@@ -23,7 +23,7 @@ shared sealed interface Convertion<in Source=Nothing ,out Result=Anything,in Res
 		Delegator delegator,
 		"Data which will be converter"
 		Source source,
-		"Data type which needs to be produced by [[Convertion]]"
+		"Data type which needs to be produced by [[Conversion]]"
 		ResultType resultType);
 	
 	

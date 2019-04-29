@@ -11,7 +11,7 @@ import ceylon.logging {
 
 import herd.codamo.api.core.transformer {
 	Registrable,
-	Convertion,
+	Conversion,
 	Resolvance,
 	Creation,
 	Matchable,
@@ -36,7 +36,7 @@ shared class TransformationAdapter(Logger logger) satisfies Registrable.Adapter{
 		
 	String matchingResultLog(Boolean result) =>"Matching ``if (result) then "SUCCESS" else "FAILURE"``";
 	
-	shared actual [Classificable,Transformation] convertion<Source, Result, ResultType>(Convertion<Source,Result,ResultType> preparee, Matchable<Source,ResultType>? matchable)
+	shared actual [Classificable,Transformation] convertion<Source, Result, ResultType>(Conversion<Source,Result,ResultType> preparee, Matchable<Source,ResultType>? matchable)
 			given ResultType satisfies Type<Result> {
 		
 		Classificator classificator=converter;
@@ -44,9 +44,9 @@ shared class TransformationAdapter(Logger logger) satisfies Registrable.Adapter{
 		Transformation transformation= object satisfies Transformation{
 				shared actual Result transform<Result>(Anything[] args) {
 					assert(is [Delegator,Source,ResultType] args);
-					logger.debug("[``preparee``] Converting ``args.rest.first else "null"`` to ``args.rest.rest.first``");
+					logger.debug("|Convertion| [``preparee``] Converting ``args.rest.first else "null"`` to ``args.rest.rest.first``");
 					assert(is Result result=preparee.convert(*args));
-					logger.debug("[``preparee``] Converted ``args.rest.first else "null"`` to ``result else "null"``");
+					logger.debug("|Convertion| [``preparee``] Converted ``args.rest.first else "null"`` to ``result else "null"``");
 					return result;
 					
 				}
@@ -86,9 +86,9 @@ shared class TransformationAdapter(Logger logger) satisfies Registrable.Adapter{
 		Transformation transformation= object satisfies Transformation{
 			shared actual Result transform<Result>(Anything[] args) {
 				assert(is [Delegator,Class<ResultType>,Source] args);
-				logger.debug("[``preparee``] Creating ``args.rest.first ``from`` args.rest.rest.first else "null"``");
+				logger.debug("|Creation| [``preparee``] Creating ``args.rest.first `` from `` args.rest.rest.first else "null"``");
 				assert(is Result result=preparee.create(*args));
-				logger.debug("[``preparee``] Created ``result else "null" ``from`` args.rest.rest.first else "null"``");
+				logger.debug("|Creation| [``preparee``] Created ``result else "null" ``from`` args.rest.rest.first else "null"``");
 				return result;
 				
 			}
@@ -129,9 +129,9 @@ shared class TransformationAdapter(Logger logger) satisfies Registrable.Adapter{
 		Transformation transformation= object satisfies Transformation{
 			shared actual Result transform<Result>(Anything[] args) {
 				assert(is [Delegator,Source,ResultType] args);
-				logger.debug("[``preparee``] Resolving ``args.rest.first else "null"`` to ``args.rest.rest.first``");
+				logger.debug("|Resolvance| [``preparee``] Resolving ``args.rest.first else "null"`` to ``args.rest.rest.first``");
 				assert(is Result result=preparee.resolve(*args));
-				logger.debug("[``preparee``] Resolved ``args.rest.first else "null"`` to ``result``");
+				logger.debug("|Resolvance| [``preparee``] Resolved ``args.rest.first else "null"`` to ``result``");
 				return result;
 				
 			}
@@ -174,9 +174,9 @@ shared class TransformationAdapter(Logger logger) satisfies Registrable.Adapter{
 			shared actual Result transform<Result>(Anything[] args) {
 				assert(is [Relation<Source,ResultType>] args);
 				
-				logger.debug("[``preparee``] Mapping ``args.first`` to ``dicitonaryType.satisfiedTypes``");
+				logger.debug("|Mapping| [``preparee``] Mapping ``args.first`` to ``dicitonaryType.satisfiedTypes``");
 				assert(is Result result=preparee.map(*args));
-				logger.debug("[``preparee``] Mapped ``args.first `` to ``result ``");
+				logger.debug("|Mapping| [``preparee``] Mapped ``args.first `` to ``result ``");
 				return result;
 				
 			}

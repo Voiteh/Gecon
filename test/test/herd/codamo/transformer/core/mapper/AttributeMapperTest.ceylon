@@ -12,9 +12,6 @@ import herd.codamo.transformer.core.support.mapper {
 import herd.codamo.api.core.transformer {
 	Relation
 }
-import herd.codamo.api.core.dictionary {
-	AttributeDictionary
-}
 
 class SimpleModel(
 	shared String name,

@@ -16,14 +16,15 @@ import herd.codamo.api.core.util {
 import ceylon.language.meta {
 	type
 }
-shared class SourceKeyValueMapper() extends Mapper
-		<Object,{<String->Anything>*},KeyToValueDictionary>
-		(){
+shared class SourceKeyValueMapper()
+		 extends Mapper<Object,{<String->Anything>*},KeyToValueDictionary>(){
 	shared actual KeyToValueDictionary map(Relation<Object,{<String->Anything>*}> relation) {
 		value sourceType = type(relation.source);
 		value mapping=sourceType.getAttributes<>()
 				.filter(filterObjectAndIdentifiableAttributes)
-				.map((Attribute<Nothing,Anything,Nothing> attr) => attr.declaration.name->attr.bind(relation.source).get()) ;
+				.map((Attribute<Nothing,Anything,Nothing> attr) 
+			=> attr.declaration.name->attr.bind(relation.source).get()
+	) ;
 		return KeyToValueDictionary(mapping);
 	}
 	
