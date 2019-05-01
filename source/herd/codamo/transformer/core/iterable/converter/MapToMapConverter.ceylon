@@ -6,8 +6,7 @@ import ceylon.language.meta.model {
 
 import herd.codamo.api.core.transformer {
 	Converter,
-	Delegator,
-	Matchable
+	Delegator
 }
 import herd.codamo.api.core.util {
 	runtimeCall
@@ -41,14 +40,11 @@ shared class MapToMapConverter() extends Converter<Map<>,Map<>,ClassOrInterface<
 		return delegator.create(resolvedType, creatorArgs);
 	}
 	
-	matchable=> object satisfies Matchable<Map<Object,Anything>,ClassOrInterface<Map<Object,Anything>>>{
-		shared actual Boolean predicate(Map<Object,Anything> source, ClassOrInterface<Map<Object,Anything>> resultType) => true;
-		
-		shared actual Integer priority =2;
-		
-		
-	};
 	
+	shared actual Matcher matcher => Matcher {
+		Boolean predicate(Map<Object,Anything> source, ClassOrInterface<Map<Object,Anything>> resultType) => true;
+		Integer priority =2;
+	};
 	
 }
 

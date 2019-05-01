@@ -11,8 +11,7 @@ import herd.codamo.api.core.dictionary {
 }
 import herd.codamo.api.core.transformer {
 	Creator,
-	Delegator,
-	Matchable
+	Delegator
 }
 "Creates generic objects from [[AttributeDictionary]], core creator"
 tagged("Generic")
@@ -33,12 +32,11 @@ shared class AttributeObjectCreator() extends Creator<AttributeDictionary,Object
 			throw Error(kind, x);
 		}
 	}
-	matchable => object satisfies Matchable<AttributeDictionary,Class<Object,Nothing>>{
-		shared actual Boolean predicate(AttributeDictionary source, Class<Object,Nothing> resultType) => true;
-		
-		shared actual Integer priority =0;
-		
-		
+	
+	shared actual Matcher matcher => Matcher{
+		Boolean predicate(AttributeDictionary source, Class<Object,Nothing> resultType) => true;
+		Integer priority =0;
 	};
+	
 	
 }

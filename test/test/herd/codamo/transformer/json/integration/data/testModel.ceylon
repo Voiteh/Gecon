@@ -11,8 +11,7 @@ import ceylon.language.meta.model {
 
 import herd.codamo.api.core.transformer {
 	Resolver,
-	Delegator,
-	Matchable
+	Delegator
 }
 
 shared serializable
@@ -95,7 +94,7 @@ class ResolvableClass(resolved) {
 	shared TypeResolveInterface resolved;
 }
 
-shared class JsonObjectToTestResolveInterfaceResolver() extends Resolver<JsonObject,TypeResolveInterface,Type<TypeResolveInterface> >() {
+shared class JsonObjectToTestResolveInterfaceResolver() extends Resolver<JsonObject,TypeResolveInterface,Type<TypeResolveInterface>>() {
 	shared actual Class<TypeResolveInterface,Nothing> resolve(Delegator delegator, JsonObject input, Type<TypeResolveInterface> outputType) {
 		value typeInfo = input.get(`TypeResolveInterface.type`.declaration.name);
 		value dataType = delegator.convert(typeInfo, `DataType`);
@@ -107,12 +106,8 @@ shared class JsonObjectToTestResolveInterfaceResolver() extends Resolver<JsonObj
 			return `TypeResolveTwo`;
 		}
 	}
-	matchable => object satisfies Matchable<JsonObject,Type<TypeResolveInterface>>{
-		shared actual Boolean predicate(JsonObject source, Type<TypeResolveInterface> resultType) => true;
-		
-		shared actual Integer priority =1;
-		
-		
+	matcher => Matcher {
+		Boolean predicate(JsonObject source, Type<TypeResolveInterface> resultType) => true;
+		Integer priority = 1;
 	};
-	
 }

@@ -16,11 +16,16 @@ shared abstract class Resolver<Source, Result,ResultType=Type<Result>>()
 		given ResultType satisfies Type<Result>
 {
 	
+	shared class Matcher(
+		shared Boolean predicate(Source source, ResultType resultType),
+		shared Integer priority
+	){}
+	
 	shared formal actual Class<Result,Nothing> resolve(Delegator delegator, Source input, ResultType outputType);
 	
-	shared default Matchable<Source,ResultType>? matchable=null;
+	shared default Matcher? matcher=null;
 	
-	shared actual Anything visitAdapter(Registrable.Adapter visitor) => visitor.resolvance(this, matchable);
+	shared actual Anything visitAdapter(Registrable.Adapter visitor) => visitor.resolvance(this);
 	
 	string => "``type(this).declaration.name`` ``typeLiteral<Source>()`` -> ``typeLiteral<Result>()`` ";
 }

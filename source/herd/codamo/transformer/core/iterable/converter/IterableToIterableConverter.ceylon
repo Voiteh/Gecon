@@ -5,8 +5,7 @@ import ceylon.language.meta.model {
 
 import herd.codamo.api.core.transformer {
 	Converter,
-	Delegator,
-	Matchable
+	Delegator
 }
 import herd.codamo.api.core.util {
 	runtimeCall
@@ -29,9 +28,8 @@ shared class IterableToIterableConverter() extends Converter<{Anything*},{Anythi
 		return delegator.create(resolvedType, narrowedArgs);
 	}
 	
-	matchable => object satisfies Matchable<{Anything*},ClassOrInterface<{Anything*}>> {
-		shared actual Boolean predicate({Anything*} source, ClassOrInterface<{Anything*}> resultType) => true;
-		
-		shared actual Integer priority = 1;
+	shared actual Matcher matcher => Matcher{
+		predicate({Anything*} source, ClassOrInterface<{Anything*}> resultType) => true;
+		priority = 1;
 	};
 }

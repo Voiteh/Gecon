@@ -7,9 +7,7 @@ import ceylon.language.meta.model {
 
 import herd.codamo.api.core.transformer {
 	Creator,
-	Delegator,
-	Matchable
-}
+	Delegator}
 
 
 "Creator for [[ArrayList]] using any iterable as arguments"
@@ -20,11 +18,10 @@ shared class ArrayListCreator() extends Creator<{Anything*},List<>>() {
 		return kind.apply(0, 1.5, arguments);
 	}
 	
-	shared actual Matchable<{Anything*},Class<List<Anything>,Nothing>>? matchable => object satisfies Matchable<{Anything*},Class<List<Anything>,Nothing>>{
-		
-		shared actual Integer priority => 1;
-		shared actual Boolean predicate({Anything*} source, Class<List<Anything>,Nothing> resultType) => resultType.declaration==`class ArrayList`;
-			
+	shared actual Matcher matcher => Matcher{
+		Boolean predicate({Anything*} source, Class<List<Anything>,Nothing> resultType) => resultType.declaration==`class ArrayList`;
+		Integer priority = 1;
 	};
+	
 }
 

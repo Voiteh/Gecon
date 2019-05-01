@@ -11,13 +11,12 @@ import ceylon.logging {
 
 import herd.codamo.api.core.transformer {
 	Registrable,
-	Conversion,
-	Resolvance,
-	Creation,
-	Matchable,
 	Delegator,
-	Mapping,
-	Relation
+	Relation,
+	Mapper,
+	Converter,
+	Creator,
+	Resolver
 }
 import herd.codamo.engine.internal.clasification {
 	Classificable,
@@ -26,7 +25,7 @@ import herd.codamo.engine.internal.clasification {
 	resolver=resolvance,
 	converter=convertion,
 	relator=mapping,
-	Matcher,
+	GenericMatcher,
 	Hasher
 }
 import herd.codamo.api.core.dictionary {
@@ -36,7 +35,7 @@ shared class TransformationAdapter(Logger logger) satisfies Registrable.Adapter{
 		
 	String matchingResultLog(Boolean result) =>"Matching ``if (result) then "SUCCESS" else "FAILURE"``";
 	
-	shared actual [Classificable,Transformation] conversion<Source, Result, ResultType>(Conversion<Source,Result,ResultType> preparee, Matchable<Source,ResultType>? matchable)
+	shared actual [Classificable,Transformation] conversion<Source, Result, ResultType>(Converter<Source,Result,ResultType> preparee)
 			given ResultType satisfies Type<Result> {
 		
 		Classificator classificator=converter;
@@ -54,14 +53,14 @@ shared class TransformationAdapter(Logger logger) satisfies Registrable.Adapter{
 				string => preparee.string;
 				
 		};
-			Classificable classificable= if(exists matchable) then Matcher { 
+			Classificable classificable= if(exists matcher=preparee.matcher) then GenericMatcher { 
 				classificator = classificator;
-				priority = matchable.priority;
+				priority = matcher.priority;
 				
 				Boolean match(Anything[] args){
 					Boolean result;	
 					if (is [Source,ResultType] args) {
-						result= matchable.predicate(*args);
+						result= matcher.predicate(*args);
 					}
 					else{
 						result =false;
@@ -80,8 +79,7 @@ shared class TransformationAdapter(Logger logger) satisfies Registrable.Adapter{
 		return [classificable,transformation];
 	}
 	
-	shared actual [Classificable,Transformation] creation<Source, Result, ResultType>(Creation<Source,Result,ResultType> preparee, Matchable<Source,Class<ResultType,Nothing>>? matchable)
-			given ResultType satisfies Result {
+	shared actual [Classificable,Transformation] creation<Source, ResultType>(Creator<Source,ResultType> preparee) {
 		Classificator classificator=creator;
 		Transformation transformation= object satisfies Transformation{
 			shared actual Result transform<Result>(Anything[] args) {
@@ -96,14 +94,14 @@ shared class TransformationAdapter(Logger logger) satisfies Registrable.Adapter{
 			string => preparee.string;
 			
 		};
-		Classificable classificable= if(exists matchable) then Matcher { 
+		Classificable classificable= if(exists matcher =preparee.matcher) then GenericMatcher { 
 			classificator = classificator;
-			priority = matchable.priority;
+			priority = matcher.priority;
 			
 			Boolean match(Anything[] args){
 				Boolean result;	
 				if (is [Source,Class<ResultType>] args) {
-					result= matchable.predicate(*args);
+					result= matcher.predicate(*args);
 				}
 				else{
 					result =false;
@@ -116,13 +114,13 @@ shared class TransformationAdapter(Logger logger) satisfies Registrable.Adapter{
 		}
 		else Hasher{ 
 			classificator = classificator; 
-			toHash = [typeLiteral<Source>(),typeLiteral<Result>()];
+			toHash = [typeLiteral<Source>(),typeLiteral<ResultType>()];
 		};
 		
 		return [classificable,transformation];
 	}
 	
-	shared actual [Classificable,Transformation] resolvance<Source, Result, ResultType>(Resolvance<Source,Result,ResultType> preparee, Matchable<Source,ResultType>? matchable)
+	shared actual [Classificable,Transformation] resolvance<Source, Result, ResultType>(Resolver<Source,Result,ResultType> preparee)
 			given ResultType satisfies Type<Result> {
 		
 		Classificator classificator=resolver;
@@ -139,14 +137,14 @@ shared class TransformationAdapter(Logger logger) satisfies Registrable.Adapter{
 			string => preparee.string;
 			
 		};
-		Classificable classificable= if(exists matchable) then Matcher { 
+		Classificable classificable= if(exists matcher =preparee.matcher) then GenericMatcher { 
 			classificator = classificator;
-			priority = matchable.priority;
+			priority = matcher.priority;
 			
 			Boolean match(Anything[] args){
 				Boolean result;	
 				if (is [Source,ResultType] args) {
-					result= matchable.predicate(*args);
+					result= matcher.predicate(*args);
 				}
 				else{
 					result =false;
@@ -164,7 +162,7 @@ shared class TransformationAdapter(Logger logger) satisfies Registrable.Adapter{
 		
 		return [classificable,transformation];
 	}
-	shared actual Anything mapping<Source, ResultType, Dict>(Mapping<Source,ResultType,Dict> preparee, Matchable<Relation<Source,ResultType>,Class<Dict,Nothing>>? matchable)
+	shared actual Anything mapping<Source, ResultType, Dict>(Mapper<Source,ResultType,Dict> preparee)
 			given Source satisfies Object
 			given Dict satisfies Dictionary<Object,Anything>
 	{
@@ -184,14 +182,14 @@ shared class TransformationAdapter(Logger logger) satisfies Registrable.Adapter{
 			string => preparee.string;
 			
 		};
-		Classificable classificable= if(exists matchable) then Matcher { 
+		Classificable classificable= if(exists matcher=preparee.matcher) then GenericMatcher { 
 			classificator = classificator;
-			priority = matchable.priority;
+			priority = matcher.priority;
 			
 			Boolean match(Anything[] args){
 				Boolean result;	
 				if (is [Relation<Source,ResultType>,Class<Dict>] args) {
-					result= matchable.predicate(*args);
+					result= matcher.predicate(*args);
 				}
 				else{
 					result =false;

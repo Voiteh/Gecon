@@ -6,9 +6,7 @@ import ceylon.language.meta.model {
 import herd.codamo.api.core.transformer {
 	Relation,
 	Resolver,
-	Delegator,
-	Matchable
-}
+	Delegator}
 import herd.codamo.api.core.dictionary {
 	Dictionary,
 	AttributeDictionary
@@ -41,12 +39,9 @@ shared class AttributeMap({<Attribute<>->Anything>*} stream) satisfies Map<Attri
 shared class RelationToAttributeMapResolver() extends Resolver<Relation<Object, Object>, Dictionary<Object,Anything>, Type<Dictionary<Object,Anything>>>(){
 	shared actual Class<Dictionary<Object,Anything>,Nothing> resolve(Delegator delegator, Relation<Object,Object> input, Type<Dictionary<Object,Anything>> outputType) => `AttributeDictionary`;
 	
-	matchable=object satisfies Matchable<Relation<Object,Object>, Type<Dictionary<Object,Anything>>>{
-		shared actual Boolean predicate(Relation<Object,Object> source, Type<Dictionary<Object,Anything>> resultType) => true;
-		
-		shared actual Integer priority => 0;
-		
-		
+	matcher=>Matcher{
+		Boolean predicate(Relation<Object,Object> source, Type<Dictionary<Object,Anything>> resultType) => true;
+		Integer priority => 0;
 	};
 	
 }

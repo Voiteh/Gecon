@@ -5,8 +5,7 @@ import ceylon.language.meta.model {
 
 import herd.codamo.api.core.transformer {
 	Converter,
-	Delegator,
-	Matchable
+	Delegator
 }
 import herd.type.support {
 	flat
@@ -37,9 +36,8 @@ shared class EntryConverter() extends Converter<Object->Anything,Object->Anythin
 		return instance;
 	}
 	
-	matchable => object satisfies Matchable<Object->Anything,Type<Object->Anything>> {
-		shared actual Boolean predicate(Object->Anything source, Type<Object->Anything> resultType) => resultType is Class<Object->Anything>;
-		
-		shared actual Integer priority = 1;
+	shared actual Matcher matcher => Matcher{
+		Boolean predicate(Object->Anything source, Type<Object->Anything> resultType) => resultType is Class<Object->Anything>;
+		Integer priority = 1;
 	};
 }

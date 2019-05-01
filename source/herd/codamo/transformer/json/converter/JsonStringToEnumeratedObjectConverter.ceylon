@@ -7,8 +7,7 @@ import ceylon.language.meta.model {
 
 import herd.codamo.api.core.transformer {
 	Converter,
-	Delegator,
-	Matchable
+	Delegator
 }
 
 
@@ -18,14 +17,14 @@ shared class JsonStringToEnumeratedObjectConverter() extends Converter<String,Ob
 		assert (exists objectValue = resultType.caseValues.find((Object elem) => type(elem).declaration.name == source));
 		return objectValue;
 	}
-	matchable => object satisfies Matchable<String,ClassOrInterface<Object>> {
-		shared actual Boolean predicate(String source, ClassOrInterface<Object> resultType) {
+	
+	shared actual Matcher matcher => Matcher {
+		Boolean predicate(String source, ClassOrInterface<Object> resultType) {
 			if (!resultType.caseValues.empty, exists objectValue = resultType.caseValues.find((Object elem) => type(elem).declaration.name == source)) {
 				return true;
 			}
 			return false;
 		}
-		
-		shared actual Integer priority = 1;
+		Integer priority = 1;
 	};
 }

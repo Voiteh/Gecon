@@ -6,8 +6,7 @@ import ceylon.language.meta.model {
 
 import herd.codamo.api.core.transformer {
 	Converter,
-	Delegator,
-	Matchable
+	Delegator
 }
 import herd.codamo.api.core.util {
 	extractObjectType
@@ -20,13 +19,9 @@ shared class SelfConverter() extends Converter<Anything,Anything,Type<Anything>>
 		return source;
 	}
 	
-	matchable => object satisfies Matchable<Anything,Type<>>{
-		shared actual Boolean predicate(Anything source, Type<Anything> resultType) => resultType.exactly(extractObjectType(source));
-		
-		shared actual Integer priority =runtime.maxIntegerValue;
-		
-		
+	shared actual Matcher matcher => Matcher{
+		Boolean predicate(Anything source, Type<Anything> resultType) => resultType.exactly(extractObjectType(source));
+		Integer priority =runtime.maxIntegerValue;
 	};
-	
 
 }
