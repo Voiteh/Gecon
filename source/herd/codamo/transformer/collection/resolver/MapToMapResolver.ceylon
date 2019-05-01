@@ -3,7 +3,8 @@ import ceylon.collection {
 }
 import ceylon.language.meta.model {
 	Class,
-	ClassOrInterface
+	ClassOrInterface,
+	Interface
 }
 
 import herd.codamo.api.core.transformer {
@@ -11,8 +12,8 @@ import herd.codamo.api.core.transformer {
 	Delegator,
 	Matchable
 }
-import herd.codamo.api.core.util {
-	typeHierarchy
+import herd.type.support {
+	flat
 }
 "Resolves [[Map]] to [[HashMap]]"
 tagged("Generic")
@@ -20,10 +21,9 @@ by("Wojciech Potiopa")
 shared class MapToMapResolver() extends Resolver<Map<>,Map<>,ClassOrInterface<Map<>>>() {
 	
 	shared actual Class<Map<>,Nothing> resolve(Delegator delegator,Map<> input,ClassOrInterface<Map<>> outputType) {
-		value hierarchy = typeHierarchy(outputType);
-		assert (exists iterableType = hierarchy.findByDeclaration(`interface Map`));
-		assert (exists keyType = iterableType.typeArgumentList.first);
-		assert (exists itemType = iterableType.typeArgumentList.rest.first);
+		value typeArguments= flat.types(outputType). narrow<Interface<>>().find((Interface<Anything> element) => element.declaration.equals(`interface Map`))?.typeArgumentList;
+		assert(exists keyType=typeArguments?.first);
+		assert(exists itemType=typeArguments?.rest?.first);
 		return `class HashMap`.classApply<Map<>>(keyType, itemType);
 	}
 	
