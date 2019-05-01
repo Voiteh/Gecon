@@ -9,9 +9,7 @@ import ceylon.language.meta.model {
 
 import herd.codamo.api.core.transformer {
 	Creator,
-	Delegator,
-	Matchable
-}
+	Delegator}
 "Creator for [[HashSet]] using any iterable as arguments"
 tagged("Generic")
 by("Wojciech Potiopa")
@@ -20,11 +18,9 @@ shared class HashSetCreator() extends Creator<{Anything*},Set<>>() {
 		return kind.apply(linked, Hashtable(), arguments);
 	}
 	
-	matchable => object satisfies Matchable<{Anything*},Class<Set<>,Nothing>>{
-		shared actual Boolean predicate({Anything*} source, Class<Set<Object>,Nothing> resultType) => resultType.declaration==`class HashSet`;
-		
+	shared actual Matcher matcher => Matcher{
+		Boolean predicate({Anything*} source, Class<Set<Object>,Nothing> resultType) => resultType.declaration==`class HashSet`;
 		priority =1;
-		
 	};
 
 }

@@ -7,9 +7,7 @@ import ceylon.language.meta.model {
 
 import herd.codamo.api.core.transformer {
 	Creator,
-	Delegator,
-	Matchable
-}
+	Delegator}
 "Creator for [[LinkedList]] using any iterable as arguments"
 tagged("Generic")
 by("Wojciech Potiopa")
@@ -18,9 +16,8 @@ shared class LinkedListCreator() extends Creator<{Anything*},List<Anything>>() {
 		return kind.apply(arguments);
 	}
 	
-	matchable => object satisfies Matchable<{Anything*},Class<List<Anything>>>{
-		shared actual Boolean predicate({Anything*} source, Class<List<Anything>,Nothing> resultType) => resultType.declaration == `class LinkedList`;
-		
+	shared actual Matcher matcher => Matcher{
+		Boolean predicate({Anything*} source, Class<List<Anything>,Nothing> resultType) => resultType.declaration == `class LinkedList`;
 		priority =1;
 	};
 	

@@ -9,9 +9,7 @@ import ceylon.language.meta.model {
 
 import herd.codamo.api.core.transformer {
 	Resolver,
-	Delegator,
-	Matchable
-}
+	Delegator}
 import herd.type.support {
 	flat
 }
@@ -27,10 +25,9 @@ shared class MapToMapResolver() extends Resolver<Map<>,Map<>,ClassOrInterface<Ma
 		return `class HashMap`.classApply<Map<>>(keyType, itemType);
 	}
 	
-	matchable=> object satisfies Matchable<Map<>,ClassOrInterface<Map<>>>{
-		shared actual Boolean predicate(Map<Object,Anything> source, ClassOrInterface<Map<Object,Anything>> resultType) => true;
-		
-		shared actual Integer priority =1;
+	matcher=>Matcher{
+		Boolean predicate(Map<Object,Anything> source, ClassOrInterface<Map<Object,Anything>> resultType) => true;
+		Integer priority =1;
 		
 		
 	};

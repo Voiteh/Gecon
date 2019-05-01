@@ -9,9 +9,7 @@ import ceylon.language.meta.model {
 
 import herd.codamo.api.core.transformer {
 	Resolver,
-	Delegator,
-	Matchable
-}
+	Delegator}
 "Resolves any iterable to [[ArrayList]]"
 tagged("Generic")
 by("Wojciech Potiopa")
@@ -22,12 +20,9 @@ shared class MutableListResolver() extends Resolver<{Anything*},List<>,ClassOrIn
 		return `class ArrayList`.classApply<List<>>(typeForIterable);
 	}
 
-	matchable => object satisfies Matchable<{Anything*},ClassOrInterface<List<>>>{
-		shared actual Boolean predicate({Anything*} source, ClassOrInterface<List<Anything>> resultType) => resultType.subtypeOf(`ListMutator<Nothing>`);
-		
-		shared actual Integer priority =1;
-		
-		
+	matcher => Matcher{
+		Boolean predicate({Anything*} source, ClassOrInterface<List<Anything>> resultType) => resultType.subtypeOf(`ListMutator<Nothing>`);
+		Integer priority =1;
 	};
 
 }

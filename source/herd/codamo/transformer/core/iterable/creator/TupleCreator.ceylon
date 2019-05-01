@@ -4,9 +4,7 @@ import ceylon.language.meta.model {
 
 import herd.codamo.api.core.transformer {
 	Creator,
-	Delegator,
-	Matchable
-}
+	Delegator}
 import herd.codamo.transformer.core.iterable {
 	AnyTuple
 }
@@ -29,10 +27,10 @@ shared class TupleCreator() extends Creator<{Anything*},AnyTuple>() {
 		}
 	}
 	
-	matchable=> object satisfies Matchable<{Anything*},Class<AnyTuple>>{
-		shared actual Boolean predicate({Anything*} source, Class<AnyTuple,Nothing> resultType) => true;
+	shared actual Matcher matcher=> Matcher {
+		Boolean predicate({Anything*} source, Class<AnyTuple,Nothing> resultType) => true;
 		
-		shared actual Integer priority =1;
+		Integer priority =1;
 		
 	};
 	

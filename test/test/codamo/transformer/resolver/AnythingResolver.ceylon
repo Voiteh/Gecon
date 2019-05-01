@@ -5,8 +5,7 @@ import ceylon.language.meta.model {
 
 import herd.codamo.api.core.transformer {
 	Resolver,
-	Delegator,
-	Matchable
+	Delegator
 }
 shared class AnythingResolver() extends Resolver<Anything, Anything,Type<Anything>>(){
 	shared actual Class<Anything,Nothing> resolve(Delegator delegator, Anything input, Type<Anything> outputType) {
@@ -19,12 +18,9 @@ shared class AnythingResolver() extends Resolver<Anything, Anything,Type<Anythin
 		}
 	}
 	
-	matchable => object satisfies Matchable<Anything,Type<>>{
-		shared actual Boolean predicate(Anything source, Type<Anything> resultType) => source is Null|String;
-		
-		shared actual Integer priority =0;
-		
-		
+	matcher =>Matcher{
+		Boolean predicate(Anything source, Type<Anything> resultType) => source is Null|String;
+		Integer priority =0;
 	};
 	
 	

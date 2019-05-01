@@ -10,9 +10,7 @@ import ceylon.language.meta.model {
 
 import herd.codamo.api.core.transformer {
 	Resolver,
-	Delegator,
-	Matchable
-}
+	Delegator}
 import herd.codamo.transformer.core.iterable {
 	AnyTuple
 }
@@ -39,10 +37,10 @@ shared class StreamToTupleResolver() extends Resolver<{Anything*},AnyTuple,Type<
 		return tupleType;
 	}
 	
-	matchable => object satisfies Matchable<{Anything*},Type<AnyTuple>>{
-		shared actual Boolean predicate({Anything*} source, Type<AnyTuple> resultType) => !source.empty;
+	matcher => Matcher{
+		Boolean predicate({Anything*} source, Type<AnyTuple> resultType) => !source.empty;
 		
-		shared actual Integer priority => 1;
+		Integer priority => 1;
 		
 		
 	};

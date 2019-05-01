@@ -5,9 +5,7 @@ import ceylon.language.meta.model {
 import herd.codamo.api.core.transformer {
 	Relation,
 	Creator,
-	Delegator,
-	Matchable
-}
+	Delegator}
 import ceylon.language.meta {
 	type
 }
@@ -18,11 +16,8 @@ shared class RelationCreator() extends Creator<Object->ClassOrInterface<>,Relati
 	}
 	
 	
-	matchable = object satisfies Matchable<Object->ClassOrInterface<>, Class<Relation<>>>{
-		shared actual Boolean predicate(Object->ClassOrInterface<> source, Class<Relation<Anything,Anything>> resultType) => source.item is Class<>;
-		
-		shared actual Integer priority => 0;
-		
-		
+	shared actual Matcher matcher => Matcher{
+		Boolean predicate(Object->ClassOrInterface<> source, Class<Relation<Anything,Anything>> resultType) => source.item is Class<>;
+		Integer priority => 0;
 	};
 }

@@ -1,36 +1,29 @@
 import ceylon.language.meta.model {
-	Class,
 	Type
 }
 
 import herd.codamo.api.core.dictionary {
 	Dictionary
 }
+
 shared interface Registrable {
 	
 	shared static
 	interface Adapter {
 		
-		shared formal Anything conversion<Source,Result,ResultType>(
-			Conversion<Source, Result, ResultType> conversion,
-			Matchable<Source,ResultType>? matchable ) given ResultType satisfies Type<Result>;
+		shared formal Anything conversion<Source, Result, ResultType>(
+			Converter<Source,Result,ResultType> conversion) given ResultType satisfies Type<Result>;
 		
-		shared formal Anything resolvance<Source,Result,ResultType>(
-			Resolvance<Source, Result, ResultType> resolvance,
-			Matchable<Source,ResultType>? matchable ) given ResultType satisfies Type<Result>;
+		shared formal Anything resolvance<Source, Result, ResultType>(
+			Resolver<Source,Result,ResultType> resolvance) given ResultType satisfies Type<Result>;
 		
+		shared formal Anything creation<Source, Result>(
+			Creator<Source,Result> creation);
 		
-		shared formal Anything creation<Source,Result,ResultType>(
-			Creation<Source, Result, ResultType> creation,
-			Matchable<Source,Class<ResultType>>? matchable ) given ResultType satisfies Result;
-		
-		shared formal Anything mapping<Source,Result,Dict>(
-			Mapping<Source,Result,Dict> mapping,
-			Matchable<Relation<Source,Result>,Class<Dict>>? matchable) 
+		shared formal Anything mapping<Source, Result, Dict>(
+			Mapper<Source,Result,Dict> mapper)
 				given Source satisfies Object
-				given Dict satisfies Dictionary<Object,Anything>
-		;
-		
+				given Dict satisfies Dictionary<Object,Anything>;
 	}
 	"Used inside framework only"
 	shared formal Anything visitAdapter(Adapter visitor);

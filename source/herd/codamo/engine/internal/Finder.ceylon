@@ -4,7 +4,7 @@ import ceylon.logging {
 }
 import herd.codamo.engine.internal.clasification {
 	Classificator,
-	Matcher,
+	GenericMatcher,
 	Hasher,
 	Classificable,
 	convertion,
@@ -51,10 +51,10 @@ shared class Finder(Logger logger,Catalog catalog) {
 					.each((Classificable findable -> Transformation executable) => logger.trace("``findable``-> ``executable``"));
 		}
 		logger.trace("Matching start");
-		if (exists matchable = container.keys.narrow<Matcher>()
-			.filter((Matcher element) => element.match(args))
-				.collect((Matcher element) { logger.trace("Matched ``element`` to ``args``"); return element;})
-				.sort((Matcher x, Matcher y) => y.priority.compare(x.priority))
+		if (exists matchable = container.keys.narrow<GenericMatcher>()
+			.filter((GenericMatcher element) => element.match(args))
+				.collect((GenericMatcher element) { logger.trace("Matched ``element`` to ``args``"); return element;})
+				.sort((GenericMatcher x, GenericMatcher y) => y.priority.compare(x.priority))
 				.first){
 			
 			if(exists findable= container.get(matchable)){
@@ -65,7 +65,7 @@ shared class Finder(Logger logger,Catalog catalog) {
 			logger.debug("No Matchable available!");
 			if(logger.priority>=trace){
 				logger.trace("Available Matchables were:");
-				container.filter((Classificable elementKey -> Transformation elementItem) => elementKey is Matcher)
+				container.filter((Classificable elementKey -> Transformation elementItem) => elementKey is GenericMatcher)
 						.each((Classificable matchable -> Transformation executable) => logger.trace("``matchable``-> ``executable``"));
 			}
 		}

@@ -8,8 +8,7 @@ import ceylon.language.meta.model {
 
 import herd.codamo.api.core.transformer {
 	Resolver,
-	Delegator,
-	Matchable
+	Delegator
 }
 "Resolves [[HashSet]] from any iterable type"
 tagged("Generic")
@@ -21,12 +20,9 @@ shared class IterableToSetResolver() extends Resolver<{Anything*},Set<>,Interfac
 		value typeForIterable = iterableTypeArgument(outputType);
 		return `class HashSet`.classApply<Set<>>(typeForIterable);
 	}		
-	matchable => object satisfies Matchable<{Anything*}, Interface<Set<Object>>>{
-		shared actual Boolean predicate({Anything*} source, Interface<Set<Object>> resultType) => true;
-		
-		shared actual Integer priority => 1;
-		
-		
+	matcher => Matcher{
+		Boolean predicate({Anything*} source, Interface<Set<Object>> resultType) => true;
+		Integer priority => 1;
 	};
 
 	

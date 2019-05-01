@@ -15,8 +15,7 @@ shared class SelfConverterTest() {
 	
 	shared test 
 	void shouldaMatchNullObjectToNullType(){
-		assert(exists matcher=selfConverter.matchable);
-		matcher.predicate(null, `Null`);
+		selfConverter.matcher.predicate(null, `Null`);
 	}
 
 	shared test 

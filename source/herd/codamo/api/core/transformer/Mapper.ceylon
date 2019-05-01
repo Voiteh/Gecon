@@ -14,9 +14,14 @@ shared abstract class Mapper<Source, Result, Dict>()
 		given Source satisfies Object
 		given Dict satisfies Dictionary<Object,Anything> {
 	
-	shared default Matchable<Relation<Source,Result>,Class<Dict>>? matchable = null;
+	shared class Matcher(
+		shared Boolean predicate(Relation<Source,Result> relation, Class<Dict> resultType),
+		shared Integer priority) {
+	}
 	
-	shared actual Anything visitAdapter(Registrable.Adapter visitor) => visitor.mapping(this, matchable);
+	shared default Matcher? matcher = null;
+	
+	shared actual Anything visitAdapter(Registrable.Adapter visitor) => visitor.mapping(this);
 	
 	string => "``type(this).declaration.name`` ``typeLiteral<Source>()`` -> ``typeLiteral<Result>()`` ";
 }

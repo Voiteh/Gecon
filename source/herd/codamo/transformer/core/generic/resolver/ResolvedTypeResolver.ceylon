@@ -5,9 +5,7 @@ import ceylon.language.meta.model {
 
 import herd.codamo.api.core.transformer {
 	Resolver,
-	Delegator,
-	Matchable
-}
+	Delegator}
 
 "Whenever there is no need for resolvance, this [[Resolver]] will be used."
 shared class ResolvedTypeResolver() extends Resolver<Anything,Anything,ClassOrInterface<>>() {
@@ -16,17 +14,15 @@ shared class ResolvedTypeResolver() extends Resolver<Anything,Anything,ClassOrIn
 		return outputType;
 	}
 	
-	matchable => object satisfies Matchable<Anything,ClassOrInterface<Anything>>{
-		shared actual Boolean predicate(Anything source, ClassOrInterface<Anything> resultType) {
+	matcher =>Matcher{
+		Boolean predicate(Anything source, ClassOrInterface<Anything> resultType) {
 			if(is Class<> resultType,!resultType.declaration.abstract){
 				return true;
 			}
 			return false;
 		}
 		
-		shared actual Integer priority =runtime.maxIntegerValue;
-		
-		
+		Integer priority =runtime.maxIntegerValue;
 	};
 	
 

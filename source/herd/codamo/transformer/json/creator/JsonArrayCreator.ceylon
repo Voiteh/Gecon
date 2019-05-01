@@ -1,5 +1,3 @@
-
-
 import ceylon.json {
 	JsonArray,
 	Value
@@ -10,22 +8,15 @@ import ceylon.language.meta.model {
 
 import herd.codamo.api.core.transformer {
 	Creator,
-	Delegator,
-	Matchable
-}
+	Delegator}
 
 "Creates [[JsonArray]] out of iterable of [[Value]]."
-by("Wojciech Potiopa")
+by ("Wojciech Potiopa")
 shared class JsonArrayCreator() extends Creator<{Value*},JsonArray>() {
 	shared actual JsonArray create(Delegator delegator, {Value*} arguments, Class<JsonArray,Nothing> kind) => JsonArray(arguments);
 	
-	matchable => object satisfies Matchable<{Value*},Class<JsonArray>>{
-		shared actual Boolean predicate({Value*} source, Class<JsonArray,Nothing> resultType) => true;
-		
-		shared actual Integer priority =1;
-		
-		
+	shared actual Matcher matcher => Matcher {
+		Boolean predicate({Value*} source, Class<JsonArray,Nothing> resultType) => true;
+		Integer priority = 1;
 	};
-	
-		
 }

@@ -5,9 +5,7 @@ import ceylon.language.meta.model {
 
 import herd.codamo.api.core.transformer {
 	Delegator,
-	Creator,
-	Matchable
-}
+	Creator}
 
 "Creator for [[Array]], using any iterable as argumets."
 tagged("Generic")
@@ -17,12 +15,10 @@ shared class ArrayCreator() extends Creator<{Anything*},List<>>() {
 		return kind.apply(arguments);
 	}
 	
-	matchable => object satisfies Matchable<{Anything*},Class<List<>>>{
-		shared actual Boolean predicate({Anything*} source, Class<List<Anything>,Nothing> resultType) => resultType.declaration==`class Array`;
-		
-		shared actual Integer priority =1;
-		
-		
+	
+	shared actual Matcher matcher => Matcher{
+		Boolean predicate({Anything*} source, Class<List<Anything>,Nothing> resultType) => resultType.declaration==`class Array`;
+		Integer priority =1;
 	};
 	
 }

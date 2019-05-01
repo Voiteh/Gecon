@@ -6,8 +6,7 @@ import herd.codamo.api.core.transformer {
 	Converter,
 	TransformationError,
 	Delegator,
-	TransformationFindingError,
-	Matchable
+	TransformationFindingError
 }
 
 "Converts Source object into Result union type. The result type object will be first convertable type of union.
@@ -29,26 +28,21 @@ import herd.codamo.api.core.transformer {
  assert(is Float result=codamo.convert(source,\`Float|Integer\`));
  
 "
-tagged("Generic")
-by("Wojciech Potiopa")
-shared class UnionConverter() extends Converter<Anything,Anything,UnionType<>>(){
+tagged ("Generic")
+by ("Wojciech Potiopa")
+shared class UnionConverter() extends Converter<Anything,Anything,UnionType<>>() {
 	shared actual Anything convert(Delegator delegator, Anything source, UnionType<> resultType) {
-		for(value type in resultType.caseTypes){
+		for (value type in resultType.caseTypes) {
 			try {
 				return delegator.convert(source, type);
 			} catch (TransformationError|TransformationFindingError x) {}
 		}
-		throw Error(source, resultType,Exception("All converters for types: ``resultType.caseTypes`` failed"));
+		throw Error(source, resultType, Exception("All converters for types: ``resultType.caseTypes`` failed"));
 	}
 	
-	matchable => object satisfies Matchable<Anything,UnionType<>>{
-		shared actual Boolean predicate(Anything source, UnionType<Anything> resultType) => true;
+	shared actual Matcher matcher => Matcher {
+		predicate(Anything source, UnionType<Anything> resultType) => true;
 		
-		shared actual Integer priority = 1;
-		
-		
+		Integer priority = 1;
 	};
-	
-
-	
 }

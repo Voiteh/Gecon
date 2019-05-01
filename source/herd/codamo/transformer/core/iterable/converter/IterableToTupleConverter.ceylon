@@ -6,8 +6,7 @@ import ceylon.language.meta.model {
 
 import herd.codamo.api.core.transformer {
 	Converter,
-	Delegator,
-	Matchable
+	Delegator
 }
 import herd.codamo.transformer.core.iterable {
 	AnyTuple
@@ -44,10 +43,9 @@ shared class IterableToTupleConverter() extends Converter<{Anything*},AnyTuple,T
 		return delegator.create(resolvedType, converted);
 	}
 	
-	matchable => object satisfies Matchable<{Anything*},Type<AnyTuple>>{
-		shared actual Boolean predicate({Anything*} source, Type<AnyTuple> resultType) => resultType is Class<AnyTuple>;
-		
-		shared actual Integer priority =2;		
+	shared actual Matcher matcher => Matcher{
+		predicate({Anything*} source, Type<AnyTuple> resultType) => resultType is Class<AnyTuple>;
+		priority =2;		
 	};
 	
 }

@@ -7,7 +7,6 @@ import ceylon.language.meta.model {
 import herd.codamo.api.core.transformer {
 	Converter,
 	Delegator,
-	Matchable,
 	Relation
 }
 import herd.codamo.api.core.dictionary {
@@ -26,12 +25,9 @@ shared class DefaultObjectConveter() extends Converter<Object,Object,ClassOrInte
 			return delegator.create(resolvedType, mapping);
 	}
 	
-	matchable => object satisfies Matchable<Object,ClassOrInterface<Object>>{
-		shared actual Boolean predicate(Object source, ClassOrInterface<Object> resultType) => true;
-		
-		shared actual Integer priority = 0;
-		
-		
+	shared actual Matcher matcher => Matcher{
+		Boolean predicate(Object source, ClassOrInterface<Object> resultType) => true;
+		Integer priority = 0;
 	};
 	
 }		

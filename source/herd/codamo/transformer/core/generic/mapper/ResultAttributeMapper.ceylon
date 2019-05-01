@@ -1,7 +1,6 @@
 import herd.codamo.api.core.transformer {
 	Mapper,
-	Relation,
-	Matchable
+	Relation
 }
 import herd.codamo.api.core.dictionary {
 	AttributeDictionary
@@ -23,13 +22,10 @@ shared class ResultAttributeMapper() extends Mapper
 	return AttributeDictionary(mapping);
 	}
 	
-	
-	shared actual Matchable<Relation<{<String->Anything>*},Object>,Class<AttributeDictionary,Nothing>>? matchable => object satisfies Matchable<Relation<{<String->Anything>*},Object>,Class<AttributeDictionary,Nothing>>{
-		shared actual Boolean predicate(Relation<{<String->Anything>*},Object> source, Class<AttributeDictionary,Nothing> resultType) => true;
-		
-		shared actual Integer priority => 1;
-		
-		
+	shared actual Matcher matcher => Matcher{ 
+		 predicate(Relation<{<String->Anything>*},Object> relation, Class<AttributeDictionary,Nothing> resultType) => true;
+		 priority =1;
 	};
+	
 	
 }

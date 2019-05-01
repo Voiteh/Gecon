@@ -9,8 +9,7 @@ import ceylon.test {
 
 import herd.codamo.api.core.transformer {
 	Resolver,
-	Delegator,
-	Matchable
+	Delegator
 }
 import herd.codamo.engine {
 	Codamo,
@@ -22,12 +21,9 @@ import herd.codamo.engine {
 class SearchableCharacterListAndComparableStringToStringResolver() extends Resolver<Anything,SearchableList<Character>&Summable<String>,Type<SearchableList<Character>&Summable<String>>>() {
 	shared actual Class<SearchableList<Character>&Summable<String>,Nothing> resolve(Delegator delegator, Anything input, Type<SearchableList<Character>&Summable<String>> outputType) => `String`;
 	
-	matchable=> object satisfies Matchable<Anything,Type<SearchableList<Character>&Summable<String>>>{
-		shared actual Boolean predicate(Anything source, Type<SearchableList<Character>&Summable<String>> resultType) => true;
-		
-		shared actual Integer priority =0;
-		
-		
+	matcher=> Matcher{
+		Boolean predicate(Anything source, Type<SearchableList<Character>&Summable<String>> resultType) => true;
+		Integer priority =0;
 	};
 	
 
