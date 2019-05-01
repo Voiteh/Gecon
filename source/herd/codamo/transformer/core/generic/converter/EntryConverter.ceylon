@@ -8,24 +8,25 @@ import herd.codamo.api.core.transformer {
 	Delegator,
 	Matchable
 }
-import herd.codamo.api.core.util {
-	typeHierarchy
+import herd.type.support {
+	flat
 }
-
 
 "Converts an [[Entry]] type value, into othe [[Entry]] type value. 
  
  Given Source: Key->Item, result type: Type< KeyResult -> ItemResult >.
  
  Key converted to KeyResult, Item to ItemResult  "
-tagged("Generic")
-by("Wojciech Potiopa")
+tagged ("Generic")
+by ("Wojciech Potiopa")
 shared class EntryConverter() extends Converter<Object->Anything,Object->Anything,Type<Object->Anything>>() {
 	shared actual Object->Anything convert(Delegator delegator, Object->Anything source, Type<Object->Anything> resultType) {
 		value key = source.key;
 		value item = source.item;
-		value resolvedType=delegator.resolve(source,resultType);
-		assert(is Class<Entry<Object,Anything>> entryType=typeHierarchy(resolvedType).findByDeclaration(`class Entry`));
+		value resolvedType = delegator.resolve(source, resultType);
+		assert (is Class<Entry<Object,Anything>> entryType = flat.types(resolvedType)
+				.narrow<Class<>>()
+				.find((Class<> element) => element.declaration.equals(`class Entry`)));
 		assert (exists destKeyType = entryType.typeArgumentList.first);
 		assert (exists destItemType = entryType.typeArgumentList.rest.first);
 		
@@ -36,14 +37,9 @@ shared class EntryConverter() extends Converter<Object->Anything,Object->Anythin
 		return instance;
 	}
 	
-	matchable => object satisfies Matchable<Object->Anything ,Type<Object->Anything>>{
+	matchable => object satisfies Matchable<Object->Anything,Type<Object->Anything>> {
 		shared actual Boolean predicate(Object->Anything source, Type<Object->Anything> resultType) => resultType is Class<Object->Anything>;
 		
 		shared actual Integer priority = 1;
-		
-		
 	};
-	
-		
 }
-

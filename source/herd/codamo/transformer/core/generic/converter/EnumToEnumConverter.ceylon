@@ -10,8 +10,9 @@ import herd.codamo.api.core.transformer {
 	Delegator,
 	Matchable
 }
-import herd.codamo.api.core.util {
-	typeHierarchy
+import herd.type.support {
+
+	flat
 }
 
 "Converts object instance to other object instances. Takes source object index  and tries to extract object value from Result type with the same index."
@@ -19,12 +20,10 @@ tagged("Generic")
 by("Wojciech Potiopa")
 shared class  EnumToEnumConverter() extends Converter<Object,Object,ClassOrInterface<Object>>() {
 	shared actual Object convert(Delegator delegator, Object source, ClassOrInterface<Object> resultType) {
-		value hierarchy = typeHierarchy(type(source));
-		assert (exists sourceType = hierarchy.allParent
-				.narrow<ClassOrInterface<Object>>()
-				.find((ClassOrInterface<Anything> element) => element.caseValues.contains(source)));
-		
-		assert (exists index = sourceType.caseValues.indexesWhere((Object element) => element == source).first);
+	assert(exists sourceParent=	flat.types(type(source))
+		.narrow<ClassOrInterface<Object>>()
+		.find((ClassOrInterface<Object> element) => element.caseValues.contains(source)));
+		assert (exists index = sourceParent.caseValues.indexesWhere((Object element) => element == source).first);
 		if (exists selectedObject = resultType.caseValues.get(index)) {
 			return selectedObject;
 		}

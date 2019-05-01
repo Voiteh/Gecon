@@ -1,6 +1,7 @@
 import ceylon.language.meta.model {
 	ClassOrInterface,
-	Type
+	Type,
+	Interface
 }
 
 import herd.codamo.api.core.transformer {
@@ -9,8 +10,11 @@ import herd.codamo.api.core.transformer {
 	Matchable
 }
 import herd.codamo.api.core.util {
-	typeHierarchy,
 	runtimeCall
+}
+import herd.type.support {
+
+	flat
 }
 
 "Converts [[Map]] value to other [[Map]] type. For Example [[`Map<Boolean,Integer>`]] into [[`Map<String,String>`]]."
@@ -18,7 +22,9 @@ by("Wojciech Potiopa")
 shared class MapToMapConverter() extends Converter<Map<>,Map<>,ClassOrInterface<Map<>>>() {
 	shared actual Map<Object,Anything> convert(Delegator delegator, Map<Object,Anything> source, ClassOrInterface<Map<Object,Anything>> resultType){
 		value resolvedType=delegator.resolve(source,resultType);
-		assert(exists explictMapType = typeHierarchy(resolvedType).findByDeclaration(`interface Map`));
+	assert(exists explictMapType=	flat.types(resolvedType)
+		.narrow<Interface<>>()
+			.find((Interface<Anything> element) => element.declaration==`interface Map`));
 		assert(is Type<Object>keyDestination=explictMapType.typeArgumentList.first);
 		assert(exists itemDestination=explictMapType.typeArgumentList.rest.first);
 		value entryType=`class Entry`.classApply<Entry<Object,Anything>>(keyDestination,itemDestination);
