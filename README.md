@@ -12,5 +12,5 @@ The versioning of this project starts from 0. Is defined as referenced to versio
 | `herd.gecon.core.engine`            |    CORE_API.ENGINE   |       0.0       |
 | `herd.gecon.core.trnasformer`       | CORE_API.TRANSFORMER |       0.0       |
 | `herd.gecon.collection.transformer` | CORE_API.TRANSFORMER |       0.0       |
-| `herd.gecon.json.transformer`       | CORE_API.TRNASFORMER |      0.0.0      |
+| `herd.gecon.json.transformer`       | CORE_API.TRNASFORMER |       0.0       |
 | `herd.gecon.test.extension`         |       EXTENSION      |        0        |
