@@ -3,7 +3,7 @@ import ceylon.test {
 	assertEquals
 }
 
-import herd.gecon.transformer.core.generic.converter {
+import herd.gecon.core.transformer.generic.converter {
 	SelfConverter
 }
 import test.herd.gecon.transformer.core {

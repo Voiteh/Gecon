@@ -2,12 +2,12 @@ import ceylon.language.meta.model {
 	Type,
 	Class
 }
-import herd.gecon.api.transformer {
+import herd.gecon.core.api.transformer {
 	TransformationFindingError,
 	Delegator,
 	Relation
 }
-import herd.gecon.api.dictionary {
+import herd.gecon.core.api.dictionary {
 	Dictionary
 }
 shared class MockDelegator() satisfies Delegator{

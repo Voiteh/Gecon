@@ -6,10 +6,10 @@ import ceylon.test {
 	assertEquals
 }
 
-import herd.gecon.transformer.core.support.mapper {
+import herd.gecon.core.transformer.support.mapper {
 	AttributeMapper
 }
-import herd.gecon.api.transformer {
+import herd.gecon.core.api.transformer {
 	Relation
 }
 

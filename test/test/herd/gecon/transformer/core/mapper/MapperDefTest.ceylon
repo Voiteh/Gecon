@@ -3,11 +3,11 @@ import ceylon.language.meta.model {
 	Type,
 	Class
 }
-import herd.gecon.api.transformer {
+import herd.gecon.core.api.transformer {
 	Relation,
 	Resolver,
 	Delegator}
-import herd.gecon.api.dictionary {
+import herd.gecon.core.api.dictionary {
 	Dictionary,
 	AttributeDictionary
 }

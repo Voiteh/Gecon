@@ -1,4 +1,4 @@
-import herd.gecon.engine {
+import herd.gecon.core.engine {
 	Codamo,
 	AutoProvider,
 	ScopeProvisioning
@@ -17,7 +17,7 @@ shared class CoreIntegration() {
 	
 	shared default Codamo codamo => Codamo{ 
 		provider = AutoProvider{ 
-			transformations = ScopeProvisioning([`module herd.gecon.transformer.core`]);
+			transformations = ScopeProvisioning([`module herd.gecon.core.transformer`]);
 			
 		};
 

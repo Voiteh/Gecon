@@ -4,7 +4,7 @@ import ceylon.test {
 	assertTrue
 }
 
-import herd.gecon.transformer.core.iterable.resolver {
+import herd.gecon.core.transformer.iterable.resolver {
 	StreamToTupleResolver
 }
 
