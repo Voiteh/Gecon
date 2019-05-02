@@ -3,7 +3,7 @@ import ceylon.test {
 	ignore,
 	assertEquals
 }
-import herd.gecon.api.transformer {
+import herd.gecon.core.api.transformer {
 	Conversion
 }
 shared class IterableTest() extends CoreIntegration(){

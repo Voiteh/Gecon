@@ -7,11 +7,11 @@ import ceylon.test {
 	assertEquals
 }
 
-import herd.gecon.api.transformer {
+import herd.gecon.core.api.transformer {
 	Resolver,
 	Delegator
 }
-import herd.gecon.engine {
+import herd.gecon.core.engine {
 	Codamo,
 	AutoProvider,
 	ScopeProvisioning
@@ -34,7 +34,7 @@ shared class IntersectionTest() extends CoreIntegration() {
 	shared actual Codamo codamo => Codamo {
 		provider = AutoProvider {
 			transformations = ScopeProvisioning(
-				[`module herd.gecon.transformer.core`, `class SearchableCharacterListAndComparableStringToStringResolver`]
+				[`module herd.gecon.core.transformer`, `class SearchableCharacterListAndComparableStringToStringResolver`]
 			);
 		};
 	};

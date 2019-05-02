@@ -3,7 +3,7 @@ import ceylon.language.meta.model {
 	Type
 }
 
-import herd.gecon.api.transformer {
+import herd.gecon.core.api.transformer {
 	Resolver,
 	Delegator
 }

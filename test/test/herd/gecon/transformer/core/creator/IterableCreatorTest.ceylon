@@ -2,7 +2,7 @@ import ceylon.test {
 	test,
 	ignore
 }
-import herd.gecon.transformer.core.iterable.creator {
+import herd.gecon.core.transformer.iterable.creator {
 	ArrayCreator
 }
 

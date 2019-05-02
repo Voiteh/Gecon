@@ -1,4 +1,4 @@
-import herd.gecon.api.transformer {
+import herd.gecon.core.api.transformer {
 	Converter,
 	Delegator
 }

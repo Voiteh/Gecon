@@ -2,7 +2,7 @@ import ceylon.test {
 	test
 }
 
-import herd.gecon.api.transformer {
+import herd.gecon.core.api.transformer {
 	Conversion
 }
 
