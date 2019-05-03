@@ -28,7 +28,7 @@ import herd.gecon.core.engine.internal.clasification {
 }
 "Codamo transformations class"
 by("Wojciech Potiopa")
-shared class Codamo(
+shared class Gecon(
 	"Provides dependencies to Codamo"
 	Provider provider,
 	"Configuration of Codamo engine"

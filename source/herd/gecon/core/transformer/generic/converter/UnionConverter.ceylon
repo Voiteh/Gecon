@@ -19,13 +19,13 @@ import herd.gecon.core.api.transformer {
  
  Depending how order of types in union ([[Integer|Float]], [[Float|Integer]]) is defined the result will differ. 
  
- Codamo codamo=...;
+ Codamo gecon=...;
  
  String source= \"2.0\";
  
- assert(is Integer result=codamo.convert(source,\`Integer|Float\`));
+ assert(is Integer result=gecon.convert(source,\`Integer|Float\`));
  
- assert(is Float result=codamo.convert(source,\`Float|Integer\`));
+ assert(is Float result=gecon.convert(source,\`Float|Integer\`));
  
 "
 tagged ("Generic")

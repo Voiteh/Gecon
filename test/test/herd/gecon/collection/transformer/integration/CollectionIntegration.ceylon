@@ -6,7 +6,7 @@ import ceylon.test {
 }
 
 import herd.gecon.core.engine {
-	Codamo,
+	Gecon,
 	AutoProvider,
 	ScopeProvisioning
 }
@@ -21,7 +21,7 @@ import herd.gecon.test.extension {
 testExtension(`class LoggingTestExtension`)
 shared class CollectionIntegration() {
 	
-	shared default Codamo codamo => Codamo { 
+	shared default Gecon gecon => Gecon { 
 		provider = AutoProvider{ 
 			transformations = ScopeProvisioning{
 				scopes=[`module herd.gecon.core.transformer`,`module herd.gecon.collection.transformer`];

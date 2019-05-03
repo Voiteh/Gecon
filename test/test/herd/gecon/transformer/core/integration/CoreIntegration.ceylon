@@ -15,7 +15,7 @@ import herd.gecon.test.extension {
 testExtension(`class LoggingTestExtension`)
 shared class CoreIntegration() {
 	
-	shared default Codamo codamo => Codamo{ 
+	shared default Codamo gecon => Codamo{ 
 		provider = AutoProvider{ 
 			transformations = ScopeProvisioning([`module herd.gecon.core.transformer`]);
 			

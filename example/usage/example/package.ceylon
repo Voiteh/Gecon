@@ -1,1 +1,0 @@
-shared package usage.example;

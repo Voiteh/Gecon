@@ -5,7 +5,7 @@ import ceylon.test {
 import herd.gecon.core.engine {
 	AutoProvider,
 	ScopeProvisioning,
-	Codamo
+	Gecon
 }
 import herd.gecon.test.extension {
 	LoggingTestExtension
@@ -23,7 +23,7 @@ shared class ProvisioningTest() {
 	
 	shared test
 	void shouldProvideAllTranformersFromTestModule() {
-		value codamo = Codamo {
+		value gecon = Gecon {
 			 provider = AutoProvider {
 				transformations = ScopeProvisioning([`module test.gecon.transformer`]);
 			};
@@ -31,7 +31,7 @@ shared class ProvisioningTest() {
 				logging = Logging(debug);
 			};
 		};
-		value convert = codamo.convert("String", `Null`);
+		value convert = gecon.convert("String", `Null`);
 		assert (is Null convert);
 	}
 }

@@ -1,7 +1,7 @@
 import herd.gecon.core.engine {
-	Codamo,
 	AutoProvider,
-	ScopeProvisioning
+	ScopeProvisioning,
+	Gecon
 }
 import ceylon.test {
 	testExtension
@@ -13,7 +13,7 @@ import herd.gecon.test.extension {
 testExtension (`class LoggingTestExtension`)
 shared class JsonIntegration() {
 	
-	shared default Codamo codamo => Codamo {
+	shared default Gecon gecon => Gecon{
 		provider = AutoProvider {
 			transformations = ScopeProvisioning {
 				scopes = [

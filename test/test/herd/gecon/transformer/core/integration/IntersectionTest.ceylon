@@ -31,7 +31,7 @@ class SearchableCharacterListAndComparableStringToStringResolver() extends Resol
 
 shared class IntersectionTest() extends CoreIntegration() {
 	
-	shared actual Codamo codamo => Codamo {
+	shared actual Codamo gecon => Codamo {
 		provider = AutoProvider {
 			transformations = ScopeProvisioning(
 				[`module herd.gecon.core.transformer`, `class SearchableCharacterListAndComparableStringToStringResolver`]
@@ -41,7 +41,7 @@ shared class IntersectionTest() extends CoreIntegration() {
 	
 	shared test
 	void shouldConvertIntegerToSearchableCharacterListAndSumableToString() {
-		assertEquals(codamo.convert(testData.matchingInteger, `SearchableList<Character>&Summable<String>`),
+		assertEquals(gecon.convert(testData.matchingInteger, `SearchableList<Character>&Summable<String>`),
 			testData.matchingString);
 	}
 }
