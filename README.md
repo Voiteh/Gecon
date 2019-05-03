@@ -4,48 +4,9 @@ GEneric CONverter of data models for Ceylon
 
 
 ## Examples
-All examples in `example` source folder
-
-* Model to model conversion
- 
-* Json to Model conversion
-```ceylon
-import herd.gecon.core.engine {
-	Gecon,
-	AutoProvider,
-	ScopeProvisioning
-}
-import ceylon.json {
-	JsonObject
-}
-"Simple model for deserialization"
-serializable class SimpleModel(shared Boolean boolVal, shared String strVal, shared Integer intVal) {
-	shared actual String string => "boolValue:``boolVal``, strVal:``strVal`` intVal:``intVal``";
-}
-String json ="{
-              \"boolVal\": true,
-              \"strVal\": \"test\",
-              \"intVal\": 123
-              }"
-;
-shared void run() {
-	value gecon = Gecon {
-		provider = AutoProvider {
-			transformations = ScopeProvisioning(
-				[
-					`module herd.gecon.core.transformer`,
-					`module herd.gecon.json.transformer`
-				]
-			);
-		};
-	};
-	value jsonObject = gecon.convert(json, `JsonObject`);
-	value model= gecon.convert(jsonObject, `SimpleModel`);
-	print("Here You go: {``model``}");
-}
-```
-
-
+All examples in `example` source folder. 
+Examples definitions:
+* Json to Model conversion - `module json.to.model`
 
 ## Versioning
 
