@@ -15,7 +15,6 @@ String json ="{
               \"strVal\": \"test\",
               \"intVal\": 123
               }";
-"Run the module `usage.example`."
 shared void run() {
 	value gecon = Gecon {
 		provider = AutoProvider {
