@@ -7,6 +7,7 @@ GEneric CONverter of data models for Ceylon
 All examples in `example` source folder. 
 Examples definitions:
 * Json to Model conversion - `module json.to.model`
+* Model to Json conversion - `module model.to.json`
 
 ## Versioning
 
