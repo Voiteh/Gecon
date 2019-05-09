@@ -7,18 +7,22 @@ GEneric CONverter of data models for Ceylon. This framework is created to ease e
 To make use of this framework there is need to instantiate `Gecon` type object.
 ```ceylon
 Gecon gecon = Gecon{
-		provider = AutoProvider {
-			transformations = ScopeProvisioning {
-				scopes = [
-          `module herd.gecon.core.transformer`,
-				];
-			};
-		};
-	};
+  provider = AutoProvider {
+    transformations = ScopeProvisioning {
+      scopes = [
+        `module herd.gecon.core.transformer`,
+      ];
+    };
+  };
+};
 ```
-This is minimal setup which is required for usage. There is only instantiation parameter used it is `provider`. It tells framework on what components it will work on. Currently only `transformations` can be provided. `AutoProvider` is used for this purpose. It is working on scopes. Basically it takes transformation classes, begin available via `scopes` parameter and instantiates them, using available resources. There is other parameter `exclusions` in `ScopeProvisioning` class, allowing to reduce transformations availability for framework. `Scope` is alias of ` Module|Package|ClassDeclaration` this provides controll over instantiationing of trnasformations. Other way to provide transformations is to use `ManualProvider`, which requires clients to instantiate transformations manually, but gives precise controll what and how is available for `Gecon`. 
+This is minimal setup which is required for usage. There is only one instantiation parameter used it is `provider`. It tells framework on what components it will work on. Currently only `transformations` can be provided. `AutoProvider` is used for this purpose. It is working on scope based filtering. Basically it takes transformation classes, begin available via `scopes` parameter and instantiates them, using available resources. There is other parameter `exclusions` in `ScopeProvisioning` class, allowing to reduce transformations availability for framework. `Scope` is alias of ` Module|Package|ClassDeclaration` this provides controll over instantiationing of trnasformations. Other way to provide transformations is to use `ManualProvider`, which requires clients to instantiate transformations manually, but gives precise controll what and how is available for `Gecon`. 
 
-What is `Transformation`? A `Transformation` implementation is an object which takes source object and changes it into result type object. Transformations are categorized as: 
+`Gcon` type object, can also be configured, to work in different ways. Currently only `LoggingConfiguration` is available to be altered. `LoggingConfiguration` provides ability to change `priority` which is stadard `ceylon.logging` `priority`. 
+
+### Transformation
+
+What is `Transformation`? A `Transformation` implementation is an object, which takes source data object and changes it into result type object. Transformations are categorized as: 
 
 - `Conversion` - Initial entry point for conversion, takes source object and converts it into result type object. Whole flow can be implemented using single `Conversion` or it can delegate to other transformations. Default implementation of this interface is `Converter` which should be used for defining `Conversion`.
 
@@ -29,6 +33,14 @@ What is `Transformation`? A `Transformation` implementation is an object which t
 - `Mapping` - Maps result type parts to source parts values using `Dictionary` object. Default implementation of this interface is `Mapper`, which should be used for defining `Mapping`. Example usecase is when converting from json to model object and the naming of fields are different in model than in json. 
 
 `Gecon` type object has a `transform` method which will be used for all transformations.
+
+#### Defining transformation
+
+Most commonly used transformation is `Conversion` implemented by `Converter<Source,Result,ResultType>` class. It has three type parameters as most of `Transformation` objects:
+- Source (Required) - A type of source data provided by framework to the converter,
+- Result (Required) - A type of result data which will be produced by converter,
+- ResultType (Defaulted :`Type<Result>`) - A Type of result type, provided by the framework to work on, usable only for generic conversions and `Matcher` users. By default in `Conversion.convert` method `resultType` parameter is `Type<Result>`, which is to less for some converters. They may require that `resultType` be `Class<Result>` or `ClassOrInterface<Result>` or `UnionType<Result>` etc. By constraining this type parameter, there is no need for assertations in `Conversion.convert` method body.
+
 
 
 ## Examples
