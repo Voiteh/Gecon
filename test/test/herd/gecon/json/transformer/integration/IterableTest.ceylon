@@ -33,7 +33,7 @@ shared class IterableTest() extends JsonIntegration() {
 	
 	shared test
 	void shouldConvertStreamToJsonArray() {
-		value result = gecon.convert(testData.simpleStream, `JsonArray`);
+		value result = gecon.transform(testData.simpleStream, `JsonArray`);
 		assertEquals {
 			actual = result;
 			expected = testData.simpleJsonArray;
@@ -43,7 +43,7 @@ shared class IterableTest() extends JsonIntegration() {
 	
 	shared test
 	void shouldConvertJsonArrayToStream() {
-		value result = gecon.convert(testData.simpleJsonArray, `{String|Integer|Null*}`);
+		value result = gecon.transform(testData.simpleJsonArray, `{String|Integer|Null*}`);
 		assertEquals {
 			actual = result;
 			expected = testData.simpleStream;
@@ -53,7 +53,7 @@ shared class IterableTest() extends JsonIntegration() {
 	
 	shared test
 	void shouldConvertSequenceToJsonArray() {
-		value result = gecon.convert(testData.simpleSequence, `JsonArray`);
+		value result = gecon.transform(testData.simpleSequence, `JsonArray`);
 		assertEquals {
 			actual = result;
 			expected = testData.simpleJsonArray;
@@ -63,7 +63,7 @@ shared class IterableTest() extends JsonIntegration() {
 	
 	shared test
 	void shouldConvertJsonArrayToSequence() {
-		value result = gecon.convert(testData.simpleJsonArray, `[String|Integer|Null*]`);
+		value result = gecon.transform(testData.simpleJsonArray, `[String|Integer|Null*]`);
 		assertEquals {
 			actual = result;
 			expected = testData.simpleSequence;
@@ -73,7 +73,7 @@ shared class IterableTest() extends JsonIntegration() {
 	
 	shared test
 	void shouldConvertListToJsonArray() {
-		value result = gecon.convert(testData.simpleListWithNull, `JsonArray`);
+		value result = gecon.transform(testData.simpleListWithNull, `JsonArray`);
 		assertEquals {
 			actual = result;
 			expected = testData.simpleJsonArrayWithNull;
@@ -82,7 +82,7 @@ shared class IterableTest() extends JsonIntegration() {
 	}
 	shared test
 	void shouldConvertJsonArrayToList() {
-		value result = gecon.convert(testData.simpleJsonArrayWithNull, `List<String|Integer|Null>`);
+		value result = gecon.transform(testData.simpleJsonArrayWithNull, `List<String|Integer|Null>`);
 		assertEquals {
 			actual = result;
 			expected = testData.simpleListWithNull;
@@ -92,7 +92,7 @@ shared class IterableTest() extends JsonIntegration() {
 	
 	shared test
 	void shouldConvertSetToJsonArray() {
-		value result = gecon.convert(testData.simpleSet, `JsonArray`);
+		value result = gecon.transform(testData.simpleSet, `JsonArray`);
 		assertEquals {
 			actual = result;
 			expected = testData.simpleJsonArray;
@@ -101,7 +101,7 @@ shared class IterableTest() extends JsonIntegration() {
 	}
 	shared test
 	void shouldConvertJsonArrayToSet() {
-		value result = gecon.convert(testData.simpleJsonArray, `Set<String|Integer>`);
+		value result = gecon.transform(testData.simpleJsonArray, `Set<String|Integer>`);
 		assertEquals {
 			actual = result;
 			expected = testData.simpleSet;
@@ -110,7 +110,7 @@ shared class IterableTest() extends JsonIntegration() {
 	}
 	shared test
 	void shouldConvertArrayToJsonArray() {
-		value result = gecon.convert(testData.simpleArrayWithNull, `JsonArray`);
+		value result = gecon.transform(testData.simpleArrayWithNull, `JsonArray`);
 		assertEquals {
 			actual = result;
 			expected = testData.simpleJsonArrayWithNull;
@@ -120,7 +120,7 @@ shared class IterableTest() extends JsonIntegration() {
 	shared ignore ("Failing because of https://github.com/eclipse/ceylon/issues/7390")
 	test
 	void shouldConvertJsonArrayToArray() {
-		value result = gecon.convert(testData.simpleJsonArrayWithNull, `Array<String|Integer|Null>`);
+		value result = gecon.transform(testData.simpleJsonArrayWithNull, `Array<String|Integer|Null>`);
 		assertEquals {
 			actual = result;
 			expected = testData.simpleArrayWithNull;
@@ -130,7 +130,7 @@ shared class IterableTest() extends JsonIntegration() {
 	
 	shared test
 	void shouldConvertTupleToJsonArray() {
-		value result = gecon.convert(testData.simpleTuple, `JsonArray`);
+		value result = gecon.transform(testData.simpleTuple, `JsonArray`);
 		assertEquals {
 			actual = result;
 			expected = testData.simpleJsonArray;
@@ -139,7 +139,7 @@ shared class IterableTest() extends JsonIntegration() {
 	}
 	shared test
 	void shouldConvertJsonArrayToTuple() {
-		value result = gecon.convert(testData.simpleJsonArray, `[String, Integer]`);
+		value result = gecon.transform(testData.simpleJsonArray, `[String, Integer]`);
 		assertEquals(result, testData.simpleTuple);
 	}
 }

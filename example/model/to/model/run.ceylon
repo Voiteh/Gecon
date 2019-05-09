@@ -30,6 +30,6 @@ shared void run() {
 		};
 	};
 	value dto=ProductDto("123","Door");
-	value product = gecon.convert(dto, `Product`);
+	value product = gecon.transform(dto, `Product`);
 	print(product);
 }

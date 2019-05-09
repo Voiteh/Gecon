@@ -25,7 +25,7 @@ shared void run() {
 		};
 	};
 	value simpleModel =SimpleModel(false, "test", 0.123);
-	value jsonObject = gecon.convert(simpleModel, `JsonObject`);
-	value json= gecon.convert(jsonObject, `String`);
+	value jsonObject = gecon.transform(simpleModel, `JsonObject`);
+	value json= gecon.transform(jsonObject, `String`);
 	print("Here You go: ``json``");
 }

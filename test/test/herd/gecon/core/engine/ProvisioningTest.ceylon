@@ -31,7 +31,7 @@ shared class ProvisioningTest() {
 				logging = Logging(debug);
 			};
 		};
-		value convert = gecon.convert("String", `Null`);
+		value convert = gecon.transform("String", `Null`);
 		assert (is Null convert);
 	}
 }

@@ -41,7 +41,7 @@ shared class IntersectionTest() extends CoreIntegration() {
 	
 	shared test
 	void shouldConvertIntegerToSearchableCharacterListAndSumableToString() {
-		assertEquals(gecon.convert(testData.matchingInteger, `SearchableList<Character>&Summable<String>`),
+		assertEquals(gecon.transform(testData.matchingInteger, `SearchableList<Character>&Summable<String>`),
 			testData.matchingString);
 	}
 }

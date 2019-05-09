@@ -66,7 +66,7 @@ shared class Gecon(
 		
 	}
 	"Main entry point for all transformations"
-	shared Result|TransformationError|TransformationFindingError convert<Result>(Anything source,Type<Result> resultType){
+	shared Result|TransformationError|TransformationFindingError transform<Result>(Anything source,Type<Result> resultType){
 		try{
 			return delegator.convert(source, resultType);
 		}catch(TransformationError|TransformationFindingError x){

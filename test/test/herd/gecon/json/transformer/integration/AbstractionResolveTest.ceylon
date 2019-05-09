@@ -39,25 +39,25 @@ shared class AbstractionResolveTest() extends JsonIntegration(){
 	
 	shared test
 	void shouldConvertTypeResolveOneIntoJsonObject(){
-		value result=gecon.convert(testData.resolveOne,`JsonObject`);
+		value result=gecon.transform(testData.resolveOne,`JsonObject`);
 		assertEquals(result,testData.resolveOneJsonObject);
 	}
 	
 	shared test
 	void shouldConvertTypeResolveTwoIntoJsonObject(){
-		value result=gecon.convert(testData.resolveTwo,`JsonObject`);
+		value result=gecon.transform(testData.resolveTwo,`JsonObject`);
 		assertEquals(result,testData.resolveTwoJsonObject);
 	}
 	
 	shared test
 	void shouldConvertJsonObjectIntoTypeResolveOne(){
-		value result=gecon.convert(testData.resolveOneJsonObject,`TypeResolveInterface`);
+		value result=gecon.transform(testData.resolveOneJsonObject,`TypeResolveInterface`);
 		assertEquals(result,testData.resolveOne);
 	}
 	
 	shared test
 	void shouldConvertJsonObjectIntoTypeResolveTwo(){
-		value result=gecon.convert(testData.resolveTwoJsonObject,`TypeResolveInterface`);
+		value result=gecon.transform(testData.resolveTwoJsonObject,`TypeResolveInterface`);
 		assertEquals(result,testData.resolveTwo);
 	}
 	
