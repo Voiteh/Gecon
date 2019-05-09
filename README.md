@@ -3,8 +3,22 @@ GEneric CONverter of data models for Ceylon. This framework is created to ease e
 
 
 ## Guide
-The main feature of this framework is delegation of responsibility. There is interface called `Delegator` accessible for all transformations. It allows to pass responsibility to other `Transformation`'s implementation? What is `Transformation`? A `Transformation` implementation is an object which takes source object and changes it into result type object.   
-Transformations are categorized as: 
+
+To make use of this framework there is need to instantiate `Gecon` type object.
+```ceylon
+Gecon gecon = Gecon{
+		provider = AutoProvider {
+			transformations = ScopeProvisioning {
+				scopes = [
+          `module herd.gecon.core.transformer`,
+				];
+			};
+		};
+	};
+```
+This is minimal setup which is required for usage. There is only instantiation parameter used it is `provider`. It tells framework on what components it will work on. Currently only `transformations` can be provided. `AutoProvider` is used for this purpose. It is working on scopes. Basically it takes transformation classes, begin available via `scopes` parameter and instantiates them, using available resources. There is other parameter `exclusions` in `ScopeProvisioning` class, allowing to reduce transformations availability for framework. `Scope` is alias of ` Module|Package|ClassDeclaration` this provides controll over instantiationing of trnasformations. Other way to provide transformations is to use `ManualProvider`, which requires clients to instantiate transformations manually, but gives precise controll what and how is available for `Gecon`. 
+
+What is `Transformation`? A `Transformation` implementation is an object which takes source object and changes it into result type object. Transformations are categorized as: 
 
 - `Conversion` - Initial entry point for conversion, takes source object and converts it into result type object. Whole flow can be implemented using single `Conversion` or it can delegate to other transformations. Default implementation of this interface is `Converter` which should be used for defining `Conversion`.
 
@@ -14,6 +28,7 @@ Transformations are categorized as:
 
 - `Mapping` - Maps result type parts to source parts values using `Dictionary` object. Default implementation of this interface is `Mapper`, which should be used for defining `Mapping`. Example usecase is when converting from json to model object and the naming of fields are different in model than in json. 
 
+`Gecon` type object has a `transform` method which will be used for all transformations.
 
 
 ## Examples
