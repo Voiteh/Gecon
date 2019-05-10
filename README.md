@@ -16,13 +16,13 @@ Gecon gecon = Gecon{
   };
 };
 ```
-This is minimal setup which is required for usage. There is only one instantiation parameter used it is `provider`. It tells framework on what components it will work on. Currently only `transformations` can be provided. `AutoProvider` is used for this purpose. It is working on scope based filtering. Basically it takes transformation classes, begin available via `scopes` parameter and instantiates them, using available resources. There is other parameter `exclusions` in `ScopeProvisioning` class, allowing to reduce transformations availability for framework. `Scope` is alias of ` Module|Package|ClassDeclaration` this provides controll over instantiationing of trnasformations. Other way to provide transformations is to use `ManualProvider`, which requires clients to instantiate transformations manually, but gives precise controll what and how is available for `Gecon`. 
+This is minimal setup which is required for usage. There is only one instantiation parameter used, it is `provider`. It tells framework, on what components it will work on. Currently only `transformations` can be provided. `AutoProvider` is used for such purpose. It is working on scope based filtering. Basically it takes transformation classes, begin available via `scopes` parameter and instantiates them, using available resources. There is other parameter `exclusions` in `ScopeProvisioning` class, allowing to reduce transformations availability for framework. `Scope` is alias of ` Module|Package|ClassDeclaration` this provides controll over instantiationing of trnasformations. Other way to provide transformations is to use `ManualProvider`, which requires clients to instantiate transformations manually, but gives precise controll what and how is available for `Gecon`. 
 
-`Gcon` type object, can also be configured, to work in different ways. Currently only `LoggingConfiguration` is available to be altered. `LoggingConfiguration` provides ability to change `priority` which is stadard `ceylon.logging` `priority`. 
+`Gcon` type object, can also be configured. Currently only `Logging` configuration is available to be altered. `Logging` provides ability to change `priority` which is stadard `ceylon.logging` `priority`. 
 
 ### Transformation
 
-What is `Transformation`? A `Transformation` implementation is an object, which takes source data object and changes it into result type object. Transformations are categorized as: 
+What is `Transformation`? A `Transformation` is an interface defined by `herd.gecon.core.engine` and it's giving generic way for execution of `Transformation.transform` method. Which takes source data nad transform them into result type data. In most cases in this guide by `Transofmormation` it will be ment one of below interfaces:
 
 - `Conversion` - Initial entry point for conversion, takes source object and converts it into result type object. Whole flow can be implemented using single `Conversion` or it can delegate to other transformations. Default implementation of this interface is `Converter` which should be used for defining `Conversion`.
 
@@ -36,10 +36,41 @@ What is `Transformation`? A `Transformation` implementation is an object, which 
 
 #### Defining transformation
 
-Most commonly used transformation is `Conversion` implemented by `Converter<Source,Result,ResultType>` class. It has three type parameters as most of `Transformation` objects:
+Most commonly used transformation is `Conversion` implemented by `Converter<Source,Result,ResultType>` class. It has three type parameters as most of transformations:
 - Source (Required) - A type of source data provided by framework to the converter,
 - Result (Required) - A type of result data which will be produced by converter,
 - ResultType (Defaulted :`Type<Result>`) - A Type of result type, provided by the framework to work on, usable only for generic conversions and `Matcher` users. By default in `Conversion.convert` method `resultType` parameter is `Type<Result>`, which is to less for some converters. They may require that `resultType` be `Class<Result>` or `ClassOrInterface<Result>` or `UnionType<Result>` etc. By constraining this type parameter, there is no need for assertations in `Conversion.convert` method body.
+
+Dummy specific converter definition:
+
+```ceylon
+shared class StringToNullConverter() extends Converter<String,Null>(){
+	shared actual Null convert(Delegator delegator, String source, Type<Null> resultType) => null;
+	
+}
+
+```
+
+When converter registered by `Provider` it takes `Source` and `Result` types and uses `Hashmap` for storing them. Further when lookup in transformation flow it will be easly retreivable.
+
+Dummy generic converter definition:
+
+```ceylon
+
+shared class AnythingToAnythingConverter() extends Converter<Anything,Anything,Type<Anything>>(){
+	shared actual Anything convert(Delegator delegator, Anything source, Type<Anything> resultType) {
+		value resolve = delegator.resolve(source, resultType);
+		return delegator.convert(source, resolve);
+	}
+	
+	shared actual Matcher matcher => Matcher{
+		 predicate(Anything source, Type<Anything> resultType) => (source is String|Null) && (resultType.subtypeOf(`String|Null`));
+		 Integer priority = 0;
+		
+	};
+}
+```
+In this case, registration takes `Matcher` definition. Whenever hashing fail, because for example `Result` type is interface, union type, abstract class, registered `Matcher`s are used for lookup. The search mechanism iterates over available `Matcher`s and if `Matcher.predicate` method returns `true` and the `Matcher.priority` is the biggest in this lookup scope, then this transformation will be used, in this case for conversion. 
 
 
 
