@@ -8,7 +8,7 @@ shared class MetaTest() extends CoreIntegration() {
 	
 	shared test
 	void shouldConvertTestModelOneToTwo() {
-		value adapt = codamo.convert(testData.testSimpleModel, `TestOtherSimpleModel`);
+		value adapt = gecon.transform(testData.testSimpleModel, `TestOtherSimpleModel`);
 		if (is Exception adapt) {
 			throw adapt;
 		}

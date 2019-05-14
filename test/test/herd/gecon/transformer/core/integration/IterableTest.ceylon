@@ -29,7 +29,7 @@ shared class IterableTest() extends CoreIntegration(){
 	
 	shared test 
 	void shouldConvertIterableToIterable(){
-		value result=codamo.convert(testData.iterable.integer.stream,`{String*}`);
+		value result=gecon.transform(testData.iterable.integer.stream,`{String*}`);
 		 assertEquals{
 		 	actual=result;
 		 	expected=testData.iterable.strings.stream;
@@ -40,7 +40,7 @@ shared class IterableTest() extends CoreIntegration(){
 	shared test 
 	void shouldConvertIterableToNonEmptyIterable(){
 		
-		value result=codamo.convert(testData.iterable.integer.stream,`{String+}`);
+		value result=gecon.transform(testData.iterable.integer.stream,`{String+}`);
 		assertEquals{
 			actual=result;
 			expected=testData.iterable.strings.nonEmptyStream;
@@ -51,29 +51,29 @@ shared class IterableTest() extends CoreIntegration(){
 	
 	shared test 
 	void shouldConvertIterableToList(){
-		assert(is List<String> result=codamo.convert({1,2,3},`List<String>`)); 
+		assert(is List<String> result=gecon.transform({1,2,3},`List<String>`)); 
 		assert(result.containsEvery({"1","2","3"}));
 	}
 	
 	
 	shared ignore("Failing because of https://github.com/eclipse/ceylon/issues/7390") test
 	void shouldConvertIterableToArray(){
-		assert(is Array<String> result=codamo.convert({1,2,3}, `Array<String>`));
+		assert(is Array<String> result=gecon.transform({1,2,3}, `Array<String>`));
 		assert(result.containsEvery({"1","2","3"}));
 	}
 	shared test
 	void shouldConvertIterableToTouple(){
-		assert(is [String,String,String] result=codamo.convert({1,2,3}, `[String,String,String]`));
+		assert(is [String,String,String] result=gecon.transform({1,2,3}, `[String,String,String]`));
 		assert(result.first=="1");
 		assert(result.rest.first=="2");
 		assert(result.rest.rest.first=="3");
 	}
 	shared test
 	void shouldConvertIterableToTupleWithDifferentTypes(){
-		if(is Exception ex=codamo.convert({1,1,1}, `[String,Boolean,Float]`)){
+		if(is Exception ex=gecon.transform({1,1,1}, `[String,Boolean,Float]`)){
 			throw ex;
 		}
-		assert(is [String,Boolean,Float] result=codamo.convert({1,1,1}, `[String,Boolean,Float]`));
+		assert(is [String,Boolean,Float] result=gecon.transform({1,1,1}, `[String,Boolean,Float]`));
 		assert(result.first=="1");
 		assert(result.rest.first==true);
 		assert(result.rest.rest.first==1.0);
@@ -81,18 +81,18 @@ shared class IterableTest() extends CoreIntegration(){
 	
 	shared test
 	void shouldNotConvertIterableToToupleToFewArguments(){
-		assert(is Conversion<>.Error error=codamo.convert({1,2,3}, `[String,String,String,String]`));
+		assert(is Conversion<>.Error error=gecon.transform({1,2,3}, `[String,String,String,String]`));
 	}
 	shared test
 	void shouldNotConvertIterableToToupleToManyArguments(){
-		assert(is Conversion<>.Error error=codamo.convert({1,2,3,4}, `[String,String,String]`));
+		assert(is Conversion<>.Error error=gecon.transform({1,2,3,4}, `[String,String,String]`));
 	}
 	
 
 	
 	shared test
 	void shouldConvertIterableToSequence(){
-		value result=codamo.convert(testData.iterable.integer.stream,`[String*]`);
+		value result=gecon.transform(testData.iterable.integer.stream,`[String*]`);
 		assertEquals{
 			actual=result;
 			expected=testData.iterable.strings.sequence;
@@ -102,7 +102,7 @@ shared class IterableTest() extends CoreIntegration(){
 	
 	shared test
 	void shouldConvertIterableToNonEmptySequence(){
-		value result=codamo.convert(testData.iterable.integer.stream,`[String+]`);
+		value result=gecon.transform(testData.iterable.integer.stream,`[String+]`);
 		assertEquals{
 			actual=result;
 			expected=testData.iterable.strings.sequence;

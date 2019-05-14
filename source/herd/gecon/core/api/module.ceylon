@@ -3,6 +3,6 @@
 
 
 by("Wojciech Potiopa")
-module herd.gecon.core.api "0.8" {
-	shared import herd.type.support "0.1.0";
+module herd.gecon.core.api "0" {
+	import herd.type.support "0.1.0";
 }

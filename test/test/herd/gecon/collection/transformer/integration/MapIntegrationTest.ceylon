@@ -14,7 +14,7 @@ shared class MapIntegrationTest() extends CollectionIntegration(){
 	
 	shared test 
 	void shouldConvertConcreteMapToGenericMap(){
-		assert(is Map<String,Anything> result= codamo.convert(testData.concreteStringIntegerMap, `Map<String,Anything>`));
+		assert(is Map<String,Anything> result= gecon.transform(testData.concreteStringIntegerMap, `Map<String,Anything>`));
 		testData.concreteStringIntegerMap.each((String elementKey -> Integer elementItem) {
 			value resultItem=result.get(elementKey);
 			assert(is Integer resultItem );
@@ -23,7 +23,7 @@ shared class MapIntegrationTest() extends CollectionIntegration(){
 	}
 	shared test
 	void shouldConvertConcreteUnionMapToGenericMap(){
-		assert(is Map<String,Anything> result= codamo.convert(testData.concreteStringUnionMap, `Map<String,Anything>`));
+		assert(is Map<String,Anything> result= gecon.transform(testData.concreteStringUnionMap, `Map<String,Anything>`));
 		testData.concreteStringUnionMap.each((String elementKey -> Integer? elementItem) {
 			value resultItem=result.get(elementKey);
 			assert(is Integer? resultItem );
@@ -32,12 +32,12 @@ shared class MapIntegrationTest() extends CollectionIntegration(){
 	}
 	shared test 
 	void shouldConvertIterableToSet(){
-		assert(is Set<String> result=codamo.convert({1,2,3},`Set<String>`)); 
+		assert(is Set<String> result=gecon.transform({1,2,3},`Set<String>`)); 
 		assert(result.containsEvery({"1","2","3"}));
 	}
 	shared test
 	void shouldConvertObjectToMap() {
-		value result = codamo.convert(testData.testSimpleModel, `Map<String,Anything>`);
+		value result = gecon.transform(testData.testSimpleModel, `Map<String,Anything>`);
 		assert (is Map<String,Anything> result);
 		assertEquals(result.get(`TestSimpleModel.id`.declaration.name), testData.testSimpleModel.id);
 		assertEquals(result.get(`TestSimpleModel.name`.declaration.name), testData.testSimpleModel.name);
@@ -51,7 +51,7 @@ shared class MapIntegrationTest() extends CollectionIntegration(){
 				`TestSimpleModel.name`.declaration.name->testData.testSimpleModel.name
 			};
 		};
-		value result = codamo.convert(map, `TestSimpleModel`);
+		value result = gecon.transform(map, `TestSimpleModel`);
 		assertEquals(result, testData.testSimpleModel);
 	}
 }

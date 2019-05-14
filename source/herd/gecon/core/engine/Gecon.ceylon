@@ -28,7 +28,7 @@ import herd.gecon.core.engine.internal.clasification {
 }
 "Codamo transformations class"
 by("Wojciech Potiopa")
-shared class Codamo(
+shared class Gecon(
 	"Provides dependencies to Codamo"
 	Provider provider,
 	"Configuration of Codamo engine"
@@ -66,7 +66,7 @@ shared class Codamo(
 		
 	}
 	"Main entry point for all transformations"
-	shared Result|TransformationError|TransformationFindingError convert<Result>(Anything source,Type<Result> resultType){
+	shared Result|TransformationError|TransformationFindingError transform<Result>(Anything source,Type<Result> resultType){
 		try{
 			return delegator.convert(source, resultType);
 		}catch(TransformationError|TransformationFindingError x){
