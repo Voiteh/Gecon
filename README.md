@@ -1,5 +1,5 @@
 # Gecon - GEneric CONverter of data models for Ceylon
-This framework is created to ease everyday tasks regarding conversion between models. It is not directed to one of specific use case, like json <-> model conversion, but can be used in many. 
+This framework is created to ease everyday tasks regarding conversion between models. It is not directed to one of specific use case like json <-> model conversion but can be used in many. 
 
 
 ## Guide
