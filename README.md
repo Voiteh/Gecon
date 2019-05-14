@@ -1,5 +1,5 @@
-# Gecon
-GEneric CONverter of data models for Ceylon. This framework is created to ease everyday tasks regarding conversion between models. It is not directed to one of specific use case, like json <-> model conversion, but can be used in many. 
+# Gecon - GEneric CONverter of data models for Ceylon
+This framework is created to ease everyday tasks regarding conversion between models. It is not directed to one of specific use case, like json <-> model conversion, but can be used in many. 
 
 
 ## Guide
@@ -11,18 +11,25 @@ Gecon gecon = Gecon{
     transformations = ScopeProvisioning {
       scopes = [
         `module herd.gecon.core.transformer`,
+	`module herd.gecon.collection.transformer`,
+	`module herd.gecon.json.transformer`
       ];
     };
   };
 };
 ```
-This is minimal setup which is required for usage. There is only one instantiation parameter used, it is `provider`. It tells framework, on what components it will work on. Currently only `transformations` can be provided. `AutoProvider` is used for such purpose. It is working on scope based filtering. Basically it takes transformation classes, begin available via `scopes` parameter and instantiates them, using available resources. There is other parameter `exclusions` in `ScopeProvisioning` class, allowing to reduce transformations availability for framework. `Scope` is alias of ` Module|Package|ClassDeclaration` this provides controll over instantiationing of trnasformations. Other way to provide transformations is to use `ManualProvider`, which requires clients to instantiate transformations manually, but gives precise controll what and how is available for `Gecon`. 
+This is minimal setup which is required for usage. Modules registered in this guide are providing required `Transformation`s for:
+- Basic data types 
+- Generic data types
+- Collections
+- Json <-> Model
+There only instantiation parameter used, it is `provider`. It tells framework, on what components it will work on. Currently only `Transformation`s can be provided. `AutoProvider` is used for such purpose. It is working on scope based filtering. Basically it takes `Transformation` classes, begin available via `scopes` parameter and instantiates them, using available resources. There is another parameter called `exclusions` in `ScopeProvisioning` class, allowing to reduce transformations availability for framework. `Scope` is alias of ` Module|Package|ClassDeclaration` that provides controll over instantiationing of trnasformations. Other way to provide transformations is to use `ManualProvider`, which requires clients to instantiate transformations manually, but gives precise controll what and how is available for `Gecon`. 
 
-`Gcon` type object, can also be configured. Currently only `Logging` configuration is available to be altered. `Logging` provides ability to change `priority` which is stadard `ceylon.logging` `priority`. 
+`Gcon` type object, can also be configured. Currently only `Logging` configuration is available to be altered. `Logging` provides ability to change `priority`, which is stadard `ceylon.logging` `priority`. 
 
 ### Transformation
 
-What is `Transformation`? A `Transformation` is an interface defined by `herd.gecon.core.engine` and it's giving generic way for execution of `Transformation.transform` method. Which takes source data nad transform them into result type data. In most cases in this guide by `Transofmormation` it will be ment one of below interfaces:
+What is `Transformation`? A `Transformation` is an interface defined by `herd.gecon.core.engine`, which provides a way for execution of `Transformation.transform` method. It takes source data and transform it into provided result type. Although below interfeces doesn't extends `Transformation` interface (because of transformation method definition). They are wrapped using it and iIn most cases by `Transofmormation` in this guide, one of fallowing interfaces will be ment:
 
 - `Conversion` - Initial entry point for conversion, takes source object and converts it into result type object. Whole flow can be implemented using single `Conversion` or it can delegate to other transformations. Default implementation of this interface is `Converter` which should be used for defining `Conversion`.
 
