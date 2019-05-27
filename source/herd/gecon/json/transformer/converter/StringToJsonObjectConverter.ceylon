@@ -10,7 +10,7 @@ import ceylon.language.meta.model {
 	Type
 }
 
-shared class StringToJsonObjectConverter() extends Converter<String,JsonObject>() {
+shared class StringToJsonObjectConverter() extends Converter<String,JsonObject,Type<JsonObject>>() {
 	shared actual JsonObject convert(Delegator delegator, String source, Type<JsonObject> resultType) {
 		try {
 			value result = parse(source);

@@ -17,6 +17,7 @@ shared interface Mapping<in Source=Nothing, in ResultType=Nothing, out TheDictio
 	throws (`class Error`, "Whenever mapping cannot be complieateds")
 	shared formal TheDictionary map(Relation<Source,ResultType> relation);
 	
+	"Thrown whever there is [[Mapping]] error"
 	shared class Error extends TransformationError {
 		
 		shared new (Anything source, Type<> resultType, Throwable? cause = null)

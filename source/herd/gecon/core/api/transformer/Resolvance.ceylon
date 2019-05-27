@@ -12,14 +12,6 @@ shared sealed interface Resolvance<in Source=Nothing, out Output=Anything, in Ou
 		given OutputType satisfies Type<Output> {
 	
 	
-	"Thrown whever there is [[Resolvance]] error"
-	
-	shared class Error extends TransformationError {
-		shared new (Type<Anything> provisioningType, Throwable? cause = null)
-				extends TransformationError("Can't resolve concrete type, for ``provisioningType`` type", cause) {
-		}
-	}
-	
 	"Selects non abstract class implementation to be used by other transformations."
 	throws(`class Error`,"Whenever there is an error durring resolvance")
 	shared formal Class<Output> resolve(
@@ -28,7 +20,15 @@ shared sealed interface Resolvance<in Source=Nothing, out Output=Anything, in Ou
 		"Source data to be used for resolvance" 
 		Source input,
 		"Abstract output type"
-		 OutputType outputType);
+		OutputType outputType);
+	
+	"Thrown whever there is [[Resolvance]] error"
+	shared class Error extends TransformationError {
+		shared new (Type<Anything> provisioningType, Throwable? cause = null)
+				extends TransformationError("Can't resolve concrete type, for ``provisioningType`` type", cause) {
+		}
+	}
+	
 	
 	
 }
