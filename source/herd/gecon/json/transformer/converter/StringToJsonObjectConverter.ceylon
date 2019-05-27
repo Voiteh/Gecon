@@ -10,6 +10,7 @@ import ceylon.language.meta.model {
 	Type
 }
 
+"Converts [[String]] representations into [[JsonObject]]s"
 shared class StringToJsonObjectConverter() extends Converter<String,JsonObject,Type<JsonObject>>() {
 	shared actual JsonObject convert(Delegator delegator, String source, Type<JsonObject> resultType) {
 		try {
