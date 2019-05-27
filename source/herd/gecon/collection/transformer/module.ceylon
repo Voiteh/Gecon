@@ -1,3 +1,4 @@
+"Collection transformers module. Contains transformation classes between collections"
 module herd.gecon.collection.transformer "0.0" {
 	import herd.type.support "0.1.0";
 	shared import herd.gecon.core.api "0";
