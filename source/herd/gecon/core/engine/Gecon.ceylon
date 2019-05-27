@@ -26,12 +26,12 @@ import herd.gecon.core.engine.internal.clasification {
 	resolvance,
 	mapping
 }
-"Codamo transformations class"
+"Gecon main entrypoit providing all required setup and transformation functionality. Instance of this class is immutable and cannot be reconfigured."
 by("Wojciech Potiopa")
 shared class Gecon(
-	"Provides dependencies to Codamo"
+	"Provides dependencies to Gecon"
 	Provider provider,
-	"Configuration of Codamo engine"
+	"Configuration of Gecon engine"
 	Configuration configuration=Configuration()) {
 	
 	value logger=loggerFactory(`module`);
@@ -65,7 +65,9 @@ shared class Gecon(
 				
 		
 	}
-	"Main entry point for all transformations"
+	"Executes transformation with [[source]] into [[resultType]]. 
+	 In case of internall transformation error [[TransformationError]] is returned. 
+	 In case of no provisioned transformation for given arugments [[TransformationFindingError]] is returned."
 	shared Result|TransformationError|TransformationFindingError transform<Result>(Anything source,Type<Result> resultType){
 		try{
 			return delegator.convert(source, resultType);
