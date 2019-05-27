@@ -4,7 +4,8 @@ This framework is created to ease everyday tasks regarding conversion between mo
 
 ## Guide
 
-To make use of this framework there is need to instantiate `Gecon` type object.
+To make use of this framework there is need to instantiate `Gecon` type object. It is provided from `herd.gecon.core.engine` module 
+Example: 
 ```ceylon
 Gecon gecon = Gecon{
   provider = AutoProvider {
