@@ -7,7 +7,7 @@ import herd.gecon.core.engine {
 	ScopeProvisioning,
 	Gecon
 }
-import herd.gecon.test.extension {
+import gecon.test.extension {
 	LoggingTestExtension
 }
 import herd.gecon.core.engine.configuration {

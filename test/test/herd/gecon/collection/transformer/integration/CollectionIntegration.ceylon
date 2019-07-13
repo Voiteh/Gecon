@@ -15,7 +15,7 @@ import herd.gecon.core.engine.configuration {
 	Logging
 }
 
-import herd.gecon.test.extension {
+import gecon.test.extension {
 	LoggingTestExtension
 }
 testExtension(`class LoggingTestExtension`)

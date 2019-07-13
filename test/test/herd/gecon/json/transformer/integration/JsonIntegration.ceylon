@@ -6,7 +6,7 @@ import herd.gecon.core.engine {
 import ceylon.test {
 	testExtension
 }
-import herd.gecon.test.extension {
+import gecon.test.extension {
 	LoggingTestExtension
 }
 
