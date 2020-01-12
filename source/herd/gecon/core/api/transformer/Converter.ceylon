@@ -6,7 +6,7 @@ import ceylon.language.meta {
 	typeLiteral
 }
 
-"Converts provided data into other specific type. This is core API for providing logic into Codamo. 
+"Converts provided data into other specific type. This is core API for providing logic into Gecon. 
  It act's as a kind of controller, for many (most of simple) conversions, it is only required component,
   which needs to be implemented and registered."
 by ("Wojciech Potiopa")
