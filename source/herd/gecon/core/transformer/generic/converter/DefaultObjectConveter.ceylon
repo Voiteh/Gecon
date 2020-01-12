@@ -13,7 +13,7 @@ import herd.gecon.core.api.dictionary {
 	Dictionary
 }
 
-"Converts a Source Object into Result type object. This [[Converter]] is heart of the Codamo. Usage of this component is expensive."
+"Converts a Source Object into Result type object. This [[Converter]] is heart of Gecon. Usage of this component is expensive."
 tagged("Generic")
 by("Wojciech Potiopa")
 shared class DefaultObjectConveter() extends Converter<Object,Object,ClassOrInterface<Object>>() {
